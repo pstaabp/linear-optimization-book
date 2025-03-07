@@ -1,0 +1,9 @@
+<section xml:id="sect-phase1">
+  <title>Simplex Method for Infeasible Tableaus</title>
+
+  <p>
+Consider Problem <xref ref="prob-coffee"/>, in which coffee is shipped from warehouses to retail outlets.  The problem was set up as an LOP in<xref ref="prob-coeff-setup"/>and we can use the techniques from the previous section to write this as the following tableau.
+  </p>
+
+
+</section>

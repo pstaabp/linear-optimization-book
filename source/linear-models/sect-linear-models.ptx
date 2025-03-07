@@ -1,0 +1,171 @@
+<section xml:id="sect-linear-models">
+  <title>Introduction to Linear Optimization</title>
+
+  <introduction>
+
+  <problem>
+    <title>The toy car problem</title>
+    <p>
+      Luis is a toymaker who builds toy cars with wood.  His most popular toys are car, an SUV and  a truck. The car is made with 6 units of pine, 3 units of birch and take a total of 45 minutes to make.  The SUV is made with 5 units of pine, 6 units of birch and takes a total of 75 minutes to make. The truck takes 4 units of pine, 7 units of birch and takes a total of 90 minutes to make.  For each car he make $10 in profit, for each SUV is $15 in project and for each truck is $12 in profit.
+    </p>
+
+    <p>
+      Luis take a look at his shop on a Monday and has ?? units of pine, ?? units of birch.  For the week, he has a total of 30 hours of time he can spend in the shop.  How many of each toy should he make to maximize his profit?
+    </p>
+  </problem>
+
+
+
+  <p>
+    Consider the set of inequalities:
+  </p>
+  <p>
+    <md>
+      <mrow>4x + 3y \amp \leq 24, </mrow>
+      <mrow>2x + y  \amp  \leq 26, </mrow>
+      <mrow>x, y  \amp \geq 0 </mrow>
+    </md>
+  </p>
+
+<p>
+  <ol>
+  <li>
+    <p>
+      Graph the set of points that satisfy all 4 inequalities.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Find the maximum of the function <m>g(x,y) = 3x+2y</m> on this set.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Where does the maximum occur?
+    </p>
+  </li>
+</ol>
+</p>
+</introduction>
+
+<subsection xml:id="sect-other">
+  <title>Other Examples</title>
+
+  <p>hi</p>
+
+    <problem xml:id="prob-coffee">
+      <title>Shipping Coffee Problem</title>
+
+
+      <statement>
+        <p>
+          A major coffee supplier has warehouses in Seattle and San José.  The coffee supplier receives orders from coffee retailers in Salt Lake City and Reno.
+</p>
+<p> The retailer in Salt Lake City needs 400 pounds of coffee and the the retailer in Reno needs 350 pounds of coffee.  The Seattle warehouse has 700 pounds available and the San José warehouse has 500 pounds available. </p>
+
+ <p>
+The cost of shipping from Seattle to Salt Lake City is $2.50 per pound, from Seattle to Reno $3 per pound, from San José to Salt Lake is $4 per pound and from San José to Reno is $2 per pound.
+  </p>
+
+  <p>
+Find the number of pounds to be shipped from each warehouse to each retailer to minimize the cost.
+
+        </p>
+      </statement>
+    </problem>
+
+<problem> <title>Scheduling Librarians</title>
+  <statement>
+    <p>
+      The FSU library needs to make sure that there is at least one reference librarian on duty during open hours.  If there are 3 reference librarians, how do you schedule them to work such that
+a) each one works at  least 30 hours per week.   b) No one work longer than 10 hours in a given day.  How would you schedule them such that the total number of hours worked by all reference librarians  is minimized.
+    </p>
+  </statement>
+</problem>
+
+
+</subsection>
+
+<subsection xml:id="sect-create-linear-model">
+  <title>Creating Linear Models</title>
+
+<p>
+  How do we create a linear model.
+</p>
+
+<problem xml:id="prob-coeff-setup">
+  <statement>
+    <p>
+      Write the LOP for <xref ref="prob-coffee"/>
+    </p>
+  </statement>
+  <solution>
+    <p>
+      In this case, first note that we need to know the amount of coffeed shipped between warehouses and retail outlets.  The following graph is helpful for this:
+    </p>
+
+    <figure xml:id="fig-coffee">
+      <caption></caption>
+      <image width="75%">
+        <shortdescription></shortdescription>
+        <latex-image>
+        <![CDATA[
+          \begin{tikzpicture}
+            \draw[->] (1,5) -- (5,0) node[pos=0.25, above right] {$x_1$};
+            \draw[->] (0.5,5) -- (0.5,0) node[midway, left] {$x_2$};
+            \draw[->] (5,5) -- (1,0) node[pos=0.25, above left] {$x_3$};
+            \draw[->] (5.5,5) -- (5.5,0) node[midway, right] {$x_4$};
+            \draw (0.5,5) node[above] {Seattle};
+            \draw (5,5) node[above] {San Jos\'e};
+            \draw (0.5,0) node[below] {Salt Lake City};
+            \draw (5.5,0) node [below] {Reno};
+          \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      The variables are going to be the total amount of coffee to be shipped from the two warehouses to the two retail locations. If we look first at the amount of coffee that the Salt Lake City and Reno locations need then we need to ship at least this amount or
+    </p>
+<p>
+  <md>
+    <mrow>x_2 + x_3  \amp \geq 400 </mrow>
+    <mrow>x_1 + x_4 \amp \geq 350 </mrow>
+  </md>
+</p>
+<p>
+  Since the warehouse have a limited supply, they can only ship what they have so there are two additional constraints, one for each warehouse
+</p>
+<p>
+  <md>
+    <mrow>x_1 + x_2 \amp \leq 700</mrow>
+    <mrow>x_3 + x_4  \amp \leq 500</mrow>
+  </md>
+</p>
+<p>
+  There are other constraints on the variables in that each amount must be nonnegative, so <m>x_1, x_2, x_3, x_4 \geq 0</m>.  Lastly, the objective can be written:
+</p>
+<p>
+  <me>
+    z = 2.5 x_1 + 3 x_2 + 4 x_3 + 2 x_4
+  </me>
+</p>
+<p>
+  We can combine all of these into the following LOP:
+</p>
+<p>
+  <md>
+    <mrow>\text{Minimize} \qquad \qquad  \amp z = 2.5 x_1 + 3 x_2 + 4 x_3 + 2 x_4, </mrow>
+    <mrow>\text{subject to} \qquad x_2 + x_3  \amp \geq 400. </mrow>
+    <mrow>x_1 + x_4 \amp \geq 350, </mrow>
+    <mrow>x_1 + x_2 \amp \leq 700, </mrow>
+    <mrow>x_3 + x_4  \amp \leq 500, </mrow>
+    <mrow>x_1, x_2, x_3, x_4 \amp \geq 0. </mrow>
+  </md>
+</p>
+  </solution>
+</problem>
+</subsection>
+</section>

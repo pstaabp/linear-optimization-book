@@ -1,0 +1,13 @@
+<chapter xml:id="ch-integer-problems" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Integer Linear Optimization Problems</title>
+
+<introduction>
+  <p>
+    In <xref ref="ch-linear-models"/>, we saw a few linear optimization problems that had an additional requirement that the variables are integers.
+  </p>
+</introduction>
+
+<xi:include href="sect-intro-ilops.ptx" />
+
+
+</chapter>

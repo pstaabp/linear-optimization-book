@@ -1,0 +1,354 @@
+<section xml:id="sect-matrix-reduction">
+	<title>Matrices and Matrix Reduction</title>
+
+	<introduction>
+		<p>
+			Matrices are generally presented in either a linear algebra or matrix methods class. The
+			material presented here is some basics behing matrices that are needed for performing linear
+			optimization. This should be review for most readers of the text, but is helpful for the
+			context and notation later in the text.
+		</p>
+	</introduction>
+	<subsection xml:id="sect-linear-systems">
+		<title>Linear Systems</title>
+
+		<p>
+			Let's start with an example.
+		</p>
+		<example xml:id="ex-streets">
+			<title>Traffic Flow</title>
+			<statement>
+				<p>
+					A simple model of traffic flow can be represented by the following graph:
+				</p>
+
+				<figure xml:id="fig-streets">
+					<caption>A map of a few streets in Boston where the arrows denote the direction of traffic
+						flow (all of these streets are one-way) and the numbers represent the numbers of cars
+						driving down the street in a given time period. The letters <m>A</m> through <m>D</m>
+						will be the names of the intersections.</caption>
+					<image width="75%" xml:id="streets">
+						<latex-image><![CDATA[
+					\begin{tikzpicture}[scale=1.5]
+					\draw[{Latex[length=2mm]}-] (0,1) -- (2,1) node [at start,below left] {Newbury St.};
+					\draw[-{Latex[length=2mm]}] (0,0) -- (3,0) node [at end,above right] {Bolyston St.} ;
+					\draw[{Latex[length=2mm]}-] (1,2) -- (1,-1) node [at start,above left=5pt+3pt] {Berkeley St.};
+					\draw[{Latex[length=2mm]}-] (2,-1) -- (2,2) node [at end,above right=5pt+3pt] {Arlington St.} ;
+					\draw[{Latex[length=2mm]}-] (2,1.5) -- (2,1.6);
+					\draw[{Latex[length=2mm]}-] (2,0.5) -- (2,0.6);
+					\draw[-{Latex[length=2mm]}] (1,-0.5) -- (1,-0.4);
+					\draw[-{Latex[length=2mm]}] (1,0.5) -- (1,0.6);
+					\draw[{Latex[length=2mm]}-] (0.5,0) -- (0.4,0);
+					\draw[{Latex[length=2mm]}-] (1.5,0) -- (1.4,0);
+					\draw[{Latex[length=2mm]}-] (1.5,1) -- (1.6,1);
+					\draw (3,0) node [below right] {400};
+					\draw (2,-1) node [below right] {200};
+					\draw (0,0) node [above left] {500};
+					\draw (1,-1) node [below left] {200};
+					\draw (0,1) node [above left] {$ x_1$};
+					\draw (1,2) node [above] {250};
+					\draw (2,2) node [above] {350};
+					\draw (1.5,0) node [below] {$ x_2$};
+					\draw (2,0.5) node [right] {$ x_3$};
+					\draw (1.5,1) node [above] {$ x_4$};
+					\draw (1,0.5) node [left] {$ x_5$};
+					\fill (1,1) circle[radius=1.5pt] node [above left] {$ A$};
+					\fill (2,1) circle[radius=1.5pt] node [above right] {$ B$};
+					\fill (1,0) circle[radius=1.5pt] node [above right] {$ C$};
+					\fill (2,0) circle[radius=1.5pt] node [below right] {$ D$};
+					\end{tikzpicture}
+					]]>
+					</latex-image>
+					</image>
+				</figure>
+
+				<p> Write down the equations that balance each of the numbers of cars entering and leaving
+					each of the intersections <m>A, B, C</m> and <m>D</m>. </p>
+			</statement>
+
+			<solution>
+				<p>
+					In this case, we have:
+				</p>
+
+				<p>
+					<md>
+						<mrow>x_4 + x_5 \amp = x_1 + 250</mrow>
+						<mrow>350 \amp = x_3 + x_4 </mrow>
+						<mrow number="yes" xml:id="eq-traffic">700 \amp = x_2 + x_5 </mrow>
+						<mrow>x_3 + x_2 \amp = 600 </mrow>
+					</md>
+				</p>
+
+				<p> for intersections <m>A</m>, <m>B</m>, <m>C</m> and <m>D</m> respectively. </p>
+			</solution>
+		</example>
+		<definition>
+			<statement>
+				<p>
+					<ul>
+						<li>
+							<p> A <term>linear combination</term> of <m>x_1, x_2, x_3, \ldots, x_n</m> has the
+								form </p>
+
+							<p>
+								<me>
+									a_1 x_1 + a_2 x_2 + \cdots + a_n x_n,
+								</me>
+							</p>
+
+							<p> where the constants <m>a_1, a_2, \ldots, a_n \in \mathbb{R}</m> are the
+								combinations coefficients. </p>
+						</li>
+
+						<li>
+							<p> A <term>linear equation</term> has the form </p>
+
+							<p>
+								<men xml:id="eq-def-lin-eq">
+									a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b
+								</men>
+							</p>
+
+							<p> where <m>b \in \mathbb{R}</m> is a constant and <m>a_1, a_2, \ldots, a_n \in
+								\mathbb{R}</m>. </p>
+						</li>
+
+						<li>
+							<p> The <m>n</m>-tuple <m>(s_1,s_2,\ldots,s_n)</m> <term>satisfies</term> or is a <term>
+								solution</term> of <xref ref="eq-def-lin-eq" /> if this point satisfies <xref
+									ref="eq-def-lin-eq" /> or </p>
+
+							<p>
+								<me>
+									a_1 s_1 + a_2 s_2 + \cdots + a_n s_n = b
+								</me>
+							</p>
+						</li>
+
+						<li>
+							<p> A <term>system of linear equations</term> or <term>linear system</term> is a set
+								of linear equations: </p>
+
+							<p>
+								<md>
+									<mrow>a_{1,1} x_1 + a_{1,2} x_2 + \cdots + a_{1,n} x_n \amp = b_1 , </mrow>
+									<mrow number="yes" xml:id="eq-def-lin-sys">a_{2,1} x_1 + a_{2,2} x_2 + \cdots +
+										a_{2,n} x_n \amp = b_2, </mrow>
+									<mrow>\vdots \amp = \vdots </mrow>
+									<mrow>a_{m,1} x_1 + a_{m,2} x_2 + \cdots + a_{m,n} x_n \amp = b_m, </mrow>
+								</md>
+							</p>
+
+							<p> and this linear system has <m>m</m> equations and <m>n</m> unknowns (variables). </p>
+						</li>
+
+						<li>
+							<p> The <m>n</m>-tuple <m>(s_1,s_2,\ldots,s_n)</m> <term>satisfies</term> or is a <term>
+								solution</term> of <xref ref="eq-def-lin-sys" /> if this point satisfies <em>every</em>
+								equation of <xref ref="eq-def-lin-sys" />. </p>
+						</li>
+					</ul>
+				</p>
+			</statement>
+		</definition>
+
+		<example>
+			<title>Linear Equations</title>
+			<p>
+				The following are linear equations:
+			</p>
+
+			<p>
+				<md>
+					<mrow>2x + 3y \amp = 6, \amp y_1 -y_2+y_3-y_4 \amp = 10, </mrow>
+					<mrow> 10x_1 - x_3 + 5x_5 \amp = 9, \amp \sum_{i=1}^{10} i x_i \amp = 0 </mrow>
+				</md>
+			</p>
+
+			<p>
+				where summation notation has been used in the last one and note the variable names can vary.
+				The following equations are not linear:
+			</p>
+
+			<p>
+				<md>
+					<mrow>x_1^2+x_2 \amp = 6, \amp y_1y_2 + y_3 \amp = 5, </mrow>
+					<mrow>\frac{x_1+x_2}{x_3} \amp = 6, \amp \sin(x+y) \amp = z </mrow>
+				</md>
+			</p>
+
+			<p>
+				Each of the equations in the latter group have multiplications, squares
+				division or other functions between variables.
+			</p>
+		</example>
+
+		<p> The next two examples give a way to determine if a point or <m>n</m>-tuple is a solution to
+			a linear system. </p>
+
+		<example>
+			<title>Showing a Point is a Solution to a Linear System</title>
+			<statement>
+				<p> Show that the point <m>(2,3)</m> is a solution of the linear system: </p>
+
+				<p>
+					<md>
+						<mrow>3x_1 - x_2 \amp = 3 </mrow>
+						<mrow>2x_1 + 4x_2 \amp = 16 </mrow>
+					</md>
+				</p>
+			</statement>
+
+			<solution>
+				<p> Substitute <m>x_1=2</m> and <m>x_2=3</m> into both equations and check. </p>
+
+				<p>
+					<md>
+						<mrow>3(2) - 3 \amp = 3, </mrow>
+						<mrow>2(2) + 4(3) \amp = 16.
+						</mrow>
+					</md>
+				</p>
+
+				<p> Since each equation is satisfied at the point <m>(2,3)</m> is a solution to the linear
+					system. </p>
+			</solution>
+		</example>
+
+		<example>
+			<statement>
+				<p>
+					Find a few solutions of the traffic flow problem.
+				</p>
+			</statement>
+			<solution>
+				<p>
+				</p>
+			</solution>
+		</example>
+	</subsection>
+	<subsection xml:id="sect-matrices">
+		<title>Matrices and Row Operations</title>
+
+		<p>
+			You probably recall that a matrix is a compact way of writing a linear system in which only
+			the coefficients are stored.
+		</p>
+
+		<p>The linear system in <xref ref="eq-def-lin-sys" /> can be written as the <term>augmented
+			coefficient matrix</term>
+		</p>
+		<p>
+			<me>
+				\left[\begin{array}{rrrr|r}
+				a_{1,1} \amp a_{1,2} \amp \cdots \amp a_{1,n} \amp b_1 \\
+				a_{2,1} \amp a_{2,2} \amp \cdots \amp a_{2,n} \amp b_2 \\
+				\amp \amp \amp \vdots \amp \vdots \\
+				a_{m,1} \amp a_{m,2} \amp \cdots \amp a_{m,n} \amp b_m
+				\end{array}\right]
+			</me>
+		</p>
+
+		<p> Solutions of linear systems are usually found by performing <term>row operations</term> on
+			the matrix which do not change the solution. These include multiplying a row by a constant,
+			taking a linear combination of rows and replacing one of the rows, and swapping rows. If this
+			is done in a systematic way, generally using Gauss-Jordon reduction, the resulting matrix can
+			be put in either row-echelon or reduced row-echelon form (RREF). </p>
+
+		<exercise>
+			<statement>
+				<p>Put the linear system from <xref ref="eq-traffic" /> in a augmented coefficient matrix
+					and using row operations to put the equation in reduced row-echelon form. </p>
+			</statement>
+
+			<solution>
+				<p> First, ensure that all of the variables are on the left of the equations in <xref
+						ref="eq-traffic" /> and the constants on the right. This can be written as the augmented
+					coefficient matrix, </p>
+
+				<p>
+					<me>
+						\left[\begin{array}{rrrrr|r}
+						-1 \amp 0 \amp 0 \amp 1 \amp 1 \amp 250 \\
+						0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350 \\
+						0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700 \\
+						0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 600
+						\end{array}\right]
+					</me>
+				</p>
+				<p>Row operations are now performed</p>
+
+				<p>
+					<md>
+						<mrow>-R_1 \to R_1 \qquad \amp
+							\left[\begin{array}{rrrrr|r}
+							1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+							0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+							0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+							0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 600\\
+							\end{array} \right]
+						</mrow>
+						<mrow>R_2 \leftrightarrow R_3 \qquad \amp
+							\left[\begin{array}{rrrrr|r}
+							1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+							0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+							0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+							0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 600\\
+							\end{array} \right]
+						</mrow>
+						<mrow>-R_2 + R_4 \to R_4 \qquad \amp \left[\begin{array}{rrrrr|r}
+							1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+							0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+							0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+							0 \amp 0 \amp 1 \amp 0 \amp -1 \amp -100\\
+							\end{array} \right]
+						</mrow>
+						<mrow>-R_3 +R_4 \to R_4 \qquad \amp \left[\begin{array}{rrrrr|r}
+							1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+							0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+							0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+							0 \amp 0 \amp 1 \amp 0 \amp -1 \amp -100\\
+							\end{array} \right]
+						</mrow>
+						<mrow>-R_3 + R_4 \to R_4 \qquad \amp \left[\begin{array}{rrrrr|r}
+							1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+							0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+							0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+							0 \amp 0 \amp 0 \amp -1 \amp -1 \amp -450\\
+							\end{array} \right]
+						</mrow>
+						<mrow>-R_4 \to R_4 \qquad \amp \left[\begin{array}{rrrrr|r}
+							1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+							0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+							0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+							0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 450\\
+							\end{array} \right]
+						</mrow>
+						<mrow>\begin{array}{r}R_4 + R_1 \to R_1,\amp\\ -R_4 + R_3\to R_3 \amp \end{array} \qquad \amp
+						\left[\begin{array}{rrrrr|r}
+1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 200\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+0 \amp 0 \amp 1 \amp 0 \amp -1 \amp -100\\
+0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 450\\
+\end{array} \right]
+ </mrow>
+					</md>
+				</p>
+			</solution>
+		</exercise>
+
+		<example>
+		<statement><p>
+			Solve a basically random matrix. </p></statement>
+		</example>
+
+	</subsection>
+	<subsection xml:id="sect-matrix-pivot">
+		<title>Matrix Pivots</title>
+
+		<p>
+			Matrix Pivots
+		</p>
+	</subsection>
+</section>

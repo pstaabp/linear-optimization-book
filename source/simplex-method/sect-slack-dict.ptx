@@ -1,0 +1,375 @@
+<section xml:id="sect-slack-dict">
+  <title>Slack Variables and Dictionaries</title>
+
+  <introduction>
+    <p> In <xref ref="sect-geometry" />, we examined feasible sets using geometry. As we saw in that
+      section, solutions occur on the boundary of the feasible set, </p>
+  </introduction>
+
+  <subsection>
+    <title>Slack Variables</title>
+
+    <p> Let’s return to the LOP found at the beginning of the section, that is <em>maximize</em> <m>z= f(x_1,x_2)=x_1+3x_2</m> subject to </p>
+
+    <p>
+      <md>
+        <mrow>4x_1 + 3x_2 \amp \leq 120, </mrow>
+        <mrow>x_1 + 2x_2 \amp \leq 40,</mrow>
+        <mrow>x_2 \amp \leq 16,</mrow>
+        <mrow>x_1, x_2 \amp \geq 0.</mrow>
+      </md>
+    </p>
+
+    <p> Another way to look at this problem is to introduce <term>slack variables</term> to the
+      first three inequalities that will convert the inequality to an equation. If we introduce <m>x_3,
+      x_4</m> and <m>x_5</m> in the following way: </p>
+
+    <p>
+      <md>
+        <mrow>4x_1 + 3x_2 + x_3 \amp = 120</mrow>
+        <mrow>x_1 + 2x_2 + x_4 \amp = 40</mrow>
+        <mrow>x_2 + x_5 \amp = 16 </mrow>
+      </md>
+    </p>
+
+    <p> and <m>x_3, x_4</m> and <m>x_5</m> must be nonnegative in order for the above inequalities
+      to remain true. Solving these three equations for <m>x_3, x_4</m> and <m>x_5</m>, we can write
+      the LOP as </p>
+
+    <p>
+      <md>
+        <mrow>\text{Max.}\; z \amp = x_1 + 3x_2 </mrow>
+        <mrow>\text{s.t.}\quad x_3 \amp = 120 - 4 x_1 -3x_2 </mrow>
+        <mrow number="yes" xml:id="eq-dict-LOP1"> x_4 \amp = 40 - x_1 - 2x_2</mrow>
+        <mrow>x_5 \amp = 16 - x_2 </mrow>
+        <mrow>\text{and}\; x_1, x_2, x_3, x_4, x_5 \amp \geq 0</mrow>
+      </md>
+    </p>
+
+    <p> This is called the <term>dictionary</term> form of the LOP. Note that the variables on the
+      right of the equals signs are only <m>x_1</m> and <m>x_2</m>. These are called the <term>nonbasic
+      variables</term> or <term>parameters</term> of the problem. These are the original variables.
+      The four variables on the left side are <m>z, x_3, x_4, x_5</m>. The three <m>x</m> variables
+      are called the <term>basic variables</term> and the set of these are called the <term>basis</term>
+      of the problem. For this example, these are the objective and slack variables, however as we
+      update the dictionary, these will change. </p>
+
+    <p> Note also, that when <m>x_1, x_2, x_3, x_4</m> and <m>x_5</m> are 0, these are the 5 lines
+      that define the feasible set. </p>
+
+    <p> The <term>basic</term> variables and <term>nonbasic</term> are often distinguished from one
+      another using the variables <m>\beta</m> and <m>\pi</m> respectively. For example, in the
+      dictionary above, <m>\beta=\{3,4,5\}</m> and <m>\pi=\{1,2\}</m>. </p>
+
+    <p> A plot of the feasible set listed in the dictionary form in <xref ref="eq-dict-LOP1" /> is </p>
+
+    <figure xml:id="fig-lop-1">
+      <caption></caption>
+      <image width="75%">
+        <latex-image>
+  <![CDATA[
+    \begin{tikzpicture}[scale=0.2]
+\fill[lightgray] (0,0)--(30,0) -- (24,8) -- (8,16) -- (0,16) -- cycle;
+
+\draw [->] (-2,0) -- (45,0) node [above right] {$x_1$};
+\foreach \x in {5,10,...,40} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+\draw [->] (0,-2) -- (0,45) node [above right] {$x_2$};
+\foreach \y in {5,10,...,45} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+\draw[<->,thick] (-2, {(120-4*(-2))/3}) -- (32, {(120-4*(32))/3});
+\draw[<->,thick] (-2, {(40-1*(-2))/2}) -- (45, {(40-1*(45))/2});
+\draw[<->,thick] (-2,16) -- (45,16);
+
+\foreach \x/\y in {8/16,18/16,24/8,30/0,40/0,0/16,0/0,0/20,0/40}
+  \fill (\x,\y) circle[radius=10pt];
+
+\draw (10,30) node[right] {$x_3=0$};
+\draw (30,6) node[right] {$x_4=0$};
+\draw (30,16) node [above] {$x_5=0$};
+]]>
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      In this form, it is easy to see that the boundaries of the feasible set occur when either the
+      slack variables or the original variables are zero. Note that the original variables are zero
+      on the coordinate axes.
+      You can also notice that the vertices of the feasible set occur where two of the variables are
+      zero. Note that there are 5 of these. Also, there are other intersection points between lines
+      where the variables are 0, 4 of these are not within the feasible set.
+</p>
+
+    <p>
+      Recall that from the previous chapter, that the optimal point occurs on one of the vertices of
+      the feasible set. We will see here in this chapter how to walk from vertex to vertex not
+      leaving the feasible set and also stopping when reaching the maximum of the objective.
+</p>
+  </subsection>
+
+  <subsection xml:id="sect-basic-solutions">
+    <title>Basic Solutions</title>
+
+    <p> A <term>solution</term> to either the dictionary or the tableau is any set of values for <m>
+      \boldsymbol{x}</m> that satisfy the problem constraints written as equalities. For example, <m>\boldsymbol{x}=(10~
+      5 ~|~ 65~20~11)^{\intercal}</m> is a solution to the LOP above. This is because if we
+      substitute these values of <m>\boldsymbol{x}</m> and <m>z</m>, then each line of the
+      dictionary is satisfied. </p>
+
+    <p> For example, plugging these into the dictionary is <md>
+        <mrow>x_3 \amp = 120 - 4(10) - 3(5) = 65 </mrow>
+        <mrow>x_4 \amp = 40 - 10 - 2(5) = 20</mrow>
+        <mrow>x_5 \amp = 16 - 5 = 11</mrow>
+      </md>
+    </p>
+
+    <p>The value of <m>z</m> that corresponds to is solution is <m>z=x_1+3x_2 = 10 + 3(5) = 25</m>. </p>
+
+    <note>
+      <p> The term <em>solution</em> is not a (or the) solution to the LOP, that is this may not be
+        a value that is the optimum value of the function. We use the term solution here as a
+        indication that a point satisfies all of the equations. </p>
+    </note>
+    <p> A solution is <term>basic</term> if the parameters or <term>nonbasic variables</term> are
+      all zero. In the LOP problem above, the solution <m>
+      \boldsymbol{x}=(0~0~|~120~40~16)^{\intercal}</m> is basic with value <m>z=0</m>. If we have a
+      problem in dictionary form, we will set the basic variables to 0 and the parameters will be
+      constants on right side of the equations. </p>
+
+    <p> In the example where <m>x_1 =0</m> and <m>x_2=0</m> is a basic solution with the basis <m>\beta
+      = \{1,2\}</m>. Recall that we mention above that when two variables (in this case, not in
+      general) are zero, then we are at a vertex of the feasible set. This vertex is at the origin. </p>
+
+    <p> A dictionary or tableau is <term>feasible</term> if its corresponding basic solution is
+      feasible. Both <m>\boldsymbol{x}=(10~ 5 ~|~ 65~20~11)^{\intercal}</m> and <m>
+      \boldsymbol{x}=(0~0~|~120~40~16)^{\intercal}</m> are feasible solutions, whereas <m>
+      \boldsymbol{x}=(0~30~|~30~-20~-14)^{\intercal}</m> is not because <m>x_4=-20</m> and <m>
+      x_5=-14</m> does not satisfy the nonnegative constraint. </p>
+
+    <p> We are now going to develop the <term>Simplex Method</term> to solve the LOP using the
+      dictionary. This technique will be systematically going from vertex to vertex of the feasible
+      set until the optimal solution is reached.<fn>This is perhaps a bit too simplistic, because as
+      we will see that the starting basis may not be in the feasible set and we need to get there
+      first.</fn>
+    </p>
+
+    <p> Lastly, the dictionary is <term>optimal</term> if its basic solution is optimal. The simplex
+      method will stop when we reach an optimal solution. </p>
+
+  </subsection>
+
+  <subsection xml:id="sect-develop-simplex">
+    <title>Developing the Simplex Method</title>
+
+    <p> If we return to the dictionary in <xref ref="eq-dict-LOP1" />, we notice that if either <m>
+      x_1</m> or <m>x_2</m> increases in value then <m>z</m> increases and since we are seeking a
+      maximum of <m>z</m>, this is desirable, so we want to increase either <m>x_1</m>, <m>x_2</m>
+      or both. We must be careful however, because as <m>x_1</m> and <m>x_2</m> increases, <m>x_3,
+      x_4</m> and <m>x_5</m> decrease and they must stay nonnegative. Before increasing these
+      variables, recall that the basis is <m>\beta=\{1,2\}</m> indicating that these two variables
+      are in the basis (recall that the basic variables are the ones on the right side of all of the
+      equations in a dictionary). The variable <m>x_1</m> will be increased, so will set <m>x_2=0</m>
+      in <xref ref="eq-dict-LOP1" />: </p>
+
+    <p>
+      <md>
+        <mrow> z\amp= x_1,</mrow>
+        <mrow> x_3\amp= 120-4x_1 </mrow>
+        <mrow> x_4\amp= 40 -x_1, </mrow>
+        <mrow> x_5\amp= 16. </mrow>
+      </md>
+    </p>
+
+
+    <p> If we increase <m>x_1</m>, and keep <m>x_3</m> and <m>x_4</m> nonnegative, we require that </p>
+    <p>
+      <md>
+        <mrow>120 -4x_1\amp\geq 0,\amp40-x_1\amp\geq 0.</mrow>
+      </md>
+    </p>
+
+    <p> The largest value of <m>x_1</m> that ensure both of these stay true is <m>x_1=30</m>. If we
+      let <m>x_1=30</m> in <xref ref="eq-dict-LOP1" />, notice that when <m>x_2=0,</m> the variable <m>
+      x_3</m> becomes zero, therefore it appears that we have interchanged <m>x_1</m> and <m>x_3</m>
+      between basic and nonbasic variables. Thus the new basis is <m>\beta=\{1,4,5\}</m> and the
+      parameters is <m>\pi = \{2,3\}</m>. This switch of variables is called a <term>pivot</term>
+      and is denoted <m>1 \mapsto 3</m>, where the first number 1 is the variable entering the basis
+      and the second number is the one leaving. </p>
+
+    <p> If we want <m>x_3</m> to be in the basis and <m>x_1</m> to leave we use the 2nd equation in
+      the dictionary in <xref ref="eq-dict-LOP1" /> and solve for <m>x_1</m> or </p>
+    <p>
+      <me>
+        x_1= 30 -\frac{1}{4}x_3 - \frac{3}{4}x_2.
+</me>
+    </p>
+
+    <p> To get <m>x_3</m> a basic variable for the rest of the dictionary, we plug this in the other
+      equations in <xref ref="eq-dict-LOP1" />, resulting in the new dictionary: </p>
+
+    <p>
+      <md>
+        <mrow>z\amp= 30+\frac{9}{4}x_2 - \frac{1}{4}x_3 </mrow>
+        <mrow> x_1\amp= 30 - \frac{3}{4}x_2 - \frac{1}{4}x_3 </mrow>
+        <mrow> x_4\amp= 10-\frac{5}{4}x_2 +\frac{1}{4}x_3</mrow>
+        <mrow> x_5\amp= 16-x_2 </mrow>
+      </md>
+    </p>
+
+    <p>
+      which is a bit annoying with the fractions, so multiplying each row each by 4 to get:
+</p>
+    <p>
+      <md>
+        <mrow> 4z\amp= 120 +9x_2-x_3</mrow>
+        <mrow> 4x_1\amp=120 -3x_2-x_3 </mrow>
+        <mrow> 4x_4\amp= 40 -5x_2+x_3</mrow>
+        <mrow number="yes" xml:id="eq-dict-LOP1-step2"> 4x_5\amp= 64-4x_2.</mrow>
+      </md>
+    </p>
+    <p>
+      (Note: there was no reason to multiply the last row by 4, but you will see later why we want
+      to do this.)
+</p>
+
+    <p> Also, we have a new basic solution for the dictionary in <xref ref="eq-dict-LOP1-step2" />
+      as <m>\boldsymbol{x}^{(1)}=(120~0~|~0~40~64)^{\intercal}/4=(30~0~|~0~10~16)^{\intercal}</m>.
+      where the superscript <m>(1)</m> denotes the first step of the simplex method. Also, this
+      dictionary corresponds to the basis of <m>\beta=\{1,4,5\}</m> and parameters <m>\pi=\{2,3\}</m>.
+      The notation <m>1 \mapsto 3</m> shows that 1 has left the <m>\pi</m> set (nonbasic) to become
+      a basic variable replacing 3. </p>
+
+    <p> The objective in the first row of <xref ref="eq-dict-LOP1-step2" /> is <m>z = 120/4=30</m>,
+      shows first that it has increased from the initial dictionary, but also that if we increase <m>
+      x_2</m>, then <m>z</m> will increase. Because of this, we also know that the current solution
+      is not optimal. We can increase <m>x_2</m> so long that it satisfies: </p>
+
+    <p>
+      <md>
+        <mrow>120-3x_2\amp\geq 0,\amp 40-5x_2\amp\geq 0,\amp64-4x_2\amp\geq 0. </mrow>
+      </md>
+    </p>
+
+    <p>
+      This occurs by selecting
+</p>
+    <p>
+      <me>
+        x_2= \min(120/3=40, 40/5=8,64/4=16) = 8
+</me>
+    </p>
+
+    <p> Because the 8 came from the the 3rd equation of <xref ref="eq-dict-LOP1-step2" />, we are
+      going to solve for <m>x_2</m> (or actually <m>5x_2</m>) in this equation or </p>
+
+    <p>
+      <men xml:id="eq-dict-LOP1-x2">
+        5 x_2 = 40 + x_3 - 4x_4
+      </men>
+    </p>
+
+    <p> We now take the other three equations in <xref ref="eq-dict-LOP1-step2" /> and multiply by 5
+      because of the coefficient of the variable <m>x_2</m> above to get: </p>
+
+    <p>
+      <md>
+        <mrow>20 z \amp = 600 + 9 (5x_2) - 5 x_3 </mrow>
+        <mrow>20 x_1 \amp = 600 - 3 (5x_2) - 5 x_3</mrow>
+        <mrow>5x_2 \amp =40 + x_3 - 4x_4 </mrow>
+        <mrow>20 x_5 \amp =320 - 4 (5 x_2)</mrow>
+      </md>
+    </p>
+    <p> and then in each of the terms in the parentheses substitute <xref ref="eq-dict-LOP1-x2" />,
+      to get </p>
+
+    <p>
+      <md>
+        <mrow> 20 z \amp = 600 + 9 (40 + x_3-4x_4) - 5 x_3 = 960 + 4x_3 - 36 x_4 </mrow>
+        <mrow>20 x_1 \amp = 600 - 3 (40 + x_3-4x_4) - 5 x_3 = 480 - 8x_3 + 12 x_4</mrow>
+        <mrow>5x_2 \amp =40 + x_3 - 4x_4 </mrow>
+        <mrow>20 x_5 \amp =320 - 4 (40 + x_3-4x_4) = 160 - 4x_3 + 16 x_4</mrow>
+      </md>
+    </p>
+
+    <p>
+      If we note that each of the first, second and fourth equations above are factors of 4 (the
+      previous coefficient of all parameters), if we divide these three equations by 4 to get:
+</p>
+
+    <p>
+      <md>
+        <mrow>5 z \amp = 240 + x_3 - 9 x_4 </mrow>
+        <mrow>5 x_1 \amp = 120 - 2x_3 + 3 x_4</mrow>
+        <mrow>5x_2 \amp =40 + x_3 - 4x_4 </mrow>
+        <mrow number="yes" xml:id="eq-dict-LOP1-step3">5 x_5 \amp = 40 - x_3 + 4 x_4</mrow>
+      </md>
+    </p>
+
+    <p> which is the current dictionary. Note that 4 is now a basic variable and 2 is now a
+      parameter. This means that we have done the pivot: <m>2\mapsto 4</m> and the basis is <m>\beta
+      = \{3,4\}</m> and parameter is <m>\pi = \{1,2,5\}</m>. The basic solution of this dictionary
+      or tableau is <m>\boldsymbol{x}=(120~40~|~0~0~40)^{\intercal}/5=(24~8~|~0~0~8)^{\intercal}</m>
+      with objective function value <m>z=240/5=48</m>. </p>
+
+    <p> If we look at the dictionary, the top row is <m>5z=240+x_3-9x_4</m>. If we increase the
+      variable <m>x_3</m>, then the objective function will be increased. We will increase <m>x_3</m>,
+      but in order to ensure that we remain in the feasible set, we required that </p>
+
+    <p>
+      <md>
+        <mrow>120-2x_3\amp\geq 0,\amp40+x_3\amp\geq 0,\amp40-x_3\amp\geq 0.</mrow>
+      </md>
+    </p>
+
+    <p> We wish to increase <m>x_3</m> by the maximum amount with these constraints and this occurs
+      when </p>
+
+    <p>
+      <me>
+        x_3 = \min(120/2=60,40/1=40) = 40
+</me>
+    </p>
+
+    <p> where the second inequality has been ignored because it is automatically satisfied for any
+      positive value of <m>x_3</m>. Since the minimum value is associated with the 4th equation, we
+      will solve for <m>x_3</m> in this equation or </p>
+
+    <p>
+      <me>
+        x_3 = 40 + 4x_4 - 5 x_5
+</me>
+    </p>
+
+    <p>We then substitute this into the other equations or </p>
+
+    <p>
+      <md>
+        <mrow>5 z \amp = 240 + (40+4x_4-5x_5) - 9 x_4 = 280 - 5x_4 - 5 x_5</mrow>
+        <mrow>5 x_1 \amp = 120 - 2(40+4x_4-5x_5) + 3 x_4 = 40 - 5x_4 + 10 x_5</mrow>
+        <mrow>5x_2 \amp =40 + (40+4x_4-5x_5) - 4x_4 = 80 - 5x_5 </mrow>
+        <mrow>x_3 \amp = 40+4x_4-5x_5</mrow>
+      </md>
+    </p>
+    <p>and we'll multiply the last row by 5 to ensure that the coefficients of all parameters are
+      the same</p>
+
+    <p>
+      <md>
+        <mrow>5 z \amp = 240 + (40+4x_4-5x_5) - 9 x_4 = 280 - 5x_4 - 5 x_5</mrow>
+        <mrow>5 x_1 \amp = 120 - 2(40+4x_4-5x_5) + 3 x_4 = 40 - 5x_4 + 10 x_5</mrow>
+        <mrow>5x_2 \amp =40 + (40+4x_4-5x_5) - 4x_4 = 80 - 5x_5 </mrow>
+        <mrow number="yes" xml:id="eq-dict-LOP1-step4">5x_3 \amp = 200+20x_4-25x_5</mrow>
+      </md>
+    </p>
+
+    <p> The basic solution of this tableau is <m>\boldsymbol{x}=(40~80~|~200~0~0)^{\intercal}/5\\
+      =(8~16~|~40~0~0)^{\intercal}</m> with the objective function taking on the value <m>z=56</m>.
+      Lastly, looking at the objective equation, increasing our basic variables <m>x_4</m> or <m>x_5</m>
+      decreases the objective value, so this means that this solution is <em>optimal.</em>
+    </p>
+
+    <p>In the next section, we repeat this example with a matrix form of the dictionary, called a
+      tableau. This will make all of the calculation easier to do and with some software can
+      simplify the steps tremendously. </p>
+  </subsection>
+</section>

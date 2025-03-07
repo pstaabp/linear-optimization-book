@@ -1,0 +1,17 @@
+<chapter xml:id="ch-simplex" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The Simplex Method</title>
+
+  <introduction>
+    <p>
+      Some of problems in <xref ref="ch-linear-models"/> were simple enough that with some geometric arguments, we can determine the solution.  However, plotting regions above 3 dimensions is impossible and as the number of variables and contraints increase, problems get far too complex to rely on geometric arguments to ensure we have the correct solution.
+    </p>
+    <p>
+      So here we introduce the <term>simplex method</term>, by far the most robust and efficient way of solving these problems.  We will we see that for <em>standard maximum problems</em> that the simplex method is straightfoward but for problems not in this form, there are techniques that adapt the standrad simplex method for such problems.
+    </p>
+  </introduction>
+
+  <!-- include sections -->
+  <xi:include href="sect-slack-dict.ptx" />
+  <xi:include href="sect-tableau.ptx" />
+  <xi:include href="sect-phase1.ptx" />
+</chapter>

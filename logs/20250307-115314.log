@@ -1,0 +1,48 @@
+INFO    : Since no target was supplied, we will use "web".
+
+INFO    : Building target web
+INFO    : Generating any needed assets.
+INFO    : converting latex-image pictures from /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/main.ptx to svg graphics for placement in /Users/pstaab/Documents/courses/math4400/linear-optimization-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/Users/pstaab/Documents/courses/math4400/linear-optimization-book/publication/publication.ptx'}
+INFO    : discovering source file's directory name: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source
+INFO    : verifying and expanding input directory: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/generated-assets
+INFO    : verifying and expanding input directory: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/../assets
+INFO    : input directory expanded to absolute path: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/assets
+INFO    : XSL conversion of /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.14.0/core/xsl/extract-latex-image.xsl
+INFO    : messages from the log for XSL processing:
+INFO    : * PTX:INFO:   checking ONLY the last TWO YEARS of element deprecations.
+Rerun with the string parameter "author.deprecations.all" set to "yes" to check your source against all deprecations.
+INFO    : successful application of /Users/pstaab/.ptx/2.14.0/core/xsl/extract-latex-image.xsl
+INFO    : converting fig-coffee-2.tex to fig-coffee-2.pdf
+INFO    : cropping fig-coffee-2.pdf to cropped-fig-coffee-2.pdf
+INFO    : renaming cropped-fig-coffee-2.pdf to fig-coffee-2.pdf
+INFO    : converting fig-coffee-2.pdf to fig-coffee-2.svg
+INFO    : Removing temporary directory /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-bqf9vh3j
+INFO    : Finished generating assets.
+
+INFO    : Preparing to build into /Users/pstaab/Documents/courses/math4400/linear-optimization-book/output/web.
+INFO    : discovering source file's directory name: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source
+INFO    : verifying and expanding input directory: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/generated-assets
+INFO    : verifying and expanding input directory: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/../assets
+INFO    : input directory expanded to absolute path: /Users/pstaab/Documents/courses/math4400/linear-optimization-book/assets
+INFO    : Downloading rs services file from https://runestone.academy/cdn/runestone/latest/webpack_static_imports.xml.
+INFO    : Runestone Services via online CDN query: version 7.5.10
+INFO    : Downloading Runestone Services, version 7.5.10
+INFO    : Extracting Runestone Services from archive file
+INFO    : XSL conversion of /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.14.0/core/xsl/utilities/report-publisher-variables.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.14.0/core/xsl/utilities/report-publisher-variables.xsl
+INFO    : converting /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/main.ptx to HTML in /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-637dggcc
+INFO    : XSL conversion of /Users/pstaab/Documents/courses/math4400/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.14.0/core/xsl/pretext-html.xsl
+INFO    : messages from the log for XSL processing:
+INFO    : * PTX:INFO:   checking ONLY the last TWO YEARS of element deprecations.
+Rerun with the string parameter "author.deprecations.all" set to "yes" to check your source against all deprecations.
+INFO    : successful application of /Users/pstaab/.ptx/2.14.0/core/xsl/pretext-html.xsl
+INFO    : Removing temporary directory /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-637dggcc
+INFO    : Removing temporary directory /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-vlv4rg_x
+INFO    : 
+Success! Run `pretext view` to see the results.
+
+INFO    : 

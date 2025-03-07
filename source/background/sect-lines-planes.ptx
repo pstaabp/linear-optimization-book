@@ -1,0 +1,138 @@
+<section xml:id="sect-lines-planes">
+  <title>Lines and Planes</title>
+
+<introduction>
+<p>
+  I'm guessing that if you are reading this book (either you picked it up or have been assigned it) that you have a fair bit of mathematical background.  If you haven't read through the preface with some additional information, but typically this is a upper-level undergraduate or early graduate-level class.
+</p>
+<p>
+  That being said, I'm guessing that you are quite familiar with lines<mdash/>you may even be embarrased if you seen reading a section on lines.  However, you may not have seen lines and planes in the context that you will seen them here. It will be worth your while to read through this chapter.
+</p>
+</introduction>
+
+<subsection xml:id="sect-lines">
+  <title>Lines</title>
+
+
+<p>
+ When most mathematics students are asked above lines, the response is <m>y=mx+b</m>, the <term>slope-intercept form</term> of the line.  This is often presented in a precalculus class in which linear functions fall from this naturally.  However, not all lines can be written in this form.  The exception is vertical lines, like <m>x=1</m>.
+</p>
+
+<p>
+  Instead, we will use the <term>general form</term> of the line or
+</p>
+<p>
+<men xml:id="eq-standard-form-line">
+  ax + by = c
+</men>
+</p>
+<p>
+  as long as <m>a</m> and <m>b</m> are both not zero,<fn>A nice was to ensure this is <m>ab \neq 0</m>.</fn> and the <m>b</m> in this formula is not the <m>y</m>-intercept.   This form allows both horizontal, vertical and any line with any other slope.
+</p>
+<p>
+  This form is quite nice in that if <m>a</m> is zero, then the line is horizontal, if <m>b</m> is zero, then the line is vertical and if both are non-zero then the line is oblique with <m>x</m>-intercept of <m>c/a</m>, <m>y</m>-intercept of <m>c/b</m> and slope of <m>-a/b</m>.
+</p>
+
+<p>
+  If we take the line in <xref ref="eq-standard-form-line"/> for oblique lines and divide through by <m>c</m>, this can take on the <term>intercept form of the line</term>:
+</p>
+<p>
+<men xml:id="eq-intercept-form-line">
+  \frac{x}{x_0} + \frac{y}{y0} = 1
+</men>
+</p>
+<p>
+  and in this form the <m>x</m>-intercept is <m>x_0</m> and the <m>y</m>-intercept is <m>y_0</m>.
+</p>
+
+<example>
+  <statement>
+    <p>
+      Put the line given by <m>3x+5y = 30</m> into intercept form and find the intercepts.
+    </p>
+  </statement>
+  <solution>
+    <p>
+      Divide through by 30 to get
+    </p>
+    <p>
+      <md>
+        <mrow>\frac{3x}{30} + \frac{5y}{30} \amp = 1  \amp\amp\text{or} \amp\amp
+        \frac{x}{10} + \frac{y}{6} = 1
+        </mrow>
+      </md>
+          </p>
+          <p>
+            This shows that the <m>x</m>-intercept is 10 and the <m>y</m>-intercept is 6.
+          </p>
+  </solution>
+</example>
+
+<p>
+  The above example showed how we can use the intercept form to easily read off the intercepts.  The following exercise will use these to plot the lines.
+</p>
+
+<exercise>
+  <statement>
+    <p>
+      Plot the following lines: <m>x=3</m>, <m>y= 4</m>, <m>2x+ 3y = 24</m> and <m>-3x+4y = 12</m> on the same axes.  Note: do this by hand instead of graphing calculator/website/software.
+    </p>
+  </statement>
+  <hint>
+    <p>
+      Use the information above to note if it is horizontal, vertical or oblique and in the latter case, use intercepts to plot the line.
+    </p>
+  </hint>
+  <solution>
+    <p>
+In this case, note that the first line is vertical, the second is horizontal.  For the third line, divide through by <m>24</m> and simplify to
+      </p>
+      <p>
+        <me>
+          \frac{x}{12} + \frac{y}{8} = 1
+        </me>
+              </p><p>
+                which will have the intercepts <m>(12,0)</m> and <m>(0,8)</m>and the last line can be simplified to
+              </p>
+              <p>
+                <me>
+                  -\frac{x}{4} + \frac{y}{3} = 1
+                </me>
+              </p>
+              <p>
+                which will have the intercepts <m>(-4,0)</m> and <m>(0,3)</m>.
+              </p>
+      <figure xml:id="fig-exercise-lines">
+        <caption></caption>
+        <image>
+          <shortdescription></shortdescription>
+          <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}[scale=0.5]
+              \draw [->] (-13,0) -- (13,0) node [above right] {$x$};
+              \foreach \x in {-12,-11,...,-1,1,2,...,12}
+               \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+              \draw [->] (0,-9) -- (0,9) node [above right] {$y$};
+              \foreach \y in {-8,-7,...,-1,1,2,...,8}
+                \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+              \draw[<->,thick] (3,-8)--(3,8);
+              \draw[<->,thick] (-12,4)--(12,4);
+              \draw[<->,thick] (-2,{(24-2*(-2))/3}) -- (12.5,{(24-2*(12.5))/3});
+              \draw[<->,thick] (-8,{(12+3*(-8))/4}) -- (8,{(12+3*(8))/4});
+          \end{tikzpicture}
+          ]]>
+          </latex-image>
+        </image>
+      </figure>
+
+  </solution>
+</exercise>
+</subsection>
+<subsection xml:id="sect-linear-inequality">
+  <title>Linear Inequalities</title>
+
+  <p>
+    Related to lines is that of linear inequalities.  Consider the inequality <m>3x+ 4y \leq 12</m> and if we have the set <m>S</m> is the set of all points that satisfy the inequality.  The line <m>3x+4y=12</m> cuts the <m>xy</m>-plane into two regions and in this case, the line is included in the set <m>S</m> along with the side of the line containing the origin.
+  </p>
+</subsection>
+</section>

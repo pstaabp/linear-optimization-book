@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch-linear-models" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Developing Linear Models</title>
+
+  <introduction>
+    <p> Text before the first section. </p>
+  </introduction>
+
+  <!-- include sections -->
+  <xi:include href="sect-linear-models.ptx" />
+  <xi:include href="sect-geometry.ptx" />
+
+</chapter>

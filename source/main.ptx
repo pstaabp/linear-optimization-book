@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<pretext xml:lang="en-US" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <!-- we first include a file which contains the docinfo element: -->
+  <xi:include href="./docinfo.ptx" />
+
+  <book xml:id="my-great-book">
+    <title>Linear Optimization</title>
+    <subtitle>Modeling and Solving Linear problems with Julia and WebCAS</subtitle>
+
+    <!-- Include frontmatter -->
+    <xi:include href="./frontmatter.ptx" />
+
+    <!-- Include chapters -->
+    <xi:include href="./background/ch-background.ptx" />
+    <xi:include href="./linear-models/ch-linear-models.ptx" />
+  <xi:include href="./simplex-method/ch-simplex-method.ptx" />
+  <xi:include href="./integer-problems/ch-integer-problems.ptx" />
+
+    <!-- Include backmatter -->
+    <xi:include href="./backmatter.ptx" />
+
+  </book>
+</pretext>

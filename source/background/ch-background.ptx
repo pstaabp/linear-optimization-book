@@ -1,0 +1,13 @@
+<chapter xml:id="ch-background" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Background Mathematics for Linear Optimization</title>
+
+  <introduction>
+    <p>
+
+    </p>
+  </introduction>
+
+    <!-- include sections -->
+  <xi:include href="sect-lines-planes.ptx" />
+  <xi:include href="sect-matrices.ptx" />
+</chapter>

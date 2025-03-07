@@ -1,0 +1,528 @@
+<section xml:id="sect-tableau">
+  <title>Tableaus and the Simplex Method</title>
+
+  <introduction>
+  <p>
+    In <xref ref="sect-slack-dict"/>, we walked through how to solve a Linear Optimization Problem using the dictionary.  It was a bit cumbersome to solve the problem this way in terms of solving for variables and substitute that into all other equations and simplifying.
+  </p>
+  <p>
+    We see in this section that since all of the equations are linear, we can use a matrix to organize the equations and perform the operations.
+  </p>
+  </introduction>
+
+  <subsection>
+    <title>Introduction to tableaus</title>
+
+    <p>A <term>tableau</term> is matrix representation of a <em>dictionary</em>. For example, the dictionary in <xref ref="eq-dict-LOP1"/> can be written in the form:</p>
+
+      <p>
+        <md>
+          <mrow>4x_1 + 3x_2 + x_3  \amp = 120</mrow>
+          <mrow>x_1 + 2x_2 + x_4  \amp = 40</mrow>
+          <mrow>x_2 + x_5 \amp = 16 </mrow>
+        </md>
+      </p>
+      <p> and also the objective function can be written as <m>-x_1 -3x_2 + z = 0</m>.  These four equations can be put into a matrix as
+</p>
+      <p>
+<men xml:id="eq-tableau-LOP1">
+  \left[ \begin{array}{rr|rrrr|r}
+  4 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 120 \\
+  1 \amp 2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 40 \\
+  0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16 \\ \hline
+  -1 \amp -3 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0
+  \end{array} \right]
+</men>
+</p>
+
+<p>
+  The first two columns are the variables <m>x_1</m> and <m>x_2</m>, the original variables, the next block of four columns are <m>x_3, x_4, x_5</m> and <m>z</m> and the last column is the <m>b</m>-column of right hand sides.
+  Also, the last row is the objective row.  It is standard to write the tableau with vertical lines that separate the original variables from the slack and objective variables and  the last (constant) column, as well as a horizontal line to handle the objective function.
+</p>
+
+<p>
+  Also, recall that the dictionary has the basis of <m>\beta = \{1,2\}</m> and parameters <m>\pi = \{3,4,5\}</m>.  We can see this from the tableau by looking at the columns.   Columns 3 through 6 are columns of an identity matrix and these are the parameters (except for <m>z</m>).  The remaining columns 1 and 2 are thus the basis.
+</p>
+<p>
+  Knowing this, we can read the basic solution by setting the basic variables to zero.  Doing this, results in the matrix:
+</p>
+<p>
+  <me>
+  \left[ \begin{array}{rrrr|r}
+  1 \amp 0 \amp 0 \amp 0 \amp 120 \\
+  0 \amp 1 \amp 0 \amp 0 \amp 40 \\
+  0 \amp 0 \amp 1 \amp 0 \amp 16 \\ \hline
+  0 \amp 0 \amp 0 \amp 1 \amp 0
+  \end{array}
+  \right]
+  </me>
+</p>
+<p>
+  where you need to recall that first three columns are the parameters, the 4th is now the objective, so this corresponds to
+</p>
+
+<p>
+  <md>
+    <mrow>x_3 \amp =120</mrow>
+    <mrow>x_4 \amp =40</mrow>
+    <mrow>x_5 \amp =16</mrow>
+    <mrow>z \amp =0</mrow>
+  </md>
+</p>
+
+<exercise>
+  <statement>
+    <p>
+      Read the basic solution off a tableau.
+    </p>
+  </statement>
+</exercise>
+
+<p>
+  As we saw in <xref ref="sect-slack-dict"/>, solving for various variables switches the basis and parameters and moves the basic solution from vertex to vertex along the feasible set.  We can represent each dictionary as a tableau, but in this section we will learn how to do the same operation on the tableau itself.
+</p>
+  </subsection>
+
+<subsection>
+  <title>Operations on Tableaus</title>
+
+  <p>
+We now repeat what we did in <xref ref="sect-slack-dict"/> with dictionaries with the tableaus.  Our first steps, we will write the tableau that is associated with <xref ref="eq-dict-LOP1-step2"/>.  The corresponding tableau can be written:
+  </p>
+
+<p>
+<men xml:id="eq-tableau-LOP1-step2">
+  \left[\begin{array}{rr|rrrr|r}
+  4 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 120 \\
+  0 \amp 5 \amp -1 \amp 4 \amp 0 \amp 0 \amp 40 \\
+  0 \amp 4 \amp 0 \amp 0 \amp 4 \amp 0 \amp 64 \\ \hline
+  0 \amp -9 \amp 1 \amp 0 \amp 0 \amp 4 \amp 120
+  \end{array} \right]
+  </men>
+</p>
+
+
+<p>
+  Since there is a 1-to-1 correspondence between the dictionaries and the tableaus, we could have used elementary row operations to go from <xref ref="eq-tableau-LOP1"/> to <xref ref="eq-tableau-LOP1-step2"/>.
+  In fact, these steps are:
+</p>
+<p>
+<md>
+  <mrow>-R_{1}+4R_{2}\amp\to R_{2},\amp 0R_{1} + 4R_{3} \amp \to R_{3},\amp R_{1} + 4R_{4}\amp\to R_{4} </mrow>
+</md>
+</p>
+
+<p>
+  Since we want <m>x_1</m> to be a parameter, the above row operations bring <m>x_3</m> into the basis by eliminating all other elements in the first column.
+</p>
+
+<p>
+  The basic solution to the tableau is found by noting that the basic variables are the columns which are not columns of the identity matrix and we set those to zero and in this case is <m>\boldsymbol{x} = (120,~0~|~0,~40,~64)/4 = (30,~0~|~0,~10,~16)</m>
+</p>
+
+<p>
+  For the next step, we use the same logic as in <xref ref="sect-slack-dict"/> to determine that 2 leaves the basis and 4 enters.  This corresponds to doing a matrix pivot on row 2, column 2 and eliminate the rest of the elements in column 2.  These steps are
+</p>
+
+<p>
+<md>
+  <mrow>-3R_{2} +5R_{1}\amp\rightarrow R_{1},\amp-4R_{2} +5R_{3}\amp\rightarrow R_{3},\amp9R_{2} + 5 R_{4}\amp\rightarrow R_{4},</mrow>
+</md>
+</p>
+
+<p>
+  and the result is
+</p>
+<p>
+<men xml:id="eq-tableau-LOP1-step3">
+  \left[\begin{array}{rr|rrrr|r}
+  5 \amp 0 \amp 2 \amp -3 \amp 0 \amp 0 \amp 120\\
+  0 \amp 5 \amp -1 \amp 4 \amp 0 \amp 0 \amp 40\\
+  0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40\\ \hline
+  0 \amp 0 \amp -1 \amp 9 \amp 0 \amp 5 \amp 240\\
+  \end{array} \right]
+</men>
+</p>
+
+<p>
+  Recall that checking if this is a solution means looking at the objective row.  This can be translated to
+</p>
+<p>
+  <me>
+    5z = 240 + x_3 - 9x_4
+  </me>
+</p>
+<p>
+  and since increasing <m>x_3</m> increases <m>z</m>, so this is not an optimal solution.  We can look at what we did in the dictionary form of this to determine which variable enters the basis, but let's use the tableau to determine this.  We will zero out <m>x_4</m>, the other basic variable
+</p>
+
+<p>
+  <md>
+    <mrow>5x_1 + 2x_3  \amp = 120</mrow>
+    <mrow>5x_2 - x_3 \amp 40</mrow>
+    <mrow>x_3 + 5x_5 \amp 40</mrow>
+  </md>
+</p>
+<p>
+  We seek to maximize the amount to increase <m>x_3</m> and that will switch the other variable to the basis.
+</p>
+<p>
+  <md>
+    <mrow>2x_3-120 \amp \geq 0 \amp x_3 \geq 40</mrow>
+  </md>
+</p>
+<p>
+  and we pick the 3rd equation resulting in <m>x_5</m> entering the basis.  This means that we pivot about row 3, column 3, with the row operations:
+</p>
+<p>
+  <md>
+    <mrow>-2R_3 + R_1 \amp \to R_1, \amp R_3 + R_2 \amp \to R_2, \amp  R_3 + R_4 \amp \to R_4,
+    </mrow>
+    <mrow> \frac{1}{5} R_1 \amp \to R_2, \amp \frac{1}{5} R_2 \amp \to R_2, \amp  \frac{1}{5} R_4 \to R_4 </mrow>
+  </md>
+</p>
+
+<p>
+<me>
+ \left[\begin{array}{rr|rrrr|r}
+1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\
+0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40\\ \hline
+0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56\\
+\end{array} \right]
+</me>
+</p>
+
+<p>
+  Now if we look at the objective row, this can be written as <m>z = 56 - x_4 - x_5</m> and since increasing either of the two basic variables, decreases the objective, so this is optimal.
+  The basic solution for this tableau is <m>\boldsymbol{x} = (8, ~ 16~ |~40, ~0,~0)^{\intercal}</m> with <m>z=56</m>
+</p>
+
+</subsection>
+
+<subsection>
+  <title>Standard Form</title>
+
+  <p>
+    The LOP that we have been working on the past two section is in a special form that is needed for solving via the Simplex Method.   We define it below and then explain how to get other problems into this form.
+  </p>
+
+  <definition xml:id="def-std-max-form">
+    <statement>
+      <p>
+A LOP is in <term>standard form</term> if the following are conditions are met:
+<ol>
+  <li>
+    <p>
+      It is a maximum problem.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      All the constraints are of the form <m>\leq b</m>, some constant.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      All variables are nonnegative.
+    </p>
+  </li>
+</ol>
+      </p>
+    </statement>
+  </definition>
+
+  <p>Not all LOPs are in standard form.  For example, consider the transportation problem,</p>
+</subsection>
+
+<subsection>
+  <title>Phase II of the Simplex Method</title>
+
+  <p>
+    It seems odd that we start with what is called Phase II of a method to solve, but all problems will need to go through Phase II and as we will see below that not all problems need to go through Phase I.
+  </p>
+
+  <algorithm xml:id="alg-simplex-phaseII">
+  <title>Phase II of Simplex Method</title>
+
+
+    <statement>
+      <p>
+        If a tableau is feasible, then the following steps are Phase II of the simplex method:
+      </p>
+      <p>
+<ol>
+  <li>
+    <p>
+      If there are no negative numbers in the objective row, the basic solution is optimal.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Choose the leftmost negative number in the objective row.
+      This is the <alert>pivot column</alert>.
+      The variable <m>x_{j}</m> that corresponds to the <m>j</m>th column is called the <alert>entering variable</alert> since this variable is entering the basis.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Crease the <alert>b-ratio</alert> or <m>b_{i}/a_{i,j}</m> for all <m>i</m> and for <m>j</m>, the pivot column.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Choose <m>i</m> such that the b-ratio is the <alert>smallest nonnegative ratio</alert>.
+      The basic variable corresponding to the <m>i</m>th row is called the <alert>leaving variable</alert>.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Pivot about element <m>(i,j)</m> of the tableau.
+      Goto step 1.
+    </p>
+  </li>
+</ol>
+</p>
+    </statement>
+  </algorithm>
+
+  <example>
+    <statement>
+      <p>
+        Consider a LOP with the following tableau:
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rrr|rrrr|r}
+          2 \amp 1 \amp 2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 30\\
+4 \amp 1 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 48\\
+-1 \amp 4 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 40\\ \hline
+-3 \amp -1 \amp -2 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        Note first that the basic solution is feasible because the right column has no negative numbers. Therefore, use Phase II of the Simple method <xref ref="alg-simplex-phaseII"/> to find the solution.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        First, note that the objective row (bottom) has negative numbers, so this isn't an optimal solution.  We select the left-most negative number in this row, which is column 1.
+      </p>
+      <p>
+        We compute the <m>b</m>-ratio with
+      </p>
+      <p>
+        <me>
+          \begin{bmatrix} 30/2 \\ 48/4  \\ 40/(-1) \end{bmatrix} = \begin{bmatrix}
+          15 \\ 12  \\ -40 \end{bmatrix}
+        </me>
+      </p>
+      <p>
+        and the small non-negative ratio is in the second row. Therefore we perform a pivot about the second row, first column.  Note: since <m>x_1</m> will leave the basis and <m>x_5</m> will enter, then the tableau pivot is <m>1 \mapsto 5</m>.
+      </p>
+  <p>After performing the matrix pivot we get:</p>
+
+    <p>
+      <me>
+        \left[\begin{array}{rrr|rrrr|r}
+0 \amp 2 \amp 2 \amp -2 \amp 4 \amp 0 \amp 0 \amp 24\\
+4 \amp 1 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 48\\
+0 \amp 17 \amp 23 \amp 1 \amp 0 \amp 4 \amp 0 \amp 208\\ \hline
+0 \amp -1 \amp 1 \amp 3 \amp 0 \amp 0 \amp 4 \amp 144\\
+\end{array} \right]
+      </me>
+    </p>
+    <p>
+      Examining this tableau, there is still a negative number in the objective row, which means that this is not an optimal solution.  Therefore, we find the <m>b</m>-ratios using the 2nd column or
+    </p>
+    <p>
+      <me>
+      \begin{bmatrix}
+      24/2 \\ 48/ 1 \\ 208/17
+      \end{bmatrix} \approx \begin{bmatrix}
+  12 \\ 48 \\12.234
+      \end{bmatrix}
+      </me>
+    </p>
+    <p>
+      and since the smallest non-negative number is in the first row, the next step is to perform a matrix pivot about the first row, second column.  This corresponds to the tableau pivot of <m>2 \mapsto 4</m> resulting in
+    </p>
+
+<p>
+  <me>
+    \left[\begin{array}{rrr|rrrr|r}
+0 \amp 2 \amp 2 \amp -2 \amp 4 \amp 0 \amp 0 \amp 24\\
+2 \amp 0 \amp 1 \amp 1 \amp -1 \amp 0 \amp 0 \amp 18\\
+0 \amp 0 \amp 3 \amp 9 \amp -17 \amp 2 \amp 0 \amp 2\\ \hline
+0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 0 \amp 2 \amp 78\\
+\end{array} \right]
+  </me>
+</p>
+<p>
+  Now notice that the objective row has no more negative numbers in it. This means that the basic solution of <m>\boldsymbol{x} = (9,~12,~0~|~0,~0,~1)^{\intercal}</m> is optimal.  The objective value is <m>z = 78/2=39</m>.  Note that using the original variables, this solution corresponds to the point <m>x_1 =9, x_2=12, x_3=0</m>.
+</p>
+    </solution>
+  </example>
+
+<p>
+  Let's solve the following:
+</p>
+     <problem xml:id="prob-lop2">
+        <statement>
+          <p>
+            Maximize <m>z = 2x_1+7x_2</m>, subject to
+          </p>
+          <p>
+            <md>
+              <mrow>x_1 + x_2 \amp \leq 15 </mrow>
+              <mrow>2x_1 + 3x_2 \amp \leq 38 </mrow>
+              <mrow>4x_1 + x_2  \amp \leq 56</mrow>
+              <mrow>x_1 + 5x_2 \amp \leq 62</mrow>
+              <mrow>x_1, x_2 \amp \geq 0</mrow>
+            </md>
+          </p>
+        </statement>
+      </problem>
+
+  <exercise>
+    <statement>
+      <p>
+        Use Phase II of the Simplex method to find the optimal solution of <xref ref="prob-lop2"/>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        First, write the constraints with slack variables:
+      </p>
+      <p>
+        <md>
+          <mrow>x_1 + x_2 + x_3 \amp = 15 </mrow>
+          <mrow>2x_1 + 3x_2 + x_4\amp = 38 </mrow>
+              <mrow>4x_1 + x_2 + x_5  \amp = 56</mrow>
+              <mrow>x_1 + 5x_2 + x_6 \amp = 62</mrow>
+        </md>
+      </p>
+      <p>
+        where all variables need to be nonnegative or <m>x_1, x_2, x_3, x_4, x_5, x_6 \geq 0</m> and the objective function can be written as <m>-2x_1 - 7x_2 + z = 0 </m>
+      </p>
+      <p>
+        Next, write these in tableau form.  The above step is not needed, but may be helpful.
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rr|rrrrr|r}
+1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 15\\
+2 \amp 3 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 38\\
+4 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 56\\
+1 \amp 5 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 62\\ \hline
+-2 \amp -7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        and then we use Phase II of the Simplex Method.  We first check if it is optimal, but since there are negative numbers in the objective (bottom) row, this is not optimal.  To determine the pivot note we start with the leftmost negative number in the objective row or column 1 and form the <m>\boldsymbol{b}</m>-ratio or
+      </p>
+      <p>
+        <me>
+          \begin{bmatrix} 15/1 \\ 38/2 \\ 56/4 \\ 62/1 \end{bmatrix} =
+          \begin{bmatrix} 15 \\ 19 \\ 14 \\ 62 \end{bmatrix}
+        </me>
+      </p>
+      <p>
+        and smallest nonegative above is 14 in the 3rd row.  (this corresponds to the <m>x_5</m> variable).  Therefore we perform a matrix pivot on row 3, column 1, which corresponds to the tableau pivot of <m>1 \mapsto 5</m>.
+      </p>
+
+      <p>
+        <me>
+          \left[\begin{array}{rr|rrrrr|r}
+0 \amp 3 \amp 4 \amp 0 \amp -1 \amp 0 \amp 0 \amp 4\\
+0 \amp 10 \amp 0 \amp 4 \amp -2 \amp 0 \amp 0 \amp 40\\
+4 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 56\\
+0 \amp 19 \amp 0 \amp 0 \amp -1 \amp 4 \amp 0 \amp 192\\ \hline
+0 \amp -26 \amp 0 \amp 0 \amp 2 \amp 0 \amp 4 \amp 112\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        Check if the objective row has negatives and it does in column 2.  Again form <m>\boldsymbol{b}</m>-ratio for this column or
+      </p>
+      <p>
+        <me>
+          \begin{bmatrix} 4/3 \\ 40/10 \\ 56/1 \\ 192/19 \end{bmatrix} \approx
+          \begin{bmatrix} 1.333 \\ 4 \\ 56 \\ 10.105 \end{bmatrix}
+        </me>
+      </p>
+<p>
+  and the smallest nonnegative ratio is in the first row, so we will do a matrix pivot at row 1, column 2, and this corresponds to the tableau pivot of <m>2 \mapsto 3</m>.
+</p>
+<p>
+  <me>
+    \left[\begin{array}{rr|rrrrr|r}
+0 \amp 3 \amp 4 \amp 0 \amp -1 \amp 0 \amp 0 \amp 4\\
+0 \amp 0 \amp -10 \amp 3 \amp 1 \amp 0 \amp 0 \amp 20\\
+3 \amp 0 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 41\\
+0 \amp 0 \amp -19 \amp 0 \amp 4 \amp 3 \amp 0 \amp 125\\ \hline
+0 \amp 0 \amp 26 \amp 0 \amp -5 \amp 0 \amp 3 \amp 110\\
+\end{array} \right]
+  </me>
+</p>
+<p>
+  There are still negatives in the objective row, so this is not optimal.  The leftmost negative in the objective row is in column 5, so we form <m>\boldsymbol{b}</m>-ratio for this column or
+      </p>
+      <p>
+        <me>
+          \begin{bmatrix} 4/(-1) \\ 20/1 \\ 41/1 \\ 125/4 \end{bmatrix} =
+          \begin{bmatrix} -4 \\ 20 \\ 41 \\ 31.125 \end{bmatrix}
+        </me>
+      </p>
+      <p>
+        and the smallest nonegative value is in row 2, so we will perform a matrix pivot at row 2, column 5, corresponding to the tableau pivot of <m>5 \mapsto 4</m>.  The new tableau is:
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rr|rrrrr|r}
+0 \amp 1 \amp -2 \amp 1 \amp 0 \amp 0 \amp 0 \amp 8\\
+0 \amp 0 \amp -10 \amp 3 \amp 1 \amp 0 \amp 0 \amp 20\\
+1 \amp 0 \amp 3 \amp -1 \amp 0 \amp 0 \amp 0 \amp 7\\
+0 \amp 0 \amp 7 \amp -4 \amp 0 \amp 1 \amp 0 \amp 15\\ \hline
+0 \amp 0 \amp -8 \amp 5 \amp 0 \amp 0 \amp 1 \amp 70\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        This is still not the optimal solution (there in a negative in the objective row), so again we form <m>\boldsymbol{b}</m>-ratio for column 3 or
+      </p>
+      <p>
+        <me>
+          \begin{bmatrix} 8/(-2) \\ 20/(-10) \\ 7/3 \\ 15/7 \end{bmatrix} \approx
+          \begin{bmatrix} -4 \\ -2 \\ 2.3333 \\ 2.143 \end{bmatrix}
+        </me>
+      </p>
+      <p>
+        and the smallest ratio is in row 4. So we perform a matrix pivot at row 4, column 3, corresponding to the tableau pivot of <m>3 \mapsto 6</m>.  The resulting tableau is
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rr|rrrrr|r}
+0 \amp 7 \amp 0 \amp -1 \amp 0 \amp 2 \amp 0 \amp 86\\
+0 \amp 0 \amp 0 \amp -19 \amp 7 \amp 10 \amp 0 \amp 290\\
+7 \amp 0 \amp 0 \amp 5 \amp 0 \amp -3 \amp 0 \amp 4\\
+0 \amp 0 \amp 7 \amp -4 \amp 0 \amp 1 \amp 0 \amp 15\\ \hline
+0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 8 \amp 7 \amp 610\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        And now the tableau is in optimal form<mdash/>there are no negatives in the objective row.  The basic solution for this is <m>\boldsymbol{x} = (4,~86~|~15,~0,~290,~0)^{\intercal}/7</m> resulting the objective of <m>610/7</m>.
+      </p>
+    </solution>
+  </exercise>
+</subsection>
+</section>

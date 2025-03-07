@@ -1,0 +1,66 @@
+<section xml:id="sect-geometry">
+  <title>Geometry of Feasible Sets</title>
+
+<introduction>
+  <p>
+    In the previous section, we saw many different type of problems that fall into linear optimization.  Many of these problems had a lot of variables and as we will see in this course is it easy to get tens or hundreds of variables.  But we return to a two variable setup.
+  </p>
+
+<p>
+  First, as noted in <xref ref="sect-linear-inequality"/>, a single linear inequality cuts the <m>xy</m>-plane into two regions in the plane.  As noted in <xref ref="sect-linear-models"/>, Linear Optimization Problems (LOPs) have a set of linear inequalities which lead to the following.
+</p>
+
+<definition xml:id="def-feasible-set">
+  <statement>
+    <p>
+      Consider a set of linear inequalities:
+    </p>
+    <p>
+      <md>
+        <mrow>a_{11} x_1 + a_{12} x_2 + \cdots a_{1n} x_n \amp \leq b_1 </mrow>
+        <mrow>a_{21} x_1 + a_{22} x_2 + \cdots a_{2n} x_n \amp \leq b_n </mrow>
+        <mrow>\vdots \; \amp \;\;\; \vdots</mrow>
+        <mrow>a_{m1} x_1 + a_{m2} x_2 + \cdots a_{mn} x_n \amp \leq b_m </mrow>
+      </md>
+    </p>
+    <p>
+      The <term>feasible set</term> for the set of inequalites is the set of all points <m>(x_1, x_2, \ldots, x_n)</m> that satisfy all of the inequalities.
+    </p>
+  </statement>
+</definition>
+<note>
+  <p>If there are no points in the feasible set, then the feasible set is empty.</p>
+</note>
+
+<example>
+  <statement>
+    <p>
+      Graph the feasible set given by the inequalites:
+    </p>
+    <p>
+      <md>
+        <mrow>x + y  \amp \leq 8,</mrow>
+  <mrow>2x+ 3y  \amp \leq 14,</mrow>
+  <mrow>x \amp \geq 0, </mrow>
+  <mrow>y  \amp \geq 0.</mrow>
+      </md>
+    </p>
+  </statement>
+  <solution>
+    <p>
+      In this case, we use the techniques from <xref ref="sect-linear-inequality"/> to graph each of the following inequalities.  Note that line part of the first inequalities has intercepts of <m>(8,0)</m> and <m>(0,8)</m>.  The line part of the second inequality has intercepts of <m>(7,0)</m> and <m>(0,14/3)</m>.
+
+      </p>
+
+  </solution>
+</example>
+</introduction>
+
+<subsection xml:id="sect-convex-fs">
+  <title>Feasible Sets are Convex</title>
+
+<p>
+
+</p>
+</subsection>
+</section>
