@@ -1,9 +1,430 @@
 <section xml:id="sect-phase1">
   <title>Simplex Method for Infeasible Tableaus</title>
 
+  <introduction>
+    <p> Consider <xref ref="prob-coffee" />, in which coffee is shipped from warehouses to retail
+      outlets. The problem was set up as an LOP in<xref ref="prob-coeff-setup" /> and we can use the
+      techniques from the previous section to write this as the following tableau. </p>
+
+    <p>
+      First, as discuss in ???, we need to write this problem in standard form, which means
+      switching two of the inequalites by negating them. Also, the objective needs to be written as
+      a maximum. The LOP in standard maximum form is
+</p>
+
+    <p>
+      <men xml:id="eq-coffee-std-form">
+        \begin{aligned}\text{Minimize} \amp \amp
+        z \amp = -2.5 x_1 - 3 x_2 - 4 x_3 - 2 x_4, \\
+        \text{subject to} \amp \amp -x_2 - x_3 \amp \leq -400.\\
+        \amp \amp -x_1 - x_4 \amp \leq -350, \\
+        \amp \amp x_1 + x_2 \amp \leq 700, \\
+        \amp \amp x_3 + x_4 \amp \leq 500, \\
+        \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+        \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      And the next step is to write the LOP in tableau form,
+</p>
+
+    <p>
+      <men xml:id="eq-coffee-init-tableau">
+        \left[\begin{array}{rrrr|rrrrr|r}
+        0 \amp -1 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -400\\
+        -1 \amp 0 \amp 0 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -350\\
+        1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 700\\
+        0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 500\\ \hline
+        5/2 \amp 3 \amp 4 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+        \end{array} \right]
+      </men>
+
+    </p>
+    <p>
+      Typically, we look at the objective row to determine if a tableau is optimal and the there are
+      no negatives in this row, so it appears it is optimal. However, if we look at the basic
+      solution of</p>
+    <p>
+      <me>
+        \boldsymbol{x} = \left[ \begin{array} {rrrr|rrrrr}
+        -400 \amp -350 \amp 700 \amp 500 \amp 0 \amp 0 \amp 0 \amp 0
+        \end{array} \right]^{\intercal}
+      </me>
+    </p>
+    <p>
+      and note that this is an infeasible basic solution. Before solvnig this problem, let's use a
+      smaller problem to develop the simplex method for this situation.
+</p>
+
+  </introduction>
+
+  <subsection xml:id="sect-simplex-phase1">
+    <title>Infeasible Tableaus</title>
+
+    <p>
+      We saw an LOP of a transportation problem above. Before solving that, let's look at a simpler
+      one that only has two variables and two constraints:
+</p>
+
+    <problem xml:id="prob-infeasible1">
+      <statement>
+        <p>
+          Solve the following LOP:
+        </p>
+        <p>
+          <me>
+            \begin{aligned}
+            \text{Minimize} \amp \amp w \amp = 3x_1 + 2x_2 \\
+            \text{Subject to}\amp \amp 3x_1 + x_2 \amp \geq 17 \\
+            \amp \amp x_1 + 2x_2 \amp \geq 9 \\
+            \amp \amp x_1, x_2 \amp \geq 0
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <p>
+      To begin with, this is not in standard form, so we perform some algebra (as in section ???) to
+      get this into standard form:
+</p>
+
+    <p>
+      <me>
+        \begin{aligned}
+        \text{Maximize} \amp \amp z \amp = -3x_1 - 2x_2 \\
+        \text{Subject to}\amp \amp - 3x_1 - x_2 \amp \leq -17 \\
+        \amp \amp -x_1 - 2x_2 \amp \geq -9 \\
+        \amp \amp x_1, x_2 \amp \geq 0
+        \end{aligned}
+      </me>
+    </p>
+    <p>
+      Since this only has two variables, a plot of this feasible set is helpful.
+</p>
+
+    <figure xml:id="fig-infeasible-1">
+      <caption></caption>
+      <image width="75%">
+        <latex-image>
+  <![CDATA[
+    \begin{tikzpicture}[scale=0.8]
+\fill[lightgray] (0,20) -- (0,17) --(5,2) -- (9,0) -- (14,0) -- (14,20) -- cycle;
+
+\draw [->] (-1,0) -- (15,0) node [above right] {$x_1$};
+\foreach \x in {1,...,14} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+\draw [->] (0,-1) -- (0,21) node [above right] {$x_2$};
+\foreach \y in {1,...,20} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+
+\draw[<->,thick] (-1, {(17-3*(-1))/1}) -- (6, {(17-3*(6))/1}) node[pos=0.4, right] {$x_3=0$};
+\draw[<->,thick] (-1, {(9-1*(-1))/2}) -- (10, {(9-1*(10))/2}) node[pos=0.25, above right] {$x_4=0$};
+
+\draw (8,8) node {F.S.};
+
+\draw ({17/3},0) circle[radius = 3pt] node [above right] {$A$};
+\draw (9,0) circle[radius = 3pt] node [above right] {$B$};
+\draw (5,2) circle[radius = 3pt] node [above right] {$C$};
+\draw (0,4.5) circle[radius = 3pt] node [above right] {$D$};
+\draw (0,17) circle[radius = 3pt] node [right] {$E$};
+          \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      If we introduce slack variables then in Dictionary form this is
+</p>
+
+    <p>
+      <men xml:id="eq-dict-infeasible-LOP1">
+        \begin{aligned}
+        \text{Maximize} \amp\amp z \amp = -3x_1 -2 x_2 \\
+        \text{subject to}\amp \amp x_3 \amp = -17 + 4x_1 + x_2 \\
+        \amp \amp x_4 \amp = -9 + x_1 + 2x_2 \\
+        \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+        \end{aligned}
+      </men>
+    </p>
+
+    <p> As we saw in <xref ref="eq-coffee-std-form" /> and <xref ref="eq-coffee-init-tableau" />,
+      that this tableau is infeasible. That is the basic solution is not feasible which makes sense
+      because when the basic variables are the original variables, the current basic solution is at
+      the origin, which is not in the feasible set. </p>
+    <p> As in the Phase II simplex method, we can perform a pivot. The dictionary in <xref
+        ref="eq-dict-infeasible-LOP1" /> shows that the basis is <m>\beta = \{1,2\}</m> and
+      parameters <m>\pi = \{3,4\}.</m> We will remove <m>x_1</m> and <m>x_2</m> from the basis and
+      thus have two choices to bring in either <m>x_3</m> or <m>x_4</m>. There are four cases here.
+      Let's see what happens with each. </p>
+
+    <p>
+      <dl>
+        <li>
+          <title>
+            <m>3 \mapsto 1</m>
+          </title>
+          <p> Let's try by bringing <m>x_1</m> out of the basis. If we solve the 2nd equation in <xref
+              ref="eq-dict-infeasible-LOP1" /> for <m>x_1</m> (or actually <m>3x_1</m>) we get </p>
+          <p>
+            <me>
+              3x_1 = 17 + x_3 - x_2
+            </me>
+          </p>
+          <p>
+            and then substituting this into the other equations (and multiplying through by a 4)
+            gives the new dictionary
+</p>
+          <p>
+            <men xml:id="eq-dict-infeasible-LOP2a">
+              \begin{aligned}
+              \text{Maximize} \amp\amp 3z \amp = -51 -3x_2 -3x_3 \\
+              \text{subject to}\amp \amp 3x_1 \amp = 17 -x_2 + x_3 \\
+              \amp \amp 3x_4 \amp = -10 + 5x_2 + x_3 \\
+              \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+              \end{aligned}
+            </men>
+          </p>
+          <p> Notice that this is still infeasible and because the coefficients of the variables in
+            the objective function were negative, the value of <m>z</m> has <em>decreased</em>. </p>
+        </li>
+        <li>
+          <title>
+            <m>4 \mapsto 1</m>
+          </title>
+          <p> If instead we can solve the third equation of <xref ref="eq-dict-infeasible-LOP1" />
+            for <m>x_1</m> to get: </p>
+          <p>
+            <me>
+              x_1 = 12 - 2x_2 - x_4
+            </me>
+          </p>
+          <p> and subsitute this into the other equations of <xref ref="eq-dict-infeasible-LOP1" />
+            to get: </p>
+          <p>
+            <men xml:id="eq-dict-infeasible-LOP2b">
+              \begin{aligned}
+              \text{Maximize} \amp\amp z \amp = -27 +4x_2 -3x_3 \\
+              \text{subject to}\amp \amp x_3 \amp = 10 -5x_2 + 3x_4 \\
+              \amp \amp x_1 \amp = 9 -2x_2 + x_4 \\
+              \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+              \end{aligned}
+            </men>
+          </p>
+          <p>
+            And notice that this is a feasible solution now.
+</p>
+        </li>
+        <li>
+          <title>
+            <m>3 \mapsto 2</m>
+          </title>
+          <p> In this case, we solve the 2nd equation in <xref ref="eq-dict-infeasible-LOP1" /> for <m>
+            x_2</m> or </p>
+          <p>
+            <me>
+              x_2 = 17 - 4x_1 + x_3
+            </me>
+          </p>
+          <p>
+            and substitute these into the other two equations to get:
+          </p>
+          <p>
+            <men xml:id="eq-dict-infeasible-LOP2c">
+              \begin{aligned}
+              \text{Maximize} \amp\amp z \amp = -34 + 3x_1 - 2 x_3 \\
+              \text{subject to}\amp \amp x_2 \amp = 17 -3x_1 + x_3 \\
+              \amp \amp x_4 \amp = 25 -5x_1 + 2x_3 \\
+              \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+              \end{aligned}
+            </men>
+          </p>
+          <p> Like the <m>4 \mapsto 1</m> pivot, this is a feasible solution. </p>
+        </li>
+        <li>
+          <title>
+            <m>4 \mapsto 2</m>
+          </title>
+          <p> Lastly, we solve the 3rd equation for <m>2x_2</m> or </p>
+          <p>
+            <me>
+              2 x_2 = 9 - x_1 + x_4
+            </me>
+          </p>
+          <p>
+            and subsitute this into the other equations to get the new dictionary:
+          </p>
+          <p>
+            <men xml:id="eq-dict-infeasible-LOP2d">
+              \begin{aligned}
+              \text{Maximize} \amp\amp 2z \amp = -18 -4x_1 -2x_4 \\
+              \text{subject to}\amp \amp 2x_3 \amp = -25 +5x_1 + x_4 \\
+              \amp \amp 2x_2 \amp = 9 -x_1 + x_4 \\
+              \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+              \end{aligned}
+            </men>
+          </p>
+        </li>
+      </dl>
+    </p>
+
+    <p> We compare what happened here. The cases <m>4 \mapsto1</m> and <m>3 \mapsto 2</m> resulted
+      in feasible solutions, whereas the other two did not. </p>
+
+    <p> This can be explained looking at the feasible set in <xref ref="fig-infeasible-1" />. Again,
+      the initial dictionary has a basic solution of <m>x_1=0, x_2=0</m>, which is at the origin.
+      The pivot <m>3 \mapsto 1</m> shifts the basic solution to the point <m>A</m> because this is
+      the <m>x_3=0</m> line. Alternatively, the pivot <m>4 \mapsto 1</m> shifts the basic solution
+      to point <m>B</m>, which is in the feasible set. The pivot <m>3 \mapsto 2</m> shifts the basic
+      solution to the point <m>E</m> (the intersection of the lines <m>x_2=0</m> and <m>x_3=0</m>).
+      The pivot <m>4 \mapsto 2</m> shifts the basic soltuion to point <m>D</m>, which is not
+      feasible. </p>
+    <p> So we need to determine from the dictionary (or more likely from the tableau) how to
+      determine which pivot will make it feasible. In this case, it seems like either <m>4 \mapsto 1</m>
+      or <m>3 \mapsto 2</m> would be a good step. </p>
+  </subsection>
+
+  <subsection xml:id="sect-phaseI-algorithm">
+    <title>Phase I of the Simplex Method</title>
+
+    <p>
+      With the example above, we now present the following algorithm for getting a simplex tableau
+      into a feasible solution.
+    </p>
+
+    <algorithm xml:id="alg-phaseI-simplex">
+      <title>Phase I of the Simplex Method</title>
+
+
+      <statement>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Select the row of the tableau with the most negative basic variable.
+              </p>
+            </li>
+
+            <li>
+              <p> Select the column with the largest positive column ratio.<fn>An inquisitive reader
+                should ask: What if there are not not any negative number in the row? Hmmm. Hold
+                that thought, we'll get to that soon. </fn>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If there are no other basic varibles, this phase is done.
+                If there are other negative basic variables, go to step 1.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </algorithm>
+
+    <p> Let's solve <xref ref="prob-infeasible1" /> using <xref ref="alg-phaseI-simplex" />. First,
+      write the tableau down (recall that the standard form of the problem needs to be used.) </p>
+
+    <p>
+      <me>\left[\begin{array}{rr|rrr|r}
+        -3 \amp -1 \amp 1 \amp 0 \amp 0 \amp -17\\
+        -1 \amp -2 \amp 0 \amp 1 \amp 0 \amp -9\\ \hline
+        3 \amp 2 \amp 0 \amp 0 \amp 1 \amp 0\\
+        \end{array} \right]
+      </me>
+    </p>
+
+    <p> And to start phase I, we note that the largest negative in the <m>\boldsymbol{b}</m>-column
+      is in the first row. We then do ratios of <m>b_i</m> to all of the negatives in the row. This
+      occurs in column two (the ratio is <m>-17/(-1)=17</m>). Thus, the matrix pivot is row 1,
+      column 2: </p>
+    <p>
+      <me>
+        3 \mapsto 2 \qquad \left[\begin{array}{rr|rrr|r}
+        3 \amp 1 \amp -1 \amp 0 \amp 0 \amp 17\\
+        5 \amp 0 \amp -2 \amp 1 \amp 0 \amp 25\\ \hline
+        -3 \amp 0 \amp 2 \amp 0 \amp 1 \amp -34\\
+        \end{array} \right]
+      </me>
+    </p>
+    <p> Note that this tableau is no longer infeasible (there's no negatives in the last column,
+      except for <m>z</m>). We can now switch to phase II. </p>
+
+    <p> For phase II, we need to check for optimality, but since there is a negative in the bottow
+      row, it is not optimal, so we form the <m>\boldsymbol{b}</m>-ratios: </p>
+    <p>
+      <me>
+        \begin{bmatrix} 17/3 \\ 25/5 \end{bmatrix} \approx \begin{bmatrix} 5.667 \\ 5 \end{bmatrix}
+      </me>
+    </p>
+    <p>and therefore the smallest <m>\boldsymbol{b}</m>-ratio is in the 2nd row, so perform the
+      matrix pivot about row 2, column 1</p>
+
+    <p>
+      <me>
+        4 \mapsto 1 \qquad \left[\begin{array}{rr|rrr|r}
+        0 \amp 5 \amp 1 \amp -3 \amp 0 \amp 10\\
+        5 \amp 0 \amp -2 \amp 1 \amp 0 \amp 25\\ \hline
+        0 \amp 0 \amp 4 \amp 3 \amp 5 \amp -95\\
+        \end{array} \right]
+      </me>
+    </p>
+    <p>
+      This tableau is now optimal with basic solution
+</p>
+    <p>
+      <me>
+        \boldsymbol{x} = \left[\begin{array}{rr|rr} 25 \amp 10 \amp 0 \amp 0 \end{array}
+        \right]^{\intercal}/5
+      </me>
+    </p>
+    <p> with <m>z = -95/5=-19</m>. This corresponds to the original problem as <m>w = -z = 19</m>,
+      so the function is minimized when <m>x_1=5</m> and <m>x_2 = 2</m>. </p>
+    <problem>
+      <statement>
+        <p>
+          Apply phase I of the Simplex method to the following LOP.
+        </p>
+        <p>
+          <me>
+            \begin{aligned}
+            \text{Minimize}\amp \amp w \amp = 12x_1 + 15x_2 \\
+            \text{s.t.}\amp \amp -3x_1 + 2x_2 \amp \leq -24 \\
+            \amp \amp 5x_1 -4x_2 \amp \leq -30 \\
+            \text{and} \amp \amp x_1,\; x_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+<solution>
   <p>
-Consider Problem <xref ref="prob-coffee"/>, in which coffee is shipped from warehouses to retail outlets.  The problem was set up as an LOP in<xref ref="prob-coeff-setup"/>and we can use the techniques from the previous section to write this as the following tableau.
+    If we switch the objective function to <m>z = -12x_1-15x_2</m>, then the problem is in standard form and we can write the tableau as
   </p>
+  <p>
+    <me>
+      \left[\begin{array}{rr|rrr|r}
+-3 \amp 2 \amp 1 \amp 0 \amp 0 \amp -24\\
+5 \amp -4 \amp 0 \amp 1 \amp 0 \amp -30\\ \hline
+12 \amp 15 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+    </me>
+  </p>
+  <p>
+    We use phase I of the Simplex Method because there are negatives in the last column.  We choose the second column because it is the negative most number in that column (always ignoring the objective value).
+  </p>
+  <p>
+    <me>
+      2 \mapsto 4,\qquad
+\left[\begin{array}{rr|rrr|r}
+-2 \amp 0 \amp 4 \amp 2 \amp 0 \amp -156\\
+-5 \amp 4 \amp 0 \amp -1 \amp 0 \amp 30\\ \hline
+-123 \amp 0 \amp 0 \amp -15 \amp 4 \amp 450\\
+\end{array} \right]
+    </me>
+  </p>
+</solution>
 
-
+    </problem>
+  </subsection>
 </section>
