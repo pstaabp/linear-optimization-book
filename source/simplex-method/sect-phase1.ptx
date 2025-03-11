@@ -381,17 +381,18 @@
     </p>
     <p> with <m>z = -95/5=-19</m>. This corresponds to the original problem as <m>w = -z = 19</m>,
       so the function is minimized when <m>x_1=5</m> and <m>x_2 = 2</m>. </p>
-    <problem>
+    <problem xml:id="problem-infeasible-phaseI">
       <statement>
         <p>
-          Apply phase I of the Simplex method to the following LOP.
+          Apply Phase I of the Simplex Method to the following LOP.
         </p>
         <p>
           <me>
             \begin{aligned}
-            \text{Minimize}\amp \amp w \amp = 12x_1 + 15x_2 \\
-            \text{s.t.}\amp \amp -3x_1 + 2x_2 \amp \leq -24 \\
+            \text{Maximize}\amp \amp z \amp = 12x_1 + 15x_2 \\
+            \text{s.t.}\amp \amp -3x_1 + 2x_2 \amp \leq 24 \\
             \amp \amp 5x_1 -4x_2 \amp \leq -30 \\
+            \amp \amp x_1 + x_2 \amp \leq 10 \\
             \text{and} \amp \amp x_1,\; x_2 \amp \geq 0.
             \end{aligned}
           </me>
@@ -399,14 +400,16 @@
       </statement>
 <solution>
   <p>
-    If we switch the objective function to <m>z = -12x_1-15x_2</m>, then the problem is in standard form and we can write the tableau as
+    This problem is in standard form and we can write the tableau as
   </p>
   <p>
     <me>
       \left[\begin{array}{rr|rrr|r}
--3 \amp 2 \amp 1 \amp 0 \amp 0 \amp -24\\
-5 \amp -4 \amp 0 \amp 1 \amp 0 \amp -30\\ \hline
-12 \amp 15 \amp 0 \amp 0 \amp 1 \amp 0\\
+-3 \amp 2 \amp 1 \amp 0 \amp 0 \amp 0 \amp 24\\
+5 \amp -4 \amp 0 \amp 1 \amp 0 \amp 0 \amp -30\\
+1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10 \\
+\hline
+-12 \amp -15 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
 \end{array} \right]
     </me>
   </p>
@@ -416,15 +419,92 @@
   <p>
     <me>
       2 \mapsto 4,\qquad
-\left[\begin{array}{rr|rrr|r}
--2 \amp 0 \amp 4 \amp 2 \amp 0 \amp -156\\
--5 \amp 4 \amp 0 \amp -1 \amp 0 \amp 30\\ \hline
--123 \amp 0 \amp 0 \amp -15 \amp 4 \amp 450\\
+\left[\begin{array}{rr|rrrr|r}
+-2 \amp 0 \amp 4 \amp 2 \amp 0 \amp 0 \amp 36\\
+-5 \amp 4 \amp 0 \amp -1 \amp 0 \amp 0 \amp 30\\
+9 \amp 0 \amp 0 \amp 1 \amp 4 \amp 0 \amp 10\\ \hline
+-123 \amp 0 \amp 0 \amp -15 \amp 0 \amp 4 \amp 450\\
 \end{array} \right]
     </me>
   </p>
-</solution>
+  <p>
+  Now that there are no negative numbers in the last column, this tableau is now feasible, completing the first phase of the simplex method.
+  </p>
 
+</solution>
     </problem>
+
+    <p>
+      After completing the first phase of the simplex method, we can now use phase II.  We'll complete the solution to the problem above now
+    </p>
+
+    <problem>
+      <statement>
+        <p>
+          Apply Phase II of the Simplex Method to the last tableau from <xref ref="problem-infeasible-phaseI"/>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          For phase II, we first look in the objective row of the tableau and note that because there are negative numbers so the basic solution is not optimal.  We start with the leftmost negative in the objective row or the first column. Then form the <m>\boldsymbol{b}</m>-ratios.
+        </p>
+        <p>
+          <me>
+            \begin{bmatrix} 36/(-2) \\ 30/(-5) \\ 10/9 \end{bmatrix}
+          </me>
+        </p>
+        <p>
+          and noting that the only positive number here is in the third row. Thus, we do a matrix pivot about row 3 and column 1.
+        </p>
+
+        <p>
+          <me>
+            1 \mapsto 5, \qquad \left[\begin{array}{rr|rrrr|r}
+0 \amp 0 \amp 9 \amp 5 \amp 2 \amp 0 \amp 86\\
+0 \amp 9 \amp 0 \amp -1 \amp 5 \amp 0 \amp 80\\
+9 \amp 0 \amp 0 \amp 1 \amp 4 \amp 0 \amp 10\\ \hline
+0 \amp 0 \amp 0 \amp -3 \amp 123 \amp 9 \amp 1320\\
+\end{array} \right]
+          </me>
+        </p>
+        <p>
+          Looking at the objective row, there are still negatives in this row, so this is not an optimal solution.  We form <m>\boldsymbol{b}</m>-ratios using the 4th column
+        </p>
+        <p>
+          <me>
+            \begin{bmatrix} 85/5 \\ 80/(-1) \\ 10/1 \end{bmatrix} =
+            \begin{bmatrix} 17 \\ -80 \\ 10 \end{bmatrix}
+          </me>
+        </p>
+        <p>
+          and the smallest <m>\boldsymbol{b}</m>-ratio is in the 3rd row, so we perform a matrix pivot about the 3rd row, 4th column.
+        </p>
+        <p>
+          <me>
+            4 \mapsto 1 \qquad \left[\begin{array}{rr|rrrr|r}
+-5 \amp 0 \amp 1 \amp 0 \amp -2 \amp 0 \amp 4\\
+1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10\\
+9 \amp 0 \amp 0 \amp 1 \amp 4 \amp 0 \amp 10\\ \hline
+3 \amp 0 \amp 0 \amp 0 \amp 15 \amp 1 \amp 150\\
+\end{array} \right]
+          </me>
+        </p>
+        <p>
+          This tableau is now optimal with basic solution
+        </p>
+        <p>
+          <me>
+            \boldsymbol{x} = \begin{bmatrix} 0 \amp 10 \amp 4 \amp 10 \amp 0 \end{bmatrix}^{\intercal}
+          </me>
+        </p>
+        <p>
+          and objective <m>z = 150</m>
+        </p>
+      </solution>
+    </problem>
+
+    <p>
+      Show the feasible set and discuss the pivots?
+    </p>
   </subsection>
 </section>

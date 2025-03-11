@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="problem example-like"><h4 class="heading">
+<span class="type">Problem</span><span class="space"> </span><span class="codenumber">2.1.4</span><span class="period">.</span>
+</h4>
+<div class="para">Write the LOP for <a href="sect-linear-models.html#prob-coffee" class="xref" data-knowl="./knowl/xref/prob-coffee.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 2.1.2: Shipping Coffee Problem">Problem 2.1.2</a>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">In this case, first note that we need to know the amount of coffeed shipped between warehouses and retail outlets.  The following graph is helpful for this:</div>
+<figure class="figure figure-like"><div class="image-box" style="width: 75%; margin-left: 12.5%; margin-right: 12.5%;"><img src="generated/latex-image/fig-coffee-2.svg" role="img" class="contained" alt=""></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.5<span class="period">.</span></span><span class="space"> </span></figcaption></figure><div class="para">The variables are going to be the total amount of coffee to be shipped from the two warehouses to the two retail locations. If we look first at the amount of coffee that the Salt Lake City and Reno locations need then we need to ship at least this amount or</div>
+<div class="para logical"><div class="displaymath process-math">
+\begin{align*}
+x_2 + x_3  \amp \geq 400 \\
+x_1 + x_4 \amp \geq 350 
+\end{align*}
+</div></div>
+<div class="para">Since the warehouse have a limited supply, they can only ship what they have so there are two additional constraints, one for each warehouse</div>
+<div class="para logical"><div class="displaymath process-math">
+\begin{align*}
+x_1 + x_2 \amp \leq 700\\
+x_3 + x_4  \amp \leq 500
+\end{align*}
+</div></div>
+<div class="para">There are other constraints on the variables in that each amount must be nonnegative, so <span class="process-math">\(x_1, x_2, x_3, x_4 \geq 0\text{.}\)</span>  Lastly, the objective can be written:</div>
+<div class="para logical"><div class="displaymath process-math">
+\begin{equation*}
+z = 2.5 x_1 + 3 x_2 + 4 x_3 + 2 x_4
+\end{equation*}
+</div></div>
+<div class="para">We can combine all of these into the following LOP:</div>
+<div class="para logical"><div class="displaymath process-math">
+\begin{align*}
+\text{Minimize} \qquad \qquad  \amp z = 2.5 x_1 + 3 x_2 + 4 x_3 + 2 x_4, \\
+\text{subject to} \qquad x_2 + x_3  \amp \geq 400. \\
+x_1 + x_4 \amp \geq 350, \\
+x_1 + x_2 \amp \leq 700, \\
+x_3 + x_4  \amp \leq 500, \\
+x_1, x_2, x_3, x_4 \amp \geq 0. 
+\end{align*}
+</div></div>
+</div></details></div></article><span class="incontext"><a class="internal" href="sect-linear-models.html#prob-coeff-setup">in-context</a></span>
+</body>
+</html>

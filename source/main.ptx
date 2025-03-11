@@ -16,6 +16,7 @@
     <xi:include href="./linear-models/ch-linear-models.ptx" />
   <xi:include href="./simplex-method/ch-simplex-method.ptx" />
   <xi:include href="./integer-problems/ch-integer-problems.ptx" />
+  <xi:include href="./julia/ch-lop-julia.ptx" />
 
     <!-- Include backmatter -->
     <xi:include href="./backmatter.ptx" />

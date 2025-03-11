@@ -1,112 +1,108 @@
 <section xml:id="sect-lines-planes">
   <title>Lines and Planes</title>
 
-<introduction>
-<p>
-  I'm guessing that if you are reading this book (either you picked it up or have been assigned it) that you have a fair bit of mathematical background.  If you haven't read through the preface with some additional information, but typically this is a upper-level undergraduate or early graduate-level class.
+  <introduction>
+    <p>
+      I'm guessing that if you are reading this book (either you picked it up or have been assigned
+      it) that you have a fair bit of mathematical background. If you haven't read through the
+      preface with some additional information, but typically this is a upper-level undergraduate or
+      early graduate-level class.
 </p>
-<p>
-  That being said, I'm guessing that you are quite familiar with lines<mdash/>you may even be embarrased if you seen reading a section on lines.  However, you may not have seen lines and planes in the context that you will seen them here. It will be worth your while to read through this chapter.
-</p>
-</introduction>
+    <p> That being said, I'm guessing that you are quite familiar with lines<mdash />you may even be
+      embarrased if you seen reading a section on lines. However, you may not have seen lines and
+      planes in the context that you will seen them here. It will be worth your while to read
+      through this chapter. </p>
+  </introduction>
 
-<subsection xml:id="sect-lines">
-  <title>Lines</title>
+  <subsection xml:id="sect-lines">
+    <title>Lines</title>
 
 
-<p>
- When most mathematics students are asked above lines, the response is <m>y=mx+b</m>, the <term>slope-intercept form</term> of the line.  This is often presented in a precalculus class in which linear functions fall from this naturally.  However, not all lines can be written in this form.  The exception is vertical lines, like <m>x=1</m>.
-</p>
+    <p> When most mathematics students are asked above lines, the response is <m>y=mx+b</m>, the <term>slope-intercept
+      form</term> of the line. This is often presented in a precalculus class in which linear
+      functions fall from this naturally. However, not all lines can be written in this form. The
+      exception is vertical lines, like <m>x=1</m>. </p>
 
-<p>
-  Instead, we will use the <term>general form</term> of the line or
-</p>
-<p>
-<men xml:id="eq-standard-form-line">
-  ax + by = c
+    <p> Instead, we will use the <term>general form</term> of the line or </p>
+    <p>
+      <men xml:id="eq-standard-form-line">
+        ax + by = c
 </men>
-</p>
-<p>
-  as long as <m>a</m> and <m>b</m> are both not zero,<fn>A nice was to ensure this is <m>ab \neq 0</m>.</fn> and the <m>b</m> in this formula is not the <m>y</m>-intercept.   This form allows both horizontal, vertical and any line with any other slope.
-</p>
-<p>
-  This form is quite nice in that if <m>a</m> is zero, then the line is horizontal, if <m>b</m> is zero, then the line is vertical and if both are non-zero then the line is oblique with <m>x</m>-intercept of <m>c/a</m>, <m>y</m>-intercept of <m>c/b</m> and slope of <m>-a/b</m>.
-</p>
+    </p>
+    <p> as long as <m>a</m> and <m>b</m> are both not zero,<fn>A nice was to ensure this is <m>ab
+      \neq 0</m>.</fn> and the <m>b</m> in this formula is not the <m>y</m>-intercept. This form
+      allows both horizontal, vertical and any line with any other slope. </p>
+    <p> This form is quite nice in that if <m>a</m> is zero, then the line is horizontal, if <m>b</m>
+      is zero, then the line is vertical and if both are non-zero then the line is oblique with <m>x</m>-intercept
+      of <m>c/a</m>, <m>y</m>-intercept of <m>c/b</m> and slope of <m>-a/b</m>. </p>
 
-<p>
-  If we take the line in <xref ref="eq-standard-form-line"/> for oblique lines and divide through by <m>c</m>, this can take on the <term>intercept form of the line</term>:
-</p>
-<p>
-<men xml:id="eq-intercept-form-line">
-  \frac{x}{x_0} + \frac{y}{y0} = 1
+    <p> If we take the line in <xref ref="eq-standard-form-line" /> for oblique lines and divide
+      through by <m>c</m>, this can take on the <term>intercept form of the line</term>: </p>
+    <p>
+      <men xml:id="eq-intercept-form-line">
+        \frac{x}{x_0} + \frac{y}{y_0} = 1
 </men>
-</p>
-<p>
-  and in this form the <m>x</m>-intercept is <m>x_0</m> and the <m>y</m>-intercept is <m>y_0</m>.
-</p>
-
-<example>
-  <statement>
-    <p>
-      Put the line given by <m>3x+5y = 30</m> into intercept form and find the intercepts.
     </p>
-  </statement>
-  <solution>
-    <p>
-      Divide through by 30 to get
-    </p>
-    <p>
-      <md>
-        <mrow>\frac{3x}{30} + \frac{5y}{30} \amp = 1  \amp\amp\text{or} \amp\amp
-        \frac{x}{10} + \frac{y}{6} = 1
-        </mrow>
-      </md>
-          </p>
-          <p>
-            This shows that the <m>x</m>-intercept is 10 and the <m>y</m>-intercept is 6.
-          </p>
-  </solution>
-</example>
-
-<p>
-  The above example showed how we can use the intercept form to easily read off the intercepts.  The following exercise will use these to plot the lines.
+    <p> and in this form the <m>x</m>-intercept is <m>x_0</m> and the <m>y</m>-intercept is <m>y_0</m>
+      .
 </p>
 
-<exercise>
-  <statement>
+    <example>
+      <statement>
+        <p> Put the line given by <m>3x+5y = 30</m> into intercept form and find the intercepts. </p>
+      </statement>
+      <solution>
+        <p>
+          Divide through by 30 to get
+        </p>
+        <p>
+          <md>
+            <mrow>\frac{3x}{30} + \frac{5y}{30} \amp = 1 \amp\amp\text{or} \amp\amp
+              \frac{x}{10} + \frac{y}{6} = 1
+            </mrow>
+          </md>
+        </p>
+        <p> This shows that the <m>x</m>-intercept is 10 and the <m>y</m>-intercept is 6. </p>
+      </solution>
+    </example>
+
     <p>
-      Plot the following lines: <m>x=3</m>, <m>y= 4</m>, <m>2x+ 3y = 24</m> and <m>-3x+4y = 12</m> on the same axes.  Note: do this by hand instead of graphing calculator/website/software.
-    </p>
-  </statement>
-  <hint>
-    <p>
-      Use the information above to note if it is horizontal, vertical or oblique and in the latter case, use intercepts to plot the line.
-    </p>
-  </hint>
-  <solution>
-    <p>
-In this case, note that the first line is vertical, the second is horizontal.  For the third line, divide through by <m>24</m> and simplify to
-      </p>
-      <p>
-        <me>
-          \frac{x}{12} + \frac{y}{8} = 1
-        </me>
-              </p><p>
-                which will have the intercepts <m>(12,0)</m> and <m>(0,8)</m>and the last line can be simplified to
-              </p>
-              <p>
-                <me>
-                  -\frac{x}{4} + \frac{y}{3} = 1
-                </me>
-              </p>
-              <p>
-                which will have the intercepts <m>(-4,0)</m> and <m>(0,3)</m>.
-              </p>
-      <figure xml:id="fig-exercise-lines">
-        <caption></caption>
-        <image>
-          <shortdescription></shortdescription>
-          <latex-image>
+      The above example showed how we can use the intercept form to easily read off the intercepts.
+      The following exercise will use these to plot the lines.
+</p>
+
+    <exercise>
+      <statement>
+        <p> Plot the following lines: <m>x=3</m>, <m>y= 4</m>, <m>2x+ 3y = 24</m> and <m>-3x+4y = 12</m>
+          on the same axes. Note: do this by hand instead of graphing calculator/website/software. </p>
+      </statement>
+      <hint>
+        <p>
+          Use the information above to note if it is horizontal, vertical or oblique and in the
+          latter case, use intercepts to plot the line.
+        </p>
+      </hint>
+      <solution>
+        <p> In this case, note that the first line is vertical, the second is horizontal. For the
+          third line, divide through by <m>24</m> and simplify to </p>
+        <p>
+          <me>
+            \frac{x}{12} + \frac{y}{8} = 1
+          </me>
+        </p>
+        <p> which will have the intercepts <m>(12,0)</m> and <m>(0,8)</m>and the last line can be
+          simplified to </p>
+        <p>
+          <me>
+            -\frac{x}{4} + \frac{y}{3} = 1
+          </me>
+        </p>
+        <p> which will have the intercepts <m>(-4,0)</m> and <m>(0,3)</m>. </p>
+        <figure xml:id="fig-exercise-lines">
+          <caption></caption>
+          <image>
+            <shortdescription></shortdescription>
+            <latex-image>
           <![CDATA[
             \begin{tikzpicture}[scale=0.5]
               \draw [->] (-13,0) -- (13,0) node [above right] {$x$};
@@ -122,17 +118,168 @@ In this case, note that the first line is vertical, the second is horizontal.  F
           \end{tikzpicture}
           ]]>
           </latex-image>
-        </image>
-      </figure>
+          </image>
+        </figure>
 
-  </solution>
-</exercise>
-</subsection>
-<subsection xml:id="sect-linear-inequality">
-  <title>Linear Inequalities</title>
+      </solution>
+    </exercise>
+  </subsection>
+  <subsection xml:id="sect-linear-inequality">
+    <title>Linear Inequalities</title>
 
-  <p>
-    Related to lines is that of linear inequalities.  Consider the inequality <m>3x+ 4y \leq 12</m> and if we have the set <m>S</m> is the set of all points that satisfy the inequality.  The line <m>3x+4y=12</m> cuts the <m>xy</m>-plane into two regions and in this case, the line is included in the set <m>S</m> along with the side of the line containing the origin.
-  </p>
-</subsection>
+    <p> Related to lines is that of linear inequalities. Consider the inequality <m>3x+ 4y \leq 12</m>
+      and if we have the set <m>S</m> is the set of all points that satisfy the inequality. The line <m>
+      3x+4y=12</m> cuts the <m>xy</m>-plane into two regions and in this case, the line is included
+      in the set <m>S</m> along with the side of the line containing the origin. </p>
+    <p> So which side of the line satisfies the inequality? Since every point that is not on the
+      line either satisfies the inequality or not, we can pick any point to determine this. For
+      example in the line <m>3x+4y=12</m> above, an easy point to pick is <m>(0,0)</m> and since <m>3(0)+4(0)
+      \leq 12</m> is true, then the side of the line containing the origin is in the set. The
+      following is plot: </p>
+    <figure xml:id="fig-example-inequality">
+      <caption></caption>
+      <image width="75%">
+        <shortdescription></shortdescription>
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}
+            \fill[lightgray] (-2.5,-2.5) -- (5.5, -2.5) -- (5.5,{(12-3*(5.5))/4}) -- (-2.5,{(12-3*(-2.5))/4})
+              -- cycle;
+              \draw [->] (-3,0) -- (6,0) node [above right] {$x$};
+              \foreach \x in {-2,...,-1,0,1,2,...,5}
+               \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+              \draw [->] (0,-3) -- (0,6) node [above right] {$y$};
+              \foreach \y in {-2,...,-1,0,1,2,...,5}
+                \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+              \draw[<->,thick] (-3,{(12-3*(-3))/4}) -- (6,{(12-3*(6))/4});
+
+              \draw (1,1) node [above right] {$F$};
+          \end{tikzpicture}
+          ]]>
+          </latex-image>
+      </image>
+    </figure>
+    <p> The set that satisfies the inequality we have labelled <m>F</m> and shaded in light gray.
+      When combined with other inequalities, we often call the set a <term>feasible set</term>,
+      hence labelling it as <m>F</m>. </p>
+
+    <p>
+      Example with two linear inequalities
+    </p>
+
+  </subsection>
+
+  <subsection xml:id="sect-planes">
+    <title>Planes and Hyperplanes</title>
+
+    <p> A linear equation in three variables is a <term>plane</term>. For example the equation <m>x+2x-3z
+      = 12</m> decribes points in <m>\mathbb{R}^3</m>, the set of all three-dimensional space. Like
+      a line in <m>\mathbb{R}^2</m>, it extends indefinitely and is flat. The following shows a plot
+      of the plane. Note: if reading on the web, this is interactive. </p>
+
+    <figure xml:id="fig-plane">
+      <caption></caption>
+      <image>
+        <shortdescription></shortdescription>
+        <asymptote>
+
+          import three;
+          size(4cm,0);
+          unitsize(5cm);
+          size(200);
+
+          draw(O--13X ^^ O--13Y ^^ O--13Z, black);
+
+          for(int i=1; i &lt;= 12; ++i) {
+          draw((i,-0.1,0) -- (i,0.1,0));
+          draw((-0.1,i,0) -- (0.1,i,0));
+          draw((-0.1,0,i) -- (0.1,0,i));
+          }
+
+          for(int i=2; i&lt;=12; i+=2) {
+          label("$"+string(i)+"$",(i,-0.25,0), NW);
+          label("$"+string(i)+"$",(-0.25,i,0), NE);
+          label("$"+string(i)+"$",(-0.25,0,i), E);
+          }
+
+          draw(plane(O=12X, 8Y-12X, 6Z-12X), blue);
+        </asymptote>
+      </image>
+    </figure>
+
+  </subsection>
+
+  <subsection xml:id="sect-convex">
+    <title>Convex Sets</title>
+
+    <p>As we will see later, a convex feasible set is key to the simplex method working. What does <em>
+      convex</em> mean? We will explore this and show that a feasible set constructed of linear
+      inequalities is always convex.</p>
+
+    <definition xml:id="def-convex">
+      <statement>
+        <p> A set <m>S</m> in <m>\mathbb{R}^n</m> is <term>convex</term> if for any two points <m>
+          \boldsymbol{x}</m> and <m>\boldsymbol{y}</m> in <m>S</m> that all points in the line
+          segment connecting <m>\boldsymbol{x}</m> and <m>\boldsymbol{y}</m> is in <m>S</m>
+        </p>
+      </statement>
+    </definition>
+
+    <note>
+      <p>Note: a line segment between <m>\boldsymbol{x}</m> and <m>\boldsymbol{y}</m> can be written</p>
+      <p>
+        <me>
+          L = \{ \boldsymbol{x} t + \boldsymbol{y} (1-t) \; | t \in [0,1]\}
+        </me>
+      </p>
+    </note>
+
+<p>
+  In two dimensions, a convex set is a set in <m>\mathbb{R}^2</m> such that its boundary is convex in the standard sense.  Sets like the interior of circles, rectangles and the "inside" of parabolas are examples.  To get a sense of this, the sets consisting of the interior of the following objects are convex:
+</p>
+<figure xml:id="fig-convex-objs">
+  <caption></caption>
+  <image width="75%">
+    <shortdescription></shortdescription>
+    <latex-image>
+    <![CDATA[
+      \begin{tikzpicture}
+        \draw (6,6) circle [radius = 2];
+        \draw (0,0) rectangle (4,3);
+        \draw (5,0) -- (7,3) -- (9,0) -- cycle;
+      \end{tikzpicture}
+      ]]>
+    </latex-image>
+  </image>
+</figure>
+<p>
+  However, the interior of these objects are not.  A line is shown in blue with point endpoints that are in the set, but the are parts of the line that are not in the set.
+</p>
+
+<figure xml:id="fig-nonconvex-objs">
+  <caption></caption>
+  <image width="75%">
+    <shortdescription></shortdescription>
+    <latex-image>
+    <![CDATA[
+      \begin{tikzpicture}
+         \draw (0,3) -- (2,0.5) -- (4,3) -- (2,0) -- cycle;
+        \draw (5,2) arc[start angle = 180, end angle = 360, radius = 2] --
+        (9,2) arc[start angle = 0, end angle = 180, radius = 0.75] --
+        (7.5,2) arc[start angle = 360, end angle = 180, radius = 0.5] --
+        (6.5, 2) arc[start angle = 0, end angle = 180, radius= 0.75] -- cycle;
+
+       \draw[thick, blue] (6,2.2) -- (8,2);
+       \draw[thick,blue ] (1.4,1) -- (2.95,1.5);
+      \end{tikzpicture}
+      ]]>
+    </latex-image>
+  </image>
+</figure>
+<p>
+  And notice that in the object on the right, the line segments crosses outside the interior of each of the sets.
+</p>
+
+  </subsection>
+
 </section>

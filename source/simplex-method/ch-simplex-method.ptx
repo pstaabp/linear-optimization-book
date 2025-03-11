@@ -14,4 +14,6 @@
   <xi:include href="sect-slack-dict.ptx" />
   <xi:include href="sect-tableau.ptx" />
   <xi:include href="sect-phase1.ptx" />
+  <xi:include href="sect-unbounded.ptx" />
+  <xi:include href="sect-simplex-summary.ptx" />
 </chapter>

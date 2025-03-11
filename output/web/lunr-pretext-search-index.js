@@ -16,7 +16,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "1.1",
   "title": "Lines and Planes",
-  "body": " Lines and Planes   I'm guessing that if you are reading this book (either you picked it up or have been assigned it) that you have a fair bit of mathematical background. If you haven't read through the preface with some additional information, but typically this is a upper-level undergraduate or early graduate-level class.  That being said, I'm guessing that you are quite familiar with lines you may even be embarrased if you seen reading a section on lines. However, you may not have seen lines and planes in the context that you will seen them here. It will be worth your while to read through this chapter.    Lines  When most mathematics students are asked above lines, the response is , the slope-intercept form of the line. This is often presented in a precalculus class in which linear functions fall from this naturally. However, not all lines can be written in this form. The exception is vertical lines, like .  Instead, we will use the general form of the line or     as long as and are both not zero, A nice was to ensure this is . and the in this formula is not the -intercept. This form allows both horizontal, vertical and any line with any other slope.  This form is quite nice in that if is zero, then the line is horizontal, if is zero, then the line is vertical and if both are non-zero then the line is oblique with -intercept of , -intercept of and slope of .  If we take the line in for oblique lines and divide through by , this can take on the intercept form of the line :     and in this form the -intercept is and the -intercept is .    Put the line given by into intercept form and find the intercepts.    Divide through by 30 to get     This shows that the -intercept is 10 and the -intercept is 6.    The above example showed how we can use the intercept form to easily read off the intercepts. The following exercise will use these to plot the lines.   Plot the following lines: , , and on the same axes. Note: do this by hand instead of graphing calculator\/website\/software.   Use the information above to note if it is horizontal, vertical or oblique and in the latter case, use intercepts to plot the line.   In this case, note that the first line is vertical, the second is horizontal. For the third line, divide through by and simplify to    which will have the intercepts and and the last line can be simplified to     which will have the intercepts and .            Linear Inequalities  Related to lines is that of linear inequalities. Consider the inequality and if we have the set is the set of all points that satisfy the inequality. The line cuts the -plane into two regions and in this case, the line is included in the set along with the side of the line containing the origin.   "
+  "body": " Lines and Planes   I'm guessing that if you are reading this book (either you picked it up or have been assigned it) that you have a fair bit of mathematical background. If you haven't read through the preface with some additional information, but typically this is a upper-level undergraduate or early graduate-level class.  That being said, I'm guessing that you are quite familiar with lines you may even be embarrased if you seen reading a section on lines. However, you may not have seen lines and planes in the context that you will seen them here. It will be worth your while to read through this chapter.    Lines  When most mathematics students are asked above lines, the response is , the slope-intercept form of the line. This is often presented in a precalculus class in which linear functions fall from this naturally. However, not all lines can be written in this form. The exception is vertical lines, like .  Instead, we will use the general form of the line or     as long as and are both not zero, A nice was to ensure this is . and the in this formula is not the -intercept. This form allows both horizontal, vertical and any line with any other slope.  This form is quite nice in that if is zero, then the line is horizontal, if is zero, then the line is vertical and if both are non-zero then the line is oblique with -intercept of , -intercept of and slope of .  If we take the line in for oblique lines and divide through by , this can take on the intercept form of the line :     and in this form the -intercept is and the -intercept is .    Put the line given by into intercept form and find the intercepts.    Divide through by 30 to get     This shows that the -intercept is 10 and the -intercept is 6.    The above example showed how we can use the intercept form to easily read off the intercepts. The following exercise will use these to plot the lines.   Plot the following lines: , , and on the same axes. Note: do this by hand instead of graphing calculator\/website\/software.   Use the information above to note if it is horizontal, vertical or oblique and in the latter case, use intercepts to plot the line.   In this case, note that the first line is vertical, the second is horizontal. For the third line, divide through by and simplify to     which will have the intercepts and and the last line can be simplified to     which will have the intercepts and .            Linear Inequalities  Related to lines is that of linear inequalities. Consider the inequality and if we have the set is the set of all points that satisfy the inequality. The line cuts the -plane into two regions and in this case, the line is included in the set along with the side of the line containing the origin.  So which side of the line satisfies the inequality? Since every point that is not on the line either satisfies the inequality or not, we can pick any point to determine this. For example in the line above, an easy point to pick is and since is true, then the side of the line containing the origin is in the set. The following is plot:         The set that satisfies the inequality we have labelled and shaded in light gray. When combined with other inequalities, we often call the set a feasible set , hence labelling it as .  Example with two linear inequalities    Planes and Hyperplanes  A linear equation in three variables is a plane . For example the equation decribes points in , the set of all three-dimensional space. Like a line in , it extends indefinitely and is flat. The following shows a plot of the plane. Note: if reading on the web, this is interactive.           Convex Sets  As we will see later, a convex feasible set is key to the simplex method working. What does convex mean? We will explore this and show that a feasible set constructed of linear inequalities is always convex.    A set in is convex if for any two points and in that all points in the line segment connecting and is in      Note: a line segment between and can be written      In two dimensions, a convex set is a set in such that its boundary is convex in the standard sense. Sets like the interior of circles, rectangles and the \"inside\" of parabolas are examples. To get a sense of this, the sets consisting of the interior of the following objects are convex:         However, the interior of these objects are not. A line is shown in blue with point endpoints that are in the set, but the are parts of the line that are not in the set.         And notice that in the object on the right, the line segments crosses outside the interior of each of the sets.   "
 },
 {
   "id": "sect-lines-2",
@@ -61,7 +61,79 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "1.1.2",
   "title": "",
-  "body": " Plot the following lines: , , and on the same axes. Note: do this by hand instead of graphing calculator\/website\/software.   Use the information above to note if it is horizontal, vertical or oblique and in the latter case, use intercepts to plot the line.   In this case, note that the first line is vertical, the second is horizontal. For the third line, divide through by and simplify to    which will have the intercepts and and the last line can be simplified to     which will have the intercepts and .         "
+  "body": " Plot the following lines: , , and on the same axes. Note: do this by hand instead of graphing calculator\/website\/software.   Use the information above to note if it is horizontal, vertical or oblique and in the latter case, use intercepts to plot the line.   In this case, note that the first line is vertical, the second is horizontal. For the third line, divide through by and simplify to     which will have the intercepts and and the last line can be simplified to     which will have the intercepts and .         "
+},
+{
+  "id": "fig-example-inequality",
+  "level": "2",
+  "url": "sect-lines-planes.html#fig-example-inequality",
+  "type": "Figure",
+  "number": "1.1.4",
+  "title": "",
+  "body": "      "
+},
+{
+  "id": "sect-linear-inequality-5",
+  "level": "2",
+  "url": "sect-lines-planes.html#sect-linear-inequality-5",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "feasible set "
+},
+{
+  "id": "sect-planes-2",
+  "level": "2",
+  "url": "sect-lines-planes.html#sect-planes-2",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "plane "
+},
+{
+  "id": "fig-plane",
+  "level": "2",
+  "url": "sect-lines-planes.html#fig-plane",
+  "type": "Figure",
+  "number": "1.1.5",
+  "title": "",
+  "body": "      "
+},
+{
+  "id": "def-convex",
+  "level": "2",
+  "url": "sect-lines-planes.html#def-convex",
+  "type": "Definition",
+  "number": "1.1.6",
+  "title": "",
+  "body": "  A set in is convex if for any two points and in that all points in the line segment connecting and is in    "
+},
+{
+  "id": "sect-convex-4",
+  "level": "2",
+  "url": "sect-lines-planes.html#sect-convex-4",
+  "type": "Note",
+  "number": "1.1.7",
+  "title": "",
+  "body": " Note: a line segment between and can be written     "
+},
+{
+  "id": "fig-convex-objs",
+  "level": "2",
+  "url": "sect-lines-planes.html#fig-convex-objs",
+  "type": "Figure",
+  "number": "1.1.8",
+  "title": "",
+  "body": "      "
+},
+{
+  "id": "fig-nonconvex-objs",
+  "level": "2",
+  "url": "sect-lines-planes.html#fig-nonconvex-objs",
+  "type": "Figure",
+  "number": "1.1.9",
+  "title": "",
+  "body": "      "
 },
 {
   "id": "sect-matrix-reduction",
@@ -421,7 +493,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.3",
   "title": "Simplex Method for Infeasible Tableaus",
-  "body": " Simplex Method for Infeasible Tableaus   Consider , in which coffee is shipped from warehouses to retail outlets. The problem was set up as an LOP in and we can use the techniques from the previous section to write this as the following tableau.  First, as discuss in ???, we need to write this problem in standard form, which means switching two of the inequalites by negating them. Also, the objective needs to be written as a maximum. The LOP in standard maximum form is     And the next step is to write the LOP in tableau form,     Typically, we look at the objective row to determine if a tableau is optimal and the there are no negatives in this row, so it appears it is optimal. However, if we look at the basic solution of     and note that this is an infeasible basic solution. Before solvnig this problem, let's use a smaller problem to develop the simplex method for this situation.    Infeasible Tableaus  We saw an LOP of a transportation problem above. Before solving that, let's look at a simpler one that only has two variables and two constraints:    Solve the following LOP:       To begin with, this is not in standard form, so we perform some algebra (as in section ???) to get this into standard form:     Since this only has two variables, a plot of this feasible set is helpful.        If we introduce slack variables then in Dictionary form this is     As we saw in and , that this tableau is infeasible. That is the basic solution is not feasible which makes sense because when the basic variables are the original variables, the current basic solution is at the origin, which is not in the feasible set.  As in the Phase II simplex method, we can perform a pivot. The dictionary in shows that the basis is and parameters We will remove and from the basis and thus have two choices to bring in either or . There are four cases here. Let's see what happens with each.        Let's try by bringing out of the basis. If we solve the 2nd equation in for (or actually ) we get     and then substituting this into the other equations (and multiplying through by a 4) gives the new dictionary     Notice that this is still infeasible and because the coefficients of the variables in the objective function were negative, the value of has decreased .       If instead we can solve the third equation of for to get:     and subsitute this into the other equations of to get:     And notice that this is a feasible solution now.       In this case, we solve the 2nd equation in for or     and substitute these into the other two equations to get:     Like the pivot, this is a feasible solution.       Lastly, we solve the 3rd equation for or     and subsitute this into the other equations to get the new dictionary:        We compare what happened here. The cases and resulted in feasible solutions, whereas the other two did not.  This can be explained looking at the feasible set in . Again, the initial dictionary has a basic solution of , which is at the origin. The pivot shifts the basic solution to the point because this is the line. Alternatively, the pivot shifts the basic solution to point , which is in the feasible set. The pivot shifts the basic solution to the point (the intersection of the lines and ). The pivot shifts the basic soltuion to point , which is not feasible.  So we need to determine from the dictionary (or more likely from the tableau) how to determine which pivot will make it feasible. In this case, it seems like either or would be a good step.    Phase I of the Simplex Method  With the example above, we now present the following algorithm for getting a simplex tableau into a feasible solution.   Phase I of the Simplex Method      Select the row of the tableau with the most negative basic variable.    Select the column with the largest positive column ratio. An inquisitive reader should ask: What if there are not not any negative number in the row? Hmmm. Hold that thought, we'll get to that soon.     If there are no other basic varibles, this phase is done. If there are other negative basic variables, go to step 1.       Let's solve using . First, write the tableau down (recall that the standard form of the problem needs to be used.)     And to start phase I, we note that the largest negative in the -column is in the first row. We then do ratios of to all of the negatives in the row. This occurs in column two (the ratio is ). Thus, the matrix pivot is row 1, column 2:     Note that this tableau is no longer infeasible (there's no negatives in the last column, except for ). We can now switch to phase II.  For phase II, we need to check for optimality, but since there is a negative in the bottow row, it is not optimal, so we form the -ratios:     and therefore the smallest -ratio is in the 2nd row, so perform the matrix pivot about row 2, column 1     This tableau is now optimal with basic solution     with . This corresponds to the original problem as , so the function is minimized when and .    Apply phase I of the Simplex method to the following LOP.       If we switch the objective function to , then the problem is in standard form and we can write the tableau as     We use phase I of the Simplex Method because there are negatives in the last column. We choose the second column because it is the negative most number in that column (always ignoring the objective value).        "
+  "body": " Simplex Method for Infeasible Tableaus   Consider , in which coffee is shipped from warehouses to retail outlets. The problem was set up as an LOP in and we can use the techniques from the previous section to write this as the following tableau.  First, as discuss in ???, we need to write this problem in standard form, which means switching two of the inequalites by negating them. Also, the objective needs to be written as a maximum. The LOP in standard maximum form is     And the next step is to write the LOP in tableau form,     Typically, we look at the objective row to determine if a tableau is optimal and the there are no negatives in this row, so it appears it is optimal. However, if we look at the basic solution of     and note that this is an infeasible basic solution. Before solvnig this problem, let's use a smaller problem to develop the simplex method for this situation.    Infeasible Tableaus  We saw an LOP of a transportation problem above. Before solving that, let's look at a simpler one that only has two variables and two constraints:    Solve the following LOP:       To begin with, this is not in standard form, so we perform some algebra (as in section ???) to get this into standard form:     Since this only has two variables, a plot of this feasible set is helpful.        If we introduce slack variables then in Dictionary form this is     As we saw in and , that this tableau is infeasible. That is the basic solution is not feasible which makes sense because when the basic variables are the original variables, the current basic solution is at the origin, which is not in the feasible set.  As in the Phase II simplex method, we can perform a pivot. The dictionary in shows that the basis is and parameters We will remove and from the basis and thus have two choices to bring in either or . There are four cases here. Let's see what happens with each.        Let's try by bringing out of the basis. If we solve the 2nd equation in for (or actually ) we get     and then substituting this into the other equations (and multiplying through by a 4) gives the new dictionary     Notice that this is still infeasible and because the coefficients of the variables in the objective function were negative, the value of has decreased .       If instead we can solve the third equation of for to get:     and subsitute this into the other equations of to get:     And notice that this is a feasible solution now.       In this case, we solve the 2nd equation in for or     and substitute these into the other two equations to get:     Like the pivot, this is a feasible solution.       Lastly, we solve the 3rd equation for or     and subsitute this into the other equations to get the new dictionary:        We compare what happened here. The cases and resulted in feasible solutions, whereas the other two did not.  This can be explained looking at the feasible set in . Again, the initial dictionary has a basic solution of , which is at the origin. The pivot shifts the basic solution to the point because this is the line. Alternatively, the pivot shifts the basic solution to point , which is in the feasible set. The pivot shifts the basic solution to the point (the intersection of the lines and ). The pivot shifts the basic soltuion to point , which is not feasible.  So we need to determine from the dictionary (or more likely from the tableau) how to determine which pivot will make it feasible. In this case, it seems like either or would be a good step.    Phase I of the Simplex Method  With the example above, we now present the following algorithm for getting a simplex tableau into a feasible solution.   Phase I of the Simplex Method      Select the row of the tableau with the most negative basic variable.    Select the column with the largest positive column ratio. An inquisitive reader should ask: What if there are not not any negative number in the row? Hmmm. Hold that thought, we'll get to that soon.     If there are no other basic varibles, this phase is done. If there are other negative basic variables, go to step 1.       Let's solve using . First, write the tableau down (recall that the standard form of the problem needs to be used.)     And to start phase I, we note that the largest negative in the -column is in the first row. We then do ratios of to all of the negatives in the row. This occurs in column two (the ratio is ). Thus, the matrix pivot is row 1, column 2:     Note that this tableau is no longer infeasible (there's no negatives in the last column, except for ). We can now switch to phase II.  For phase II, we need to check for optimality, but since there is a negative in the bottow row, it is not optimal, so we form the -ratios:     and therefore the smallest -ratio is in the 2nd row, so perform the matrix pivot about row 2, column 1     This tableau is now optimal with basic solution     with . This corresponds to the original problem as , so the function is minimized when and .    Apply Phase I of the Simplex Method to the following LOP.       This problem is in standard form and we can write the tableau as     We use phase I of the Simplex Method because there are negatives in the last column. We choose the second column because it is the negative most number in that column (always ignoring the objective value).     Now that there are no negative numbers in the last column, this tableau is now feasible, completing the first phase of the simplex method.    After completing the first phase of the simplex method, we can now use phase II. We'll complete the solution to the problem above now    Apply Phase II of the Simplex Method to the last tableau from     For phase II, we first look in the objective row of the tableau and note that because there are negative numbers so the basic solution is not optimal. We start with the leftmost negative in the objective row or the first column. Then form the -ratios.     and noting that the only positive number here is in the third row. Thus, we do a matrix pivot about row 3 and column 1.     Looking at the objective row, there are still negatives in this row, so this is not an optimal solution. We form -ratios using the 4th column     and the smallest -ratio is in the 3rd row, so we perform a matrix pivot about the 3rd row, 4th column.     This tableau is now optimal with basic solution     and objective     Show the feasible set and discuss the pivots?   "
 },
 {
   "id": "prob-infeasible1",
@@ -451,13 +523,76 @@ var ptx_lunr_docs = [
   "body": " Phase I of the Simplex Method      Select the row of the tableau with the most negative basic variable.    Select the column with the largest positive column ratio. An inquisitive reader should ask: What if there are not not any negative number in the row? Hmmm. Hold that thought, we'll get to that soon.     If there are no other basic varibles, this phase is done. If there are other negative basic variables, go to step 1.      "
 },
 {
-  "id": "sect-phaseI-algorithm-16",
+  "id": "problem-infeasible-phaseI",
   "level": "2",
-  "url": "sect-phase1.html#sect-phaseI-algorithm-16",
+  "url": "sect-phase1.html#problem-infeasible-phaseI",
   "type": "Problem",
   "number": "3.3.4",
   "title": "",
-  "body": "  Apply phase I of the Simplex method to the following LOP.       If we switch the objective function to , then the problem is in standard form and we can write the tableau as     We use phase I of the Simplex Method because there are negatives in the last column. We choose the second column because it is the negative most number in that column (always ignoring the objective value).      "
+  "body": "  Apply Phase I of the Simplex Method to the following LOP.       This problem is in standard form and we can write the tableau as     We use phase I of the Simplex Method because there are negatives in the last column. We choose the second column because it is the negative most number in that column (always ignoring the objective value).     Now that there are no negative numbers in the last column, this tableau is now feasible, completing the first phase of the simplex method.   "
+},
+{
+  "id": "sect-phaseI-algorithm-18",
+  "level": "2",
+  "url": "sect-phase1.html#sect-phaseI-algorithm-18",
+  "type": "Problem",
+  "number": "3.3.5",
+  "title": "",
+  "body": "  Apply Phase II of the Simplex Method to the last tableau from     For phase II, we first look in the objective row of the tableau and note that because there are negative numbers so the basic solution is not optimal. We start with the leftmost negative in the objective row or the first column. Then form the -ratios.     and noting that the only positive number here is in the third row. Thus, we do a matrix pivot about row 3 and column 1.     Looking at the objective row, there are still negatives in this row, so this is not an optimal solution. We form -ratios using the 4th column     and the smallest -ratio is in the 3rd row, so we perform a matrix pivot about the 3rd row, 4th column.     This tableau is now optimal with basic solution     and objective    "
+},
+{
+  "id": "sect-infeasible-unbounded",
+  "level": "1",
+  "url": "sect-infeasible-unbounded.html",
+  "type": "Section",
+  "number": "3.4",
+  "title": "Infeasibility and Unboundedness",
+  "body": " Infeasibility and Unboundedness   We brushed under the rug a couple of things that may go wrong when performing the simplex method. These ways result in LOPs that do not have a solution.    Unbounded Problems  The first issue that may arise is that the problem doesn't have a solution because the problem is unbounded. In general, this only occurs when the feasible set is unbounded. Consider the following LOP    Use the Simplex Method to solve       We will use the simplex method to solve this. First, this problem is in standard form and we can write the initial tableau as     Since there are negatives in the last column, this problem is in phase I. Select the row with the most negative in the last column or row 3 and find the largest positive ratio. This occurs in the first column, so we perform a matrix pivot abouve row 3, column 1:     There is still a negative in the last column (in the first row), so next we select the largest positive ratio and this occurs in the 2nd column, so we do a matrix pivot:     And noting that there are no negatives in the last column, so we are out of phase I and move to phase II. There is a negative in the objective row (column 5), so we do the -ratios, however, there are no positve -ratios. This is an indication that the problem is unbounded.   We can look at this geometrically with a plot of the feasible set.         It appears that the feasible set is unbounded. Another way to look at this is if we look at the line parametrically as , , then the line is in the feasible set if it is above the line , which occurs when . Using this line, the objective function is , which is unbounded as .    Infeasibility  The other issue that can pop up is that the problem is infeasible, meaning that there is no feasible set (that is an empty set). Consider the following problem which is nearly the same, but importantly different than that in          Let's use the simplex method to solve this. First, this is in standard form, so we can write the tableau as     and we note that there is a negative in the last column, so we are in phase I. The largest negative is in the third row,     and this last column still has a negative, so we're still in phase I. We look at the 2nd row (with the only negative number in the last column) and select the only negative in that row or column 2. We perform a matrix pivot:     and we note that there is still a negative in the last column, so still in phase I and note that this occurs in row 1. However, there are no other negatives in this row, so we cannot do a pivot to shift. This happens when problem is unbounded.   Let's take a look at the feasible set:            "
+},
+{
+  "id": "prob-unbounded-LOP",
+  "level": "2",
+  "url": "sect-infeasible-unbounded.html#prob-unbounded-LOP",
+  "type": "Problem",
+  "number": "3.4.1",
+  "title": "",
+  "body": "  Use the Simplex Method to solve      "
+},
+{
+  "id": "fig-unbounded-fs",
+  "level": "2",
+  "url": "sect-infeasible-unbounded.html#fig-unbounded-fs",
+  "type": "Figure",
+  "number": "3.4.2",
+  "title": "",
+  "body": "      "
+},
+{
+  "id": "prob-infeasible-LOP",
+  "level": "2",
+  "url": "sect-infeasible-unbounded.html#prob-infeasible-LOP",
+  "type": "Problem",
+  "number": "3.4.3",
+  "title": "",
+  "body": "      "
+},
+{
+  "id": "fig-fs-unbounded",
+  "level": "2",
+  "url": "sect-infeasible-unbounded.html#fig-fs-unbounded",
+  "type": "Figure",
+  "number": "3.4.4",
+  "title": "",
+  "body": "      "
+},
+{
+  "id": "sect-simplex-summary",
+  "level": "1",
+  "url": "sect-simplex-summary.html",
+  "type": "Section",
+  "number": "3.5",
+  "title": "Summary of the Simplex Method",
+  "body": " Summary of the Simplex Method  This section summarizes the Simplex Method that we have developed in this chapter.  "
 },
 {
   "id": "sect-intro-ilops",
@@ -467,6 +602,15 @@ var ptx_lunr_docs = [
   "number": "4.1",
   "title": "Introduction to Integer Linear Optimization Problems",
   "body": " Introduction to Integer Linear Optimization Problems    "
+},
+{
+  "id": "ch-julia",
+  "level": "1",
+  "url": "ch-julia.html",
+  "type": "Chapter",
+  "number": "5",
+  "title": "Solving Linear Optimization Problems in Julia",
+  "body": " Solving Linear Optimization Problems in Julia    "
 },
 {
   "id": "backmatter-2",

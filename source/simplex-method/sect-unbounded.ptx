@@ -1,0 +1,222 @@
+<section xml:id="sect-infeasible-unbounded">
+  <title>Infeasibility and Unboundedness</title>
+
+<introduction>
+  <p>
+    We brushed under the rug a couple of things that may go wrong when performing the simplex method.  These ways result in LOPs that do not have a solution.
+  </p>
+</introduction>
+
+<subsection xml:id="sect-unbounded">
+  <title>Unbounded Problems</title>
+
+  <p>
+     The first issue that may arise is that the problem doesn't have a solution because the problem is unbounded.  In general, this only occurs when the feasible set is unbounded.  Consider the following LOP
+  </p>
+
+<problem xml:id="prob-unbounded-LOP">
+  <statement>
+    <p>
+      Use the Simplex Method to solve
+    </p>
+    <p>
+      <me>
+      \begin{aligned}
+        \text{Maximize} \amp\amp z  = 5x_1 + 3x_2 \\
+\text{s.t.} \amp\amp  x_1 -2x_2 \amp \leq -6 \\
+\amp\amp -5x_1 +2x_2 \amp \leq -20 \\
+\amp\amp -3x_1 - 5x_2 \amp \leq -75\\
+\text{and} \amp\amp x_1,\; x_2 \amp \geq 0.
+\end{aligned}
+      </me>
+    </p>
+  </statement>
+</problem>
+
+<p>
+  We will use the simplex method to solve this.  First, this problem is in standard form and we can write the initial tableau as
+</p>
+<p>
+  <me>
+    \left[\begin{array}{rr|rrrr|r}
+1 \amp -2 \amp 1 \amp 0 \amp 0 \amp 0 \amp -6\\
+-5 \amp 2 \amp 0 \amp 1 \amp 0 \amp 0 \amp -20\\
+-3 \amp -5 \amp 0 \amp 0 \amp 1 \amp 0 \amp -75\\ \hline
+-5 \amp -3 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+  </me>
+</p>
+<p>
+  Since there are negatives in the last column, this problem is in phase I.  Select the row with the most negative in the last column or row 3 and find the largest positive ratio. This occurs in the first column, so we perform a matrix pivot abouve row 3, column 1:
+</p>
+
+<p>
+  <me>
+    1 \mapsto 5, \qquad \left[\begin{array}{rr|rrrr|r}
+0 \amp -11 \amp 3 \amp 0 \amp 1 \amp 0 \amp -93\\
+0 \amp 31 \amp 0 \amp 3 \amp -5 \amp 0 \amp 315\\
+3 \amp 5 \amp 0 \amp 0 \amp -1 \amp 0 \amp 75\\ \hline
+0 \amp 16 \amp 0 \amp 0 \amp -5 \amp 3 \amp 375\\
+\end{array} \right]\\
+  </me>
+</p>
+
+<p>
+  There is still a negative in the last column (in the first row), so next we select the largest positive ratio and this occurs in the 2nd column, so we do a matrix pivot:
+</p>
+
+<p>
+  <me>
+    2 \mapsto 3 \qquad \left[\begin{array}{rr|rrrr|r}
+0 \amp 11 \amp -3 \amp 0 \amp -1 \amp 0 \amp 93\\
+0 \amp 0 \amp 31 \amp 11 \amp -8 \amp 0 \amp 194\\
+11 \amp 0 \amp 5 \amp 0 \amp -2 \amp 0 \amp 120\\ \hline
+0 \amp 0 \amp 16 \amp 0 \amp -13 \amp 11 \amp 879\\
+\end{array} \right]
+  </me>
+
+</p>
+<p>
+  And noting that there are no negatives in the last column, so we are out of phase I and move to phase II.  There is a negative in the objective row (column 5), so we do the <m>\boldsymbol{b}</m>-ratios, however, there are no positve <m>\boldsymbol{b}</m>-ratios.  This is an indication that the problem is <em>unbounded.</em>
+</p>
+
+<p>
+  We can look at this geometrically with a plot of the feasible set.
+</p>
+
+<figure xml:id="fig-unbounded-fs">
+  <caption></caption>
+  <image width="60%">
+    <shortdescription></shortdescription>
+    <latex-image>
+      <![CDATA[
+      \begin{tikzpicture}[scale=0.25]
+\draw [->] (-2,0) -- (30,0) node [above right] {$x$};
+\foreach \x in {5,10,...,25} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+\draw [->] (0,-2) -- (0,30) node [above right] {$y$};
+\foreach \y in {5,10,...,25} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+\draw[<->,thick] (-2, {3+(-2)/2}) -- (30, {3+(30)/2});
+\draw[<->,thick] (-2, {(75-3*(-2))/5}) -- (27, {(75-3*(27))/5}) node[pos=0.7, above right] {$x_5=0$};
+\draw[<->,thick] (3, {(-20+5*(3))/2}) -- (15, {(-20+5*(15))/2});
+\path[pattern = north east lines,] (-2, {3+(-2)/2}) -- (30, {3+(30)/2})
+-- (30,{3+(30)/2-1}) -- (-2, {3+(-2)/2-1});
+\path[pattern = vertical lines,] (-2, {(75-3*(-2))/5}) -- (27, {(75-3*(27))/5})
+--  (27, {(75-3*(27))/5-1}) --(-2, {(75-3*(-2))/5-1});
+\path[pattern = north west lines,] (3, {(-20+5*(3))/2}) -- (15, {(-20+5*(15))/2})
+-- (14, {(-20+5*(15))/2}) --(2, {(-20+5*(3))/2});
+
+\draw (15,15) node {$\boldmath{F}$};
+\draw[->, dotted] (10,10) -- (28,28);
+
+\end{tikzpicture}
+
+      ]]>
+    </latex-image>
+  </image>
+</figure>
+
+<p>
+  It appears that the feasible set <m>F</m> is unbounded.  Another way to look at this is if we look at the line <m>y=x</m> parametrically as <m>x=t</m>, <m>y=t</m>, then the line is in the feasible set if it is above the line <m>x_5=0</m>, which occurs when <m>t \geq 75/8</m>. Using this line, the objective function is <m>z = 8t</m>, which is unbounded as <m>t \to \infty</m>.
+</p>
+
+</subsection>
+
+  <subsection xml:id="sect-infeasibility">
+    <title>Infeasibility</title>
+
+    <p>
+The other issue that can pop up is that the problem is infeasible, meaning  that there is no feasible set (that is an empty set). Consider the following problem which is nearly the same, but importantly different than that in <xref ref="prob-unbounded-LOP"/>
+    </p>
+    <problem xml:id="prob-infeasible-LOP">
+      <statement>
+        <p>
+          <me>
+            \begin{aligned}
+\text{Maximize} \amp \amp z \amp = 5x_1 + 3x_2 \\
+\text{s.t.} \amp\amp  -x_1 +2x_2 \amp \leq 6 \\
+\amp\amp 5x_1 -2x_2 \amp \leq 20 \\
+\amp\amp -3x_1 - 5x_2 \amp \leq -75\\
+\text{and} \amp\amp x_1, \; x_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+    <p>
+      Let's use the simplex method to solve this.  First, this is in standard form, so we can write the tableau as
+    </p>
+    <p>
+      <me>
+        \left[\begin{array}{rr|rrrr|r}
+-1 \amp 2 \amp 1 \amp 0 \amp 0 \amp 0 \amp 6\\
+5 \amp -2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 20\\
+-3 \amp -5 \amp 0 \amp 0 \amp 1 \amp 0 \amp -75\\ \hline
+-5 \amp -3 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+      </me>
+    </p>
+    <p>
+      and we note that there is a negative in the last column, so we are in phase I.  The largest negative is in the third row,
+    </p>
+    <p>
+      <me>
+        1 \mapsto 5, \qquad \left[\begin{array}{rr|rrrr|r}
+0 \amp 11 \amp 3 \amp 0 \amp -1 \amp 0 \amp 93\\
+0 \amp -31 \amp 0 \amp 3 \amp 5 \amp 0 \amp -315\\
+3 \amp 5 \amp 0 \amp 0 \amp -1 \amp 0 \amp 75\\ \hline
+0 \amp 16 \amp 0 \amp 0 \amp -5 \amp 3 \amp 375\\
+\end{array} \right]
+      </me>
+    </p>
+    <p>
+      and this last column still has a negative, so we're still in phase I.  We look at the 2nd row (with the only negative number in the last column) and select the only negative in that row or column 2.  We perform a matrix pivot:
+    </p>
+    <p>
+      <me>
+        2 \mapsto 4, \qquad \left[\begin{array}{rr|rrrr|r}
+0 \amp 0 \amp 31 \amp 11 \amp 8 \amp 0 \amp -194\\
+0 \amp 31 \amp 0 \amp -3 \amp -5 \amp 0 \amp 315\\
+31 \amp 0 \amp 0 \amp 5 \amp -2 \amp 0 \amp 250\\ \hline
+0 \amp 0 \amp 0 \amp 16 \amp -25 \amp 31 \amp 2195\\
+\end{array} \right]
+      </me>
+    </p>
+    <p>
+      and we note that there is still a negative in the last column, so still in phase I and note that this occurs in row 1. However, there are no other negatives in this row, so we cannot do a pivot to shift.  This happens when problem is <em>unbounded.</em>
+    </p>
+    <p>
+      Let's take a look at the feasible set:
+    </p>
+
+<figure xml:id="fig-fs-unbounded">
+  <caption></caption>
+  <image width="75%">
+    <shortdescription></shortdescription>
+    <latex-image>
+      <![CDATA[ \begin{tikzpicture}[scale=0.15]
+\draw [->] (-2,0) -- (30,0) node [above right] {$x$};
+\foreach \x in {5,10,...,25} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+\draw [->] (0,-2) -- (0,30) node [above right] {$y$};
+\foreach \y in {5,10,...,25} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+\draw[<->,thick] (-2, {3+(-2)/2}) -- (30, {3+(30)/2});
+\draw[<->,thick] (-2, {(75-3*(-2))/5}) -- (27, {(75-3*(27))/5});
+\draw[<->,thick] (3, {(-20+5*(3))/2}) -- (15, {(-20+5*(15))/2});
+\path[pattern = north east lines,] (-2, {3+(-2)/2}) -- (30, {3+(30)/2})
+-- (30,{3+(30)/2+1}) -- (-2, {3+(-2)/2+1});
+\path[pattern = north east lines,] (-2, {(75-3*(-2))/5}) -- (27, {(75-3*(27))/5})
+--  (27, {(75-3*(27))/5-1}) --(-2, {(75-3*(-2))/5-1});
+\path[pattern = north west lines,] (3, {(-20+5*(3))/2}) -- (15, {(-20+5*(15))/2})
+-- (16, {(-20+5*(15))/2}) --(4, {(-20+5*(3))/2});
+      \end{tikzpicture}
+]]>
+
+
+    </latex-image>
+  </image>
+</figure>
+<p>
+
+</p>
+  </subsection>
+
+</section>
