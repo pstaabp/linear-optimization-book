@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Matrices and Matrix Reduction</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Linear Optimization">
+<meta property="book:author" content="You">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.5.10';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.c2d04816128ebb44.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.f6bda0c0ccce4835.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.e0c6d4592e23c667.css">
+</head>
+<body id="linopt-staab" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="my-great-book.html"><span class="title">Linear Optimization:</span> <span class="subtitle">Modeling and Solving Linear problems with Julia and WebCAS</span></a></h1>
+<p class="byline">You</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sect-lines-planes.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-background.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="ch-linear-models.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter"><div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div></li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-background.html" class="internal"><span class="codenumber">1</span> <span class="title">Background Mathematics for Linear Optimization</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lines-planes.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-lines" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-linear-inequality" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Linear Inequalities</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sect-matrix-reduction.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Matrices and Matrix Reduction</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-linear-systems" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Linear Systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrices" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Matrices and Row Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrix-pivot" class="internal"><span class="codenumber">1.2.3</span> <span class="title">Matrix Pivots</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-linear-models.html" class="internal"><span class="codenumber">2</span> <span class="title">Developing Linear Models</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-linear-models.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Introduction to Linear Optimization</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-linear-models.html#subsec-" class="internal"><span class="codenumber">2.1.1</span> <span class="title"></span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-geometry.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Geometry of Feasible Sets</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-convex-fs" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Feasible Sets are Convex</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-simplex.html" class="internal"><span class="codenumber">3</span> <span class="title">The Simplex Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-slack-dict.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Slack Variables and Dictionaries</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-slack-dict-3" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Slack Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-basic-solutions" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Basic Solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-develop-simplex" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Developing the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-tableau.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Tableaus and the Simplex Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-3" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Introduction to tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-4" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Operations on Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-5" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Standard Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-6" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Phase II of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-integer-problems.html" class="internal"><span class="codenumber">4</span> <span class="title">Integer Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-intro-ilops.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Introduction to Integer Linear Optimization Problems</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sect-matrix-reduction"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">1.2</span><span class="space"> </span><span class="title">Matrices and Matrix Reduction</span>
+</h2>
+<section class="introduction" id="sect-matrix-reduction-2"><div class="para" id="sect-matrix-reduction-2-1">Matrices are generally presented in either a linear algebra or matrix methods class. The material presented here is some basics behing matrices that are needed for performing linear optimization. This should be review for most readers of the text, but is helpful for the context and notation later in the text.</div></section><section class="subsection" id="sect-linear-systems"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">1.2.1</span><span class="space"> </span><span class="title">Linear Systems</span>
+</h3>
+<div class="para" id="sect-linear-systems-2">Let’s start with an example.</div>
+<article class="example example-like" id="ex-streets"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Traffic Flow.</span>
+</h4>
+<div class="para" id="ex-streets-2-1">A simple model of traffic flow can be represented by the following graph:</div> <figure class="figure figure-like" id="fig-streets"><div class="image-box" style="width: 75%; margin-left: 12.5%; margin-right: 12.5%;"><img src="generated/latex-image/streets.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.2.2<span class="period">.</span></span><span class="space"> </span>A map of a few streets in Boston where the arrows denote the direction of traffic flow (all of these streets are one-way) and the numbers represent the numbers of cars driving down the street in a given time period. The letters <span class="process-math">\(A\)</span> through <span class="process-math">\(D\)</span> will be the names of the intersections.</figcaption></figure> <div class="para" id="ex-streets-2-3">Write down the equations that balance each of the numbers of cars entering and leaving each of the intersections <span class="process-math">\(A, B, C\)</span> and <span class="process-math">\(D\text{.}\)</span>
+</div>
+<div class="solutions"><details id="ex-streets-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="ex-streets-3-1">In this case, we have:</div>
+<div class="para logical" id="ex-streets-3-2"><div class="displaymath process-math" id="ex-streets-3-2-1">
+\begin{align}
+x_4 + x_5 \amp = x_1 + 250\notag\\
+350 \amp = x_3 + x_4 \notag\\
+700 \amp = x_2 + x_5 \tag{1.2.1}\\
+x_3 + x_2 \amp = 600 \notag
+\end{align}
+</div></div>
+<div class="para" id="ex-streets-3-3">for intersections <span class="process-math">\(A\text{,}\)</span> <span class="process-math">\(B\text{,}\)</span> <span class="process-math">\(C\)</span> and <span class="process-math">\(D\)</span> respectively.</div>
+</div></details></div></article><article class="definition definition-like" id="sect-linear-systems-4"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">1.2.3</span><span class="period">.</span>
+</h4>
+<div class="para logical" id="sect-linear-systems-4-1-1"><ul class="disc" id="sect-linear-systems-4-1-1-1">
+<li id="sect-linear-systems-4-1-1-1-1">
+<div class="para" id="sect-linear-systems-4-1-1-1-1-1">A <dfn class="terminology">linear combination</dfn> of <span class="process-math">\(x_1, x_2, x_3, \ldots, x_n\)</span> has the form</div>
+<div class="para logical" id="sect-linear-systems-4-1-1-1-1-2"><div class="displaymath process-math">
+\begin{equation*}
+a_1 x_1 + a_2 x_2 + \cdots + a_n x_n,
+\end{equation*}
+</div></div>
+<div class="para" id="sect-linear-systems-4-1-1-1-1-3">where the constants <span class="process-math">\(a_1, a_2, \ldots, a_n \in \mathbb{R}\)</span> are the combinations coefficients.</div>
+</li>
+<li id="sect-linear-systems-4-1-1-1-2">
+<div class="para" id="sect-linear-systems-4-1-1-1-2-1">A <dfn class="terminology">linear equation</dfn> has the form</div>
+<div class="para logical" id="sect-linear-systems-4-1-1-1-2-2"><div class="displaymath process-math" id="eq-def-lin-eq">
+\begin{equation}
+a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b\tag{1.2.2}
+\end{equation}
+</div></div>
+<div class="para" id="sect-linear-systems-4-1-1-1-2-3">where <span class="process-math">\(b \in \mathbb{R}\)</span> is a constant and <span class="process-math">\(a_1, a_2, \ldots, a_n \in
+\mathbb{R}\text{.}\)</span>
+</div>
+</li>
+<li id="sect-linear-systems-4-1-1-1-3">
+<div class="para" id="sect-linear-systems-4-1-1-1-3-1">The <span class="process-math">\(n\)</span>-tuple <span class="process-math">\((s_1,s_2,\ldots,s_n)\)</span> <dfn class="terminology">satisfies</dfn> or is a <dfn class="terminology">solution</dfn> of <a href="sect-matrix-reduction.html#eq-def-lin-eq" class="xref" data-knowl="./knowl/xref/eq-def-lin-eq.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.2.2">(1.2.2)</a> if this point satisfies <a href="sect-matrix-reduction.html#eq-def-lin-eq" class="xref" data-knowl="./knowl/xref/eq-def-lin-eq.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.2.2">(1.2.2)</a> or</div>
+<div class="para logical" id="sect-linear-systems-4-1-1-1-3-2"><div class="displaymath process-math">
+\begin{equation*}
+a_1 s_1 + a_2 s_2 + \cdots + a_n s_n = b
+\end{equation*}
+</div></div>
+</li>
+<li id="sect-linear-systems-4-1-1-1-4">
+<div class="para" id="sect-linear-systems-4-1-1-1-4-1">A <dfn class="terminology">system of linear equations</dfn> or <dfn class="terminology">linear system</dfn> is a set of linear equations:</div>
+<div class="para logical" id="sect-linear-systems-4-1-1-1-4-2"><div class="displaymath process-math" id="sect-linear-systems-4-1-1-1-4-2-1">
+\begin{align}
+a_{1,1} x_1 + a_{1,2} x_2 + \cdots + a_{1,n} x_n \amp = b_1 , \notag\\
+a_{2,1} x_1 + a_{2,2} x_2 + \cdots +
+a_{2,n} x_n \amp = b_2, \tag{1.2.3}\\
+\vdots \amp = \vdots \notag\\
+a_{m,1} x_1 + a_{m,2} x_2 + \cdots + a_{m,n} x_n \amp = b_m, \notag
+\end{align}
+</div></div>
+<div class="para" id="sect-linear-systems-4-1-1-1-4-3">and this linear system has <span class="process-math">\(m\)</span> equations and <span class="process-math">\(n\)</span> unknowns (variables).</div>
+</li>
+<li id="sect-linear-systems-4-1-1-1-5"><div class="para" id="sect-linear-systems-4-1-1-1-5-1">The <span class="process-math">\(n\)</span>-tuple <span class="process-math">\((s_1,s_2,\ldots,s_n)\)</span> <dfn class="terminology">satisfies</dfn> or is a <dfn class="terminology">solution</dfn> of <a href="sect-matrix-reduction.html#sect-linear-systems-4-1-1-1-4-2-1" class="xref" data-knowl="./knowl/xref/eq-def-lin-sys.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.2.3">(1.2.3)</a> if this point satisfies <em class="emphasis">every</em> equation of <a href="sect-matrix-reduction.html#sect-linear-systems-4-1-1-1-4-2-1" class="xref" data-knowl="./knowl/xref/eq-def-lin-sys.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.2.3">(1.2.3)</a>.</div></li>
+</ul></div></article><article class="example example-like" id="sect-linear-systems-5"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.4</span><span class="period">.</span><span class="space"> </span><span class="title">Linear Equations.</span>
+</h4>
+<div class="para" id="sect-linear-systems-5-2">The following are linear equations:</div>
+<div class="para logical" id="sect-linear-systems-5-3"><div class="displaymath process-math" id="sect-linear-systems-5-3-1">
+\begin{align*}
+2x + 3y \amp = 6, \amp y_1 -y_2+y_3-y_4 \amp = 10, \\
+10x_1 - x_3 + 5x_5 \amp = 9, \amp \sum_{i=1}^{10} i x_i \amp = 0 
+\end{align*}
+</div></div>
+<div class="para" id="sect-linear-systems-5-4">where summation notation has been used in the last one and note the variable names can vary. The following equations are not linear:</div>
+<div class="para logical" id="sect-linear-systems-5-5"><div class="displaymath process-math" id="sect-linear-systems-5-5-1">
+\begin{align*}
+x_1^2+x_2 \amp = 6, \amp y_1y_2 + y_3 \amp = 5, \\
+\frac{x_1+x_2}{x_3} \amp = 6, \amp \sin(x+y) \amp = z 
+\end{align*}
+</div></div>
+<div class="para" id="sect-linear-systems-5-6">Each of the equations in the latter group have multiplications, squares division or other functions between variables.</div></article><div class="para" id="sect-linear-systems-6">The next two examples give a way to determine if a point or <span class="process-math">\(n\)</span>-tuple is a solution to a linear system.</div>
+<article class="example example-like" id="sect-linear-systems-7"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Showing a Point is a Solution to a Linear System.</span>
+</h4>
+<div class="para" id="sect-linear-systems-7-2-1">Show that the point <span class="process-math">\((2,3)\)</span> is a solution of the linear system:</div> <div class="para logical" id="sect-linear-systems-7-2-2"><div class="displaymath process-math" id="sect-linear-systems-7-2-2-1">
+\begin{align*}
+3x_1 - x_2 \amp = 3 \\
+2x_1 + 4x_2 \amp = 16 
+\end{align*}
+</div></div>
+<div class="solutions"><details id="sect-linear-systems-7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sect-linear-systems-7-3-1">Substitute <span class="process-math">\(x_1=2\)</span> and <span class="process-math">\(x_2=3\)</span> into both equations and check.</div>
+<div class="para logical" id="sect-linear-systems-7-3-2"><div class="displaymath process-math" id="sect-linear-systems-7-3-2-1">
+\begin{align*}
+3(2) - 3 \amp = 3, \\
+2(2) + 4(3) \amp = 16.
+\end{align*}
+</div></div>
+<div class="para" id="sect-linear-systems-7-3-3">Since each equation is satisfied at the point <span class="process-math">\((2,3)\)</span> is a solution to the linear system.</div>
+</div></details></div></article><article class="example example-like" id="sect-linear-systems-8"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">1.2.6</span><span class="period">.</span>
+</h4>
+<div class="para" id="sect-linear-systems-8-1-1">Find a few solutions of the traffic flow problem.</div>
+<div class="solutions"><details id="sect-linear-systems-8-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content"><div class="para" id="sect-linear-systems-8-2-1"></div></div></details></div></article></section><section class="subsection" id="sect-matrices"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">1.2.2</span><span class="space"> </span><span class="title">Matrices and Row Operations</span>
+</h3>
+<div class="para" id="sect-matrices-2">You probably recall that a matrix is a compact way of writing a linear system in which only the coefficients are stored.</div>
+<div class="para" id="sect-matrices-3">The linear system in <a href="sect-matrix-reduction.html#sect-linear-systems-4-1-1-1-4-2-1" class="xref" data-knowl="./knowl/xref/eq-def-lin-sys.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.2.3">(1.2.3)</a> can be written as the <dfn class="terminology">augmented coefficient matrix</dfn>
+</div>
+<div class="para logical" id="sect-matrices-4"><div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrrr|r}
+a_{1,1} \amp a_{1,2} \amp \cdots \amp a_{1,n} \amp b_1 \\
+a_{2,1} \amp a_{2,2} \amp \cdots \amp a_{2,n} \amp b_2 \\
+\amp \amp \amp \vdots \amp \vdots \\
+a_{m,1} \amp a_{m,2} \amp \cdots \amp a_{m,n} \amp b_m
+\end{array}\right]
+\end{equation*}
+</div></div>
+<div class="para" id="sect-matrices-5">Solutions of linear systems are usually found by performing <dfn class="terminology">row operations</dfn> on the matrix which do not change the solution. These include multiplying a row by a constant, taking a linear combination of rows and replacing one of the rows, and swapping rows. If this is done in a systematic way, generally using Gauss-Jordon reduction, the resulting matrix can be put in either row-echelon or reduced row-echelon form (RREF).</div>
+<details id="sect-matrices-6" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">1.2.7</span><span class="period">.</span>
+</h4></summary><article class="exercise exercise-like knowl__content"><div class="para" id="sect-matrices-6-1-1">Put the linear system from <a href="sect-matrix-reduction.html#ex-streets-3-2-1" class="xref" data-knowl="./knowl/xref/eq-traffic.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.2.1">(1.2.1)</a> in a augmented coefficient matrix and using row operations to put the equation in reduced row-echelon form.</div>
+<div class="solutions"><details id="sect-matrices-6-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sect-matrices-6-2-1">First, ensure that all of the variables are on the left of the equations in <a href="sect-matrix-reduction.html#ex-streets-3-2-1" class="xref" data-knowl="./knowl/xref/eq-traffic.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 1.2.1">(1.2.1)</a> and the constants on the right. This can be written as the augmented coefficient matrix,</div>
+<div class="para logical" id="sect-matrices-6-2-2"><div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrrrr|r}
+-1 \amp 0 \amp 0 \amp 1 \amp 1 \amp 250 \\
+0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350 \\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700 \\
+0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 600
+\end{array}\right]
+\end{equation*}
+</div></div>
+<div class="para" id="sect-matrices-6-2-3">Row operations are now performed</div>
+<div class="para logical" id="sect-matrices-6-2-4"><div class="displaymath process-math" id="sect-matrices-6-2-4-1">
+\begin{align*}
+-R_1 \to R_1 \qquad \amp
+\left[\begin{array}{rrrrr|r}
+1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 600\\
+\end{array} \right]\\
+R_2 \leftrightarrow R_3 \qquad \amp
+\left[\begin{array}{rrrrr|r}
+1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 600\\
+\end{array} \right]\\
+-R_2 + R_4 \to R_4 \qquad \amp \left[\begin{array}{rrrrr|r}
+1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+0 \amp 0 \amp 1 \amp 0 \amp -1 \amp -100\\
+\end{array} \right]\\
+-R_3 +R_4 \to R_4 \qquad \amp \left[\begin{array}{rrrrr|r}
+1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+0 \amp 0 \amp 1 \amp 0 \amp -1 \amp -100\\
+\end{array} \right]\\
+-R_3 + R_4 \to R_4 \qquad \amp \left[\begin{array}{rrrrr|r}
+1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+0 \amp 0 \amp 0 \amp -1 \amp -1 \amp -450\\
+\end{array} \right]\\
+-R_4 \to R_4 \qquad \amp \left[\begin{array}{rrrrr|r}
+1 \amp 0 \amp 0 \amp -1 \amp -1 \amp -250\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 350\\
+0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 450\\
+\end{array} \right]\\
+\begin{array}{r}R_4 + R_1 \to R_1,\amp\\ -R_4 + R_3\to R_3 \amp \end{array} \qquad \amp
+\left[\begin{array}{rrrrr|r}
+1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 200\\
+0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 700\\
+0 \amp 0 \amp 1 \amp 0 \amp -1 \amp -100\\
+0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 450\\
+\end{array} \right]
+\end{align*}
+</div></div>
+</div></details></div></article></details></section><section class="subsection" id="sect-matrix-pivot"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">1.2.3</span><span class="space"> </span><span class="title">Matrix Pivots</span>
+</h3>
+<div class="para" id="sect-matrix-pivot-2">Matrix Pivots</div></section></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="sect-lines-planes.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="ch-linear-models.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

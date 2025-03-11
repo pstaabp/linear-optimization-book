@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="problem example-like"><h4 class="heading">
+<span class="type">Problem</span><span class="space"> </span><span class="codenumber">3.3.4</span><span class="period">.</span>
+</h4>
+<div class="para">Apply Phase I of the Simplex Method to the following LOP.</div> <div class="para logical"><div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned}
+\text{Maximize}\amp \amp z \amp = 12x_1 + 15x_2 \\
+\text{s.t.}\amp \amp -3x_1 + 2x_2 \amp \leq 24 \\
+\amp \amp 5x_1 -4x_2 \amp \leq -30 \\
+\amp \amp x_1 + x_2 \amp \leq 10 \\
+\text{and} \amp \amp x_1,\; x_2 \amp \geq 0.
+\end{aligned}
+\end{equation*}
+</div></div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">This problem is in standard form and we can write the tableau as</div>
+<div class="para logical"><div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rr|rrr|r}
+-3 \amp 2 \amp 1 \amp 0 \amp 0 \amp 0 \amp 24\\
+5 \amp -4 \amp 0 \amp 1 \amp 0 \amp 0 \amp -30\\
+1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10 \\
+\hline
+-12 \amp -15 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+\end{equation*}
+</div></div>
+<div class="para">We use phase I of the Simplex Method because there are negatives in the last column.  We choose the second column because it is the negative most number in that column (always ignoring the objective value).</div>
+<div class="para logical"><div class="displaymath process-math">
+\begin{equation*}
+2 \mapsto 4,\qquad
+\left[\begin{array}{rr|rrrr|r}
+-2 \amp 0 \amp 4 \amp 2 \amp 0 \amp 0 \amp 36\\
+-5 \amp 4 \amp 0 \amp -1 \amp 0 \amp 0 \amp 30\\
+9 \amp 0 \amp 0 \amp 1 \amp 4 \amp 0 \amp 10\\ \hline
+-123 \amp 0 \amp 0 \amp -15 \amp 0 \amp 4 \amp 450\\
+\end{array} \right]
+\end{equation*}
+</div></div>
+<div class="para">Now that there are no negative numbers in the last column, this tableau is now feasible, completing the first phase of the simplex method.</div>
+</div></details></div></article><span class="incontext"><a class="internal" href="sect-phase1.html#problem-infeasible-phaseI">in-context</a></span>
+</body>
+</html>
