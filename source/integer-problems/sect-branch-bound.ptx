@@ -1,0 +1,894 @@
+<section xml:id="sect-branch-bound">
+  <title>Branch and Bound</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Take a feasible set that contains a non-integer solution and divide it into two feasible set.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Use this technique to solve ILOPs called <em>Branch and Bound.</em>
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      In <xref ref="sect-cutting-planes" />, we solved <xref ref="prob-ilop2" /> using Gomory's cutting plane method.
+      An alternative technique called <term>branch and bound</term> is introduced in this section.
+      In short, the branch and bound method uses the simplex method and if an non-integral solution arises, we cut the feasible set in two sets which will exclude the non-integral solution.
+      This is done in a systematic way to arrive at the desired answer.
+      Let's dive into this method with an example.
+    </p>
+
+    <p>
+      Recall that above we solved <xref ref="prob-ilop2" /> using the simplex method.  The result was <m>\boldsymbol{x}^{\star}=(256,119)^{T}/60\approx (4.266,1.983)</m> and <m>z^{\star}=1619/60\approx 26.983</m>.
+    </p>
+
+    <p>
+      The basic idea presented here is to split each of the feasible sets into smaller regions with boundaries as integers.
+      For example, since <m>x_{1}^{\star}=4.266</m> from above we solve two new problems, one of which has the constraint that <m>x_{1} \leq 4</m> and the other has the constraint <m>x_{1} \geq 5</m>.
+      That is there are two problems:
+    </p>
+
+
+    <problem>
+      <title>LOP A</title>
+
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Max.} \amp\amp z = 4x_1 + 5x_2, \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2 \amp\leq 25, \\ \amp\amp x_1 \amp \leq 4,
+            \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+
+    <problem>
+      <title>LOP B</title>
+
+      <p>
+        <me>
+          \begin{aligned} \text{Max.} \amp\amp z = 4x_1 + 5x_2, \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2 \amp\leq 25, \\ \amp\amp x_1 \amp \geq 5,
+          \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
+          \end{aligned}
+        </me>
+      </p>
+    </problem>
+
+    <p>
+      Both LOP A and LOP B have the nonnegative constraint and the same objective function.
+      Solving each via the simplex method we have the solutions to LOP A and B respectively.<fn>For this section, we are skipping the details of the simplex method that we have seen earlier in the text and focus on the bigger picture.</fn>
+    </p>
+
+    <p>
+      What we have done is split the original problem into two which can be visualized as follows:
+    </p>
+
+    <figure xml:id="fig-bb-1">
+      <caption>The first phase of the branch and bound algorithm of <xref ref="prob-ilop2" />
+      , split via <m>x_1</m> to eliminate all values with <m>4 \lt x_1 \lt 5</m>.
+      The sets <m>F_A</m> and <m> F_B</m> are the feasible sets for the problems LOP A and LOP B.
+      </caption>
+      <image width="75%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}
+              \fill[lightgray] (0,0) -- (4,0) -- (4,{(136-17*4)/32}) -- (0, {136/32}) -- cycle;
+              \fill[lightgray] (5,0) -- (5,{(25-4*5)/4}) -- (6.25,0) -- cycle;
+              \draw[->] (-0.5,0) -- (8.5,0) node [above right] {$x_1$};
+              \foreach \x in {1,...,8} \draw (\x,0.15) -- (\x,-0.15) node [below] {\x};
+              \draw[->] (0,-0.5) -- (0,6.5) node [above right] {$x_2$};
+              \foreach \y in {1,...,6} \draw (0.15,\y) -- (-0.15,\y) node [left] {\y};
+              \foreach \x in {0,...,6} \fill (\x,0) circle [radius=2pt];
+              \foreach \x in {0,...,5} \fill (\x,1) circle [radius=2pt];
+              \foreach \x in {0,...,4} \fill (\x,2) circle [radius=2pt];
+              \foreach \x in {0,...,2} \fill (\x,3) circle [radius=2pt];
+              \fill (0,4) circle [radius=2pt];
+              \draw (0,4.25) -- (8,0);
+              \draw (6.25,0) -- (0,6.25);
+              \draw (1.5,1.5) node {$F_A$};
+              \draw (5.5,0.3) node {$F_B$};
+              \fill[DarkGreen] (4,2.1) circle;
+              \fill[DarkGreen] (5,1.2) circle;
+            \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      The solution to these two problems is
+    </p>
+
+    <p>
+      <md>
+        <mrow>\amp \text{LOP A} \amp \amp \text{LOP B} </mrow>
+        <mrow>x_1^{\star} \amp = 4 \amp x_1^{\star} \amp = 5 </mrow>
+        <mrow>x_2^{\star} \amp = 68/32 \approx 2.125 \amp x_2^{\star} \amp = 5/4 = 1.25 </mrow>
+        <mrow>z^{\star} \amp = 852/32 \amp z^{\star} \amp = 105/4</mrow>
+      </md>
+    </p>
+
+    <p>
+      Note that the optimal solution of LOP A is the upper right corner of <m>F_A</m> and the optimal solution of LOP B is the upper left corner of <m>F_B</m>.  These don't quite fall on integers.
+    </p>
+
+    <p>
+      Since neither solution is integral, we next need to split each problem again, this time using <m>x_{2}</m>.
+      For problem LOP A, we solve with the two constraints: <m>x_{2} \leq 2</m> and then <m>x_{2} \geq 3</m>.
+      We will call these LOP AA and LOP AB:
+    </p>
+
+
+    <problem>
+      <title>LOP AA</title>
+
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize} \amp\amp z = 4x_1 + 5x_2 \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2 \amp\leq 25, \\ \amp\amp x_1 \amp \leq 4, \\ \amp\amp x_2 \amp \leq 2, \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+
+    <problem>
+      <title>LOP AB</title>
+
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize.} \amp\amp z = 4x_1 + 5x_2 \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2 \amp\leq 25, \\ \amp\amp x_1 \amp \leq 4, \\ \amp\amp x_2 \amp \geq 3, \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <p>
+      Similarly, LOP B can be split into two problems.
+      Since the solution to LOP B contains <m>x_{2}^{\star}=1.25</m>, the split is <m>x_{2} \leq 1</m> and <m>x_{2} \geq 2</m>.
+      The two problems are:
+    </p>
+
+
+    <problem>
+      <title>LOP BA</title>
+
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize} \amp\amp z = 4x_1 + 5x_2 \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2   \amp\leq 25, \\ \amp\amp x_1 \amp \geq 5, \\ \amp\amp x_2 \amp \leq 1, \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+
+    <problem>
+      <title>LOP BB</title>
+
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize} \amp\amp z = 4x_1 + 5x_2 \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2   \amp\leq 25, \\ \amp\amp x_1 \amp \geq 5, \\ \amp\amp x_2 \amp \geq 2, \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <p>
+      Again, we have split each of the feasible sets into 2:
+    </p>
+
+    <figure xml:id="fig-bb-2">
+      <caption>The second level feasible sets for <xref ref="prob-ilop2"/>. The feasible set <m>F_{BB}</m> is not shown because it is empty.</caption>
+      <image width="75%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}
+              \fill[lightgray] (0,0) -- (4,0) -- (4,2) -- (0,2) -- cycle;
+              \draw (2,1) node [above] {$F_{AA}$};
+              \fill[lightgray] (5,0) -- (5,1) -- (5.25,1) -- ({(25-4*1)/4},1) -- (6.25,0) -- cycle;
+              \draw (5.5,0) node [above] {$F_{BA}$};
+              \fill[lightgray] (0,3) -- ({(136-32*3)/17},3) -- (0,{136/32}) -- cycle;
+              \draw (1,3) node [above] {$F_{AB}$};
+              \draw[->] (-0.5,0) -- (8.5,0) node [above right] {$x_1$};
+              \foreach \x in {1,...,8} \draw (\x,0.15) -- (\x,-0.15) node [below] {\x};
+              \draw[->] (0,-0.5) -- (0,6.5) node [above right] {$x_2$};
+              \foreach \y in {1,...,6} \draw (0.15,\y) -- (-0.15,\y) node [left] {\y};
+              \foreach \x in {0,...,6} \fill (\x,0) circle [radius=2pt];
+              \foreach \x in {0,...,5} \fill (\x,1) circle [radius=2pt];
+              \foreach \x in {0,...,4} \fill (\x,2) circle [radius=2pt];
+              \foreach \x in {0,...,2} \fill (\x,3) circle [radius=2pt];
+              \fill (0,4) circle [radius=2pt];
+              \draw (0,4.25) -- (8,0);
+              \draw (6.25,0) -- (0,6.25);
+            \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      We now solve all four of these subproblems using the simplex method.
+    </p>
+
+    <p>
+      <md>
+        <mrow>\text{LOP AA} \amp\amp\text{LOP AB} \amp \amp \text{LOP BA}</mrow>
+        <mrow> x_1^{\star} \amp = 4, \amp x_1^{\star} \amp = 40/17\approx 2.353, \amp   x_1^{\star} \amp = 21/4 =5.25, </mrow>
+        <mrow> x_2^{\star} \amp = 2, \amp x_2^{\star} \amp = 3, \amp  x_2^{\star} \amp =1, </mrow>
+        <mrow> z^{\star} \amp = 26, \amp z^{\star} \amp = 415/17 \approx 24.411, \amp z^{\star} \amp = 26.   </mrow>
+      </md>
+    </p>
+
+    <p>
+      There is no solution to LOP BB, which shouldn't be a surprise looking at the feasible set in <xref ref="fig-bb-2"/> in that <m>F_{BB}</m> is empty.
+      Also, note that we have our first integer solution for problem LOP AA.
+      This is a potential solution and importantly, the optimal solution would have a value greater than 26.
+      Thus, if any solution has value smaller than 26, we can ignore that.
+      For example, any integer solution to LOP AB will be smaller than 24.411 and which is clearly smaller than 26.
+    </p>
+    <p>
+      At this point we can stop because any integer solution that is a subset of <m>F_{BA}</m> will has a solution no more that 26.
+      Since we are looking for a solution, there may be another integer solution in this set, but we already have one.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>A Branch and Bound Flowchart</title>
+
+    <p>
+      You can see from the previous example that this continued splitting can be difficult to follow.
+      It's helpful to build a flowchart of this situation.
+      The following shows the solution to the <xref ref="prob-ilop2"/> using branch and bound.
+    </p>
+
+    <figure xml:id="fig-ilop1-flowchart">
+      <caption>A tree of the branch and bound algorithm for <xref ref="prob-ilop2"/>. Each branch is explored until an integer solution is  found.  If it is clear that other branches will not result in a larger (since this is a maximum problem) objective value, that branch is not further explored.</caption>
+      <image>
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}[scale=0.75]
+              \node[rectangle,draw] (P) at (8,18) {
+              \begin{minipage}{3.5cm} \vspace{-0.2in}
+              \begin{align*}
+              \text{P:}& \\
+              \boldsymbol{x}&=(256, 119)^{\intercal} /60  \\
+              & \approx (4.26, 1.983)^{\intercal} \\
+              z^{\star}  &= 1619/60\approx 26.983
+              \end{align*}
+              \end{minipage}
+              };
+              \draw (5,16) node[left] {$x_1 \leq 4$};
+              \draw (11,16) node[right] {$x_1 \geq 5$};
+              \node[rectangle,draw] (PA) at (3,13) {
+              \begin{minipage}{3cm} \vspace{-0.2in}
+              \begin{align*}
+              \text{PA:}& \\
+              \boldsymbol{x}&=(4,17/4 )^{\intercal}  \\
+              z^{\star}  &= 852/32\\
+              & \approx 26.625
+              \end{align*}
+              \end{minipage}
+              };
+              \draw (0.5,11) node[left] {$x_2\leq 2$};
+              \draw (4.5,11) node[right] {$x_2\geq 3$};
+              \draw[->, very thick, -latex](P) to (PA);
+              \node[rectangle,draw] (PB) at (13,13) {
+              \begin{minipage}{3cm} \vspace{-0.2in}
+              \begin{align*}
+              \text{PB:} &\\
+              \boldsymbol{x}&=(5,5/4)^{\intercal}   \\
+              z^{\star}  &= 105/4\approx 26.25
+              \end{align*}
+              \end{minipage}
+              };
+              \draw (11,10.5) node[left] {$x_2\leq 1$};
+              \draw (15,10.5) node[right] {$x_2\geq 2$};
+              \draw[->,line width=1pt,-latex](P) to (PB);
+              \node[rectangle,draw] (PAA) at (-1,8) {
+              \begin{minipage}{3cm} \vspace{-0.2in}
+              \begin{align*}
+              \text{PAA:} &\\
+              \boldsymbol{x}&=(4,2)^{\intercal}   \\
+              z^{\star}  &= 26
+              \end{align*}
+              \end{minipage}
+              };
+              \draw[->,line width=1pt,-latex](PA) to (PAA);
+              \node[rectangle,draw] (PAB) at (5,8) {
+              \begin{minipage}{3cm} \vspace{-0.2in}
+              \begin{align*}
+              \text{PAB:} &\\
+              \boldsymbol{x}&=(40/17,3)^{\intercal}   \\
+              z^{\star}  &= 415/17 \\ &\approx 24.411
+              \end{align*}
+              \end{minipage}
+              };
+              \node at (5,5.75) {not optimal};
+              \draw[->,line width=1pt,-latex](PA) to (PAB);
+              \node[rectangle,draw] (PBA) at (11,8) {
+              \begin{minipage}{3cm} \vspace{-0.2in}
+              \begin{align*}
+              \text{PBA:} &\\
+              \boldsymbol{x}&=(21/4,1)^{\intercal}   \\
+              z^{\star}  &= 26
+              \end{align*}
+              \end{minipage}
+              };
+              \draw[->,line width=1pt,-latex](PB) to (PBA);
+              \node[rectangle,draw] (PBB) at (16,8) {
+              \begin{minipage}{3cm} \vspace{-0.2in}
+              \begin{align*}
+              \text{PBB:} &\\
+              \text{infeasible}
+              \end{align*}
+              \end{minipage}
+              };
+              \draw[->,line width=1pt](PB) to (PBB);
+            \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+  </subsection>
+
+
+  <subsection>
+    <title>Systematic Branch and Bound Algorithm</title>
+
+    <p>
+      The key to this method is the <alert>splitting step</alert>, in which the feasible set on variable <m>i</m> is split into two pieces.
+      Problem <m>PA</m> will be <m>P</m> with the additional constraint <m>x_i \leq \lfloor \hat{x}_i \rfloor</m>.
+      Problem <m>PB</m> will have the same constratints as <m>P</m> with the additional one <m> x_i \geq \lceil \hat{x}_i \rceil</m>.
+    </p>
+
+    <p>
+      The following steps will result in finding an integer solution to an LOP.
+      Call this <m>P</m>
+    </p>
+
+    <p>
+      <ol>
+        <li>
+          <p>
+            Solve <m>P</m> using the simplex method.
+            If the optimal point is integral, stop, this is a solution.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Let <m>i=1</m>.
+            If the solution to <m>x_i</m> is not integral, call it <m>\hat{x}_i</m>.
+            Perform the splitting step and solve each one.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Repeat step #2 for the rest of the original variables.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            This is now one level ...
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      In <xref ref="sect-cutting-planes"/>, we solved a ILOP with three variables. The following exercise finds the solution to <xref ref="ex-ilop-3vars"/> using the branch and bound technique.
+    </p>
+
+    <exercise xml:id="ex-branch-bound-1">
+      <statement>
+        <p>
+          Solve <xref ref="ex-ilop-3vars"/> using the branch and bound algorithm.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The problem is in standard form, so we just write down the tableau as
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 64\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and then perform the following pivots (again not showing all of the details)
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 3 \mapsto 6, \\ 2 \mapsto 4, \end{array} \qquad \left[\begin{array}{rrr|rrrr|r} -20 \amp 28 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp 20\\ 240 \amp 0 \amp 0 \amp -20 \amp 28 \amp 15 \amp 0 \amp 1328\\ 56 \amp 0 \amp 28 \amp 0 \amp 0 \amp 7 \amp 0 \amp 448\\ \hline 76 \amp 0 \amp 0 \amp 24 \amp 0 \amp 17 \amp 28 \amp 2360\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          This has the basic solution
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \boldsymbol{x} \amp = \frac{1}{28}\left[ \begin{array}{rrr|rrr} 0 \amp 20 \amp 448 \amp 0 \amp 1328 \amp 0 \end{array} \right] \\ \amp  \approx \left[ \begin{array}{rrr|rrr} 0 \amp 0.714 \amp 16 \amp 0 \amp 47.43 \amp 0 \end{array} \right] \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          So this is not integral, so we will form two problems.
+          This solution has <m>x_1=0</m>, so first we will look at <m>x_2</m> and add the two constraints: <m>x_2 \leq 0</m> and <m>x_2 \geq 1</m>.
+        </p>
+
+
+        <problem xml:id="prob-ilop3-pa">
+          <title>PA</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp \amp x_2 \amp \leq 0, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+                \end{aligned}
+              </me>
+            </p>
+          </statement>
+        </problem>
+
+
+        <problem xml:id="prob-ilop3-pb">
+          <title>PB</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp \amp x_2 \amp \geq 1, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_0.
+                \end{aligned}
+              </me>
+            </p>
+          </statement>
+        </problem>
+
+        <p>
+          The solution to <alert>PA</alert> is found by starting with the simplex tableau:
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 64\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and the perform the following pivots to get the optimal tableau of problem PA:
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 3 \mapsto 6, \\ 2 \mapsto 7, \end{array} \qquad \left[\begin{array}{rrr|rrrrr|r} -20 \amp 0 \amp 0 \amp 4 \amp 0 \amp -3 \amp -28 \amp 0 \amp 20\\ 20 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -20 \amp 0 \amp 204\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 64\\ 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0\\ \hline 28 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 24 \amp 4 \amp 320\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and this has the solution
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \boldsymbol{x} \amp = \frac{1}{4} \left[\begin{array}{rrr|rrrr} 0 \amp 0 \amp 65 \amp 17 \amp 204 \amp 0 \amp 0 \end{array}\right] \\ \amp = \left[\begin{array}{rrr|rrrr} 0 \amp 0 \amp 16.25 \amp 4.25 \amp 51 \amp 0 \amp 0 \end{array}\right] \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          which is not integral.
+        </p>
+
+        <p>
+          Next, return to the simplex tableau corresponding to problem PB, which has the following simplex tableau:
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 64\\ 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp -1\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          where note that the inequality <m>x_2 \geq 1</m> has been put into standard form.
+        </p>
+
+        <p>
+          The pivots that form the optimal solution are
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 2 \mapsto 7, \\ 1 \mapsto 6, \\ 3 \mapsto 4, \end{array} \qquad \left[\begin{array}{rrr|rrrrr|r} 0 \amp 0 \amp 20 \amp 8 \amp 0 \amp -1 \amp 56 \amp 0 \amp 304\\ 0 \amp 0 \amp 0 \amp 20 \amp 20 \amp -15 \amp 240 \amp 0 \amp 880\\ 20 \amp 0 \amp 0 \amp -4 \amp 0 \amp 3 \amp -28 \amp 0 \amp 8\\ 0 \amp 20 \amp 0 \amp 0 \amp 0 \amp 0 \amp -20 \amp 0 \amp 20\\ \hline 0 \amp 0 \amp 0 \amp 28 \amp 0 \amp 4 \amp 76 \amp 20 \amp 1664\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          which has the basic solution
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \boldsymbol{x} = \amp \frac{1}{20} \left[ \begin{array}{rrr|rrrr} 8 \amp 20 \amp 304 \amp 0 \amp 880 \amp 0 \amp 0 \end{array} \right] \\ \approx \amp \left[ \begin{array}{rrr|rrrr} 0.4 \amp 1 \amp 15.2 \amp 0 \amp 44 \amp 0 \amp 0 \end{array} \right] \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          which is not integral.
+          We need to do another level.
+          First, let's define PAA and PAB as the two problems that split the feasible set of PA.
+          Since <m>x_1</m> and <m>x_2</m> are both integers, we will split the feasible set of PAA using <m>x_3</m> and the two constraints <m>x_3 \leq 16</m> and <m>x_3 \geq 17</m>.
+        </p>
+
+
+        <problem>
+          <title>PAA</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp\amp x_2 \amp \leq 0, \\ \amp \amp x_3 \amp \geq 17, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+                \end{aligned}
+              </me>
+            </p>
+          </statement>
+        </problem>
+
+
+        <problem>
+          <title>PAB</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp\amp x_2 \amp \leq 0, \\ \amp \amp x_3 \amp \leq 16, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+                \end{aligned}
+              </me>
+            </p>
+          </statement>
+        </problem>
+
+        <p>
+          The solution to PAA is found by starting with the simplex tableau:
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp -17\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and then one pivot results in the tableau
+        </p>
+
+        <p>
+          <me>
+            3 \mapsto 8, \qquad \left[\begin{array}{rrr|rrrrrr|r} 1 \amp 7 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 2\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 4 \amp 0 \amp -4\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 17\\ \hline -3 \amp -6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -5 \amp 1 \amp 85\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and from the 3rd row, therre is no positive ratio of last column to parameter coefficients, so this tableau is infeasible.
+        </p>
+
+        <p>
+          Next, return to the simplex tableau corresponding to problem PAB, which has the following simplex tableau:
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          Applying the simplex method, we arrive at the following tableau:
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 3 \mapsto 6, \\ 2 \mapsto 7,  \end{array} \qquad \left[\begin{array}{rrr|rrrrrr|r} -20 \amp 0 \amp 0 \amp 4 \amp 0 \amp -3 \amp -28 \amp 0 \amp 0 \amp 20\\ 20 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -20 \amp 0 \amp 0 \amp 204\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0\\ -8 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 4 \amp 0 \amp 0\\ \hline 28 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 24 \amp 0 \amp 4 \amp 320\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          which has the basic solution
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \boldsymbol{x} \amp = \frac{1}{4} \left[\begin{array}{rrr|rrrrr} 0 \amp 0 \amp 64 \amp 20 \amp 204 \amp 0 \amp 0 \end{array}\right] \\ \amp = \left[\begin{array}{rrr|rrrr} 0 \amp 0 \amp 16 \amp 5 \amp 51 \amp 0 \amp 0 \end{array}\right] \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          which is an integer solution.
+          The objective value of this solution is <m>320/4=80</m>.
+        </p>
+
+        <p>
+          Next, the problem PB is split into two problems, PBA and PBB, where the feasible set of PBA is split using <m>x_1 \leq 0</m> and <m>x_1 \geq 1</m>.
+        </p>
+
+
+        <problem>
+          <title>PBA</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp\amp x_2 \amp \geq 1, \\ \amp\amp x_1 \amp \leq 0, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+                \end{aligned}
+              </me>
+            </p>
+          </statement>
+        </problem>
+
+
+        <problem>
+          <title>PBB</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp\amp x_2 \amp \geq 1, \\ \amp\amp x_1 \amp \geq 1, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+                \end{aligned}
+              </me>
+            </p>
+          </statement>
+        </problem>
+
+        <p>
+          The solution to PBA is found by starting with the simplex tableau:
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and then apply the simplex method to get the following tableau:
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 2 \mapsto 7, \\ 1 \mapsto 8, \\ 3 \mapsto 4, \end{array} \qquad \left[\begin{array}{rrr|rrrrrr|r} 0 \amp 0 \amp 3 \amp 1 \amp 0 \amp 0 \amp 7 \amp -1 \amp 0 \amp 46\\ 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 15 \amp -15 \amp 0 \amp 138\\ 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 3 \amp -28 \amp -20 \amp 0 \amp 8\\ 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 3\\ 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0\\ \hline 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 17 \amp 4 \amp 3 \amp 248\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          The basic solution of this tableau is
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \boldsymbol{x} \amp = \frac{1}{3} \left[\begin{array}{rrr|rrrrr} 0 \amp 3 \amp 46 \amp 0 \amp 138 \amp 8 \amp 0 \end{array}\right] \\ \amp \approx \left[\begin{array}{rrr|rrrr} 0 \amp 1 \amp 15.33 \amp 0 \amp 46 \amp 0 \end{array}\right] \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          which is not integral.
+          Also, note that the objective value of this tableau is <m>248/3\approx 82.667</m>, which is greater than the objective value of problem PAB.
+          This branch needs to be further explored.
+        </p>
+
+        <p>
+          Return to Problem PBB, which has the following simplex tableau:
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -1\\ -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp -1\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          And then applying the simplex method, we arrive at the following tableau:
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 1 \mapsto 8, \\ 2 \mapsto 7, \\  3 \mapsto 6, \\ 7 \mapsto 4 \end{array} \qquad \left[\begin{array}{rrr|rrrrrr|r} 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -3 \amp 28 \amp -20 \amp 0 \amp 12\\ 0 \amp 0 \amp 0 \amp -20 \amp 28 \amp 15 \amp 0 \amp 240 \amp 0 \amp 1088\\ 0 \amp 0 \amp 28 \amp 0 \amp 0 \amp 7 \amp 0 \amp 56 \amp 0 \amp 392\\ 0 \amp 28 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp -20 \amp 0 \amp 40\\ 28 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -28 \amp 0 \amp 28\\ \hline 0 \amp 0 \amp 0 \amp 24 \amp 0 \amp 17 \amp 0 \amp 76 \amp 28 \amp 2284\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and this has the basic solution
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \boldsymbol{x} \amp = \frac{1}{28} \left[\begin{array}{rrr|rrrrr} 28 \amp 40 \amp 392 \amp 0 \amp 1088 \amp 0 \amp 12 \amp 0 \end{array}\right] \\ \amp \approx \left[\begin{array}{rrr|rrrr} 1 \amp 1.43 \amp 14 \amp 0 \amp 38.86 \amp 0 \amp 0.43 \end{array}\right] \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          Which is not integral, and has an objective value of <m>2284/28\approx 81.571</m>.
+          This is greater than the objective value of problem PAB, so we should explore this branch as well.
+        </p>
+
+        <p>
+          Next, we split the feasible set of PBA using <m>x_3 \leq 15</m> and <m>x_3 \geq 16</m>.
+        </p>
+
+
+        <problem>
+          <title>PBAA</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp\amp x_2 \amp \geq 1, \\ \amp\amp x_1 \amp \leq 0, \\ \amp \amp x_3 \amp \leq 15, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+                \end{aligned}
+              </me>
+            </p>
+          </statement>
+        </problem>
+
+
+        <problem>
+          <title>PBAB</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp\amp x_2 \amp \geq 1, \\ \amp\amp x_1 \amp \leq 0, \\ \amp \amp x_3 \amp \geq 16, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+                \end{aligned}
+              </me>
+            </p>
+          </statement>
+        </problem>
+
+        <p>
+          The solution to PBAA is found by starting with the simplex tableau:
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 15\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and then applying the simplex method, we arrive at the following tableau:
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 2 \mapsto 7, \\ 1 \mapsto 8, \\ 3 \mapsto 9, \\ 7 \mapsto 4, \end{array} \qquad \left[\begin{array}{rrr|rrrrrrr|r} 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 7 \amp -1 \amp -3 \amp 0 \amp 1\\ 0 \amp 0 \amp 0 \amp -5 \amp 7 \amp 0 \amp 0 \amp -30 \amp 15 \amp 0 \amp 317\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp -56 \amp -28 \amp 0 \amp 28\\ 0 \amp 7 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1 \amp -3 \amp 0 \amp 8\\ 7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp 105\\ \hline 0 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 0 \amp 15 \amp 17 \amp 7 \amp 573\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and this has the basic solution
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \boldsymbol{x} \amp = \frac{1}{7} \left[\begin{array}{rrr|rrrrrr} 0 \amp 8 \amp 105 \amp 0 \amp 317 \amp 28 \amp 0 \amp  \end{array}\right] \\ \amp \approx \left[\begin{array}{rrr|rrrr} 0 \amp 1.143 \amp 15 \amp 0 \amp 45.29 \amp 4 \amp 0 \end{array}\right].
+            \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          This is not integral, and the objective value of this tableau is <m>573/7\approx 81.857</m>, which is greater than the objective value of problem PAB.
+          This may still have a viable solution.
+          We will explore this below.
+        </p>
+
+        <p>
+          Next, the solution to PBAB is found by starting with the simplex tableau:
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp -16\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and applying the simplex method, we arrive at the following tableau:
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 2 \mapsto 7, \\ 3 \mapsto 9, \end{array} \qquad \left[\begin{array}{rrr|rrrrrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 7 \amp 0 \amp 3 \amp 0 \amp -2\\ 5 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 46\\ 8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 16\\ \hline -3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -6 \amp 0 \amp -5 \amp 1 \amp 86\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and the top row shows that this tableau is infeasible.
+          Therefore, this branch is not explored further.
+        </p>
+
+        <p>
+          There is still the branch based on PBAA, so we split the feasible set of PBAA using <m>x_2 \leq 1</m> and <m>x_2 \geq 2</m>.
+          The second inequality here is redundant here, since <m>x_2 \geq 1</m> is already a constraint in PBAA, so a problem PBAAB will not be created.
+        </p>
+
+
+        <problem>
+          <title>PBAAA</title>
+
+          <statement>
+            <p>
+              <me>
+                \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \amp\amp x_2 \amp \geq 1, \\ \amp\amp x_1 \amp \leq 0, \\ \amp \amp x_3 \amp \leq 15, \\ \amp \amp x_2 \amp \leq 1, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+                \end{aligned}
+              </me>
+            </p>
+
+            <p>
+              This has the simplex tableau of
+            </p>
+
+            <p>
+              <me>
+                \left[\begin{array}{rrr|rrrrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 15\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+              </me>
+            </p>
+
+            <p>
+              and applying the simplex method, we arrive at the following tableau:
+            </p>
+
+            <p>
+              <me>
+                \begin{array}{r} 2 \mapsto 7, \\ 1 \mapsto 8, \\ 3 \mapsto 9, \\ 7 \mapsto 10, \end{array} \qquad \left[\begin{array}{rrr|rrrrrrrr|r} 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1 \amp -3 \amp -7 \amp 0 \amp 1\\ 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -5 \amp 0 \amp -5 \amp 0 \amp 46\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp -8 \amp -4 \amp 0 \amp 0 \amp 4\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 15\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 6 \amp 1 \amp 81\\ \end{array} \right]
+              </me>
+            </p>
+
+            <p>
+              The basic solution of this tableau is
+            </p>
+
+            <p>
+              <me>
+                \boldsymbol{x} = \left[\begin{array}{rrr|rrrrrrr} 0 \amp 1 \amp 15 \amp 1 \amp 46 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0  \end{array}\right]
+              </me>
+            </p>
+
+            <p>
+              which is an integer solution with an objective value of <m>81</m>.
+              All other
+            </p>
+          </statement>
+        </problem>
+      </solution>
+    </exercise>
+  </subsection>
+</section>

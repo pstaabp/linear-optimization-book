@@ -1,0 +1,556 @@
+<section xml:id="sect-phase1">
+  <title>Simplex Method for Infeasible Tableaus</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Determining when basic solutions of tableaus are infeasible
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Developing an algorithm to pivot an infeasible simplex tableau to one that is feasible.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understand the geometry of the algorithm.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Write down the Simplex method for infeasible tableaus.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      Consider <xref ref="prob-coffee" />, in which coffee is shipped from warehouses to retail outlets.
+      The problem was set up as an LOP in <xref ref="prob-coffee-setup" /> and we can use the techniques from the <xref ref="sect-tableau"/> to write this as a tableau.
+    </p>
+
+    <p>
+      First, as discussed in <xref ref="sect-std-form"/>, we need to write this problem in <em>standard form</em>, which means switching two of the inequalities by negating them.
+      Also, the objective needs to be written as a maximum.
+      The LOP in standard maximum form is
+    </p>
+
+    <p>
+      <men xml:id="eq-coffee-std-form">
+        \begin{aligned}\text{Maximize} \amp \amp z  = -2.5 x_1 - 3 x_2 - 4 x_3 - 2 x_4, \amp \\ \text{subject to} \amp \amp -x_2 - x_3 \amp \leq -400,\\ \amp \amp -x_1 - x_4 \amp \leq -350, \\ \amp \amp x_1 + x_2 \amp \leq 700, \\ \amp \amp x_3 + x_4 \amp \leq 500, \\ \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+        \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      And the next step is to write the LOP in tableau form,
+    </p>
+
+    <p>
+      <men xml:id="eq-coffee-init-tableau">
+        \left[\begin{array}{rrrr|rrrrr|r} 0 \amp -1 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -400\\ -1 \amp 0 \amp 0 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -350\\ 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 700\\ 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 500\\ \hline 5/2 \amp 3 \amp 4 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+      </men>
+    </p>
+
+    <p>
+      Typically, we look at the objective row to determine if a tableau is optimal and the there are no negatives in this row, so it appears it is optimal.
+      The basic solution of <xref ref="eq-coffee-init-tableau"/> is
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x} = \left[ \begin{array} {rrrr|rrrrr} -400 \amp -350 \amp 700 \amp 500 \amp 0 \amp 0 \amp 0 \amp 0 \end{array} \right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      and there are negatives in the solution, which implies that this is an <em>infeasible</em> basic solution.
+      We need to perform some pivots to get a basic solution to be feasible first.
+      This is what is called <term>Phase I of the Simplex Method</term>.
+      We will use a simpler problem to develop this.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-simplex-phase1">
+    <title>Infeasible Tableaus</title>
+
+    <p>
+      Let's start with a simpler LOP who's initial basic solution is infeasible.
+    </p>
+
+
+    <problem xml:id="prob-infeasible1">
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Minimize} \amp \amp w  = 3y_1 + 2y_2, \amp \\ \text{Subject to}\amp \amp -2y_1 + y_2 \amp \leq 6, \\ \amp \amp 2y_1 + y_2 \amp \geq 12, \\ \amp \amp y_1 + y_2 \amp \geq 8, \\ \text{and} \amp \amp y_1, y_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <p>
+      To begin with, this is not in standard form, and follow the steps in <xref ref="sect-std-form"/> get this into standard form:
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} \text{Maximize} \amp \amp z  = -3y_1 - 2y_2,\amp \\ \text{Subject to}\amp \amp -2y_1 + y_2 \leq 6, \\ \amp \amp - 2y_1 - y_2 \amp \leq -12, \\ \amp \amp -y_1 - y_2 \amp \leq -8, \\ \text{and}\amp \amp y_1, y_2 \amp \geq 0.
+        \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      Since this only has two variables, a plot of this feasible set is helpful.
+    </p>
+
+    <figure xml:id="fig-infeasible-1">
+      <caption>A plot of the feasible set from <xref ref="prob-infeasible1"/>
+      .
+      The boundary lines (where the slack variables are each 0) are labelled with the slack variables.
+      Also, all the intersection points between the slack variables are also labelled.
+      </caption>
+      <image width="80%">
+        <latex-image>
+  <![CDATA[
+    \begin{tikzpicture}[xscale=0.8, yscale=0.6]
+\fill[lightgray] (5,16) -- (1.5,9) --(4,4) -- (8,0) -- (14,0) -- (14,16) -- cycle;
+\draw [->] (-1,0) -- (15,0) node [above right] {$y_1$};
+\foreach \x in {1,...,14} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+\draw [->] (0,-1) -- (0,17) node [above right] {$y_2$};
+\foreach \y in {2,4,...,16} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+\draw[<->,thick] (-1, {(6+2*(-1))/1}) -- (5.5, {(6+2*(5.5))/1}) node[pos=0, left] {$y_3=0$};
+\draw[<->,thick] (-1, {(12-2*(-1))/1}) -- (6.5, {(12-2*(6.5))/1}) node[pos=0, left] {$y_4=0$};
+\draw[<->,thick] (-1,9) -- (9,-1) node [pos=0, left] {$y_5=0$};
+\draw (8,8) node {\large $F$};
+\draw (0,6) ellipse(3pt and 5pt) node [right] {$A$};
+\draw (6,0) ellipse(3pt and 5pt) node [above right] {$B$};
+\draw (1.5,9) ellipse(3pt and 5pt) node [ right] {$C$};
+\draw (0,12) ellipse(3pt and 5pt) node [above right] {$D$};
+\draw (4,4) ellipse(3pt and 5pt) node [above right] {$E$};
+\draw (8,0) ellipse(3pt and 5pt) node [above right] {$G$};
+\draw (0,8) ellipse(3pt and 5pt) node [above right] {$H$};
+\draw ({2/3},{8-2/3}) ellipse(3pt and 5pt) node [above right] {$I$};
+          \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      As with phase II, we will perform a pivot to move variables in and out of the basis.
+      Instead of just looking at the standard algorithm, let's look at the feasible set and make some determinations.
+    </p>
+
+    <p>
+      First, the standard first step from phase II is to determine the entering variable, which could be discovered by using the objective function and determining which was the lowest indexed variable that would increase the value of the objective function.
+    </p>
+
+    <p>
+      We aren't concerned yet about the objective function.
+      We just need to find a feasible solution.
+      In this case, finding the leaving variable is generally a better first step.
+      The leaving variable would bring the current vertex to along it's line.
+      This would mean that we would select between <m>y_3</m>, <m>y_4</m> and <m>y_5</m> on which variable to leave<mdash/>using the feasible set in <xref ref="fig-infeasible-1"/>, that means selecting one of the variables that form the boundary of the feasible set.
+      <m>F</m>.
+    </p>
+
+    <p>
+      Before selecting the pivot variables, let's look at the dictionary for this problem.
+      If we introduce slack variables then in Dictionary form in the same way as that in <xref ref="sect-slack-dict"/>, then
+    </p>
+
+    <p>
+      <men xml:id="eq-dict-infeasible-LOP1">
+        \begin{aligned} \text{Maximize} \amp\amp z \amp = -3y_1 -2 y_2,  \\ \text{subject to}\amp \amp y_3 \amp = 6 + 2y_1 - y_2, \\ \amp \amp y_4 \amp = -12 + 2y_1 + y_2, \\ \amp \amp y_5 \amp = -8 + y_1 + y_2, \\ \text{and} \amp \amp \amp y_1, y_2, y_3, y_4, y_5 \geq 0.
+        \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      Note that the basic solution for this dictionary is
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x} = \left[\begin{array}{rr|rrr} 0 \amp 0 \amp 6 \amp -12 \amp -8 \end{array}\right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      And note that the two variables that do not satisfy the nonnegative condition is <m>y_4</m> and <m>y_5</m>.
+      The goal is to select a basis that is feasible and therefore either <m>y_4</m> or <m>y_5</m> will be selected as the leaving variable and this means that upon pivoting will either go to these lines on the feasible set.
+    </p>
+
+    <p>
+      Note that a pivot will be to solve for a variable entering the basis in one of the equations.
+      This is then used in the other solutions.
+      The hope would be that the new dictionary or tableau is feasible.
+      Thus, selecting the most negative number, since when a variable is solved for, that value will become positive and perhaps lead to all other basic variable being solved for.
+    </p>
+
+    <p>
+      So <alert>we identify the most negative basic value</alert> to start with.
+      This occurs in the <m>y_4</m> equation in <xref ref="eq-dict-infeasible-LOP1"/>.
+    </p>
+
+    <p>
+      In this case, we can solve for either <m>2y_1</m> or <m>y_2</m> and in either case, the result will be a positive value for either of these.
+      These correspond to either <m>1 \mapsto 4</m> or <m>2 \mapsto 4</m>.
+    </p>
+
+    <p>
+      Without further analysis, it's hard to say which to choose.
+      And think if we had 10s or 100s of parameters to choose from.  If we did calculations to help determine the <q>best</q>, it may be expensive to compute.  Because of this, we will choose the entering variable to be the <alert>negative parameter with lowest index</alert>.
+    </p>
+
+    <p>
+      Not only is this simple, but as we will see, this works most of the time.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-phaseI-algorithm">
+    <title>Phase I of the Simplex Method</title>
+
+    <p>
+      With the example above, we now present the following algorithm for getting a simplex tableau into a feasible solution.
+    </p>
+
+    <algorithm xml:id="alg-phaseI-simplex">
+      <title>Phase I of the Simplex Method</title>
+
+      <statement>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Select the row of the tableau with the most negative basic variable and call this row <m>i</m>.
+                The basic variable in row <m>i</m> is the <term>leaving variable</term> and denote this variable <m>k</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Of the parameters of the problem, select the smallest indexed parameter with a negative value. <fn>An inquisitive reader should ask: What if there are not not any negative number in the row? Hmmm.
+                Hold that thought, we'll get to that soon.
+                </fn> Call this column <m>j</m> and this will be the <term>entering variable</term>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Perform the pivot <m>j \mapsto k</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If there are no other infeasible basic variables, this phase is done.
+                If there are, go to step 1.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </algorithm>
+
+    <p>
+      Let's now solve <xref ref="prob-infeasible1" /> using <xref ref="alg-phaseI-simplex" />.
+      First, start with the tableau of <xref ref="eq-dict-infeasible-LOP1"/>.
+    </p>
+
+    <p>
+      <me>
+        \left[\begin{array}{rr|rrrr|r} -2 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 6\\ -2 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp -12\\ -1 \amp -1 \amp 0 \amp 0 \amp 1 \amp 0 \amp -8\\ \hline 3 \amp 2 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      And to start phase I, we note that the largest negative in the <m>\boldsymbol{b}</m>-column is in the second row.
+      This will be the leaving variable and is <m>y_4</m>.
+      To select the entering variable, select the negative parameter with the smallest index in row 2.
+      This occurs in column 1, so <m>y_1</m> is the entering variable.
+      Now perform a pivot.
+    </p>
+
+    <p>
+      <me>
+        1 \mapsto 4 \qquad \left[\begin{array}{rr|rrrr|r}
+0 \amp 4 \amp 2 \amp -2 \amp 0 \amp 0 \amp 36\\
+2 \amp 1 \amp 0 \amp -1 \amp 0 \amp 0 \amp 12\\
+0 \amp -1 \amp 0 \amp -1 \amp 2 \amp 0 \amp -4\\ \hline
+0 \amp 1 \amp 0 \amp 3 \amp 0 \amp 2 \amp -36\\
+\end{array} \right]
+
+      </me>
+    </p>
+
+    <p>
+      This tableau is still infeasible.
+      Note the basic solution for <m>y_5</m> is <m>-4</m> so this is the leaving variable.
+      To determine the entering variable, find the leftmost negative parameter in row 3.
+      This is <m>y_2</m> and we pivot:
+    </p>
+
+    <p>
+      <me>
+        2 \mapsto 5 \qquad \left[\begin{array}{rr|rrrr|r}
+0 \amp 0 \amp 1 \amp -3 \amp 4 \amp 0 \amp 10\\
+1 \amp 0 \amp 0 \amp -1 \amp 1 \amp 0 \amp 4\\
+0 \amp 1 \amp 0 \amp 1 \amp -2 \amp 0 \amp 4\\ \hline
+0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp -20\\
+\end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      This tableau is feasible in that all variables are now nonnegative.
+      Notice that in <xref ref="fig-infeasible-1"/> this tableau corresponds to the vertex <m>E</m>.
+      This completes phase I of the simplex method.
+    </p>
+
+    <p>
+      If we now look to phase II, we notice that there are no negatives in the objective row, so in fact, this is the optimal solution.<fn>Although it is rare to finish up phase I with an optimal solution, it can happen and here's an example.</fn>
+      The optimal basic solution is
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x} = \left[\begin{array}{rr|rrr}  4\amp 4 \amp 10 \amp 0 \amp 0 \end{array} \right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      with <m>z = -20</m>.
+      This corresponds to the original problem as <m>w = -z = 20</m>, so the function is minimized when <m>x_1=4</m> and <m>x_2 = 4</m>.
+    </p>
+
+
+    <problem xml:id="problem-infeasible-phaseI">
+      <statement>
+        <p>
+          Apply Phase I of the Simplex Method to the following LOP.
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize}\amp \amp z = 12x_1 + 15x_2, \amp \\ \text{such that}\amp \amp -2x_1 + 3x_2 \amp \leq 30 \\ \amp \amp -x_1 -1x_2 \amp \leq -15 \\ \amp \amp 4x_1 - x_2 \amp \leq 10 \\ \text{and} \amp \amp x_1,\; x_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          This problem is in standard form and we can write the tableau as
+        </p>
+
+        <p>
+          <men xml:id="eq-phaseI-lop0">
+            \left[\begin{array}{rr|rrrr|r} -2 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 30\\ -1 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp -15\\ 4 \amp -1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10\\ \hline -12 \amp -15 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </men>
+        </p>
+
+        <p>
+          We use phase I of the Simplex Method because there are negatives in the last column.
+          This occurs in row 2 and the corresponding leaving variable is <m>x_4</m>.
+          To determine the entering variable, we select the leftmost (lowest indexed) of the parameters with negative values or <m>x_1</m>.
+          Thus pivot:
+        </p>
+
+        <p>
+          <men xml:id="eq-phaseI-lop1">
+            1 \mapsto 4, \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 5 \amp 1 \amp -2 \amp 0 \amp 0 \amp 60\\ 1 \amp 1 \amp 0 \amp -1 \amp 0 \amp 0 \amp 15\\ 0 \amp -5 \amp 0 \amp 4 \amp 1 \amp 0 \amp -50\\ \hline 0 \amp -3 \amp 0 \amp -12 \amp 0 \amp 1 \amp 180\\ \end{array} \right]
+          </men>
+        </p>
+
+        <p>
+          There are still negatives in the last column.
+          This time it is in row 3 and will select its corresponding variable, <m>x_5</m> as the leaving variable.
+          The leftmost negative parameter is in column 2, so <m>x_2</m> will be the entering variable and we perform the pivot:
+        </p>
+
+        <p>
+          <men xml:id="eq-phaseI-lop2">
+            2 \mapsto 5, \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 5 \amp 10 \amp 5 \amp 0 \amp 50\\ 5 \amp 0 \amp 0 \amp -1 \amp 1 \amp 0 \amp 25\\ 0 \amp 5 \amp 0 \amp -4 \amp -1 \amp 0 \amp 50\\ \hline 0 \amp 0 \amp 0 \amp -72 \amp -3 \amp 5 \amp 1050\\ \end{array} \right]
+          </men>
+        </p>
+
+        <p>
+          Now that there are no negative numbers in the last column, this tableau is now feasible, completing the first phase of the simplex method.
+        </p>
+      </solution>
+    </problem>
+
+    <p>
+      After completing the first phase of the simplex method, we can now use phase II.
+      We'll complete the solution to the problem above now
+    </p>
+
+
+    <problem>
+      <statement>
+        <p>
+          Apply Phase II of the Simplex Method to the last tableau from <xref ref="problem-infeasible-phaseI"/>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          For phase II, we first look in the objective row of the tableau and note that because there are negative numbers so the basic solution is not optimal.
+          We start with the leftmost negative in the objective row or the fourth column, so <m>x_4</m> is the entering variable.
+          Then form the <m>\boldsymbol{b}</m>-ratios.
+        </p>
+
+        <p>
+          <me>
+            \begin{bmatrix} 50/(10) \\ 25/(-1) \\ 50/(-4) \end{bmatrix} = \begin{bmatrix} 5 \\ -25 \\ -12.5 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and noting that the only positive number here is in the first row.
+          The basic variable in the first row is <m>x_3</m>, so this is the leaving variable.
+          Perform the pivot
+        </p>
+
+        <p>
+          <men xml:id="eq-phaseI-lop3">
+            4 \mapsto 1 \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 5 \amp 10 \amp 5 \amp 0 \amp 50\\ 10 \amp 0 \amp 1 \amp 0 \amp 3 \amp 0 \amp 60\\ 0 \amp 10 \amp 4 \amp 0 \amp 2 \amp 0 \amp 140\\ \hline 0 \amp 0 \amp 72 \amp 0 \amp 66 \amp 10 \amp 2820\\ \end{array} \right]
+          </men>
+        </p>
+
+        <p>
+          This tableau is now optimal with basic solution
+        </p>
+
+        <p>
+          <me>
+            \boldsymbol{x} = \frac{1}{10}\left[\begin{array}{rr|rrr} 60 \amp 140 \amp 0 \amp 50 \amp 0 \end{array}\right]^{\intercal} = \left[\begin{array}{rr|rrr} 6 \amp 14 \amp 0 \amp 5 \amp 0\end{array}\right]^{\intercal}
+          </me>
+        </p>
+
+        <p>
+          and objective <m>z = 2920/10 = 292</m>.
+          This corresponds to the point in the original variables of <m>x_1 = 6, x_2 = 14</m>.
+        </p>
+      </solution>
+    </problem>
+
+    <p>
+      Let's take a look a the feasible set for this problem and see how the simplex method walks the vertices.
+      First, here's a graph of the feasible set:
+    </p>
+
+    <figure xml:id="fig-infeasible-2">
+      <caption>A plot of the feasible set for the LOP in <xref ref="problem-infeasible-phaseI"/>
+      .
+      The sides of the lines not in the feasible set are crossed out.
+      The resulting feasible set is the triangle <m>CEG</m>.
+      </caption>
+      <image width="75%">
+        <latex-image>
+  <![CDATA[
+    \begin{tikzpicture}[scale=0.6]
+\fill[pattern= north west lines] ((-1, {(30+2*(-1))/3}) -- (12, {(30+2*(12))/3}) -- (12,{2+(30+2*12)/3}) -- (-1,{2+(30+2*(-1))/3}) -- cycle;
+\fill[pattern= north east lines] (2, {(-10+4*(2))/1}) -- (7, {(-10+4*(7))/1}) -- (9, {(-10+4*(7))/1}) -- (4,{(-10+4*(2))/1}) -- cycle;
+\fill[pattern = horizontal lines] (-1, {(15-1*(-1))/1}) -- (15.5, {(15-1*(15.5))/1}) -- (15.5,{-2+(15-1*(15.5))/1}) -- (-1, {-2+(15-1*(-1))/1}) -- cycle;
+\fill[pattern= horizontal lines] (-1,-1) rectangle (0,18.5);
+\fill[pattern  = vertical lines] (-1, -1) rectangle (18.5,0);
+\draw [->] (-1,0) -- (19,0) node [above right] {$x_1$};
+\foreach \x in {3,6,...,18} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+\draw [->] (0,-1) -- (0,19) node [above right] {$x_2$};
+\foreach \y in {3,6,...,18} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+\draw[<->,thick] (-1, {(30+2*(-1))/3}) -- (12, {(30+2*(12))/3}) node[pos=0.7, right] {$x_3=0$};
+\draw[<->,thick] (2, {(-10+4*(2))/1}) -- (7, {(-10+4*(7))/1}) node[pos=0.25, above right] {$x_5=0$};
+\draw[<->,thick] (-1, {(15-1*(-1))/1}) -- (16, {(15-1*(16))/1}) node[pos=0.75, above right] {$x_4=0$};
+%\draw (8,8) node {F.S.};
+\draw (15,0) circle[radius = 3pt] node [above right] {$A$};
+\draw (2.5,0) circle[radius = 3pt] node [above right] {$B$};
+\draw (3,12) circle[radius = 3pt] node [above] {$C$};
+\draw (0,4.5) circle[radius = 3pt] node [above right] {$D$};
+\draw (5,10) circle[radius = 3pt] node [right] {$E$};
+\draw (6,14) circle[radius = 3pt] node [right] {$G$};
+\draw (0,10) circle[radius = 3pt] node [below right] {$H$};
+\draw (0,15) circle[radius = 3pt] node [above right] {$J$};
+          \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      And recall that the shaded side of the lines are the infeasible sides, meaning that the triangular region <m>CEG</m> is the feasible set.
+      When the simplex method starts (either under phase I or II), the initial point is always the origin.
+      In this particular case, the only variable that is infeasible is  <m>x_4</m>, which is what we see in <xref ref="eq-phaseI-lop0"/>, in that the negative number in the left column corresponds to <m>x_4</m>.
+    </p>
+
+    <p>
+      The first step moved the basic variable from the origin to the point <m>x_1=15, x_2=0</m>, which is point <m>A</m>.
+      However, note that this is still infeasble.
+      From the plot you can see that the side to the right of <m>x_5=0</m> is infeasible.
+      This can also be seen in <xref ref="eq-phaseI-lop1"/> in that the negative number in the left column corresponds to the basic variable <m>x_5</m>.
+    </p>
+
+    <p>
+      Another pivot as seen in <xref ref="eq-phaseI-lop2"/> moves the basic solution to the vertex at <m>E</m>.
+      This is now a feasible solution, however, it is not optimal.
+    </p>
+
+    <p>
+      The last step as in <xref ref="eq-phaseI-lop3"/> moves the basic solution to the vertex at <m>G</m> and it is optimal.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Summary of the Simplex Method</title>
+
+    <p>
+      This and the previous section lays out the steps to perform the simplex methods.
+      Overall, here are the steps needed to do this.
+    </p>
+
+    <p>
+      <ol>
+        <li>
+          <p>
+            Write the LOP in standard form as shown in <xref ref="sect-std-form"/>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Writing down the tableau as shown in <xref ref="sect-intro-tableaus"/>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            If the solution is infeasible, use the phase I in <xref ref="alg-phaseI-simplex"/>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            If the solution is not optimal, use the phase II of the simplex method as shown in <xref ref="alg-phaseII-simplex"/>.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      Even though it appears that we have all of the bases covered, there are a couple of spots in the simplex method that can go wrong.
+      Although these are eluded to while developing this method, the following section will cover these cases.
+    </p>
+  </subsection>
+</section>

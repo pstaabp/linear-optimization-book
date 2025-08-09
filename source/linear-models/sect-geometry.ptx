@@ -1,0 +1,460 @@
+<section xml:id="sect-geometry">
+  <title>Geometry of Feasible Sets</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          The definition of a <term>feasible set</term>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          How to graph a feasible set in the <m>xy</m>-plane.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The structure of a feasible set and how it helps solve LOPs
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The convexity of feasible sets.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      In the <xref ref="sect-linear-models"/>, we saw many different type of problems that fall into linear optimization.
+      Many of these problems had a lot of variables and as we will see in this course is it easy to get tens or hundreds of variables.
+    </p>
+
+    <definition xml:id="def-feasible-set">
+      <statement>
+        <p>
+          Consider a set of linear inequalities that arise from an Linear Optimization Problem in standard form:
+        </p>
+
+        <p>
+          <md>
+            <mrow>a_{11} x_1 + a_{12} x_2 + \cdots a_{1n} x_n \amp \leq b_1 </mrow>
+            <mrow>a_{21} x_1 + a_{22} x_2 + \cdots a_{2n} x_n \amp \leq b_n </mrow>
+            <mrow>\vdots \; \amp \;\;\; \vdots</mrow>
+            <mrow>a_{m1} x_1 + a_{m2} x_2 + \cdots a_{mn} x_n \amp \leq b_m </mrow>
+            <mrow>x_1, x_2, \ldots, x_n \amp \geq 0.</mrow>
+          </md>
+        </p>
+
+        <p>
+          The <term>feasible set</term> for the set of inequalities is the set of all points <m>(x_1, x_2, \ldots, x_n)</m> that satisfy all of the inequalities.
+        </p>
+      </statement>
+    </definition>
+
+    <note>
+      <p>
+        If there are no points in the feasible set, then the feasible set is empty.
+      </p>
+    </note>
+
+
+    <problem xml:id="prob-2d-lop">
+      <title>Maximum Problem in <m>\mathbb{R}^2</m></title>
+
+      <statement>
+        <p>
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize}\amp\amp  \qquad z = 3x_1 + 2x_2, \amp  \\ \text{subject to} \amp \amp x_1 + x_2  \amp \leq 7, \\ \amp \amp 2x_1+ 3x_2  \amp \leq 18, \\ \text{and} \amp \amp x_1, x_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <example>
+      <statement>
+        <p>
+          Graph the feasible set given by the inequalities in <xref ref="prob-2d-lop"/>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          In this case, we use the techniques from <xref ref="sect-linear-inequality"/> to graph each of the following inequalities.
+          If we write the equation <m>x_1 + x_2 = 7</m> in intercept form as
+        </p>
+
+        <p>
+          <me>
+            \frac{x_1}{7} + \frac{x_2}{7} = 1,
+          </me>
+        </p>
+
+        <p>
+          then the intercepts of these are <m>(7,0)</m> and <m>(0,7)</m>.
+          The linear equation <m>2x_1 + 3x_2 = 18</m> can be written in intercept form as
+        </p>
+
+        <p>
+          <me>
+            \frac{x_1}{6} + \frac{x_2}{9} = 1,
+          </me>
+        </p>
+
+        <p>
+          which has the intercepts <m>(6,0)</m> and <m>(0,9)</m>.
+          Returning to the inequalities, the origin is within the feasible side of these lines so we cross out the other (northeast) side.
+        </p>
+
+        <p>
+          Additionally, the nonnegative inequalities have us cross out the region outside the first quadrant.
+          The result of this is
+        </p>
+
+        <figure xml:id="fig-feasible-example">
+          <caption>A graph of the feasible set of the above problem. For each inequality, the side of the line not in the feasible set is crossed out.  The set of points left is the feasible set for the inequalities and labelled <m>\boldsymbol{F}</m>.</caption>
+          <image width="70%">
+            <shortdescription>
+            </shortdescription>
+            <latex-image>
+            <![CDATA[
+              \begin{tikzpicture}[scale=0.75]
+                \draw[->] (-1,0) -- (10,0) node [above right] {$x_1$};
+                \foreach \x in {1,...,9} \draw (\x,0.15) -- (\x,-0.15) node [below] {$\x$};
+                \draw[->] (0,-1) -- (0,8.5) node [above right] {$x_2$};
+                \foreach \y in {1,...,8} \draw (0.15,\y) -- (-0.15,\y) node [left] {$\y$};
+                \draw[<->] (-1,8) -- (8,-1);
+                \draw[<->] (-1,{6-2*(-1)/3}) -- ({9-3*(-1)/2},-1);
+                \draw(2.5,2.5) node {$F$};
+                \begin{scope}
+                  \clip (-0.8,-0.8) -- (-0.8,8.5) -- (0,8.5) -- (0,-0.8) -- cycle;
+                  \foreach \y in {-6,-5.75,...,10.5} \draw plot [domain=-1.5:0] (\x,{-0.3*\x+\y});
+                \end{scope}
+                \begin{scope}
+                  \clip (-0.8,-0.8) -- (9.5,-0.8) -- (9.5,0) -- (-0.8,0) -- cycle;
+                  \foreach \a in {-1,-0.75,...,10} \draw plot [domain=-1.5:10]
+                    (\x,{2*(\x-\a)});
+                \end{scope}
+                \begin{scope}
+                  \clip (-1,{(18-2*(-1))/3}) -- (9.5,{(18-2*9.5)/3}) -- (9.5,7) -- (-1,7) -- cycle;
+                  \foreach \y in {-6,-5.75,...,12.5} \draw plot [domain=-0.8:10] (\x,{0.7*\x+\y});
+                \end{scope}
+                \begin{scope}
+                  \clip (-1,8) -- (8,8) -- (8,-1) -- cycle;
+                  \foreach \y in {-6,-5.75,...,12.5} \draw plot [domain=-0.8:10] (\x,{0.25*\x+\y});
+                \end{scope}
+              \end{tikzpicture}
+              ]]>
+            </latex-image>
+          </image>
+        </figure>
+
+        <p>
+          The feasible set is the quadrilateral that is not shaded and labelled <m>F</m>.
+        </p>
+      </solution>
+    </example>
+  </introduction>
+
+
+  <subsection xml:id="sect-geometry-fs-2d">
+    <title>Geometry of 2D Feasible Sets</title>
+
+    <p>
+      Examining the feasible set in <xref ref="fig-feasible-example"/>, notice that it is a polygon.
+      The possible solutions to the problem is this set of points.
+      So if we're trying to find a solution, we limit the possible points to those in the feasible set.
+      But that's still a lot!!
+    </p>
+
+    <p>
+      One way to try to determine a solution, recall that we are trying to maximize the function <m>z = 4x_1 + 5x_2</m>.
+      If we take any point in the feasible set, then increasing in the direction <m>\langle 4, 5 \rangle</m> will increase the most of any direction.<fn>Recall that if there is a function <m>f(x,y)</m>, then the direction of increase in the most is <m>\langle \partial f/\partial x, \partial f/\partial y \rangle</m> and in the case of a linear function, this is the coefficients of the function.
+      </fn> A plot of the feasible set with the randomly selected point <m>(2,1)</m> and a line going in the direction <m>\langle 4, 5 \rangle</m> can be seen in the following plot:
+    </p>
+
+    <figure xml:id="fig-fs-maximize">
+      <caption>A feasible set in the first quadrant together with a line segment with one end in the feasible set pointing in the direction of maximum increase of the objective function. </caption>
+      <image width="80%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+        <![CDATA[
+          \begin{tikzpicture}[scale=0.75]
+            \draw[->] (-1,0) -- (10,0) node [above right] {$x_1$};
+            \foreach \x in {1,...,9} \draw (\x,0.15) -- (\x,-0.15) node [below] {$\x$};
+            \draw[->] (0,-1) -- (0,8.5) node [above right] {$x_2$};
+            \foreach \y in {1,...,8} \draw (0.15,\y) -- (-0.15,\y) node [left] {$\y$};
+            \draw[thick] (0,0) -- (7,0) -- (3,4) -- (0,6) -- cycle;
+            \draw (1.5,3.5) node {$F$};
+            \draw[very thick, ->] (2,1) -- (6,6);
+            \draw ({34/9},{29/9}) circle [radius=4pt];
+      \end{tikzpicture}
+      ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      The maximum that the function <m>z=4x_1+5x_2</m> within the feasible set reaches on this line would be where the line crosses the boundary (on the open circle).
+      In the example above, repeating this argument, any random point selected, the line segment will be parallel to the one above and the maximum value will be on the north-east boundary of the feasible set.
+    </p>
+
+    <p>
+      A similar argument can be made with any point in <m>F</m>.
+      If a line segment in the direction <m>\langle 4, 5 \rangle</m>, then it can be maximized along the upper right boundary of <m>F</m>.
+    </p>
+
+    <p>
+      Notice that in this case, since the coefficients of the variables in the objective function are both positive, the optimal function would be along the upper right side of the feasible set.
+      Objective functions with other signs may result in the optimal point along other edges.
+    </p>
+
+    <note>
+      <p>
+        From a geometric argument, the optimal value of the objective function should be along the boundary of the feasible set.
+      </p>
+    </note>
+
+    <p>
+      Continuing along this rationale, let's pick a point along the boundary of the feasible set.
+      For example, <m>(6,1)</m>.
+      This boundary is the line <m>x_1+x_2=7</m> or if we solve for <m>x_2</m>, <m>x_2 = 7 - x_1</m>.
+      The objective function along this line is <m>z=4x_1 + 5x_2 = 4x_1 + 5(7-x_1) = 35-x_1</m>.
+      The objective function increases as <m>x_1</m> decreases.
+      This is true up to the point on the boundary a the corner <m>(3,4)</m>.
+    </p>
+
+    <p>
+      If we look at the other boundary side of the feasible set, the function is <m>2x_1+3x_2=18</m> or solving for <m>x_2</m>, <m>x_2 = 6-2x_1/3</m>.
+      Substiting this into the objective:
+    </p>
+
+    <p>
+      <me>
+        z = 4x_1+5x_2 = 4x_1 + 5 \left(6-\frac{2}{3} x_1\right) = 30 +\frac{2}{3} x_1
+      </me>
+    </p>
+
+    <p>
+      And on this side, the objective <em>increases</em> as <m>x_1</m> increases.
+      This is true again up to the corner at <m>(3,4)</m>.
+    </p>
+
+    <p>
+      Using this argument, it appears that the objective is optimal at corners or vertices of the feasible set.
+    </p>
+
+    <p>
+      Notice with this argument, we saw that along the two edges that we checked, the objective either increased or decreased along the edge.
+      It might be the case that the objective is constant along the edge.
+      Thus the two vertices of the side would have the same value of the objective.
+    </p>
+
+    <note>
+      <p>
+        From a further geometric argument, the optimal value of the objective function should be at a vertex of the feasible set.
+      </p>
+    </note>
+
+    <exercise>
+      <introduction>
+        <p>
+          <xref ref="prob-min-lop"/> is a minimum problem.
+        </p>
+      </introduction>
+
+
+      <task>
+        <statement>
+          <p>
+            Sketch the feasible set for the problem.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            Using the techniques from <xref ref="sect-lines-planes"/>, we put each line from the constraint in intercept form and plot the line, crossing out the <c>false</c> side.  The result is the feasible set in <xref ref="fig-example-min-lop"/>.
+          </p>
+          <figure xml:id="fig-example-min-lop">
+            <caption></caption>
+            <image width="70%">
+              <shortdescription></shortdescription>
+              <latex-image>
+                <![CDATA[
+                \begin{tikzpicture}
+                  \fill[lightgray] (0,4.75) -- (0,6.2) -- (6.2,6.2) -- (6.2,0)--(5.5,0) -- (3.5,0.5) -- (1.5,2.5);
+                  \draw[->] (-1,0) -- (6.5,0) node [above right] {$y_1$};
+                  \draw[->] (0,-1) -- (0,6.5) node [above right] {$y_1$};
+                  \foreach \x in {10,20,...,60} \draw ({\x/10},0.1) -- ({\x/10},-0.1) node [below] {\x};
+                  \foreach \y in {10,20,...,60} \draw (0.1, {\y/10}) -- (-0.1, {\y/10}) node [left] {\y};
+                  \draw[<->] (-0.5,4.5) -- (4.5,-0.5);
+                  \draw[<->] (-0.5,{(9.5-3*(-0.5))/2}) -- (3.8,{(9.5-3*(3.8))/2});
+                  \draw[<->] (-0.5,{(5.5-(-0.5))/4}) -- (6.3,{(5.5-(6.3))/4});
+
+                  \draw[->, thick] (3,4) -- ({3-4*(0.5)},{4-3*(0.5)});
+                \end{tikzpicture}
+                ]]>
+              </latex-image>
+            </image>
+          </figure>
+        </solution>
+      </task>
+
+
+      <task>
+        <statement>
+          <p>
+            Pick a random point in the feasible set and draw a directed line segment in the direction of the minimizing the objective.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The direction of minimization is <m>\langle 4, 3 \rangle </m>.  The point <m>(30,40)</m> is shown with a directed line segment on <xref ref="fig-example-min-lop"/>.
+          </p>
+        </solution>
+      </task>
+
+
+      <task>
+        <statement>
+          <p>
+            From the feasible set and the directed line segment, which sides of the feasible set does it appear the objective function is minimized?
+          </p>
+        </statement>
+        <solution>
+          <p>
+            It appears that the southwest sides of the feasible set would have the minimum values.
+          </p>
+        </solution>
+      </task>
+
+
+      <task>
+        <statement>
+          <p>
+            Find the relevant vertices of the feasible set.
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The relevant vertices are found by finding the intersections of pairs of the boundary lines.  These are <m>(0,55), (35,5), (15,25)</m> and <m>(0, 47.5)</m>.
+          </p>
+        </solution>
+      </task>
+
+
+      <task>
+        <statement>
+          <p>
+            Evaluate the objective function at each of the vertices and find the smallest one.
+          </p>
+        </statement>
+        <solution>
+
+            <table>
+              <title></title>
+              <tabular>
+                <row bottom="minor">
+                  <cell><m>y_1</m></cell><cell><m>y_2</m></cell> <cell><m>w(y_1, y_2)</m></cell>
+                </row>
+                <row>
+                  <cell>55</cell> <cell>0</cell> <cell>220</cell>
+                </row>
+                <row>
+                  <cell>35</cell> <cell>5</cell> <cell>155</cell>
+                </row>
+                <row>
+                  <cell>15</cell><cell>25</cell><cell>
+                    135
+                  </cell>
+                </row>
+                <row>
+                  <cell>0</cell><cell>47.5</cell><cell>142.5</cell>
+                </row>
+              </tabular>
+            </table>
+            <p>
+              From the above table, it appears that the minimum is 135 and occurs when <m>y_1=15</m> and <m>y_2=25</m>.
+            </p>
+        </solution>
+      </task>
+    </exercise>
+  </subsection>
+
+
+  <subsection xml:id="sect-possible-algorithm">
+    <title>Solving LOPs <mdash/>
+
+    Possible Algorithm</title>
+    <p>
+      So it seems that finding the optimal point of a linear optimization problem is straight forward.
+      If we find all of the vertices of a feasible set, and evaluate the objective at these points, then we will find the optimal solution.
+    </p>
+
+    <p>
+      This would work, however, finding all of the vertices may be tricky, even if we have objectives and contraints of only two variables.
+      With more variables, it is even more complex and many real-world problems may have hundreds or thousands of variables with hundreds or thousands of constraints.
+      This would results in possibly millions of vertices.
+    </p>
+
+    <p>
+      We will see in the next chapter a more reasonable solution.
+      This will start with a vertex (or possible vertex), and move to another vertex that increases (for a maximum problem) the objective and continue until the optimal value is reached.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-convex-fs">
+    <title>Feasible Sets are Convex</title>
+
+    <p>
+      Consider a linear optimization problem with <m>z=2x_1+5x_2</m> to be maximizes and it has a feasible set with the following shape:
+    </p>
+
+    <figure xml:id="fig-non-convex-fs">
+      <caption></caption>
+      <image width="65%">
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}
+              \draw[->] (-1,0) -- (10,0) node [above right] {$x_1$};
+              \foreach \x in {1,...,9} \draw (\x,0.15) -- (\x,-0.15) node [below] {$\x$};
+              \draw[->] (0,-1) -- (0,8.5) node [above right] {$x_2$};
+              \foreach \y in {1,...,8} \draw (0.15,\y) -- (-0.15,\y) node [left] {$\y$};
+              \draw[thick] (1,1) -- (1,8) -- (2,2) -- (4,4) -- (7,1) -- cycle;
+              \draw (4,2) node {$F$};
+            \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      Let's say that we have an algorithm that walks around vertices.
+      Let's say that the algorithm is at the point <m>(7,1)</m> and it is noted that the objective at this point is <m>z = 2(7) + 5(1) = 19</m>.
+      We also note that if we go the vertex at <m>(4,4)</m>, then the objective is now <m>z = 28</m>, so it has increased.
+      The algorithm now checks if any any adjacent vertices have a larger objective value.
+      At the point <m>(2,2)</m>, the objective is <m>z=14</m>therefore you may conclude that the maximum must be 28  at <m>(4,4)</m> because it is larger than at any adjacent vertex.
+    </p>
+
+    <p>
+      However, note that at the vertex <m>(1,8)</m>, the objective is <m>z=42</m>, so larger than <m>z=14</m> and this would in fact be maximum for this problem.
+    </p>
+
+    <p>
+      This situation cannot happen because feasible sets from Linear Optimization Problems are convex.
+      As noted in <xref ref="sect-linear-inequality"/>, a single linear inequality cuts the <m>xy</m>-plane into two regions in the plane.
+      As noted in <xref ref="sect-linear-models"/>, Linear Optimization Problems (LOPs) have a set of linear inequalities which lead to the following.
+      In sort, any LOP has a convex feasible set and as we will see in <xref ref="ch-simplex"/> how this will be exploited.
+    </p>
+  </subsection>
+</section>

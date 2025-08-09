@@ -1,0 +1,299 @@
+<section xml:id="sect-pivot-webcas">
+  <title>Using Software to Perform Matrix Pivots</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Using WebCAS to perform row operations and pivots on matrices.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      In the previous section, we performed row operations and matrix pivots to develop solutions to linear systems.
+      In this section, we will show software to do this.
+    </p>
+
+    <p>
+      Almost all software that handles matrices have some way to do row operations on the matrix.
+      However, often it is complicated to do.
+      Clearly any software that will help with the understanding here should be used.
+      We will show using a website called <url href="https://webwork.fitchburgstate.edu/webcas">WebCAS</url> that handles matrices in a very nice way.
+      In this section, we will show some of the features.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-webcas-rowop">
+    <title>Using WebCAS to do Row Operations</title>
+
+    <p>
+      In this section, we will enter matrices into WebCAS and perform row operations on the matrix.
+      Let's start with the matrix that we saw in <xref ref="ex-lin-sys2"/>.
+      From the WebCAS main page, select the <em>Gaussian Eliminator</em> tool.
+      Within the large box, enter the matrix as numbers separated by one or more spaces and each row on a separate line.
+      This matrix can go in as
+    </p>
+
+    <figure xml:id="fig-webcas">
+      <caption>Screenshot of WebCAS, a web-based software to do matrix operations.</caption>
+      <image source="images/webcas01.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      and then click <em>Enter Matrix</em> and you should see the matrix displayed in a mathematical form.
+    </p>
+
+    <note>
+      <p>
+        Although the matrix above probably does not have the vertical line on the last column.
+        This is a matrix decoration<mdash/>it's purpose is to separate out the last column visually.
+        To get this, click the gear icon in the top bar and the first option is <em>Vertical Line Mode</em>.
+        Select <em>Before Last Column</em> then click <em>Save Changes</em>.
+      </p>
+
+      <p>
+        You won't see them immediately, but if you click <em>Restart</em> and then enter the matrix again, you should see the results that you expect.
+      </p>
+    </note>
+
+    <figure xml:id="fig-webcas2">
+      <caption>The mathematical output of the matrix above put into WebCAS.</caption>
+      <image width="50%" source="images/webcas2.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      To perform row operations in the Gaussian Eliminator, the following are supported
+    </p>
+
+    <p>
+      <dl>
+      <li>
+        <title>Multiply Row by a Constant</title>
+
+        <p>
+          If we want to multiply a row by a constant, like <m>3R_2 \to R_2</m>, then enter <c>3R2 -&gt; R2</c>
+        </p>
+      </li>
+
+      <li>
+        <title>Multiply a Row by a Constant and add to another row</title>
+
+        <p>
+          Mathematically, if you want to do <m>R_1 + 3R_2 \to R_2</m>, in WebCAS, enter <c>R1+3R2 -&gt; R2</c>
+        </p>
+      </li>
+
+      <li>
+        <title>Linear Combination of Rows</title>
+
+        <p>
+          A linear combination of rows is the above two operations above mushed together.
+          This is often not an elementary row operation because for certain operations (like finding a determinant), one needs to be careful.
+          However, this is a nice convenient operation for matrix pivots.
+        </p>
+
+        <p>
+          If you want to do <m>-2R_1 + 3R_2 \to R_2</m>, then enter <c>-2R1+3R2 -&gt; R2</c>
+        </p>
+      </li>
+
+      <li>
+        <title>Row swaps</title>
+
+        <p>
+          The row swap <m>R_1 \leftrightarrow R_2</m> can be done with <c>R1 &lt;-&gt; R2</c>.
+        </p>
+      </li>
+      </dl>
+    </p>
+
+    <p>
+      For the operations except the Row Swap, if you leave off the <c> -&gt; R2</c> or an row, it will use the previous row as the row to insert.
+      This way, complicated row operations can be done.
+    </p>
+
+    <p>
+      Returning to the matrix above from <xref ref="ex-lin-sys2"/>, we wanted to perform a matrix pivot about row 1, column 1.
+      This was done with the two operations <m>-2R_1 - 3R_2 \to R_2, R_1 -3R_3 \to R_3</m> and in the Gaussian Eliminator, you can add both operations in the same box with <c>-2R1-3R2-&gt;R2, R1-3R3-&gt;R3</c>.
+      (Or drop the arrow and last row).
+      Hitting the <em>Enter</em> button (or the <em>enter</em> key on your keyboard), you should see:
+    </p>
+
+    <figure xml:id="fig-webcas3">
+      <caption>Row operations on the above matrix performed in WebCAS.  This is a matrix pivot about row 1, column 1 and the image is the result of the two operations.</caption>
+      <image width="90%" source="images/webcas3.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <note>
+      <p>
+        Recall that on a matrix pivot the goal is to zero out the column that you are pivoting about (and we will want to get a positive number on the pivot element).
+        Therefore, it should be clear that the pivot was done correctly.
+        If not, there is an <em>Undo</em> button which will bring back the previous matrix and reinserts the row operation.
+        Edits can be done and re-entered.
+      </p>
+
+      <p>
+        From my experience over many years, this is the students' favorite feature of this tool.
+      </p>
+    </note>
+
+    <p>
+      Continuing to do a matrix pivot on row 2, column 3, we do the following operation:
+    </p>
+
+    <figure xml:id="fig-webcas4">
+      <caption>Row operations on the above matrix performed in WebCAS.  This is a matrix pivot about row 2, column 3 and the image is the result of the two operations.</caption>
+      <image width="90%" source="images/webcas04.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Note that as we described in <xref ref="ex-lin-sys2"/>, this operation wasn't quite needed (the second row already is solved for <m>x_3</m>).  However, we did it to fit in with the standard pivot operations.
+    </p>
+    <p>
+      To finish the pivot, we need to negative the second row and then multiply the other two rows by <m>1/3</m>, where <m>3</m> is used as the pivot value of the previous step.
+    </p>
+
+    <figure xml:id="fig-webcas5">
+      <caption>Continued work on the previous pivot.  The second row is negated to ensure that the pivot element is positive.  Then the other two rows are multiplied by <m>1/3</m> to keep all previous pivots with the same value. </caption>
+      <image width="90%" source="images/webcas05.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      The fraction operations are put in like <c>1/3R1, 1/3R3</c> and a nice feature of WebCAS is that it uses fractions under the hood and doesn't do a floating-point divide that most languages might do with a <c>1/3</c>.
+    </p>
+
+    <p>
+      The last pivot that we wanted to do is row 3, column 6.
+      This can be done with
+    </p>
+
+    <figure xml:id="fig-webcas6">
+      <caption>Row operations on the above matrix performed in WebCAS.  This is a matrix pivot about row 3, column 6 and the image is the result of the two operations.</caption>
+      <image width="90%" source="images/webcas06.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      and then we'll do the cleanup with
+    </p>
+
+    <figure xml:id="fig-webcas7">
+      <caption></caption>
+      <image width="90%" source="images/webcas07.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      and this is the same matrix that we got in <xref ref="ex-lin-sys2"/> and we could then right now the linear system and the solution as we did in that example.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-webcas-pivot">
+    <title>Matrix Pivots in WebCAS</title>
+
+    <p>
+      You should clearly notice that using WebCAS to perform the row operations were quite nice in that it eliminates arithmetic errors.
+      However, it still takes a number of steps that can be automated.
+      In this section we will use the <c>piv</c> command in WebCAS to further simplify these steps.
+    </p>
+
+    <p>
+      Let's return to <xref ref="ex-lin-sys2"/> and if you still have that matrix in the Gaussian Eliminator, then you can click <em>Restart</em> and then reenter the matrix.<fn><image source="images/matrix-movie.png" >
+      <shortdescription>
+        (for accessibility)
+      </shortdescription>
+    </image>
+    </fn> Now at this step if we want to do a matrix pivot about row 1, column 1, then enter <c>piv(1,1)</c>, and you should get:
+  </p>
+
+  <figure xml:id="fig-webcas8">
+    <caption>Pivoting the original matrix about row 1 column 1.</caption>
+    <image width="75%" source="images/webcas08.png">
+      <shortdescription>
+        (for accessibility)
+      </shortdescription>
+    </image>
+  </figure>
+
+  <p>
+    And note that this differs from that of <xref ref="fig-webcas3"/> in that the last two rows differ by a multiple of <m>-1</m>.
+    One can get from one to the other by row multiplications.
+    The next pivot was about row 2, column 3, so entering <c>piv(2,3)</c> results in
+  </p>
+
+  <figure xml:id="fig-webcas9">
+    <caption>Pivoting the original matrix about row 2 column 3.</caption>
+    <image width="75%" source="images/webcas09.png">
+      <shortdescription>
+        (for accessibility)
+      </shortdescription>
+    </image>
+  </figure>
+
+  <p>
+    and again this only differs by a sign in the last row in <xref ref="fig-webcas5"></xref>.
+    Lastly, we perfomed a pivot about row 3, column 6, so <c>piv(3,6)</c> results in
+  </p>
+
+  <figure xml:id="fig-webcas10">
+    <caption>Pivoting the original matrix about row 3 column 6.</caption>
+    <image width="75%" source="images/webcas10.png">
+      <shortdescription>
+        (for accessibility)
+      </shortdescription>
+    </image>
+  </figure>
+
+  <p>
+    and this is now equivalent to the matrix in <xref ref="fig-webcas7"/>.  Using this fraction-free pivot method, or the <c>piv</c> command in WebCAS will keep the matrix in integers and the pivot elements equal (and positive).  As we will see, using this and a related form of the pivot will simplify many operations used in later chapters.
+  </p>
+</subsection>
+<subsection xml:id="sect-click-to-pivot">
+  <title>Click to Pivot in WebCAS</title>
+
+  <p>
+    Another feature of WebCAS is <em>Click To Pivot</em>.  When selected, this allows the user to click on an element in the matrix and perform the click.  Once enabled, you can simply click on any entry in the matrix to perform a pivot about that element. This feature streamlines the process, especially for larger matrices, by reducing the need to manually enter pivot commands. After clicking, the matrix will update automatically to reflect the pivot operation. This will help as the size of the matrix increases.
+  </p>
+
+  <p>
+    First, to use this in WebCAS, return to the settings (with the Gear icon) on the top bar, and enable the <em>Click To Pivot</em> option then save the changes.
+  </p>
+  <p>
+    After this is set and a matrix is entered, there will be a Checkbox at the top.  Selecting the  <em>Click to Pivot</em> option puts this in a click mode.
+  </p>
+  <p>
+    Enter a matrix in the standard way.  Then you can click on the number that you wish to pivot upon.
+  </p>
+</subsection>
+</section>

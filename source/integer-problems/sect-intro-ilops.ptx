@@ -1,0 +1,277 @@
+<section xml:id="sect-intro-ilops">
+  <title>Introduction to Integer Linear Optimization Problems</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Definition of an Integer Linear Optimization Problem.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Geometry of simple ILOPs.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Determine when solutions from simplex method are solutions to ILOPs.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <p>
+    In <xref ref="sect-linear-models"/>, we saw a few examples, where it was important that variables take on integer values.
+    For example, the variables in <xref ref="prob-toymaker"/> are the number of toy cars, trucks and SUVs that Luis was going to make.
+    It doesn't make any sense to make half of a car for example, so it was important that these are integers.
+  </p>
+
+  <p>
+    The solution of this problem was to make 10 cars, 12 trucks and 15 SUVs.
+    Perhaps we were lucky that the solution was an integer.
+    We will see in this section that if we are "lucky" then we're done.
+  </p>
+
+  <theorem xml:id="thm-ilop1">
+    <statement>
+      <p>
+        Let <m>P</m> be an LOP in standard form with no integer constraints, and <m>IP</m> is the same LOP with integer constraints.
+        If the optimal solution to <m>P</m> has an integer solution, then it is also the solution to <m>IP</m>.
+      </p>
+    </statement>
+  </theorem>
+
+  <p>
+    Recall <xref ref="prob-lop1"/> which had no integer constraints.
+    The solution to this problem is <m>\boldsymbol{x}^{\star}=(8,16)^{T}</m> with <m>z^{\star}= 56</m>.
+    If include another constraint of
+  </p>
+
+  <p>
+    <me>
+      x_1, x_2 \in \mathbb{N}_0
+    </me>
+  </p>
+
+  <p>
+    is in included,  then <xref ref="prob-lop1"/> can be written
+  </p>
+
+
+  <problem xml:id="prob-ilop1">
+    <title>Integer LOP</title>
+
+    <statement>
+      <p>
+        <me>
+          \begin{aligned} \text{Maximize} \amp \amp z = x_1 + 3x_2 \amp \\ \text{subject to} \amp \amp 4x_1 + 3x_2 \amp \leq 120,  \\ \amp \amp x_1 + 2x_2 \amp \leq 40, \\ \amp \amp x_2 \amp \leq 16, \\ \text{and} \amp \amp x_1, x_2 \amp \in \mathbb{N}_0 \end{aligned}
+        </me>
+      </p>
+    </statement>
+  </problem>
+
+  <p>
+    then since <xref ref="prob-lop1"/> has an integer solution then the same is a solution to <xref ref="prob-ilop1"/> or  <m>\boldsymbol{x}^{\star}=(8,16)^{T}</m> with <m>z^{\star}= 56</m>.
+  </p>
+
+  <p>
+    However, what if we have an ILOP and the standard simplex method does not return an integer solution.
+    As an example, consider the following LOP:
+  </p>
+
+
+  <problem xml:id="prob-ilop2">
+    <statement>
+      <p>
+        <me>
+          \begin{aligned} \text{Maximize} \amp\amp z = 4x_1 + 5x_2 \amp  \\ \text{s.t.}\amp\amp 17x_1+32x_2 \amp \leq 136, \\ \amp\amp 4x_1 + 4x_2  \amp \leq 25, \\ \text{and}\amp\amp x_1, x_2 \amp  \in \mathbb{N}_0.
+          \end{aligned}
+        </me>
+      </p>
+    </statement>
+  </problem>
+
+  <p>
+    Let's take a look at a plot of the feasible set here.  The possible integer solutions are also plotted on the feasible set.
+  </p>
+
+  <figure xml:id="fig-fs-ilop2">
+    <caption>A plot of the feasible set (shaded) in <xref ref="prob-lop2"/> as well as all integer points in the feasible set.</caption>
+    <image width="70%">
+      <shortdescription>
+      </shortdescription>
+      <latex-image>
+      <![CDATA[
+      \begin{tikzpicture}
+      \fill[lightgray] (0,0) -- (6.25,0) -- ({256/60},{119/60}) -- (0,4.25) -- cycle;
+\draw[->] (-0.5,0) -- (8.5,0) node [above right] {$x_1$};
+\foreach \x in {1,...,8} \draw (\x,0.15) -- (\x,-0.15) node [below] {\x};
+\draw[->] (0,-0.5) -- (0,6.5) node [above right] {$x_2$};
+\foreach \y in {1,...,6} \draw (0.15,\y) -- (-0.15,\y) node [left] {\y};
+\foreach \x in {0,...,6} \fill (\x,0) circle [radius=2pt];
+\foreach \x in {0,...,5} \fill (\x,1) circle [radius=2pt];
+\foreach \x in {0,...,4} \fill (\x,2) circle [radius=2pt];
+\foreach \x in {0,...,2} \fill (\x,3) circle [radius=2pt];
+\fill (0,4) circle [radius=2pt];
+\draw (0,4.25) -- (8,0);
+\draw (6.25,0) -- (0,6.25);
+\end{tikzpicture}
+      ]]>
+      </latex-image>
+    </image>
+  </figure>
+
+  <p>
+    If the variables <m>x_1</m> and <m>x_2</m> are reals with <m>x_1, x_2 \geq 0</m>, then the feasible set is the quadrilateral shaded gray above.
+    If the variables are nonnegative integers then the only options are the points plotted above.
+  </p>
+
+  <exercise xml:id="ex-ilop2-simplex">
+    <statement>
+      <p>
+        Use the simplex method to solve <xref ref="prob-ilop2"/>.
+        Is the optimal solution consist only of integer points?
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        This problem is in standard maximum form so we can write down the tableau.
+      </p>
+
+      <p>
+        <me>
+          \left[\begin{array}{rr|rrr|r} 17 \amp 32 \amp 1 \amp 0 \amp 0 \amp 136\\ 4 \amp 4 \amp 0 \amp 1 \amp 0 \amp 25\\ \hline -4 \amp -5 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+        </me>
+      </p>
+
+      <p>
+        Skipping some of the details, but using the simplex method, the next step is the tableau pivot <m>1 \mapsto 4</m> (matrix pivot about row 2, column 1):
+      </p>
+
+      <p>
+        <me>
+          1 \mapsto 4 \qquad \left[\begin{array}{rr|rrr|r} 0 \amp 60 \amp 4 \amp -17 \amp 0 \amp 119\\ 4 \amp 4 \amp 0 \amp 1 \amp 0 \amp 25\\ \hline 0 \amp -4 \amp 0 \amp 4 \amp 4 \amp 100\\ \end{array} \right]
+        </me>
+      </p>
+
+      <p>
+        This is not optimal, so another pivot is done.
+        The tableau pivot of <m>2 \mapsto 3</m> or the matrix pivot of row 1, column 2 results in
+      </p>
+
+      <p>
+        <me>
+          2 \mapsto 3 \qquad \left[\begin{array}{rr|rrr|r} 0 \amp 60 \amp 4 \amp -17 \amp 0 \amp 119\\ 60 \amp 0 \amp -4 \amp 32 \amp 0 \amp 256\\ \hline 0 \amp 0 \amp 4 \amp 43 \amp 60 \amp 1619\\ \end{array} \right]
+        </me>
+      </p>
+
+      <p>
+        this is now optimal with basic solution
+      </p>
+
+      <p>
+        <me>
+          \boldsymbol{x} = \frac{1}{60} \left[\begin{array}{rr|rr} 256 \amp 119 \amp 0 \amp 0 \end{array}\right]
+        </me>
+      </p>
+
+      <p>
+        and this is clearly not an integer solution.
+      </p>
+    </solution>
+  </exercise>
+
+  <p>
+    As noted, in this case, the only possible integer points are those plotted in <xref ref="fig-fs-ilop2"/>.
+    In the next exercise, we will use this fact to find the solution to the ILOP in <xref ref="prob-ilop2"/>.
+  </p>
+
+  <exercise>
+    <statement>
+      <p>
+        Note that the objective function, <m>z = 4x_1 + 5x_2</m> has positive coefficients for both <m>x_1</m> and <m>x_2</m>.
+        This means that the objective increases as points go up and right.
+        Evaluate the objective function at all integer points near the upper right edge of the feasible set.         There should be 7 of these.
+        Evaluate the objective value for each of these and this will solve <xref ref="prob-ilop1"/>.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        We identify the integer points closest to the oblique lines that form the boundary of the feasible set.
+        We also then evaluate the objective function at these points:
+      </p>
+
+      <table>
+        <title>Table of Values on Integer points </title>
+
+        <tabular>
+          <row bottom="minor">
+            <cell><m>x_1</m></cell>
+            <cell><m>x_2</m></cell>
+            <cell><m>z</m></cell>
+          </row>
+
+          <row>
+            <cell>0</cell>
+            <cell>4</cell>
+            <cell>20</cell>
+          </row>
+
+          <row>
+            <cell>1</cell>
+            <cell>3</cell>
+            <cell>19</cell>
+          </row>
+
+          <row>
+            <cell>2</cell>
+            <cell>3</cell>
+            <cell>23</cell>
+          </row>
+
+          <row>
+            <cell>3</cell>
+            <cell>2</cell>
+            <cell>24</cell>
+          </row>
+
+          <row>
+            <cell>4</cell>
+            <cell>2</cell>
+            <cell>26</cell>
+          </row>
+
+          <row>
+            <cell>5</cell>
+            <cell>1</cell>
+            <cell>25</cell>
+          </row>
+
+          <row>
+            <cell>6</cell>
+            <cell>0</cell>
+            <cell>24</cell>
+          </row>
+        </tabular>
+      </table>
+
+      <p>
+        And from the table, the optimal value is 26 and occurs when <m>x_1=4</m> and <m>x_2=2</m>.
+      </p>
+
+      <p>
+        Finding the optimal solution using this technique often works for small problems (with a few variables), however as the problem increases in numbers of variables, the total number of points to be checked is not reasonable, so we seek other solution techniques.
+      </p>
+    </solution>
+  </exercise>
+
+  <p>
+    In the next two sections, we will see two techniques that solve problems in which the optimal solution on the non-integer problem is not an integer.
+    In both cases, the feasible set is changed to trim away these non-integer solutions.
+  </p>
+</section>

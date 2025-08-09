@@ -1,0 +1,945 @@
+<section xml:id="sect-linear-models">
+  <title>Introduction to Linear Optimization</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Provide examples of linear optimization problems.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Writing down an applied problem as a mathematical linear optimization problem.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      This section goes into a number of applied problems that have linear constraints and a linear objective function.
+      Consider the following:
+    </p>
+
+
+    <problem xml:id="prob-toymaker">
+      <title>The toy car problem</title>
+
+      <p>
+        Luis is a toymaker who builds toy cars with wood.
+        His most popular toys are a car, an SUV and a truck.
+        The car is made with 6 units of pine, 3 units of birch and take a total of 45 minutes to make.
+        The SUV is made with 5 units of pine, 6 units of birch and takes a total of 75 minutes to make.
+        The truck takes 4 units of pine, 7 units of birch and takes a total of 90 minutes to make.
+        For each car he makes $10 in profit, for each SUV is $15 in profit and for each truck is $12 in profit.
+      </p>
+
+      <p>
+        Luis has 183 units of pine, 204 units of birch.
+        For the week, he has a total of 2655 minutes of time the shop can spend building toys.
+        How many of each toy should he make to maximize his profit?
+      </p>
+    </problem>
+    <!--
+    <exercise>
+      <statement>
+        <p>
+          Consider the set of inequalities:
+        </p>
+
+        <p>
+          <md>
+            <mrow>4x + 3y \amp \leq 24, </mrow>
+            <mrow>2x + y \amp \leq 26, </mrow>
+            <mrow>x, y \amp \geq 0 </mrow>
+          </md>
+        </p>
+
+        <p>
+          <ol>
+            <li>
+              <p>
+                Graph the set of points that satisfy all 4 inequalities.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Find the maximum of the function <m>g(x,y) = 3x+2y</m> on this set.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Where does the maximum occur?
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </exercise>
+    -->
+    <p>
+      Example of Linear Optimization Problems (LOPs) occur in many fields.
+      This section introduces a few more examples.
+    </p>
+
+
+    <problem xml:id="prob-coffee">
+      <title>Shipping Coffee Problem</title>
+
+      <statement>
+        <p>
+          A coffee supplier has warehouses in Seattle and San José.
+          The coffee supplier receives orders from coffee retailers in Salt Lake City and Reno.
+        </p>
+
+        <p>
+          The retailer in Salt Lake City needs 400 pounds of coffee and the the retailer in Reno needs 350 pounds of coffee.
+          The Seattle warehouse has 700 pounds available and the San José warehouse has 500 pounds available.
+        </p>
+
+        <p>
+          The cost of shipping from Seattle to Salt Lake City is $2.50 per pound, from Seattle to Reno $3 per pound, from San José to Salt Lake is $4 per pound and from San José to Reno is $2 per pound.
+        </p>
+
+        <p>
+          Find the number of pounds to be shipped from each warehouse to each retailer to minimize the cost.
+        </p>
+      </statement>
+    </problem>
+
+
+    <problem>
+      <title>Scheduling Librarians</title>
+
+      <statement>
+        <p>
+          The FSU library needs to make sure that there is at least one reference librarian on duty during open hours.
+          If there are 3 reference librarians, how do you schedule them to work such that a) each one works at least 30 hours per week.
+          b) No one work longer than 10 hours in a given day.
+          How would you schedule them such that the total number of hours worked by all reference librarians is minimized.
+        </p>
+      </statement>
+    </problem>
+
+
+    <problem xml:id="prob-diet">
+      <title>A Diet Problem</title>
+
+      <statement>
+        <p>
+          Consider the problem: Gary goes on a diet eating only a salad, turkey sandwich or a bagel with cream cheese for a week.
+          (Yes.
+          It’s the worst!).
+          The following table shows important information for each
+        </p>
+
+        <tabular>
+          <!-- <col right="minor"> </col> <col right="minor"> </col> <col right="minor"> </col> <col right="minor"> </col> <col> </col> -->
+          <row bottom="medium">
+            <cell> </cell>
+            <cell>calories</cell>
+            <cell>protein</cell>
+            <cell>carbs</cell>
+            <cell>fat</cell>
+          </row>
+
+          <row>
+            <cell>salad</cell>
+            <cell>600</cell>
+            <cell>5</cell>
+            <cell>7</cell>
+            <cell>4</cell>
+          </row>
+
+          <row>
+            <cell>sandwich</cell>
+            <cell>750</cell>
+            <cell>18</cell>
+            <cell>10</cell>
+            <cell>8</cell>
+          </row>
+
+          <row>
+            <cell>bagel</cell>
+            <cell>500</cell>
+            <cell>10</cell>
+            <cell>24</cell>
+            <cell>12</cell>
+          </row>
+        </tabular>
+
+        <p>
+          Gary is trying to minimize the total calories ensuring that he eats at least 54 grams of protein, 45 grams of fat and 60 grams of carbs.
+          Write down the objective function and the set of linear constraints?
+        </p>
+      </statement>
+    </problem>
+
+
+    <problem>
+      <title>Blending Problem</title>
+
+      <p>
+        <em>Becky’s Bakery</em> has the following amounts of ingredients on hand: 32 cups flour, 2 dozen eggs and 20 cups of sugar. They would like to make some number of batches of Chocolate Chip Cookies, Brownies and Sugar Cookies. The recipes for these call for the following amounts of flour, eggs and sugar:
+      </p>
+
+      <tabular>
+        <row bottom="medium">
+          <cell>Recipe</cell>
+          <cell>Flour</cell>
+          <cell>Eggs</cell>
+          <cell>Sugar</cell>
+        </row>
+
+        <row>
+          <cell> </cell>
+        </row>
+
+        <row>
+          <cell>Choc. Chip Cookies</cell>
+          <cell>3</cell>
+          <cell>2</cell>
+          <cell>1</cell>
+        </row>
+
+        <row>
+          <cell>Brownies</cell>
+          <cell>2</cell>
+          <cell>1</cell>
+          <cell>2</cell>
+        </row>
+
+        <row>
+          <cell>Sugar Cookies</cell>
+          <cell>1</cell>
+          <cell>2</cell>
+          <cell>2</cell>
+        </row>
+      </tabular>
+
+      <p>
+        If the profit made for each recipe is 20, 24, and 16 dollars respectively, find the number of batches of each baked good that the bakery should make to maximize the profit.
+      </p>
+    </problem>
+
+
+    <problem>
+      <title>Allocation Problem</title>
+
+      <p>
+        Jane has four courses this given semester.
+        Let's call them Mathematics (M), History (H), Writing (W) and Psychology (Psy).
+        We want to determine a number of constraints on the amount of studying she does in these classes.
+      </p>
+
+      <p>
+        <ol>
+          <li>
+            <p>
+              The total number of hours for studying is 360.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Jane is on a scholarship and needs to keep a 3.0.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Jane needs to pass every class to stay on the scholarship.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              From past experience, the following table lists the amount of time Jane needs to earn 1 grade point in each course:
+            </p>
+
+            <tabular>
+              <row bottom="medium">
+                <cell>Course</cell>
+                <cell>hour/grade point</cell>
+              </row>
+
+              <row>
+                <cell>Mathematics</cell>
+                <cell>30</cell>
+              </row>
+
+              <row>
+                <cell>Psychology</cell>
+                <cell>20</cell>
+              </row>
+
+              <row>
+                <cell>History</cell>
+                <cell>25</cell>
+              </row>
+
+              <row>
+                <cell>Writing</cell>
+                <cell>20</cell>
+              </row>
+            </tabular>
+          </li>
+        </ol>
+      </p>
+
+      <p>
+        What is the minimum number of hours that Jane should study in each class?
+      </p>
+    </problem>
+
+
+    <problem xml:id="prob-urban-farm">
+      <!-- Note: this problem was generated with gemini.google.com on May 30, 2025 -->
+      <title>Urban Farming Project</title>
+
+      <p>
+        A non-profit organization, <em>GreenHarvest</em>, aims to establish a sustainable urban farm within a limited city space.<fn>This problem was created in part using Google Gemini.</fn> They want to maximize their total profit from selling produce to local restaurants and farmers' markets while adhering to various constraints.
+        They have identified four key crops to cultivate:
+      </p>
+
+      <p>
+        <ol>
+          <li>
+            <p>
+              Heirloom Tomatoes (T): High-profit, but require significant space and water.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Organic Lettuce (L): Moderate profit, quick growing, but sensitive to sun exposure.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Specialty Herbs (H): Low profit per plant, but very space-efficient and high demand.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Root Vegetables (R): Moderate profit, require deep soil beds and longer growth cycles.
+            </p>
+          </li>
+        </ol>
+      </p>
+
+      <p>
+        The project has 50 growing beds for all crops.
+        Due to city regulations and sustainable practices, there's a limit on daily water consumption.
+        Each crop type has different water requirements per bed.
+        The total water usage cannot exceed 1500 liters per day.
+      </p>
+
+      <p>
+        <ul>
+          <li>
+            <p>
+              Heirloom Tomatoes: 40 liters/bed
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Organic Lettuce: 25 liters/bed
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Specialty Herbs: 15 liters/bed
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Root Vegetables: 30 liters/bed
+            </p>
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        To meet the demand from local restaurants that rely heavily on fresh herbs, GreenHarvest wants to ensure at least 5 beds are dedicated to Specialty Herbs.
+      </p>
+
+      <p>
+        To maintain crop diversity and manage pest control effectively, the number of Heirloom Tomato beds should be no more than twice the number of Organic Lettuce beds.
+      </p>
+
+      <p>
+        Profit per bed (estimated per growing season):
+      </p>
+
+      <p>
+        <ol>
+          <li>
+            <p>
+              Heirloom Tomatoes: $300
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Organic Lettuce: $180
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Specialty Herbs: $100
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Root Vegetables: $220
+            </p>
+          </li>
+        </ol>
+      </p>
+
+      <p>
+        The goal of this problem is to determine the number of beds to devote to each of the different types of crops in order to maximize the profit.
+      </p>
+    </problem>
+  </introduction>
+
+
+  <subsection xml:id="sect-create-linear-model">
+    <title>Creating Linear Models</title>
+
+    <p>
+      We have seen a number of problems in this chapter that will fit into a linear model.
+      Let's look at <xref ref="prob-toymaker"/> as a example of how to approach creating a linear model.
+      We'll write the common steps and fill in those steps for this problem.
+    </p>
+
+    <p>
+      <ol>
+        <li>
+          <p>
+            What are the variables? Clearly list each one or perhaps if they are indexed, write down what each indexed variable represents.
+          </p>
+
+          <p>
+            <alert>Solution:</alert> There are 3 types of toys for this problem:
+          </p>
+
+          <p>
+            <md>
+              <mrow>x_1 \amp = \text{number of cars to be produced},</mrow>
+              <mrow>x_2 \amp = \text{number of SUVs to be produced},</mrow>
+              <mrow>x_3 \amp = \text{number of trucks to be produced}.</mrow>
+            </md>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            What is the objective?   Is it to be minimized or maximized.
+          </p>
+
+          <p>
+            <alert>Solution:</alert> In this case, the profit is to be <em>maximized</em> and can be written
+          </p>
+
+          <p>
+            <me>
+              z = 10 x_1 + 15 x_2 + 12 x_3.
+            </me>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            What are the contraints?  Note: one way to think about this is the case of something being maximized, why can't the objective be increased without bound.
+          </p>
+
+          <p>
+            <alert>Solution:</alert> The profit cannot be increased with bound because there is a limit on the amount of wood and labor that can be used.  For each of these, we build a constraint.
+          </p>
+
+          <p>
+            <ul>
+              <li>
+                <p>
+                  For the amount of pine: <m>6x_1 + 5x_2 + 4x_3 \leq 183.
+                  </m>
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  For the amount of birch: <m>3x_1 + 6x_2 + 7x_3 \leq 204.
+                  </m>
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  For the amount of labor: <m>45x_1 + 75x_2 + 90x_3 \leq 2655.
+                  </m>
+                </p>
+              </li>
+            </ul>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Check if the nonnegative constraints on the variables are needed assumptions.
+          </p>
+
+          <p>
+            <alert>Solution:</alert> Yes.  Since the variables represent the numbers of things (in this case toys) to make, the nonnegative assumptions on each variable makes sense.
+          </p>
+
+          <p>
+            <me>
+              x_1, x_2, x_3 \geq 0
+            </me>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Check if either integer or binary constraints are reasonable.
+          </p>
+
+          <p>
+            <alert>Solution:</alert> Since the variables are numbers of toys to make, they must be integers,<fn>There are a few different ways to denote the set of nonnegative integers, however, in this text, we will use <m>\mathbb{N}_0</m> to represent <m>\{0,1,2,3, \ldots \}</m>.</fn> but not binary.
+          </p>
+
+          <p>
+            <me>
+              x_1, x_2, x_3 \in \mathbb{N}_0
+            </me>
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      The next problem shows how to attack another linear problem.
+    </p>
+
+
+    <problem xml:id="prob-coffee-setup">
+      <statement>
+        <p>
+          Use the steps above to write the LOP for <xref ref="prob-coffee" />.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                What are the variables?
+              </p>
+
+              <p>
+                <alert>Solution:</alert> In this case, first note that we need to know the amount of coffee shipped between warehouses and retail outlets. The following graph is helpful for this:
+              </p>
+
+              <figure xml:id="fig-coffee">
+                <caption></caption>
+                <image width="60%">
+                  <shortdescription>
+                  </shortdescription>
+                  <latex-image>
+                  <![CDATA[
+                    \begin{tikzpicture}
+                      \draw[->] (1,5) -- (5,0) node[pos=0.25, above right] {$x_1$};
+                      \draw[->] (0.5,5) -- (0.5,0) node[midway, left] {$x_2$};
+                      \draw[->] (5,5) -- (1,0) node[pos=0.25, above left] {$x_3$};
+                      \draw[->] (5.5,5) -- (5.5,0) node[midway, right] {$x_4$};
+                      \draw (0.5,5) node[above] {Seattle};
+                      \draw (5,5) node[above] {San Jos\'e};
+                      \draw (0.5,0) node[below] {Salt Lake City};
+                      \draw (5.5,0) node [below] {Reno};
+                    \end{tikzpicture}
+                    ]]>
+                  </latex-image>
+                </image>
+              </figure>
+
+              <p>
+                Specificially we have the following:
+              </p>
+
+              <p>
+                <md>
+                  <mrow>x_1 \amp = \text{number of pounds of coffee to ship from Seattle to Reno},</mrow>
+                  <mrow>x_2 \amp = \text{number of pounds of coffee to ship from Seattle to Salt Lake City},</mrow>
+                  <mrow>x_3 \amp = \text{number of pounds of coffee to ship from San José  to Reno},</mrow>
+                  <mrow>x_4 \amp = \text{number of pounds of coffee to ship from San José to Salt Lake. City}</mrow>
+                </md>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <em>What is the objective?</em>
+              </p>
+
+              <p>
+                The objective is the total cost and it is to be minimized or
+              </p>
+
+              <p>
+                <me>
+                  z = 3 x_1 + 2.50 x_2 + 4 x_3 + 2 x_4.
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <em>What are the constraints?</em>
+              </p>
+
+              <p>
+                The variables are going to be the total amount of coffee to be shipped from the two warehouses to the two retail locations.
+                If we look first at the amount of coffee that the Salt Lake City and Reno locations need then we need to ship at least this amount or
+              </p>
+
+              <p>
+                <md>
+                  <mrow>x_2 + x_3 \amp \geq 400, </mrow>
+                  <mrow>x_1 + x_4 \amp \geq 350. </mrow>
+                </md>
+              </p>
+
+              <p>
+                Since the warehouses have a limited supply, they can only ship what they have so there are two additional constraints, one for each warehouse
+              </p>
+
+              <p>
+                <md>
+                  <mrow>x_1 + x_2 \amp \leq 700,</mrow>
+                  <mrow>x_3 + x_4 \amp \leq 500.</mrow>
+                </md>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Check if the nonnegative constraints on the variables are needed assumptions.
+              </p>
+
+              <p>
+                <alert>Solution:</alert> Each amount of coffee shipped should be nonnegative, so <m>x_1, x_2, x_3, x_4 \geq 0</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <em>Check if either integer or binary constraint are needed.</em>
+              </p>
+
+              <p>
+                In this case, because coffee does not need to be shipped in integer amounts of pounds, this is not needed.
+              </p>
+            </li>
+          </ol>
+        </p>
+
+        <p>
+          We can combine all of these into the following LOP:
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \text{Minimize} \amp \amp  z = 2.5 x_1 + 3 x_2 + 4 x_3 + 2 x_4,\amp \\ \text{subject to} \amp \amp x_2 + x_3 \amp \geq 400.\\ \amp \amp x_1 + x_4 \amp \geq 350,\\ \amp \amp x_1 + x_2 \amp \leq 700,\\ \amp \amp x_3 + x_4 \amp \leq 500,\\ \text{and}\amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </solution>
+    </problem>
+  </subsection>
+
+
+  <subsection xml:id="sect-other-problems">
+    <title>Non-Obvious Linear Optimization Problems</title>
+
+    <introduction>
+      <p>
+        Perhaps as you have read through the problems at the top of this section and then the mathematical formulation of each in <xref ref="sect-create-linear-model"/> and notice that there are some similarities between the problems.
+        Each clearly has an objective that is to optimized and has a number of constraints.
+        However, there are other problems that with some creativity can be written as an LOP.
+        Consider the following:
+      </p>
+
+
+      <problem xml:id="prob-n-queens">
+        <title><m>n</m>-queens problem</title>
+
+        <statement>
+          <p>
+            A chessboard is a grid of spaces in which pieces move around the board according to various rules.
+            A queen is a piece that can move left, right, up, down or diagonal any number of squares.
+            <xref ref="fig-chessboard-queen"/> shows the standard 8 by 8 chessboard and one queen.
+          </p>
+
+          <p>
+            The <m>n</m>-queens problem asks if <m>n</m> queens can appear on an <m>n</m> by <m>n</m> chessboard, so that no queen can attacker another queen.
+          </p>
+        </statement>
+      </problem>
+
+      <figure xml:id="fig-chessboard-queen">
+        <caption>An 8 by 8 chessboard with a queen on a square.  The arrows indicate the other squares that can attack with this piece. </caption>
+        <image width="50%">
+          <shortdescription>
+          </shortdescription>
+          <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}[scale=0.5]
+              \draw[lightgray] (0,0) grid (8,8);
+              \draw (2.5, 1.5) node {\symqueen};
+              \draw[thick, ->] (2.8, 1.5) -- (7.5,1.5);
+              \draw[thick, ->] (2.1, 1.5) -- (0.5,1.5);
+              \draw[thick, ->] (2.1, 1.1) -- (1.5, 0.5);
+              \draw[thick, ->] (2.5, 1.1) -- (2.5, 0.5);
+              \draw[thick, ->] (2.9, 1.1) -- (3.5, 0.5);
+              \draw[thick, ->] (2.1, 1.9) -- (0.5, 3.5);
+              \draw[thick, ->] (2.5, 1.9) -- (2.5, 7.5);
+              \draw[thick, ->] (2.9, 1.9) -- (7.5, 6.5);
+            \end{tikzpicture}
+            ]]>
+          </latex-image>
+        </image>
+      </figure>
+
+      <p>
+        It's not clear what the objective function is for this problem (although there is one).
+        The constraints for the problem might be the constraints on a queen.
+        Also, what are the variables?  We'll see how to approach this later.
+      </p>
+
+
+      <problem>
+        <title>Room Scheduling</title>
+
+        <p>
+          The registrar at State University needs to schedule rooms for a set of classes in a time block.
+          For simplification, the classes will be A, B, C, ..., H and they will be put in rooms 1,2,3, ..., 8.
+          Not every class can be scheduled in every room.
+          Some classes need to be in a computer class, some classes need to be on the first floor of the building, some faculty prefer whiteboards, some faculty prefer to use a project.
+          Here's all of these constraints:
+        </p>
+
+        <p>
+          <ul>
+            <li>
+              <p>
+                Classes A, B and C need to be scheduled in a computer lab (rooms 1, 4, 6, 8).
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Classes D and E need to be on the first floor the building (rooms 1, 2, 3).
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Classes B, E, F, G, H need a whiteboard and cannot be in rooms 1, 2 or 7.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Classes C, D, F and H need a projector and cannot be in room 2, 5, or 8.
+              </p>
+            </li>
+          </ul>
+        </p>
+
+        <p>
+          What is a reasonable scheduling of the rooms if possible?
+        </p>
+      </problem>
+
+      <p>
+        This problem seems to have similarties with the previous problem, and similar questions arise.
+        What are the variables for the problem?  There are clearly some constraints in that certain classes need to be in a some rooms, but not others.
+        It's unclear what the objective is.
+      </p>
+
+
+      <problem xml:id="prob-mars-rover">
+        <title>Mars Rover</title>
+
+        <p>
+          You are the lead mission planner for NASA's new Mars rover, <q>Curiosity II.</q> The rocket launching the rover has a strict weight limit for its scientific payload.
+          Exceeding this limit is not an option.
+          A team of scientists has reviewed all possible instruments and assigned each a <q>scientific value</q> score based on the mission's objectives (like finding signs of past life or analyzing atmospheric composition).
+          Your job is to select the combination of instruments that will maximize the total scientific value of the mission without exceeding the weight limit.
+          <fn>This was generated with help from Gemini AI.
+          </fn>
+        </p>
+
+        <table xml:id="table-knapsack-rover">
+          <title>Mars Rover Instrument Options</title>
+
+          <tabular>
+            <row header="yes" bottom="medium">
+              <cell>Instrument Name</cell>
+              <cell halign="center">Weight (kg)</cell>
+              <cell halign="center">Scientific Value Score</cell>
+            </row>
+
+            <row>
+              <cell>Alpha Particle X-ray Spectrometer</cell>
+              <cell halign="center">35</cell>
+              <cell halign="center">30</cell>
+            </row>
+
+            <row>
+              <cell>High-Resolution Panoramic Camera</cell>
+              <cell halign="center">30</cell>
+              <cell halign="center">25</cell>
+            </row>
+
+            <row>
+              <cell>Subsurface Drilling Unit</cell>
+              <cell halign="center">60</cell>
+              <cell halign="center">55</cell>
+            </row>
+
+            <row>
+              <cell>Weather &amp; Radiation Monitor</cell>
+              <cell halign="center">45</cell>
+              <cell halign="center">35</cell>
+            </row>
+
+            <row>
+              <cell>Laser-Induced Breakdown Spectrometer</cell>
+              <cell halign="center">40</cell>
+              <cell halign="center">40</cell>
+            </row>
+
+            <row>
+              <cell>Robotic Scoop &amp; Soil Analyzer</cell>
+              <cell halign="center">55</cell>
+              <cell halign="center">50</cell>
+            </row>
+          </tabular>
+        </table>
+      </problem>
+
+      <p>
+        This problem falls into a class of problems called knapsack problems.
+        The idea is that you have a knapsack (backpack) with limited capacity and you want to include as much as possible, whether that is volume, weight or some other measure (like scientific value).
+      </p>
+
+      <problem xml:id="prob-mailbox">
+        <title>The Mailbox Problem</title>
+        <statement>
+          <p>
+            Consider a city that is 4 blocks by 6 blocks in a grid as shown below
+          </p>
+          <figure xml:id="fig-gridburg">
+            <caption></caption>
+            <image width="75%">
+              <shortdescription></shortdescription>
+              <latex-image>
+                <![CDATA[
+                \begin{tikzpicture}
+                \draw (0,0) grid (6,4);
+                \end{tikzpicture}
+                ]]>
+              </latex-image>
+            </image>
+          </figure>
+          <p>
+            The postal chief wants to arrange mailboxes such that anywhere in the city, one does not need to walk any more than one block to reach a mailbox.  Where should the mailboxes be placed to minimize the number of mailboxes.<fn>This problem is a nod to Glenn Hurlbert, whose book <em>Linear Optimization: a Handbook</em> motivated this work.  The book had a number of problems in <em>Gridburg</em> a town on a grid like above.</fn>
+          </p>
+        </statement>
+      </problem>
+    </introduction>
+
+    <subsubsection xml:id="prob-n-queens-form">
+      <title>LOP Formulation of <m>n</m>-queens Problem</title>
+
+      <!-- x_{1,1} + x_{2,2} + \cdots + x_{8,8} \leq 1 x_{2,1} + x_{3,2} + \cdots + x_{8,7} \leq 1 x_{3,1} + x_{4,2} + \cdots + x_{8,6} \leq 1 x_{1,2} + x_{2,3} + \cdots + x_{7,8} \leq 1 -->
+      <p>
+        Perhaps looking at <xref ref="prob-n-queens"/>, it would not seem like it is a linear optimization problem.
+        You might think that there are constraints<mdash />no queen can attack another one, but what is the objective function?
+      </p>
+
+      <p>
+        First, to formulate the problem, we need to know the variables. A common situation is to place objects in a grid or other arrangement and then use a variable to denote whether or not to place the object at the grid point.
+        In this case, we are going to use <m>x_{i,j}</m> to be a binary variable that is 1 if there is a queen at row <m>i</m> and column <m>j</m> and 0 otherwise.
+      </p>
+
+      <p>
+        The constraints will be that there is at most one queen in any row, column or diagonal of the chessboard.
+        At most a single queen in any row or column can be written as
+      </p>
+
+      <p>
+        <md>
+          <mrow number="yes" xml:id="eq-queen-row">\sum_{j=1}^n x_{i,j} \amp \leq 1 \qquad \text{for $i=1, 2, \ldots n$} </mrow>
+          <mrow number="yes" xml:id="eq-queen-col"> \sum_{i=1}^n x_{i,j} \amp \leq 1 \qquad \text{for $j=1, 2, \ldots n$} </mrow>
+        </md>
+      </p>
+
+      <p>
+        Note that in <xref ref="eq-queen-row"/>, the sum is across row <m>i</m> and the inequality with <m> \leq 1</m> means that at most there is 1 queen in each row.
+        Similarly in <xref ref="eq-queen-col"/>, the sum in for a given column, so there is at most one queen in a column.
+      </p>
+
+      <p>
+        The diagonals are trickier.
+        In the diagonal from the lower left to upper right then summing <m> \sum_{i=1}^n x_{i,i}  \leq 1 </m>, but this is also true for every diagonal that parallels this one.
+        The inequality for this is in the problem below.
+      </p>
+
+      <p>
+        There is also a diagonal from the upper left to lower right with the inequality <m>\sum_{i=1}^n x_{i,n+1-i} \leq 1</m>, but also with every other diagonal parallel to these, which are listed below.
+      </p>
+
+      <p>
+        Finally, we will use the objective that the total number of queens on the board to be minimized.
+        The total number can be calculated with
+      </p>
+
+      <p>
+        <me>
+          z = \sum_{i=1}^n \sum_{j=1}^n x_{i,j}
+        </me>
+      </p>
+
+      <p>
+        Here's a summary of the <m>n</m>-queens problems:
+      </p>
+
+      <p>
+        <me>
+          \begin{aligned} \text{Minimize} \amp \amp z \amp = \sum_{i=1}^n \sum_{j=1}^n x_{i,j}, \\ \text{subject to} \amp \amp \sum_{i=1}^n x_{i,j} \amp \leq 1 \qquad \text{for $j=1, 2, \ldots n$} \\ \amp \amp \sum_{j=1}^n x_{i,j} \amp \leq 1 \qquad \text{for $i=1, 2, \ldots n$} \\ \amp \amp \sum_{i=1}^{n-k} x_{i,i+k} \amp \leq 1 \qquad \text{for $k=0, 1, \ldots n-1$} \\ \amp \amp \sum_{i=k-1}^{n-1} x_{i,i-k} \amp \leq 1 \qquad \text{for $k=1,2, \ldots n-1$} \\ \amp \amp \sum_{i=1}^{n-k} x_{i,n-k} \amp \leq 1 \qquad \text{for $k=0, 1, \ldots n-1$} \\ \amp \amp \sum_{i=k-1}^{n-1} x_{n-i,k} \amp \leq 1 \qquad \text{for $k=1,2, \ldots n-1$} \\ \text{and} \amp \amp x_{i,j} \amp \in \{0,1\} \qquad \text{for $i=1,\ldots, n, j = 1, \ldots n$} \end{aligned}
+        </me>
+      </p>
+
+      <p>
+        The first inequality is the column sum for every <m>j</m>, the second is the row sum for every <m>i</m>.
+        The third and fourth are the diagonals that run from bottom left to upper right on the chessboard and the fifth and sixth are the upper left to lower right.
+      </p>
+    </subsubsection>
+  </subsection>
+</section>

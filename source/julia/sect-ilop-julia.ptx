@@ -1,0 +1,438 @@
+<section xml:id="sect-ilop-julia">
+  <title>Cutting Planes and Branch and Bound with Julia</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Understand how to solve integer problems using the cutting planes and branch-and-bound techniques in Julia.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+
+  <introduction>
+    <p>
+      How to solve the integer problems using the cutting planes and branch-and-bound techniques in Julia.
+    </p>
+
+    <p>
+      In <xref ref="sect-intro-ilops"/>, we saw <xref ref="prob-ilop2"/>. We solved this two different ways. The first involved cutting planes to trim the feasible set without eliminating integer solutions and the second was branch and bound, which successfully split the feasible set into pieces by eliminating non-integer solutions.
+    </p>
+
+    <p>
+      These were quite complex but important to understand how they work. However, when solving problems using software, we don't need the details. As in the previous section, we will solve this using the <c>JuMP</c> and <c>HiGHS</c> packages of Julia.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-ilop">
+    <title>Solving Integer Problems with Julia</title>
+
+    <p>
+      Setting up an integer problem to solve with <c>JuMP</c> and <c>HiGHS</c> is very similar to non-integer problems. The big differences is by adding the <c>Int</c> argument to the <c>@variable</c> macro. <xref ref="prob-ilop2"/> can be written as
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+    m = Model(HiGHS.Optimizer)
+    @variable(m, x₁ ≥ 0, Int)
+    @variable(m, x₂ ≥ 0, Int)
+    @constraint(m, 17x₁ + 32x₂ ≤ 136)
+    @constraint(m, 4x₁ + 4x₂ ≤ 25)
+    @objective(m, Max, 4x₁ + 5x₂)
+    print(m)
+      </code>
+    </program>
+
+    <p>
+      and note that when defining variables on lines 2 and 3, that we add <c>Int</c> to the end indicating that the variables are integers. This returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>Max 4 x₁ + 5 x₂</cline>
+      <cline>  Subject to</cline>
+      <cline>   17 x₁ + 32 x₂ ≤ 136</cline>
+      <cline>   4 x₁ + 4 x₂ ≤ 25</cline>
+      <cline>   x₁ ≥ 0</cline>
+      <cline>   x₂ ≥ 0</cline>
+      <cline>   x₁ integer</cline>
+      <cline>   x₂ integer</cline>
+      </cd>
+    </p>
+
+    <p>
+      We can solve this exactly the same way as before with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        set_silent(m)
+        optimize!(m)
+        is_solved_and_feasible(m)
+      </code>
+    </program>
+
+    <p>
+      which returns <c>true</c> so we have an optimal feasible solution.  Then finally, we can find the values and the objective with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        value(x₁), value(x₂)
+      </code>
+    </program>
+
+    <p>
+      which returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>(4.0, 2.0)</cline>
+      </cd>
+    </p>
+
+    <p>
+      and
+    </p>
+
+
+    <program language="julia">
+      <code>
+        objective_value(m)
+      </code>
+    </program>
+
+    <p>
+      returns <c>24.0</c>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          Solve the ILOP defined in <xref ref="ex-branch-bound-1"/> using the <c>JuMP</c> and <c>HiGHS</c> packages in Julia.  You can use the code above as a template.
+        </p>
+      </statement>
+    </exercise>
+  </subsection>
+
+
+  <subsection xml:id="sect-blops">
+    <title>Solving Binary LOPs using Julia</title>
+
+    <p>
+      Another common constraint on Linear Optimization problems is that variables may take on either 0 or 1. For example, the <m>n</m>-queens problem in <xref ref="prob-n-queens"/> is such an example.
+    </p>
+
+    <p>
+      In <xref ref="prob-n-queens-form"/>, the problem is written in mathematical form. First, if we look at this for <m>n=4</m>, the problem is a bit more reasonable.
+    </p>
+
+    <p>
+      First, the variable <m>x_{i,j}</m> will be a binary variable that will take on the value 1 if there is a queen on the <m>i</m>th row and <m>j</m>th column.  To create the variables in Julia, we first create a model, then the variables, which we can do in bulk as the following:
+    </p>
+
+
+    <program language="julia">
+      <code>
+        m2 = Model(HiGHS.Optimizer)
+        @variable(m2, x[1:4,1:4], Bin)
+      </code>
+    </program>
+
+    <p>
+      where the last term in the <c>@variable</c> macro shows the variable is binary. Also, note that this make a array variable that will match the size of the board.
+    </p>
+
+    <p>
+      The constraints in the problem can be encoded in Julia with
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+      for j=1:4
+        @constraint(m2, sum(x[:,j]) ≤  1)
+      end
+      for i=1:4
+        @constraint(m2, sum(x[i,:]) ≤ 1)
+      end
+      for k=0:2
+        @constraint(m2, sum( [ x[i,i+k] for i=1:4-k]) ≤ 1)
+      end
+      for k=1:2
+        @constraint(m2, sum( [ x[i+k,i] for i=1:4-k]) ≤ 1)
+      end
+      for k=0:2
+        @constraint(m2, sum( [ x[i, 5-k-i] for i=1:4-k]) ≤ 1)
+      end
+      for k=1:2
+        @constraint(m2, sum( [ x[i, 5+k-i] for i=1+k:4]) ≤ 1)
+      end
+      </code>
+    </program>
+
+    <p>
+      The constraints on lines 1-6 are the column and row sums respectively.  The constraints on lines 7-12 are the diagonal constraints along northwest to southeast diagonals and lines 13-18 are along the northeast to southwest diagonals.
+    </p>
+
+    <p>
+      Lastly, the objective needs to be defined and can be with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        @objective(m2, Max, sum(x[:,:]))
+      </code>
+    </program>
+
+    <p>
+      and the 3rd argument sums over all elements of <c>x</c>.  Again, not necessary, but a good double check to do a <c>print(m2)</c> which will print out the LOP as
+    </p>
+
+
+    <program language="$">
+      <code>
+Max x[1,1] + x[2,1] + x[3,1] + x[4,1] + x[1,2] + x[2,2] + x[3,2] + x[4,2] + x[1,3] + x[2,3] + x[3,3] + x[4,3] + x[1,4] + x[2,4] + x[3,4] + x[4,4]
+Subject to
+ x[1,1] + x[2,1] + x[3,1] + x[4,1] ≤ 1
+ x[1,2] + x[2,2] + x[3,2] + x[4,2] ≤ 1
+ x[1,3] + x[2,3] + x[3,3] + x[4,3] ≤ 1
+ x[1,4] + x[2,4] + x[3,4] + x[4,4] ≤ 1
+ x[1,1] + x[1,2] + x[1,3] + x[1,4] ≤ 1
+ x[2,1] + x[2,2] + x[2,3] + x[2,4] ≤ 1
+ x[3,1] + x[3,2] + x[3,3] + x[3,4] ≤ 1
+ x[4,1] + x[4,2] + x[4,3] + x[4,4] ≤ 1
+ x[1,1] + x[2,2] + x[3,3] + x[4,4] ≤ 1
+ x[1,2] + x[2,3] + x[3,4] ≤ 1
+ x[1,3] + x[2,4] ≤ 1
+ x[2,1] + x[3,2] + x[4,3] ≤ 1
+ x[3,1] + x[4,2] ≤ 1
+ x[4,1] + x[3,2] + x[2,3] + x[1,4] ≤ 1
+ x[3,1] + x[2,2] + x[1,3] ≤ 1
+ x[2,1] + x[1,2] ≤ 1
+ x[4,2] + x[3,3] + x[2,4] ≤ 1
+ x[4,3] + x[3,4] ≤ 1
+ x[1,1] binary
+ x[2,1] binary
+ x[3,1] binary
+ x[4,1] binary
+ x[1,2] binary
+ x[2,2] binary
+ x[3,2] binary
+ x[4,2] binary
+ x[1,3] binary
+ x[2,3] binary
+ x[3,3] binary
+ x[4,3] binary
+ x[1,4] binary
+ x[2,4] binary
+ x[3,4] binary
+ x[4,4] binary
+      </code>
+    </program>
+
+    <p>
+      and if you careful look at all of the contraints that they are all that there is at most one queen (sum of the <c>x</c> values along each row, column and diagonal), that all of the contraints are there.
+    </p>
+
+    <p>
+      Solve the problem with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        set_silent(m2)
+        optimize!(m2)
+        is_solved_and_feasible(m2)
+      </code>
+    </program>
+
+    <p>
+      and again, since <c>true</c> is returned that we have a feasible optimal solution.  We can use the following shortcut (called broadcasting) to output the values with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        value.(x)
+      </code>
+    </program>
+
+    <p>
+      where recall that the <c>.</c> does broadcasting, that is, the function <c>value</c> is applied to all elements of <c>x</c> term by term.  This returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>4×4 Matrix{Float64}:</cline>
+      <cline> -0.0  -0.0   1.0   0.0</cline>
+      <cline>  1.0   0.0   0.0  -0.0</cline>
+      <cline>  0.0  -0.0  -0.0   1.0</cline>
+      <cline>  0.0   1.0   0.0  -0.0</cline>
+      </cd>
+    </p>
+
+    <p>
+      Although we can read the solution from this, it seems odd that this is not an integer matrix. We can round this with <c>round.(Int, value.(x))</c> which returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>4×4 Matrix{Int64}:</cline>
+      <cline>  0  0  1  0</cline>
+      <cline>  1  0  0  0</cline>
+      <cline>  0  0  0  1</cline>
+      <cline>  0  1  0  0</cline>
+      </cd>
+    </p>
+
+    <p>
+      which will show the locations of the queens. On a 4 by 4 chessboard, this would look like:
+    </p>
+
+    <figure xml:id="fig-4by4-chessboard-queen">
+      <caption>An 4 by 4 chessboard with a queen on a square.  The arrows indicate the other squares that can be attacked with this piece. </caption>
+      <image width="50%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+        <![CDATA[
+          \begin{tikzpicture}
+            \draw[lightgray] (0,0) grid (4,4);
+            \draw (1.5, 0.5) node {\symqueen};
+            \draw (3.5, 1.5) node {\symqueen};
+            \draw (0.5, 2.5) node {\symqueen};
+            \draw (2.5, 3.5) node {\symqueen};
+          \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      And in <xref ref="fig-4by4-chessboard-queen"/>, one can see that no queen can attack another one in a single move.  Note that in general you get a single solution to a LOP when solving either via the simplex method or using software tools.  There is another solution to this problem in which the board above can be flipped either vertically or horizontally.  The software will not generate this other solution.
+    </p>
+
+    <p>
+      This problem can be scaled up to larger chessboards by careful adjusting the constraints above.
+    </p>
+
+
+  </subsection>
+
+
+  <subsection>
+    <title>Does the 3-queens problem have a solution?</title>
+
+    <p>
+      It's probably not too hard to see that if you have a 3 by 3 chess board, that you cannot get 3 queens on the board. Play with it for a few minutes and you'll probably see this.
+    </p>
+
+    <p>
+      So what happens with the ILOP?  The model can be created with:
+    </p>
+
+
+    <program language="julia">
+      <code>
+        q3 = Model(HiGHS.Optimizer)
+        @variable(q3, x[1:3,1:3], Bin)
+        for j=1:3
+          @constraint(q3, sum(x[:,j]) ≤  1)
+        end
+        for i=1:3
+          @constraint(q3, sum(x[i,:]) ≤ 1)
+        end
+        @constraint(q3, sum( x[i,i] for i=1:3) ≤  1)
+        @constraint(q3, sum( x[i,4-i] for i=1:3) ≤  1)
+        @constraint(q3, sum( x[1,2]+x[2,1]) ≤ 1)
+        @constraint(q3, sum( x[3,2]+x[2,3]) ≤ 1)
+        @constraint(q3, sum( x[1,2]+x[2,3]) ≤ 1)
+        @constraint(q3, sum( x[3,2]+x[2,1]) ≤ 1)
+        @objective(q3, Max, sum(x[:,:]))
+        print(q3)
+      </code>
+    </program>
+
+    <p>
+      and this prints out the model:
+    </p>
+
+    <p>
+      <cd>
+      <cline>Max x[1,1] + x[2,1] + x[3,1] + x[1,2] + x[2,2] + x[3,2] + x[1,3] + x[2,3] + x[3,3]</cline>
+      <cline>Subject to</cline>
+      <cline> x[1,1] + x[2,1] + x[3,1] ≤ 1</cline>
+      <cline> x[1,2] + x[2,2] + x[3,2] ≤ 1</cline>
+      <cline> x[1,3] + x[2,3] + x[3,3] ≤ 1</cline>
+      <cline> x[1,1] + x[1,2] + x[1,3] ≤ 1</cline>
+      <cline> x[2,1] + x[2,2] + x[2,3] ≤ 1</cline>
+      <cline> x[3,1] + x[3,2] + x[3,3] ≤ 1</cline>
+      <cline> x[1,1] + x[2,2] + x[3,3] ≤ 1</cline>
+      <cline> x[3,1] + x[2,2] + x[1,3] ≤ 1</cline>
+      <cline> x[2,1] + x[1,2] ≤ 1</cline>
+      <cline> x[3,2] + x[2,3] ≤ 1</cline>
+      <cline> x[1,2] + x[2,3] ≤ 1</cline>
+      <cline> x[2,1] + x[3,2] ≤ 1</cline>
+      <cline> x[1,1] binary</cline>
+      <cline> x[2,1] binary</cline>
+      <cline> x[3,1] binary</cline>
+      <cline> x[1,2] binary</cline>
+      <cline> x[2,2] binary</cline>
+      <cline> x[3,2] binary</cline>
+      <cline> x[1,3] binary</cline>
+      <cline> x[2,3] binary</cline>
+      <cline> x[3,3] binary</cline>
+      </cd>
+    </p>
+
+    <p>
+      and the find the optimal solution with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        set_silent(q3)
+        optimize!(q3)
+        is_solved_and_feasible(q3)
+      </code>
+    </program>
+
+    <p>
+      so <c>true</c> is returned.  You might think that this won't have a solution, however, it seems to and if we print out the solution with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        round.(Int, value.(x))
+      </code>
+    </program>
+
+    <p>
+      the result is
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×3 Matrix{Int64}:</cline>
+      <cline> 0  0  0</cline>
+      <cline> 1  0  0</cline>
+      <cline> 0  0  1</cline>
+      </cd>
+    </p>
+    <p>
+      This shows that the optimal solution has 2 queens on the board.  Recall that the goal is to maximize the objective function with the given constraints.  This means that putting a queen on an edge and an opposite corner is the largest number of queens allowed.  You probably noticed this if you played with it a bit.
+    </p>
+  </subsection>
+</section>

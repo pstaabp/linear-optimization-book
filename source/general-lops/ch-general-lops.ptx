@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch-general-lops" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>General Linear Optimization Problems</title>
+
+  <introduction>
+    <p> Text before the first section. </p>
+  </introduction>
+
+  <!-- include sections -->
+  <xi:include href="sect-general-form.ptx" />
+  <xi:include href="sect-phase-zero.ptx" />
+  <xi:include href="sect-general-dual.ptx" />
+  <xi:include href="sect-general-applied.ptx" />
+
+
+</chapter>

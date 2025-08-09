@@ -1,0 +1,22 @@
+<chapter xml:id="ch-lop-julia" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Solving Linear Optimization Problems using Software</title>
+
+<introduction>
+
+  <p>
+    As we developed the Simplex Method to solve Linear Optimization Problems in <xref ref="ch-simplex"/>, we noted that the method systematically performed matrix pivots to find the optimal points. However, once problems scale up, the matrix sizes increase and the number of pivots increase.  Even with software like WebCAS to handle the arithmetic, it can be a lengthy solve to get the optimal answer.
+  </p>
+  <p>
+    And then if we have problems in which variables have integer or binary constraints, using either Gomory's method or branch and bound, can take a lot more steps.
+  </p>
+  <p>
+    In this section, we will use Julia to construct models and solve them in a single step.
+  </p>
+  </introduction>
+
+  <xi:include href="sect-intro-julia.ptx" />
+  <xi:include href="sect-julia-vectors-arrays.ptx" />
+  <xi:include href="sect-julia-linear-algebra.ptx" />
+  <xi:include href="sect-jump-highs.ptx" />
+  <xi:include href="sect-ilop-julia.ptx" />
+</chapter>

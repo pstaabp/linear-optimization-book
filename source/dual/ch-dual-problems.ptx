@@ -1,0 +1,12 @@
+<chapter xml:id="ch-dual-problems" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Dual Problems</title>
+
+<introduction>
+<p>
+In this chapter, we introduce a dual problem, which is related to the original (or primal) problem.  We will see why dual problems are important, especially in granting a <em>certificate</em>, ensuring that the solution we found for a primal problem is indeed optimal.
+</p>
+</introduction>
+<xi:include href="sect-intro-dual.ptx" />
+<xi:include href="sect-primal-dual-relationships.ptx" />
+<xi:include href="sect-dual-certificates.ptx" />
+</chapter>

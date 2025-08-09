@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch-linear-models" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Developing Linear Models</title>
+
+  <introduction>
+    <p>Linear models arise from many different fields including business, manufacturing as well as the sciences. This chapter shows many applied problems and how they can be created mathematically into a category called linear optimization problems. For problems of only two variables it relatively straightforward to graph the constraints and make a geometric argument about where the optimal value is.</p>
+  </introduction>
+
+  <!-- include sections -->
+  <xi:include href="sect-linear-models.ptx" />
+  <xi:include href="sect-lops.ptx" />
+  <xi:include href="sect-geometry.ptx" />
+
+
+</chapter>

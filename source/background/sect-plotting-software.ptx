@@ -1,0 +1,177 @@
+<section xml:id="sect-plotting-software">
+  <title>Using Software for Plotting</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Using Desmos or other software to plot lines and linear inequalities.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+
+  <subsection xml:id="sect-plotting-lines">
+    <title>Plotting Lines</title>
+
+    <p>
+      Software can help with the plotting of lines, planes and linear inequalities.
+      In <xref ref="sect-lines"/>, the equation <m>3x+4y=12</m> and linearly inequality <m>3x+4y \leq 12</m> was plotted.
+    </p>
+
+    <p>
+      Visit <url href="https://www.desmos.com/calculator">Desmos</url> which will look like:
+    </p>
+
+    <figure xml:id="fig-desmos">
+      <caption></caption>
+      <image source="images/desmos.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Enter <c>3x+4y=12</c> in the first box (outlined in blue) and you should see
+    </p>
+
+    <figure xml:id="fig-desmos-line-plot">
+      <caption></caption>
+      <image source="images/desmos-line-plot.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Additional lines can be plotted by adding them to the box below the previous line.
+      For example, enter <c>y=2x=3</c> results in
+    </p>
+
+    <figure xml:id="fig-desmos-two-lines">
+      <caption></caption>
+      <image source="images/desmos-two-lines.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+  </subsection>
+
+
+  <subsection xml:id="sect-plotting-inequalities">
+    <title>Plotting Inequalities and Feasible Sets</title>
+
+    <p>
+      Inequalities can also be plotted.
+      Return to desmos and remove all equations by hitting the X on the right side of each entry box.
+      Now add <c>3x+4y ≤ 12</c> where Demos will automatically convert <c>&lt;=</c> to <c>≤</c>.
+      The resulting plot will be
+    </p>
+
+    <figure xml:id="fig-desmos-inequality">
+      <caption></caption>
+      <image source="images/desmos-inequality.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Note that the colors of all the plots may be different.
+      Desmos usually cycles through the colors in a specific manner, but this may differ as you enter equations.
+    </p>
+
+    <p>
+      The graph shows both the line as solid and the color as a light green indicating that the region below and left of the line is part of the inequality.
+    </p>
+
+    <p>
+      This idea can be extended to plotting sets of inequalities to arrive at a feasible set.
+      Recall that in <xref ref="sect-lines-planes"/> the set of inequalites:
+    </p>
+
+    <p>
+      <md>
+        <mrow>3x+4y \amp \leq 12 </mrow>
+        <mrow>y \amp \geq x+1 </mrow>
+      </md>
+    </p>
+
+    <p>
+      was plotted.
+      If we add the second inequality to Demos we get
+    </p>
+
+    <figure xml:id="fig-desmos-two-inequalities">
+      <caption></caption>
+      <image source="images/desmos-two-inequalities.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      With only two inequalities, visually the overlap (the set of points that satisfy both inequalities) is reasonably easy to see, however, as these grow, it can be more difficulty to see.
+      One way is to plot the opposite inequalty and then area of the plane with no coloring would be the resultant set.
+    </p>
+
+    <example>
+      <statement>
+        <p>
+          Use Desmos to plot the region that satisfies the following:
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} x - 2y \leq -2, \\ 5x-2y \geq 15, \\ 3x+5y \geq 75. \end{aligned}
+          </me>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          We open up Desmos and add all three of the inequalities, except switching each inequality.
+          The result is
+        </p>
+
+        <figure xml:id="fig-desmos-three-inequalities">
+          <caption></caption>
+          <image source="images/desmos-three-inequalities.png">
+            <shortdescription>
+              (for accessibility)
+            </shortdescription>
+          </image>
+        </figure>
+
+        <p>
+          The set of points that satisfy the three inequalities is the triangular region without any shading.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+  <subsection xml:id="sect-graphing-planes">
+    <title>Graphing Planes</title>
+    <p>
+      As we saw in <xref ref="sect-lines-planes"/>, planes are another example of linear functions that we will encounter in this text.  Desmos also has a <url href="https://www.desmos.com/3d"> 3D graphing calculator</url>.   Open up the webpage and it will look like the regular graphing calculator, however the default axes are in <m>\mathbb{R}^3</m>.
+    </p>
+    <p>
+      Add <c>x+2y+3z=12</c> to the plot and you should get a plane.  Spin the axes around and zoom in and out with the + and - buttons.  You may get something that looks like
+    </p>
+
+    <figure xml:id="fig-desmos-plane">
+    <caption></caption>
+    <image source="images/desmos-plane.png">
+      <shortdescription>(for accessibility)</shortdescription>
+    </image>
+  </figure>
+  <p>
+    Inequalities can also be plotted, however, they are difficult to read.  For example, change the <m>=</m> in the previous plane to a <m>\leq</m> or <m>\geq</m> and you will see that half of the <m>\mathbb{R}^3</m> space is now colored red (in my case). However, adding another inequality will be quite difficult to see the intersecting region.
+  </p>
+  </subsection>
+</section>

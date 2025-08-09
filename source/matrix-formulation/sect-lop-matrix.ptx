@@ -1,0 +1,550 @@
+<section xml:id="sect-lop-matrix">
+  <title>Writing a LOP in Matrix Form</title>
+
+  <introduction>
+    <p>
+      Consider the following LOP.
+    </p>
+
+
+    <problem xml:id="prob-matrix-lop-ex">
+      <p>
+        <me>
+          \begin{aligned} \text{Max.} \amp\amp z = 40 x_1 + 36 x_2 + 72 x_3, \amp \\ \text{s.t.}\amp\amp 18 x_1 + 5 x_2 + 10 x_3 \amp \geq 85, \\ \amp\amp  4 x_1 + 20 x_2 + 15 x_3 \amp \geq 70, \\ \amp\amp10 x_1 + 15 x_2 + 18 x_3 \amp \leq 250, \\ \amp\amp 20 x_1 + 16 x_2 + 4x_3\amp \leq 180, \\ \text{and} \amp\amp x_1, x_2, x_3, x_4 \amp \geq 0.
+          \end{aligned}
+        </me>
+      </p>
+    </problem>
+
+    <p>
+      This can be first written in standard form and then in matrix form by defining
+    </p>
+
+    <p>
+      <md>
+        <mrow> A \amp = \begin{bmatrix} -18 \amp -5 \amp -10 \\ -4 \amp -20 \amp -15  \\ 10 \amp 15 \amp 18 \\ 20 \amp 16 \amp 4 \end{bmatrix} \amp \boldsymbol{b} \amp  =\begin{bmatrix} -85 \\ -70 \\ 250 \\ 180 \end{bmatrix} \amp \boldsymbol{c} \amp = \begin{bmatrix} 40 \\ 36 \\ 72 \end{bmatrix}</mrow>
+      </md>
+    </p>
+
+    <p>
+      Then the problem can be written as
+    </p>
+
+
+    <problem xml:id="prob-matrix-lop">
+      <p>
+        <me>
+          \begin{aligned} \text{Maximize} \amp \amp z = \boldsymbol{c}^{\intercal} \boldsymbol{x}  \\ \text{such that} \amp \amp A \boldsymbol{x} \leq \boldsymbol{b} \\ \text{and} \amp \amp \boldsymbol{x} \geq \boldsymbol{0}.
+          \end{aligned}
+        </me>
+      </p>
+    </problem>
+
+    <p>
+      where the inequalities need to be considered as satisfying for each element.
+    </p>
+
+    <p>
+      Any problem can be written in this form.
+      Additionally, the dual of the problem can be written
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} \text{Minimize} \amp \amp w \amp = \boldsymbol{b}^{\intercal} \boldsymbol{y} \\ \text{such that} \amp \amp A^{\intercal} \boldsymbol{y} \amp \geq \boldsymbol{c} \\ \text{and} \amp \amp \boldsymbol{y} \amp \geq \boldsymbol{0}.
+        \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      It is nice to be able to write a problem or it's dual in this form, however, this generally doesn't help us solve the problem.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-simplex-matrix">
+    <title>The Matrix Simplex Method</title>
+
+    <p>
+      We will see in this section how to set up the simplex method to solve an LOP not by using the simplex tableau but by updating the matrix <m>A</m> and vectors <m>\boldsymbol{b}</m> and <m>\boldsymbol{c}</m>.
+    </p>
+
+    <p>
+      First, we define
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x}_{\beta} = \text{basis variables} \qquad \boldsymbol{x}_{\pi} = \text{parameters}
+      </me>
+    </p>
+
+    <p>
+      Then introducing slack variables to the inequality <m>A \boldsymbol{x} \leq \boldsymbol{b}</m> results in <m>A\boldsymbol{x}_{\pi} + I \boldsymbol{x}_{\beta} = \boldsymbol{b}</m>.
+    </p>
+
+    <p>
+      If we define
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} \boldsymbol{c}_{\pi} \amp = \text{the $c$ varibles with respect to the basis variables} \\ \boldsymbol{c}_{\beta} \amp = \text{the $c$ varibles with respect to the parameters} \\ \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      Then <xref ref="prob-matrix-lop"/> can be written
+    </p>
+
+    <p>
+      <men xml:id="eq-prob-matrix-lop-compact">
+        \text{Maximize}\;\; z = \boldsymbol{c}^{\intercal} \boldsymbol{x} \quad \text{such that} \; A\boldsymbol{x}_{\pi} + I \boldsymbol{x}_{\beta} = \boldsymbol{b} \; \text{and} \; \boldsymbol{x} \geq \boldsymbol{0}.
+      </men>
+    </p>
+
+    <p>
+      where the objective is
+    </p>
+
+    <p>
+      <me>
+        z = \boldsymbol{c}_{\beta}^{\intercal}\boldsymbol{x}_{\beta} + \boldsymbol{c}_{\pi}^{\intercal}\boldsymbol{x}_{\pi}
+      </me>
+    </p>
+
+    <p>
+      Specifically, for <xref ref="prob-matrix-lop-ex"/>, initially <m>\beta = \{4,5,6,7\}</m> and <m>\pi = \{1,2,3\}</m> and therefore
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} \boldsymbol{c}_{\pi} = \begin{bmatrix} 40 \amp 36 \amp 72 \end{bmatrix}^{\intercal} \\ \boldsymbol{c}_{\beta} = \begin{bmatrix} 0 \amp 0 \amp 0 \amp 0 \end{bmatrix}^{\intercal} \\ \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      and we write
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{c} = \left[\begin{array}{rrr|rrrr} 40 \amp 36 \amp 72 \amp 0 \amp 0 \amp 0 \amp 0 \end{array}\right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      Next, we define <m>B</m> to be the matrix that is the same size as <m>A</m> and have the columns of <m>A</m> or the identity matrix, <m>I</m> corresponding to the basic variables and the matrix <m>\Pi</m> a square matrix with the parameters.
+    </p>
+
+    <p>
+      If <m>\beta=\{1,5,6,7\}</m> and <m>\pi=\{2,3,4\}</m> then
+    </p>
+
+    <p>
+      <me>
+        B = \begin{bmatrix} -18 \amp 0 \amp 0 \amp 0 \\ -4 \amp 1 \amp 0 \amp 0 \\ 10 \amp 0 \amp 1 \amp 0 \\ 20 \amp 0 \amp 0 \amp 1 \end{bmatrix} \qquad \Pi = \begin{bmatrix} -5 \amp -10 \amp 1 \\ -20 \amp -15 \amp 0 \\ 15 \amp 18 \amp 0 \\ 16 \amp 4 \amp 0 \end{bmatrix}
+      </me>
+    </p>
+
+    <p>
+      For the intial tableau, <m>B = A</m> and <m>\Pi = I</m>
+    </p>
+
+    <p>
+      Now, the Primal LOP can be written:
+    </p>
+
+    <p>
+      <me>
+        \text{Maximize}\;\; z = \boldsymbol{c}_{\beta}^{\intercal} \boldsymbol{x}_{\beta}+ \boldsymbol{c}_{\pi}^{\intercal} \boldsymbol{x}_{\pi}\quad \text{s.t.}\;\; B \boldsymbol{x}_{\beta} + \Pi \boldsymbol{x}_{\pi} = \boldsymbol{b}\quad\text{and}\;\; \boldsymbol{x} \geq \boldsymbol{0}.
+      </me>
+    </p>
+
+    <p>
+      Recall the dictionary form of an LOP problem from <xref ref="sect-slack-dict"/> in which the equations are written with the basic variables on the left.
+      We can write the above LOP in dictionary form by solving for <m>\boldsymbol{x}_{\beta}</m> or
+    </p>
+
+    <p>
+      <men xml:id="eq-xbeta">
+        \boldsymbol{x}_{\beta}  = B^{-1} (\boldsymbol{b}- \Pi \boldsymbol{x}_{\pi}) = B^{-1} \boldsymbol{b} - B^{-1} \Pi \boldsymbol{x}_{\pi}
+      </men>
+    </p>
+
+    <p>
+      and substituting this into the objective function:
+    </p>
+
+    <p>
+      <md>
+        <mrow> z \amp = \boldsymbol{c}_{\beta}^{\intercal} \bigl( B^{-1} \boldsymbol{b} - B^{-1} \Pi \boldsymbol{x}_{\pi} \bigr)+ \boldsymbol{c}_{\pi}^{\intercal} \boldsymbol{x}_{\pi}  </mrow>
+        <mrow> \amp = \boldsymbol{c}_{\beta}^{\intercal} B^{-1} \boldsymbol{b} - \boldsymbol{c}_{\beta}^{\intercal} B^{-1} \Pi \boldsymbol{x}_{\pi} + \boldsymbol{c}_{\pi}^{\intercal} \boldsymbol{x}_{\pi}  </mrow>
+        <mrow number="yes" xml:id="eq-obj"> \amp = \boldsymbol{c}_{\beta}^{\intercal} B^{-1} \boldsymbol{b} - (\boldsymbol{c}_{\beta}^{\intercal} B^{-1} \Pi - \boldsymbol{c}_{\pi}^{\intercal}) \boldsymbol{x}_{\pi} </mrow>
+      </md>
+    </p>
+
+    <p>
+      Note that if the parameters are 0 or <m>\boldsymbol{x}_{\pi}=\boldsymbol{0}</m>, then <xref ref="eq-xbeta"/> becomes
+    </p>
+
+    <p>
+      <men xml:id="eq-xbeta-basic">
+        \boldsymbol{x}_{\beta} = B^{-1} \boldsymbol{b}.
+      </men>
+    </p>
+
+    <p>
+      This is the basic solution for a given basis and the corresponding objective is <xref ref="eq-obj"/> becomes
+    </p>
+
+    <p>
+      <men xml:id="eq-matrix-z">
+        z  = \boldsymbol{c}_{\beta}^{\intercal} B^{-1} \boldsymbol{b}
+      </men>
+    </p>
+
+    <p>
+      In the following example, we will calculate the formulas or parts of formulas above and will be useful for performing the simplex method in the next section.
+    </p>
+
+    <example xml:id="ex-simplex-matrix">
+      <statement>
+        <p>
+          Using the LOP in <xref ref="prob-matrix-lop-ex"/>, and letting <m>\beta=\{1,3,6,7\}</m>, then find the following:
+        </p>
+
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>B^{-1}</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>B^{-1}\boldsymbol{b}</m>,
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>B^{-1}\Pi</m>,
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\boldsymbol{b}</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          First, note that <m>B</m> takes on the 1st and 3rd columns of <m>A</m> and then the 3rd and 4th columns of <m>I</m>.
+          The first column of <m>\Pi</m> is the 2nd column of <m>A</m> and then the 2nd and 3rd columns of <m>\Pi</m> are the first and second columns of <m>I</m> or
+        </p>
+
+        <p>
+          <me>
+            B = \begin{bmatrix} -18 \amp -10 \amp 0 \amp 0 \\ -4 \amp -15 \amp 0 \amp 0 \\ 10 \amp 18 \amp 1 \amp 0 \\ 20 \amp 4 \amp 0 \amp 1 \end{bmatrix} \qquad \Pi = \begin{bmatrix} -5 \amp 1 \amp 0 \\ -20 \amp 0 \amp 1 \\ 15 \amp 0 \amp 0 \\ 16 \amp 0 \amp 0 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          Also, it is helpful to use software to find the inverse and matrix product.
+          See <xref ref="sect-lop-matrix-software"/> to use Julia to do this.
+        </p>
+
+        <p>
+          <ol>
+            <li>
+              <p>
+                <me>
+                  B^{-1} = \begin{bmatrix} -3/46 \amp 1/23 \amp 0 \amp 0 \\ 2/115 \amp -9/115 \amp 0 \amp 0 \\ 39/115 \amp 112/115 \amp 1 \amp 0 \\ 142/115 \amp -64/116 \amp 0 \amp 1 \end{bmatrix}
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Using the matrix <m>B^{-1}</m> above leads to
+              </p>
+
+              <p>
+                <me>
+                  B^{-1} \boldsymbol{b} = \begin{bmatrix} 5/2 \\ 4 \\ 153 \\114 \end{bmatrix}
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Again, use the matrix <m>B^{-1}</m> above,
+              </p>
+
+              <p>
+                <me>
+                  B^{-1} \Pi = \begin{bmatrix} -25/46 \amp   -3/46 \amp    1/23 \\ 34/23 \amp  2/115  \amp -9/115 \\ -142/23 \amp  39/115 \amp  112/115 \\ 482/23 \amp 142/115 \amp -64/115 \end{bmatrix}
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                First, note that
+              </p>
+
+              <p>
+                <me>
+                  \boldsymbol{c}_{\beta} = \begin{bmatrix} 40 \\ 72 \\ 0 \\ 0 \end{bmatrix} \qquad \boldsymbol{c}_{\pi} = \begin{bmatrix} 36 \\ 0 \\ 0 \end{bmatrix}
+                </me>
+              </p>
+
+              <p>
+                and then
+              </p>
+
+              <p>
+                <me>
+                  \boldsymbol{c}_{\beta}^{\intercal}B^{-1}\boldsymbol{b} = 388
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                To find <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}</m> first find
+              </p>
+
+              <p>
+                <me>
+                  \boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi  = \frac{1}{115}\begin{bmatrix} 9740 \amp  -156 \amp  -448 \end{bmatrix}^{\intercal}
+                </me>
+              </p>
+
+              <p>
+                so
+              </p>
+
+              <p>
+                <me>
+                  \boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi -\boldsymbol{c}_{\pi}^{\intercal} = \frac{1}{115}\begin{bmatrix} 5600 \amp -156 \amp  -448 \end{bmatrix}^{\intercal}
+                </me>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      The matrices and vectors in <xref ref="ex-simplex-matrix"/> are useful for solving LOPs using this matrix form.
+      More details on using these will follow below.
+      However, if you notice that each of these had fractions in the results and to keep things in integer form, we can introduce some other notation.
+      First, let <m>d_{\beta} = |\text{det}(B)|</m> and then
+    </p>
+
+    <p>
+      <me>
+        B' = d_{\beta}B^{-1}
+      </me>
+    </p>
+
+    <p>
+      will be a matrix of integers.
+      Then multiplying <xref ref="eq-xbeta"/> by <m>d_{\beta}</m> results in
+    </p>
+
+    <p>
+      <men>
+        d_{\beta} \boldsymbol{x}_{\beta} = B' \boldsymbol{b} - B'\Pi\boldsymbol{x}_{\pi}
+      </men>
+    </p>
+
+    <p>
+      and similarly <xref ref="eq-obj"/> can be written as
+    </p>
+
+    <p>
+      <men xml:id="eq-obj2">
+        d_{\beta} z = \boldsymbol{c}_{\beta}^{\intercal} B' \boldsymbol{b} - (\boldsymbol{c}_{\beta}^{\intercal} B' \Pi - d_{\beta}\boldsymbol{c}_{\pi}^{\intercal}) \boldsymbol{x}_{\pi}
+      </men>
+    </p>
+
+    <example xml:id="ex-simplex-matrix-int">
+      <statement>
+        <p>
+          Using the basis and parameters in <xref ref="ex-simplex-matrix"/>, then find the following:
+        </p>
+
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>d_{\beta}</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>B'</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>B'\boldsymbol{b}</m>,
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>B'\Pi</m>,
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\boldsymbol{c}_{\beta}^{\intercal}B'\boldsymbol{b}</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\boldsymbol{c}_{\beta}^{\intercal}B'\Pi - d_{\beta} \boldsymbol{c}_{\pi}^{\intercal}</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          For this we use the same <m>B</m> and <m>\Pi</m> from <xref ref="ex-simplex-matrix"/>
+        </p>
+
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>d_{\beta} = 230</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <me>
+                  B' = d_{\beta} B^{-1} = \begin{bmatrix} -15  \amp  10  \amp  0  \amp  0 \\ 4 \amp  -18 \amp   0 \amp   0 \\ 78 \amp  224 \amp 230 \amp   0 \\ 284 \amp -128 \amp   0 \amp 230 \\ \end{bmatrix}
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                And then using the above
+              </p>
+
+              <p>
+                <me>
+                  B'\boldsymbol{b} = \begin{bmatrix} 575 \\ 920 \\ 35190 \\ 26220 \end{bmatrix}
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <me>
+                  B' \Pi = \begin{bmatrix} -125 \amp -15 \amp   10 \\ 340 \amp   4 \amp  -18 \\ -1420 \amp  78 \amp  224 \\ 4820 \amp 284 \amp -128 \\ \end{bmatrix}
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <me>
+                  \boldsymbol{c}_{\beta}^{\intercal} B' \boldsymbol{b} = 89240
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <me>
+                  \boldsymbol{c}_{\beta}^{\intercal} B' \Pi - d_{\beta} \boldsymbol{c}_{\pi}^{\intercal} = \begin{bmatrix} 11200 \amp  -312 \amp -896 \end{bmatrix}
+                </me>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      Although the terms we found in <xref ref="ex-simplex-matrix"/> came from the formulas above, they will also be used to perform the simplex method.
+      We will walk through the steps of the simplex method using these matrices and vectors in the next section.
+    </p>
+  </subsection>
+  <subsection xml:id="sect-matrix-tableau-compare">
+    <title>Comparison to the Tableau</title>
+    <p>
+      How does this compare to the simplex tableau?  Let's look at the tableau of <xref ref="prob-matrix-lop-ex"/> and see how this compares to the matrix forms.  Start with the initial tableau of
+    </p>
+    <p>
+<me>
+  \left[\begin{array}{rrr|rrrrr|r}
+-18 \amp -5 \amp -10 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -85\\
+-4 \amp -20 \amp -15 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -70\\
+10 \amp 15 \amp 18 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 250\\
+20 \amp 16 \amp 4 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 180\\ \hline
+-40 \amp -36 \amp -72 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+
+</me>
+
+    </p>
+    <p>
+      The basis in <xref ref="ex-simplex-matrix"/> and <xref ref="ex-simplex-matrix-int"/> is <m>\beta=\{1,3,6,7\}</m>, so we need to perform pivots for this.  We can do <m>1 \mapsto 4</m> and <m>3 \mapsto 5</m> to get this basis.  Applying these pivots to the above tableau is
+    </p>
+    <p>
+      <me>
+        \left[\begin{array}{rrr|rrrrr|r}
+230 \amp -125 \amp 0 \amp -15 \amp 10 \amp 0 \amp 0 \amp 0 \amp 575\\
+0 \amp 340 \amp 230 \amp 4 \amp -18 \amp 0 \amp 0 \amp 0 \amp 920\\
+0 \amp -1420 \amp 0 \amp 78 \amp 224 \amp 230 \amp 0 \amp 0 \amp 35190\\
+0 \amp 4820 \amp 0 \amp 284 \amp -128 \amp 0 \amp 230 \amp 0 \amp 26220\\ \hline
+0 \amp 11200 \amp 0 \amp -312 \amp -896 \amp 0 \amp 0 \amp 230 \amp 89240\\
+\end{array} \right]
+
+      </me>
+    </p>
+    <p>
+      Hopefully, you can see a number of similarities.  First, the value in each of the basis variables in 230, which is the value <m>d_{\beta}</m>.
+    </p>
+    <p>
+      The matrix <m>B'</m> is the columns 4 through 7 of the tableau.
+    </p>
+    <p>
+      The vector <m>B'\boldsymbol{b}</m> is the right column of the tableau.  Also, this is the value of basic solution with the factor of <m>1/d_{\beta}</m>.
+    </p>
+    <p>
+      The matrix <m>B'\Pi</m> is the columns of the tableau corresponding to the parameters <m>\pi=\{2,4,5\}.</m> This part of the tableau is important in determining the next pivot in the simplex method as we will see in the next section.
+    </p>
+    <p>
+      The value <m>\boldsymbol{c}^{\intercal}_{\beta} B' \boldsymbol{b}</m> is that of the objective function (lower right element).
+    </p>
+    <p>
+      The row vector <m>\boldsymbol{c}^{\intercal}_{\beta} B'\pi - d_{\beta} \boldsymbol{c}^{\intercal}_{\pi}</m> is the coefficients of the parameters in the objective row.  We will need this for the simplex method in the next section.
+    </p>
+  </subsection>
+</section>

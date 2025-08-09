@@ -1,0 +1,429 @@
+<section xml:id="sect-lop-matrix-software">
+  <title>Performing LOP Matrix Operations using Software</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Perform matrix operations in WebCAS.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Perform matrix operations (with rational numbers) in Julia.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      This section covers how to effectively and efficiently perform the matrix operations presented in <xref ref="sect-lop-matrix"/>.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-lop-matrix-webcas">
+    <title>Perform the Matrix Operations to Solve LOP problems in WebCAS</title>
+
+    <p>
+      WebCAS not only performs row operations on matrices, but also the standard matrix operations.
+      First go to the <url href="https://webwork.fitchburgstate.edu/webcas/matrix/matrix-calc.html">the Matrix Calculator</url> section of WebCAS.
+      There are two sections of this web page:
+    </p>
+
+    <figure xml:id="fig-matrixops-01">
+      <caption></caption>
+      <image source="images/matrixops-01.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      On the right side, there is a place to enter matrices.
+      This is the place to start to enter a matrix or vector with a name.
+      The <em>Matrix Expression</em> textbook is how operations are performed.
+    </p>
+
+    <p>
+      This tool is very general, but we will show the operations from <xref ref="sect-lop-matrix"/>.
+      First, click the <em>Add a new Matrix</em> button and you should see:
+    </p>
+
+    <figure xml:id="fig-matrixops-02">
+      <caption></caption>
+      <image width="50%" source="images/matrixops-02.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Next, let's enter the matrix in <xref ref="ex-simplex-matrix"/>.
+      We first enter the matrix <m>B</m> with the basis <m>\beta=\{1,3,6,7\}</m>.
+    </p>
+
+    <figure xml:id="fig-matrixops-03">
+      <caption></caption>
+      <image width="60%" source="images/matrixops-03.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      where the name of the matrix goes in the left (smaller) textbox and the matrix is entered in the right side in the same manner as that in the <em>Gaussian Eliminator</em> tool.
+      That is, row by row with no commas or other separating characters.
+      Click <em>Save Matrix</em> as you will see it rendered like a matrix in the Matrix Area on the right side.
+      (Note: you can edit the matrix or delete it with the boxes on the right side of it.
+      )
+    </p>
+
+    <p>
+      Next, let's do an operation on B, specifically the inverse using <c>inv(B)</c> by entering this in the <em>Matrix Expression</em> textbook.
+      Either click the <em>Enter</em> button or hit the return key.
+      You will see the inverse as
+    </p>
+
+    <figure xml:id="fig-matrixops-04">
+      <caption></caption>
+      <image width="60%" source="images/matrixops-04.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Note a few things about this.
+      First, the operation that was performed is shown.
+      That is, <m>B^{-1}</m>.
+      Next, the operation using fractions and finally, there is a [1] shown on the right side.
+      We will be able to use this with other operations later.
+    </p>
+
+    <p>
+      Next, let's add another vector and matrix.
+      Add <m>\boldsymbol{b}</m> and <m>\Pi</m> from <xref ref="ex-simplex-matrix"/>.
+      For the vector, it is a column vector, so each number should be in a separate row.
+      Also, use the name <c>Pi</c> as that we can't put greek letters in for matrix names.
+      You should see:
+    </p>
+
+    <figure xml:id="fig-matrixops-05">
+      <caption></caption>
+      <image width="60%" source="images/matrixops-05.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Next, to continue with the calculations in <xref ref="ex-simplex-matrix"/>, to compute <m>B^{-1}\boldsymbol{b}</m>, enter <c>[1]*b</c>, where <c>[1]</c> is the output on line 1.
+      The output is the same as seen in <xref ref="ex-simplex-matrix"/>.
+      Note: the Matrix Operations tool does not perform implicit multiplication, so make sure you specifically enter <c>*</c> for all mutliplications.
+    </p>
+
+    <p>
+      To compute <m>B^{-1}\Pi</m>, enter <c>[1]*Pi</c>.
+      The result is that seen in <xref ref="ex-simplex-matrix"/>.
+    </p>
+
+    <p>
+      To finish with the last two steps, first enter <m>\boldsymbol{c}_{\beta}</m> and <m>\boldsymbol{c}_{\pi}</m>.
+      Use the names <c>cbeta</c> and <c>cpi</c> and make sure that each element goes on a separate line.
+    </p>
+
+    <p>
+      To calculate <m>\boldsymbol{c}^{\intercal}B^{-1}\boldsymbol{b}</m>, first note that <m>B^{-1}\boldsymbol{b}</m> has already be computed and is in output <c>[2]</c>.
+      We next need to compute <m>\boldsymbol{c}_{\beta}^{\intercal}</m>, which is the transpose of <m>\boldsymbol{c}_{\beta}</m>.
+      This is done with <c>cbeta'</c> and returns
+    </p>
+
+    <p>
+      <me>
+        {cbeta}^{\intercal} = \left[\begin{array}{cccc} 40 \amp 72 \amp 0 \amp 0\end{array}\right].
+      </me>
+    </p>
+
+    <p>
+      and if you have the same steps, this output is now in row <c>[4]</c>.
+    </p>
+
+    <p>
+      Now, to compute  <m>\boldsymbol{c}^{\intercal}B^{-1}\boldsymbol{b}</m>, enter <c>[4]*[2]</c> and you should get
+    </p>
+
+    <p>
+      <me>
+        ({cbeta}^{\intercal})((B^{-1}) b) = [388]
+      </me>
+    </p>
+
+    <p>
+      where the result is a 1 by 1 matrix, which should be interpreted as a scalar.<fn>You probably also notice that there are many unneeded parentheses in the output.
+      It's a bit tricky to programmatically determine when a set of parentheses is needed.</fn>
+    </p>
+
+    <p>
+      Lastly, we also have the expression <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}</m>.
+      Some of these already exist, but note that these are all matrices (or actually row vectors) and if we first find <m>B^{-1}\Pi</m> using <c>[1]*Pi</c> and this returns:
+    </p>
+
+    <p>
+      <me>
+        (B^{-1})Pi = \begin{bmatrix} -25/46 \amp -3/46 \amp 1/23 \\ 34/23 \amp 2/115 \amp -9/115 \\ -142/23 \amp 39/115 \amp 112/115 \\ 482/23 \amp 142/115 \amp -64/115 \end{bmatrix}
+      </me>
+    </p>
+
+    <p>
+      and it's output is <c>[6]</c>.
+      Next we can find <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi</m> with <c>[4]*[6]</c> and the output is
+    </p>
+
+    <p>
+      <me>
+        ({cbeta}^{\intercal})((B^{-1}) Pi) = \begin{bmatrix} 1948/23 \amp -156/115 \amp -448/115 \end{bmatrix}
+      </me>
+    </p>
+
+    <p>
+      The next step is to compute <m>\boldsymbol{c}_{\pi}^{\intercal}</m> with <c>cpi'</c> which returns
+    </p>
+
+    <p>
+      <me>
+        cpi^{\intercal} = \begin{bmatrix} 36 \amp 0 \amp 0 \end{bmatrix}
+      </me>
+    </p>
+
+    <p>
+      in output <c>[8]</c>.
+      Finally we can compute <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}</m> with <c>[7]-[8]</c>
+    </p>
+
+    <p>
+      and the output in line <c>[9]</c> is
+    </p>
+
+    <p>
+      <me>
+        ({cbeta}^{\intercal})((B^{-1}) Pi) - (cpi^{\intercal})= \begin{bmatrix} 1120/23 \amp -156/115 \amp -448/115 \end{bmatrix}
+      </me>
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          Complete <xref ref="ex-simplex-matrix-int"/> using WebCAS (Matrix Calculator).
+          Note: <c>det(A)</c> will give you the determinant of the matrix <c>A</c> in WebCAS.
+        </p>
+      </statement>
+    </exercise>
+  </subsection>
+
+
+  <subsection xml:id="sect-lop-matrix-julia">
+    <title>Using Julia to perform Matrix Operations in solving LOP problems.</title>
+
+    <p>
+      In the previous section, we used WebCAS to perform the matrix operations from <xref ref="sect-lop-matrix"/>.
+      Although it performed nicely to calculate matrixes with fractions instead of floating point, we needed to break down the steps in order to get it to perform well.
+      Also, as we will see, the same steps are performed with a different basis each time and in WebCAS, the steps will need to be retyped in.
+    </p>
+
+    <p>
+      Alternatively, this section shows how to perform the steps in Julia, which allows some scripting and in the long term is easier to use with some setup.
+    </p>
+
+    <p>
+      If you haven't yet, review the basics of Julia that you will need in <xref ref="ch-lop-julia"/>, especially <xref ref="sect-julia-linear-algebra"/>, which discusses handling matrices in Julia.
+    </p>
+
+    <p>
+      To begin with, we will define <c>S</c> to be the simplex tableau except the objective row and right hand line.
+      In short, this will be the original and slack variable coefficients.
+      In the case of <xref ref="ex-simplex-matrix-int"/> define
+    </p>
+
+
+    <program language="julia">
+      <code>
+        S = [-18 -5 10 1 0 0 0
+          -4 -20 -15 0 1 0 0
+          10 15 18 0 0 1 0
+          20 16 4 0 0 0 1]
+      </code>
+    </program>
+
+    <p>
+      Recall that <m>B</m> and <m>\Pi</m> are defined by the basis and the parameter set.
+      It will actually help quite a bit to define these as
+    </p>
+
+
+    <program language="julia">
+      <code>
+        β = [1,3,6,7]
+        π = [2,4,5]
+      </code>
+    </program>
+
+    <p>
+      where you can create the beta and pi charaters with <c>\beta</c> or <c>\pi</c> and then hit tab (in a julia environment).
+      Once we have these, we can define <c>B</c> and <c>Π</c> in terms of the basis by
+    </p>
+
+
+    <program language="julia">
+      <code>
+        B = rationalize.(S[:,β])
+        Π = rationalize.(S[:,π])
+      </code>
+    </program>
+
+    <p>
+      where <c>rationalize</c> takes each integer and converts it to a rational number.
+      This is helpful for creating an inverse that is rational and the <c>.</c> is for broadcasting.
+      The elements inside the <c>[]</c> extracts all rows (the <c>:</c>) as well as columns 1,3, 6 and 7.
+      If both commands are in a single cell, only the last one will be echoed to the screen or
+    </p>
+
+    <p>
+      <cd>
+      <cline>4×3 Matrix{Rational{Int64}}:</cline>
+      <cline>  -5  1  0</cline>
+      <cline> -20  0  1</cline>
+      <cline>  15  0  0</cline>
+      <cline>  16  0  0</cline>
+      </cd>
+    </p>
+
+    <p>
+      Lastly, we will also define <m>c</m> to be
+    </p>
+
+
+    <program language="julia">
+      <code>
+        c = [40; 36; 72; 0; 0; 0; 0]
+      </code>
+    </program>
+
+    <p>
+      Then you can get <m>c_{\beta}</m> in julia using <c>c[β]</c> and the result is
+    </p>
+
+    <p>
+      <cd>
+      <cline>4-element Vector{Int64}:</cline>
+      <cline> 40</cline>
+      <cline> 72</cline>
+      <cline>  0</cline>
+      <cline>  0</cline>
+      </cd>
+    </p>
+
+    <p>
+      Now that all of the parts have been defined, repeating <xref ref="ex-simplex-matrix-int"/> is quite straightforward.
+    </p>
+
+    <p>
+      <ol>
+        <li>
+          <p>
+            To find <m>B^{-1}</m>, use <c>inv(B)</c> and the result is
+          </p>
+
+          <p>
+            <cd>
+            <cline>4×4 Matrix{Rational{Int64}}:</cline>
+            <cline>  -3//62    -1//31   0  0</cline>
+            <cline>   2//155   -9//155  0  0</cline>
+            <cline>  39//155  212//155  1  0</cline>
+            <cline> 142//155  136//155  0  1</cline>
+            </cd>
+          </p>
+
+          <p>
+            and this is the same that we got using WebCAS.
+            Note that a rational number in Julia has a <c>//</c>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            To get <m>B^{-1}\boldsymbol{b}</m>, enter <c>inv(B)*b</c> and the result is
+          </p>
+
+          <p>
+            <cd>
+            <cline>4-element Vector{Rational{Int64}}:</cline>
+            <cline>  5//2</cline>
+            <cline>   4</cline>
+            <cline> 153</cline>
+            <cline> 114</cline>
+            </cd>
+          </p>
+
+          <p>
+            and this is the same as above as well as in the exercise.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            To find <m>B^{-1}\Pi</m> enter <c>inv(B)*Π</c> and the result is
+          </p>
+
+          <p>
+            <cd>
+            <cline>4×3 Matrix{Rational{Int64}}:</cline>
+            <cline>  -25//46   -3//46     1//23</cline>
+            <cline>   34//23    2//115   -9//115</cline>
+            <cline> -142//23   39//115  112//115</cline>
+            <cline>  482//23  142//115  -64//115</cline>
+            </cd>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            To find <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\boldsymbol{b}</m>, enter <c>c[β]'*inv(B)*b</c> and it returns <c>388//1</c>, which is the rational (fraction) version of 388, which we found above.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Lastly, to find <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}</m> enter <c>c[β]'*inv(B)*Π-c[π]'</c> to get
+          </p>
+
+          <p>
+            <cd>
+            <cline>1×3 adjoint(::Vector{Rational{Int64}}) with eltype Rational{Int64}:</cline>
+            <cline> 1120//23  -156//115  -448//115</cline>
+            </cd>
+          </p>
+
+          <p>
+            which is a bit complicated (it's saying it is an adjoint--which is a general transpose).
+            The important thing is that it is a row vector of length 3 and the same that we got above and in the exercise.
+          </p>
+        </li>
+      </ol>
+    </p>
+    <exercise>
+      <statement>
+        <p>
+          Use Julia to evaluate all of the expressions in <xref ref="ex-simplex-matrix-int"/> and note that the determinant in Julia is <c>det</c>.
+        </p>
+      </statement>
+    </exercise>
+  </subsection>
+</section>

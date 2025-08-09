@@ -1,0 +1,618 @@
+<section xml:id="sect-slack-dict">
+  <title>Slack Variables and Dictionaries</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Use slack variables to convert an inequality to an equation.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understand the geometry of slack variables in a feasible set.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Create a Dictionary for a Linear Optimization Problem.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Define solutions, basic and feasible solutions and optimal solutions to a LOP.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Use Dictionaries to develop a solution algorithm.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      In <xref ref="sect-geometry" />, we examined feasible sets using geometry.
+      As we saw in that section, solutions occur on the boundary of the feasible set.
+      We will begin developing an algorithm which starts on a vertex of the feasible set and steps to other vertices that increase the objective function, continuing until the optimum value is reached.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Slack Variables</title>
+
+    <p>
+      Consider an inequality such as <m>4x_1 + 3x_2 \leq 24</m>.
+      This is nice mathematically in that it is linear, however an inequality is not quite as nice as a equation.
+      We can make this an equation by adding a value, <m>x_3</m> to the left side to make this an inequality.
+      That is
+    </p>
+
+    <p>
+      <me>
+        4x_1 + 3x_2 + x_3 = 24
+      </me>
+    </p>
+
+    <p>
+      and in order to keep the inequality <m>4x_1+3x_2 \leq 24</m>, it is imperative that <m>x_3 \geq 0</m>.
+      This may be nicer, but we now have an equation of 3 variables.
+      It is a plane or can be thought of as a family of lines with the parameter <m>x_3</m>.
+      A plot of this family is given in
+    </p>
+
+    <figure xml:id="fig-slack-vars">
+      <caption>The family of lines <m>4x_1 + 3x_2 + x_3 = 24</m> with the parameter and slack variable <m>x_3</m>.</caption>
+      <image width="65%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}
+              \draw [->] (-2,0) -- (9,0) node [above right] {$x$};
+              \foreach \x in {1,2,...,8}
+               \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+              \draw [->] (0,-2) -- (0,9) node [above right] {$y$};
+              \foreach \y in {1,2,...,8}
+                \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+                \draw[<->,thick] (-1,{(24-4*(-1))/3}) node[left] {$x_3=0$} -- (6.5,{(24-4*(6.5))/3});
+                \draw[<->,thick] (-1,{(21-4*(-1))/3}) node[left] {$x_3=3$} -- (5.75,{(21-4*(5.75))/3});
+                \draw[<->,thick] (-1,{(18-4*(-1))/3}) node[left] {$x_3=6$} -- (5,{(18-4*(5))/3});
+                \draw[<->,thick] (-1,{(15-4*(-1))/3}) node[left] {$x_3=9$} -- (4.25,{(15-4*(4.25))/3});
+              \end{tikzpicture}
+              ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      The side of the line <m>4x_1+3x_2 = 24</m> that is feasible is the same side where <m>x_3 \geq 0</m>.
+    </p>
+
+    <p>
+      The idea of slack variables with a single inequalities is now extended to a set of inequalities.
+      As an example, let's return to <xref ref="prob-lop1"/>.
+      We will introduce <term>slack variables</term> to the first three inequalities that will convert the inequality to an equation.
+      If we introduce <m>x_3, x_4</m> and <m>x_5</m> in the following way:
+    </p>
+
+    <p>
+      <men xml:id="eq-inequalities-slack">
+        \begin{aligned} 4x_1 + 3x_2 + x_3 \amp = 120 \\ x_1 + 2x_2 + x_4 \amp = 40 \\ x_2 + x_5 \amp = 16 \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      and <m>x_3, x_4</m> and <m>x_5</m> must be nonnegative in order for the above inequalities in <xref ref="prob-lop1"/> to remain true.
+      Similar to that above, we can plot the feasible set by plotting each of the equations where the slack variables are 0 and then shade the region when each is positive.
+    </p>
+
+    <figure xml:id="fig-lop-1">
+      <caption>A plot of a feasible set of <xref ref="prob-lop1"/>
+      together with plots of the lines with specific values for the slack variables.
+      The feasible set is the set of all <m>(x_1, x_2)</m> such that the variables (both original and slack) are positive.
+      </caption>
+      <image width="65%">
+        <latex-image>
+  <![CDATA[
+    \begin{tikzpicture}[scale=0.2]
+\fill[lightgray] (0,0)--(30,0) -- (24,8) -- (8,16) -- (0,16) -- cycle;
+\draw [->] (-2,0) -- (45,0) node [above right] {$x_2=0$};
+\foreach \x in {5,10,...,40} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+\draw [->] (0,-2) -- (0,45) node [above right] {$x_1=0$};
+\foreach \y in {5,10,...,45} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+\draw[<->,thick] (-2, {(120-4*(-2))/3}) -- (32, {(120-4*(32))/3});
+\draw[<->] (-5, {110-4*(-5))/3}) node [left]{$x_3=10$} -- (30, {(110-4*(30))/3});
+\draw[<->,thick] (-5, {(40-1*(-5))/2}) -- (45, {(40-1*(45))/2});
+\draw[<->] (-5, {(35-1*(-5))/2}) node [left]{$x_4 = 5$} -- (42, {35-1*(42))/2});
+\draw[<->,thick] (-5,16) -- (45,16);
+\draw[<->] (-5,13) node [left] {$x_5=3$} -- (45,13);
+\draw[<->] (6,-3) node [below] {$x_1=6$} -- (6,42);
+\draw[<->] (-5,4) node [left] {$x_2=4$} -- (42,4);
+\foreach \x/\y in {8/16,18/16,24/8,30/0,40/0,0/16,0/0,0/20,0/40}
+  \fill (\x,\y) circle[radius=10pt];
+\draw (10,30) node[right] {$x_3=0$};
+\draw (30,6) node[right] {$x_4=0$};
+\draw (30,16) node [above] {$x_5=0$};
+          \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+  </subsection>
+
+
+  <subsection xml:id="sect-dictionary">
+    <title>The Dictionary for an LOP</title>
+
+    <p>
+      Now that slack variables have been added to each inequality in an LOP, we look at the set of equations produced and see if we can develop a way to find the optimum solution to the LOP.
+    </p>
+
+    <p>
+      Returning to <xref ref="eq-inequalities-slack"/>, solve for <m>x_3, x_4</m> and <m>x_5</m>, we can write the LOP as
+    </p>
+
+    <p>
+      <men xml:id="eq-dict-LOP1">
+        \begin{aligned} \text{Maximize}\amp \amp   z  \amp = x_1 + 3x_2,  \\ \text{such that}\amp \amp  x_3  \amp = 120 - 4 x_1 -3x_2, \\ \amp \amp x_4  \amp = 40 - x_1 - 2x_2, \\ \amp \amp x_5  \amp = 16 - x_2,  \\ \text{and}\amp\amp \amp x_1, x_2, x_3, x_4, x_5 \geq 0.
+        \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      This is called the <term>dictionary</term> form of the LOP.
+      Note that the variables on the right of the equals signs are only <m>x_1</m> and <m>x_2</m>.
+      These are called the <term>nonbasic variables</term> or <term>parameters</term> of the problem.
+      If we have values for these variables, then we can determine the values of the other variables, <m>z, x_3, x_4, x_5</m>.
+      The three <m>x</m> variables are called the <term>basic variables</term> and the set of these are called the <term>basis</term> of the problem.
+      When a problem is originally written in dictionary form, the basic variables are the slack variables and the parameters are the original variables.
+    </p>
+
+    <p>
+      We will develop a solution algorithm which moves variables from the basis to the parameters.
+      The <term>basic</term> and <term>nonbasic</term> variables are often distinguished from one another using the variables <m>\beta</m> and <m>\pi</m> respectively.
+      For example, in the dictionary above, <m>\beta=\{3,4,5\}</m> and <m>\pi=\{1,2\}</m>.
+    </p>
+
+    <p>
+      Note also, that when <m>x_1, x_2, x_3, x_4</m> and <m>x_5</m> are 0, these are the 5 lines that define the feasible set as seen in <xref ref="fig-lop-1"/>.
+      Note that the original variables are zero on the coordinate axes.
+      You can also notice that the vertices of the feasible set occur where two of the variables are zero.
+      There are 5 of these.
+      Also, other intersection points occur between lines where the variables are 0, like <m>(24,8)</m>.
+      Four of these sets of points are not within the feasible set, such as such as <m>(40,0)</m> and <m>(56/3,16)</m>.
+    </p>
+
+    <p>
+      Recall that from the previous chapter, that the optimal point occurs on one of the vertices of the feasible set.
+      We will see here in this chapter how to walk from vertex to vertex without leaving the feasible set and also stopping when reaching the maximum of the objective.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-basic-solutions">
+    <title>Basic Solutions</title>
+
+    <p>
+      A <term>solution</term> to either the dictionary or the tableau is any set of values for <m> \boldsymbol{x}</m> that satisfy the problem constraints written as equalities.
+      For example,
+    </p>
+
+    <p>
+      <men xml:id="eq-solution-01">
+        \boldsymbol{x}=\left[\begin{array}{rr|rrr}10 \amp 5 \amp 65 \amp 20 \amp 11\end{array}\right]^{\intercal}
+      </men>
+    </p>
+
+    <p>
+      is a solution to the LOP above.
+      This is because if we substitute these values of <m>\boldsymbol{x}</m>, then each equation of the dictionary is satisfied.
+      The vertical line in <xref ref="eq-solution-01"/> between the variables <m>x_2</m> and <m>x_3</m> is used to separate out the original variables from the slack variables and is helpful for readibility.
+    </p>
+
+    <p>
+      To see that <xref ref="eq-solution-01"/> is a solution, substitute the values of <m>x_1</m> and <m>x_2</m> into the dictionary.
+    </p>
+    <p>
+      <md>
+        <mrow>x_3 \amp = 120 - 4(10) - 3(5) = 65 </mrow>
+        <mrow>x_4 \amp = 40 - (10) - 2(5) = 20</mrow>
+        <mrow>x_5 \amp = 16 - (5) = 11</mrow>
+      </md>
+    </p>
+
+    <p>
+      Also, we can find the value of <m>z</m> that corresponds to is solution is <m>z=x_1+3x_2 = 10 + 3(5) = 25</m>.
+    </p>
+
+    <note>
+      <p>
+        The term <em>solution</em> is not a (or the) optimal solution to the LOP, that is this may not be a point that is the optimum value of the function.
+        We use the term solution here as a indication that a point satisfies all of the equations.
+        The term <term>optimal solution</term> or <term>optimum</term> will used for this.
+      </p>
+    </note>
+
+    <p>
+      A solution is <term>basic</term> if the parameters are all zero.
+      In the LOP problem above, the solution
+    </p>
+
+    <p>
+      <men xml:id="eq-basic-solution-01">
+        \boldsymbol{x}=\left[\begin{array}{rr|rrr}0 \amp 0 \amp 120 \amp 40 \amp 16\end{array}\right]^{\intercal}
+      </men>
+    </p>
+
+    <p>
+      is basic with value <m>z=0</m>.
+      If we have a problem in dictionary form, we will set the parameters to 0 and the basic variables will be constants on right side of the equations.
+    </p>
+
+    <p>
+      In the example where <m>x_1 =0</m> and <m>x_2=0</m> is a basic solution with the basis <m>\beta = \{3, 4, 5\}</m>.
+      Recall that we mention above that when two variables (in this case, not in general) are zero, then we are at a vertex of the feasible set.
+      This vertex is at the origin.
+    </p>
+
+    <p>
+      Another basic solution is
+    </p>
+
+    <p>
+      <men xml:id="eq-basic-solution-03">
+        \boldsymbol{x}=\left[\begin{array}{rr|rrr} 0 \amp 16 \amp  72 \amp 8 \amp 0\end{array}\right]^{\intercal},
+      </men>
+    </p>
+
+    <p>
+      and is basic because the two variables <m>x_1</m> and <m>x_5</m> are 0.
+      Thus for this case, <m>\beta=\{2,3,4\}</m> and <m>\pi=\{1,5\}.</m>
+    </p>
+
+    <p>
+      A dictionary or tableau is <term>feasible</term> if its corresponding basic solution is feasible.
+      The solutions  <xref ref="eq-solution-01"/>,  <xref ref="eq-basic-solution-01"/> and <xref ref="eq-basic-solution-03"/> are feasible solutions because all of the variables are non-negative.
+      (Note: you would need to check that they are solutions.).
+      The solution
+    </p>
+
+    <p>
+      <men xml:id="eq-infeasible-solution">
+        \boldsymbol{x}=\left[\begin{array}{rr|rrr} 18 \amp 16 \amp 0 \amp -10 \amp 0 \end{array}\right]^{\intercal}
+      </men>
+    </p>
+
+    <p>
+      is not because <m>x_4=-10</m> does not satisfy the nonnegative constraint.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          For the solutions in <xref ref="eq-solution-01"/>, <xref ref="eq-basic-solution-01"/>, <xref ref="eq-basic-solution-03"/> and <xref ref="eq-infeasible-solution"/>, plot the solution on the feasible set in <xref ref="fig-lop-1"/> to verify that each is feasible or not.
+        </p>
+      </statement>
+      <hint>
+        <p>
+          For each of the solutions, the numbers to the left of the vertical line are the original variables and those are the variables to plot on the feasible set.
+        </p>
+      </hint>
+      <solution>
+        <p>
+          Replotting the feasible set with the solutions:
+        </p>
+         <figure xml:id="fig-lop-1-extra">
+      <caption>A plot of a feasible set of <xref ref="prob-lop1"/>
+      together with four solutions for the LOP.
+      </caption>
+      <image width="65%">
+        <latex-image>
+  <![CDATA[
+    \begin{tikzpicture}[scale=0.2]
+\fill[lightgray] (0,0)--(30,0) -- (24,8) -- (8,16) -- (0,16) -- cycle;
+\draw [->] (-2,0) -- (35,0) node [above right] {$x_2$};
+\foreach \x in {5,10,...,30} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+\draw [->] (0,-2) -- (0,30) node [above right] {$x_1$};
+\foreach \y in {5,10,...,25} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+\draw[<->,thick] (15, {(120-4*(15))/3}) -- (32, {(120-4*(32))/3});
+\draw[<->,thick] (-5, {(40-1*(-5))/2}) -- (35, {(40-1*(35))/2});
+\draw[<->,thick] (-5,16) -- (45,16);
+\foreach \x/\y/\L in {10/5/A, 18/16/D,0/16/C,0/0/B}
+  \fill (\x,\y) circle[radius=10pt] node [above right] {\L};
+          \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+      </solution>
+    </exercise>
+
+    <p>
+      We are now going to develop the <term>Simplex Method</term> to solve the LOP using the dictionary.
+      This technique will be systematically going from vertex to vertex of the feasible set until the optimal solution is reached.<fn>This is perhaps a bit too simplistic, because as we will see that the starting basis may not be in the feasible set and we need to get there first.</fn>
+    </p>
+
+    <p>
+      Lastly, the dictionary is <term>optimal</term> if its basic solution is optimal.
+      The simplex method will stop when we reach an optimal solution.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-develop-simplex">
+    <title>Developing the Simplex Method</title>
+
+    <p>
+      Returning to the dictionary in <xref ref="eq-dict-LOP1" />, consider the objective function
+    </p>
+
+    <p>
+      <me>
+        z = x_1 + 3x_2
+      </me>
+    </p>
+
+    <p>
+      and notice that if either <m> x_1</m> or <m>x_2</m> increases in value then <m>z</m> increases.
+      Since we are seeking a maximum of <m>z</m>, we want to increase either <m>x_1</m>, <m>x_2</m> or both.
+      We must be careful however, because as <m>x_1</m> and <m>x_2</m> increases, <m>x_3, x_4</m> and <m>x_5</m> decrease and we need to ensure that they must stay nonnegative.
+      Before increasing these variables, recall that the basis is <m>\beta=\{3,4,5\}</m> indicating that these three variables are in the basis (which are on the left side of all of the equations in a dictionary).
+    </p>
+
+    <p>
+      We can select one of the parameters, <m>\pi=\{1,2\}</m>, to increase its value.
+      As we will typically do, we will increase the first one and keep the others as 0,<fn>There are other algorithms (variations of the one that we are developing) that use the parameter with the largest coefficient to select the variable instead.</fn> so the variable <m>x_1</m> will be increased, so will set <m>x_2=0</m> in the constraints of <xref ref="eq-dict-LOP1" />:
+    </p>
+
+    <p>
+      <md>
+        <mrow> x_3\amp= 120-4x_1 </mrow>
+        <mrow> x_4\amp= 40 -x_1, </mrow>
+        <mrow> x_5\amp= 16. </mrow>
+      </md>
+    </p>
+
+    <p>
+      If we increase <m>x_1</m>, and keep <m>x_3</m> and <m>x_4</m> nonnegative, we require that
+    </p>
+
+    <p>
+      <md>
+        <mrow>120 -4x_1\amp\geq 0,\amp40-x_1\amp\geq 0.</mrow>
+      </md>
+    </p>
+
+    <p>
+      The largest value of <m>x_1</m> that ensure both of these stay true is <m>x_1=30</m>.
+      If we let <m>x_1=30</m> in <xref ref="eq-dict-LOP1" />, notice that when <m>x_2=0,</m> the variable <m> x_3</m> becomes zero, therefore it appears that we have interchanged <m>x_1</m> and <m>x_3</m> between basic and nonbasic variables.
+      Thus the new basis is <m>\beta=\{1,4,5\}</m> and the parameters is <m>\pi = \{2,3\}</m>.
+      This switch of variables is called a <term>pivot</term> and is denoted <m>1 \mapsto 3</m>, where the first number 1 is the variable entering the basis and the second number is the one leaving.
+    </p>
+
+    <p>
+      If we want <m>x_3</m> to be in the basis and <m>x_1</m> to leave we use the 2nd equation (first  equation coming from a constraint) in the dictionary in <xref ref="eq-dict-LOP1" /> and solve for <m>x_1</m> or
+    </p>
+
+    <p>
+      <me>
+        x_1= 30 -\frac{1}{4}x_3 - \frac{3}{4}x_2.
+      </me>
+    </p>
+
+    <p>
+      To get <m>x_3</m> a basic variable for the rest of the dictionary, we plug this in the other equations in <xref ref="eq-dict-LOP1" />, resulting in the new dictionary:
+    </p>
+
+    <p>
+      <md>
+        <mrow>z\amp= \left(30 -\frac{1}{4}x_3 - \frac{3}{4}x_2\right) + 3 x_2 =  30+\frac{9}{4}x_2 - \frac{1}{4}x_3 </mrow>
+        <mrow> x_1\amp = 30 - \frac{3}{4}x_2 - \frac{1}{4}x_3 </mrow>
+        <mrow> x_4\amp= 40 - \left(30 -\frac{1}{4}x_3 - \frac{3}{4}x_2\right) - 2x_2 = 10-\frac{5}{4}x_2 +\frac{1}{4}x_3</mrow>
+        <mrow> x_5\amp= 16-x_2 </mrow>
+      </md>
+    </p>
+
+    <p>
+      and for simplicity, if we multiply each row each by 4 to get:
+    </p>
+
+    <p>
+      <men xml:id="eq-dict-LOP1-step2">
+        \begin{aligned} 4z\amp= 120 +9x_2-x_3 \\ 4x_1\amp=120 -3x_2-x_3 \\ 4x_4\amp= 40 -5x_2+x_3 \\ 4x_5\amp= 64-4x_2.
+        \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      (Note: there was no reason to multiply the last row by 4 since there are no fractions in the equation, but you will see later why we want to do this.)
+    </p>
+
+    <p>
+      Also, we have a new basic solution for the dictionary in <xref ref="eq-dict-LOP1-step2" /> as
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x}^{(1)}= \frac{1}{4}\left[\begin{array}{rr|rrr} 120 \amp 0 \amp 0 \amp 40 \amp 64 \end{array}\right]^{\intercal} =
+        \left[\begin{array}{rr|rrr} 30 \amp 0 \amp 0 \amp 10 \amp 16\end{array}\right]^{\intercal}.
+      </me>
+    </p>
+
+    <p>
+      where the superscript <m>(1)</m> denotes the first step of the simplex method.
+      Also, this dictionary corresponds to the basis of <m>\beta=\{1,4,5\}</m> and parameters <m>\pi=\{2,3\}</m>.
+      The notation <m>1 \mapsto 3</m> shows that 1 has left the <m>\pi</m> parameter set to become a basic variable replacing 3.
+    </p>
+
+    <p>
+      The objective in the first row of <xref ref="eq-dict-LOP1-step2" /> is <m>z = 120/4=30</m>, when setting the parameters to 0.
+      Thus, the objective has increased from the initial dictionary, but also that if we increase <m>x_2</m>, then <m>z</m> will increase.
+      Because of this, we also know that the current solution is not optimal.
+      We can increase <m>x_2</m> (and set <m>x_3=0</m>) so long that it satisfies:
+    </p>
+
+    <p>
+      <md>
+        <mrow>120-3x_2\amp\geq 0,\amp 40-5x_2\amp\geq 0,\amp64-4x_2\amp\geq 0. </mrow>
+      </md>
+    </p>
+
+    <p>
+      This occurs by selecting
+    </p>
+
+    <p>
+      <me>
+        x_2= \min(120/3, 40/5,64/4) = 8
+      </me>
+    </p>
+
+    <p>
+      Because the 8 came from the the 3rd equation of <xref ref="eq-dict-LOP1-step2" />, we are going to solve for <m>x_2</m> (or actually <m>5x_2</m>) in this equation or
+    </p>
+
+    <p>
+      <men xml:id="eq-dict-LOP1-x2">
+        5 x_2 = 40 + x_3 - 4x_4
+      </men>
+    </p>
+
+    <p>
+      We now take the other three equations in <xref ref="eq-dict-LOP1-step2" /> and multiply by 5 because of the coefficient of the variable <m>x_2</m> above to get:
+    </p>
+
+    <p>
+      <md>
+        <mrow>20 z \amp = 600 + 9 (5x_2) - 5 x_3 </mrow>
+        <mrow>20 x_1 \amp = 600 - 3 (5x_2) - 5 x_3</mrow>
+        <mrow>5x_2 \amp =40 + x_3 - 4x_4 </mrow>
+        <mrow>20 x_5 \amp =320 - 4 (5 x_2)</mrow>
+      </md>
+    </p>
+
+    <p>
+      and then in each of the terms in the parentheses substitute <xref ref="eq-dict-LOP1-x2" />, to get
+    </p>
+
+    <p>
+      <md>
+        <mrow> 20 z \amp = 600 + 9 (40 + x_3-4x_4) - 5 x_3 = 960 + 4x_3 - 36 x_4 </mrow>
+        <mrow>20 x_1 \amp = 600 - 3 (40 + x_3-4x_4) - 5 x_3 = 480 - 8x_3 + 12 x_4</mrow>
+        <mrow>5x_2 \amp =40 + x_3 - 4x_4 </mrow>
+        <mrow>20 x_5 \amp =320 - 4 (40 + x_3-4x_4) = 160 - 4x_3 + 16 x_4</mrow>
+      </md>
+    </p>
+
+    <p>
+      If we note that each of the first, second and fourth equations above are factors of 4 (the previous coefficient of all parameters), if we divide these three equations by 4 to get:
+    </p>
+
+    <p>
+      <men xml:id="eq-dict-LOP1-step3">
+        \begin{aligned} 5 z \amp = 240 + x_3 - 9 x_4  \\ 5 x_1 \amp = 120 - 2x_3 + 3 x_4 \\ 5x_2 \amp =40 + x_3 - 4x_4  \\ 5 x_5 \amp = 40 - x_3 + 4 x_4 \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      which is the current dictionary.
+      Note that <m>x_4</m> is now a parameter and <m>x_2</m> is now a basic variable.
+      This means that we have done the pivot: <m>2\mapsto 4</m> and the parameter set is <m>\beta = \{3,4\}</m> and basis is <m>\beta = \{1,2,5\}</m>.
+      The basic solution of this dictionary is
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x}= \frac{1}{5}\left[\begin{array}{rr|rrr} 120 \amp 4 \amp 0 \amp 0 \amp 40\end{array}\right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      with objective function value <m>z=240/5=48</m>.
+    </p>
+
+    <p>
+      If we look at the dictionary, the top row is <m>5z=240+x_3-9x_4</m>.
+      If we increase the variable <m>x_3</m>, then the objective function will be increased.
+      We will increase <m>x_3</m>, but in order to ensure that we remain in the feasible set, we required that
+    </p>
+
+    <p>
+      <md>
+        <mrow>120-2x_3\amp\geq 0,\amp40+x_3\amp\geq 0,\amp40-x_3\amp\geq 0.</mrow>
+      </md>
+    </p>
+
+    <p>
+      We wish to increase <m>x_3</m> by the maximum amount with these constraints and this occurs when
+    </p>
+
+    <p>
+      <me>
+        x_3 = \min(120/2,40/1) = 40
+      </me>
+    </p>
+
+    <p>
+      where the second inequality has been ignored because it is automatically satisfied for any positive value of <m>x_3</m>.
+      Since the minimum value is associated with the 4th equation, we will solve for <m>x_3</m> in this equation or
+    </p>
+
+    <p>
+      <me>
+        x_3 = 40 + 4x_4 - 5 x_5
+      </me>
+    </p>
+
+    <p>
+      We then substitute this into the other equations or
+    </p>
+
+    <p>
+      <md>
+        <mrow>5 z \amp = 240 + (40+4x_4-5x_5) - 9 x_4 = 280 - 5x_4 - 5 x_5,</mrow>
+        <mrow>5 x_1 \amp = 120 - 2(40+4x_4-5x_5) + 3 x_4 = 40 - 5x_4 + 10 x_5,</mrow>
+        <mrow>5x_2 \amp =40 + (40+4x_4-5x_5) - 4x_4 = 80 - 5x_5, </mrow>
+        <mrow>x_3 \amp = 40+4x_4-5x_5.</mrow>
+      </md>
+    </p>
+
+    <p>
+      The first three equations are all multiples of 5, the previous constant, so we can divide each equation by 5 to get
+    </p>
+
+    <p>
+      <men xml:id="eq-dict-LOP1-step4">
+        \begin{aligned} z \amp = 56 - x_4 - x_5 \\ x_1 \amp = 8 - x_4 + 2 x_5 \\ x_2 \amp = 16 - x_5  \\ x_3 \amp = 40+4x_4-5x_5 \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      The basic solution of this tableau is
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x} = \left[\begin{array}{rr|rrr} 8 \amp 16 \amp 40 \amp 0 \amp 0 \end{array} \right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      with the objective function taking on the value <m>z=56</m>.  This solution has basis variables <m>\beta=\{1,2,3\}</m> and parameters <m>\pi=\{4,5\}.</m>
+      Lastly, looking at the objective equation, increasing our either of the parameters <m>x_4</m> or <m>x_5</m> decreases the objective value, so this means that this solution is <em>optimal.</em>
+    </p>
+
+    <p>
+      These set of steps form part of the <term>simplex method</term> for solving LOPs.
+      In the next section, we repeat this example with a matrix form of the dictionary, called a tableau.
+      This will make all of the calculations easier to do and with some software can simplify the steps tremendously.
+    </p>
+  </subsection>
+</section>

@@ -1,0 +1,13 @@
+<chapter xml:id="ch-matrix-form" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Matrix Formulation of Linear Optimization Problems</title>
+
+<introduction>
+  <p>
+    Simplex tableaus are matrices and as we have seen quite useful for solving LOPs.  We look at alternative way to formulation LOPs using matrices in this chapter.  Not only are the problems written in matrix format, but the simplex method is adapted to use these matrices.
+  </p>
+  </introduction>
+
+  <xi:include href="./sect-lop-matrix.ptx" />
+  <xi:include href="./sect-lop-matrix-software.ptx" />
+  <xi:include href="./sect-matrix-simplex.ptx" />
+</chapter>

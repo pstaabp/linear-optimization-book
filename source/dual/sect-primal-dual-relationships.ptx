@@ -1,0 +1,354 @@
+<section xml:id="sect-primal-dual">
+  <title>Primal-Dual Relationships</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Understand the relationship between the primal and dual problems.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Determine the optimal values of the dual problem from the final tableau of the primal problem.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understand the certificate for the primal problem.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <p>
+    Let's consider a Primal LOP
+  </p>
+
+  <p>
+    <me>
+      \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 + 4x_2 + 7 x_3, \amp  \\ \text{such that}\amp\amp x_1 + 2x_2 + 3x_3 \amp \leq 12, \\ \amp\amp 4x_1 + 3x_2 + 2x_3 \amp  \leq 18, \\ \text{and}\amp\amp x_1, x_2, x_3 \amp \geq 0.
+      \end{aligned}
+    </me>
+  </p>
+
+  <p>
+    The intial tableau is
+  </p>
+
+  <p>
+    <me>
+      \left[\begin{array}{rrr|rrr|r} 1 \amp 2 \amp 3 \amp 1 \amp 0 \amp 0 \amp 12\\ 4 \amp 3 \amp 2 \amp 0 \amp 1 \amp 0 \amp 18\\ \hline -3 \amp -4 \amp -7 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+    </me>
+  </p>
+
+  <p>
+    and using the simplex method, the tableau with optimal solutions is
+  </p>
+
+  <p>
+    <me>
+      \begin{array}{r} 1 \mapsto 5 \\ 2 \mapsto 4 \\ 3 \mapsto 2 \end{array} \qquad \left[\begin{array}{rrr|rrr|r} 0 \amp 5 \amp 10 \amp 4 \amp -1 \amp 0 \amp 30\\ 10 \amp 5 \amp 0 \amp -2 \amp 3 \amp 0 \amp 30\\ \hline 0 \amp 10 \amp 0 \amp 22 \amp 2 \amp 10 \amp 300\\ \end{array} \right].
+    </me>
+  </p>
+
+  <p>
+    The optimal basic solution is
+  </p>
+
+  <p>
+    <me>
+      \boldsymbol{x}^{\star} = \left[\begin{array}{rrr|rr} 3 \amp 0 \amp 3 \amp 0 \amp 0 \end{array}\right]^{\intercal}
+    </me>
+  </p>
+
+  <p>
+    with <m>z^{\star} = 30</m>.
+  </p>
+
+  <p>
+    The dual problem is written
+  </p>
+
+  <p>
+    <me>
+      \begin{aligned} \text{Minimize} \amp\amp w  = 12y_1 +18 y_2 \amp\\ \text{such that} \amp\amp y_1 + 4y_2 \amp\geq 3, \\ \amp\amp2y_1 + 3y_2 \amp \geq 4, \\ \amp\amp 3y_1 + 2y_2 \amp \geq 7, \\ \text{and} \amp\amp y_1, y_2, \geq 0.
+      \end{aligned}
+    </me>
+  </p>
+
+  <p>
+    This can be solved with the simplex method.
+    The initial tableau is
+  </p>
+
+  <p>
+    <me>
+      \left[\begin{array}{rr|rrrr|r} -1 \amp -4 \amp 1 \amp 0 \amp 0 \amp 0 \amp -3\\ -2 \amp -3 \amp 0 \amp 1 \amp 0 \amp 0 \amp -4\\ -3 \amp -2 \amp 0 \amp 0 \amp 1 \amp 0 \amp -7\\ \hline 12 \amp 18 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+    </me>
+  </p>
+
+  <p>
+    and tableau pivots result in
+  </p>
+
+  <p>
+    <me>
+      \begin{array}{r} 1 \mapsto 5 \\ 2 \mapsto 3 \end{array} \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 10 \amp -3 \amp 0 \amp 1 \amp 0 \amp 2\\ 0 \amp 0 \amp -5 \amp 10 \amp -5 \amp 0 \amp 10\\ 10 \amp 0 \amp 2 \amp 0 \amp -4 \amp 0 \amp 22\\ \hline 0 \amp 0 \amp 30 \amp 0 \amp 30 \amp 10 \amp -300\\ \end{array} \right]
+    </me>
+  </p>
+
+  <p>
+    The optimal solution is
+  </p>
+
+  <p>
+    <me>
+      \boldsymbol{y}^{\star} = \frac{1}{10} \left[\begin{array}{rr|rrr} 22 \amp 2 \amp 0 \amp 10 \amp 0 \end{array} \right]^{\intercal}.
+    </me>
+  </p>
+
+  <p>
+    Looking at the final tableau for both the primal and dual problems, you should notices many similarities.
+    In particular, the nonzero elements of <m>\boldsymbol{y}^{\star}</m> are located in the final objective row of the primal tableau (except for some shuffling of locations).
+    Additionally, the nonzero values of <m>\boldsymbol{x}^{\star}</m>are located in the final objective row of the dual tableau, again with shuffling of locations.
+    This chapter will discuss why this occurs.
+  </p>
+
+  <p>
+    Consider now that the simplex method was performed on the primal problem.
+    The final objective row will take on the form:
+  </p>
+
+  <p>
+    <me>
+      \left[ \begin{array}{ccccc|cccccc|c} \amp\amp\amp\amp\amp\amp\amp\amp\amp\amp \\ \hline c_1^{\star} \amp \cdots \amp c_j^{\star} \amp \cdots \amp c_n^{\star} \amp c_{n+1}^{\star} \amp \cdots \amp c_{n+i}^{\star} \amp \cdots \amp c_{n+m}^{\star} \amp 1 \amp z^{\star} \end{array}  \right]
+    </me>
+  </p>
+
+  <p>
+    From what we saw in the problem above, it appears that
+  </p>
+
+  <p>
+    <men xml:id="eq-y-obj">
+      y_i^{\star}  = c_{n+i}^{\star} \qquad \text{for $1 \leq i \leq m$} \qquad y_{m+j}^{\star} = c_j^{\star} \qquad \text{for $1 \leq j \leq n$}
+    </men>
+  </p>
+
+  <p>
+    Here’s the roadmap for what we are trying to do.
+    We have the tableau from the primal problem, and specifically the final objective row.
+    We want to show that
+  </p>
+
+  <p>
+    <ol>
+      <li>
+        <p>
+          The values of the objective row correspond to the optimal values of <m>\boldsymbol{y}</m> in the dual.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The values of <m>c_j^{\star}</m> satisfy constraints thus the values of <m>y_j</m> are non-negative.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The variables <m>y_j</m> satisfy the other constraints of the dual.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The optimal value of <m>w^{\star}</m> equals <m>z^{\star}</m>.
+        </p>
+      </li>
+    </ol>
+  </p>
+
+  <p>
+    We will then call the optimal values of <m>\boldsymbol{y}</m> the <term>certificate</term> for the primal problem.
+  </p>
+
+  <lemma xml:id="lem-dual-nonneg">
+    <statement>
+      <p>
+        The optimal values of <m>\boldsymbol{y}^{\star}</m> as defined by <xref ref="eq-y-obj"/> satisfies the nonnegative constraint.
+      </p>
+    </statement>
+
+
+    <proof>
+      <p>
+        Because <m>c_{j}^{\star}</m> is in the objective row of the final tableau, all elements are nonnegative, therefore <m>y_i^{\star}</m> is nonnegative.
+      </p>
+    </proof>
+  </lemma>
+
+  <lemma xml:id="lem-obj-row">
+    <statement>
+      <p>
+        Show that
+      </p>
+
+      <p>
+        <men xml:id="eq-lemma-obj-row">
+          z = \sum_{j=1}^n c_j x_j = \biggl(z^{\star} - \sum_{i=1}^m b_i y_i^{\star} \biggr) + \sum_{j=1}^n \biggl( \biggl( \sum_{i=1}^m a_{i,j} y^{\star} \biggr) - y_{m+j}^{\star} \biggr) x_j.
+        </men>
+      </p>
+
+      <p>
+        where <m>z^{\star}</m> is the optimal value of <m>z</m> of the Primal LOP and the <m>y^{\star}</m>’s
+      </p>
+    </statement>
+
+
+    <proof>
+      <p>
+        The last row of the objective function of the final primal tableau states that
+      </p>
+
+      <p>
+        <me>
+          z = z^{\star}- \sum_{j=1}^{n} c^{\star}_{j} x_{j} -\sum_{i=1}^{m} c^{\star}_{n+i}x_{n+i}
+        </me>
+      </p>
+
+      <p>
+        from <xref ref="eq-y-obj"/>
+      </p>
+
+      <p>
+        <men xml:id="eq-Z">
+          z= z^{\star}- \sum_{j=1}^{n} y^{\star}_{m+j}x_{j} -\sum_{i=1}^{m} y^{\star}_{i}x_{n+i}.
+        </men>
+      </p>
+
+      <p>
+        Since the slack variable <m>x_{n+i}</m> from the original form of the dictionary can be written:
+      </p>
+
+      <p>
+        <me>
+          x_{n+i} = b_{i} - \sum_{j=1}^{n} a_{ij}x_{j}
+        </me>
+      </p>
+
+      <p>
+        we can use this and the objective <m>z=\sum_{j=1}^n c_j x_j</m> from the Primal LOP to write <xref ref="eq-Z"/> as
+      </p>
+
+      <p>
+        <me>
+          \sum_{j=1}^{n} c_{j} x_{j} = z^{\star}- \sum_{j=1}^{n} y^{\star}_{m+j}x_{j} - \sum_{i=1}^{m} y^{\star}_{i} \biggl( b_{i} - \sum_{j=1}^{n} a_{ij}x_{j} \biggr)
+        </me>
+      </p>
+
+      <p>
+        and rewriting, we get
+      </p>
+
+      <p>
+        <me>
+          \sum_{j=1}^{n} c_{j} x_{j} = \biggl( z^{\star}-\sum_{i=1}^{m} b_{i} y_{i}^{\star}\biggr) + \sum_{j=1}^{n} \biggl(\biggl( \sum_{i=1}^{m} a_{i,j}y^{\star}\biggr) - y_{m+j}^{\star}\biggr) x_{j}
+        </me>
+      </p>
+    </proof>
+  </lemma>
+
+  <corollary xml:id="cor-zstar">
+    <statement>
+      <p>
+        Show that
+      </p>
+
+      <p>
+        <me>
+          z^{\star} = \sum_{i=1}^m b_i y^{\star}_i
+        </me>
+      </p>
+    </statement>
+
+
+    <proof>
+      <p>
+        Let <m>x_j=0</m> in <xref ref="lem-obj-row"/>.
+      </p>
+    </proof>
+  </corollary>
+
+  <corollary xml:id="cor-sum-cjxj">
+    <statement>
+      <p>
+        Show that
+      </p>
+
+      <p>
+        <me>
+          \sum_{j=1}^n c_j x_j = \sum_{j=1}^n \biggl( \sum_{i=1}^m a_{ij} y^{\star}_i - y^{\star}_{m+j} \biggr) x_j.
+        </me>
+      </p>
+    </statement>
+
+
+    <proof>
+      <p>
+        Substitute the result of <xref ref="cor-zstar"/> into <xref ref="eq-lemma-obj-row"/> from  <xref ref="lem-obj-row"/>.
+      </p>
+    </proof>
+  </corollary>
+
+  <corollary xml:id="cor-cj-geq">
+    <statement>
+      <p>
+        From above, show that
+      </p>
+
+      <p>
+        <men xml:id="eq-col-cj">
+          c_j = \sum_{i=1}^m a_{ij} y^{\star}_i - y^{\star}_{m+j}
+        </men>
+      </p>
+
+      <p>
+        and then conclude that
+      </p>
+
+      <p>
+        <men xml:id="eq-col-nonneg">
+          \sum_{i=1}^m a_{ij} y^{\star}_i \geq c_j.
+        </men>
+      </p>
+    </statement>
+
+
+    <proof>
+      <p>
+        Equating coefficients of <xref ref="cor-sum-cjxj"/>, leads to <xref ref="eq-col-cj"/>.
+        Since <m>y^{\star}_{m+j} \geq 0</m> from <xref ref="lem-dual-nonneg"/>, this leads to <xref ref="eq-col-nonneg"/>.
+      </p>
+    </proof>
+  </corollary>
+
+  <p>
+    Note that we have shown that the values of <m>y_{i}^{\star}</m> taken from the objective row of the final primal tableau, which are called the certificates, show that the objective of the minimum problem is ...
+  </p>
+
+  <p>
+    Additionally, the values of <m>y_{i}^{\star}</m> satisfy the dual problem.
+  </p>
+
+  <theorem>
+    <statement>
+      <p>
+        Strong Duality Theorem If a linear problem <m>P</m> has an optimal value <m>z^{\star}</m>, and its dual problem <m>D</m> has an optimal value <m>w^{\star}</m> then <m>z^{\star}=w^{\star}</m>.
+      </p>
+    </statement>
+  </theorem>
+</section>

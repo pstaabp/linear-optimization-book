@@ -1,0 +1,304 @@
+<section xml:id="sect-lops">
+  <title>Linear Optimization Problems</title>
+
+<objectives>
+  <ul>
+    <li>
+      <p>
+        Definition of a Linear Optimization Problem and related problems.
+      </p>
+    </li>
+    <li>
+      <p>
+        Defintion of the Standard Form of an LOP
+      </p>
+    </li>
+    <li>
+      <p>
+        How to put a minimum problem into standard form
+      </p>
+    </li>
+    <li>
+      <p>
+        General Form of an LOP
+      </p>
+    </li>
+  </ul>
+</objectives>
+
+
+  <introduction>
+    <p>
+      In the previous two sections of this chapter we have seen applied problems as well as feasible sets.
+      In this section, we will summarize all of these and determine a method to put applied problems into a mathematical formulation.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-def-lop">
+    <title>Defintions and Conventions</title>
+
+    <definition xml:id="def-lop">
+      <statement>
+        <p>
+          A <term>Linear Optimization Problem</term><fn>This is not the most general form of such a problem.  We will see a general linear optimziation problem in <xref ref="ch-general-lops"/>.</fn> consists of
+        </p>
+
+        <p>
+          <ul>
+            <li>
+              <p>
+                A linear objective function that is to be minimized or maximized.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                A set of linear inequalities.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                A set of nonnegative constraints on the variables.
+              </p>
+            </li>
+          </ul>
+        </p>
+
+        <p>
+          In short, we will call such problems <term>LOPs</term> and if the variables are constrained to be integers, then such problems are <term>Integer Linear Optimization Problems</term> or <term>ILOPs</term> and if the variables are constrained to be binary, then the problems are <term>Binary Linear Optimization Problems</term> or <term>BLOPs</term> .
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Let's take a look at an purely mathematical example of an LOP.
+    </p>
+
+
+    <problem xml:id="prob-lop1">
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize} \amp \amp z = x_1 + 3x_2, \amp \\ \text{subject to} \amp \amp 4x_1 + 3x_2 \amp \leq 120, \\ \amp \amp x_1 + 2x_2 \amp \leq 40, \\ \amp \amp x_2 \amp \leq 16, \\ \text{and} \amp \amp x_1, x_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <p>
+      A few conventions that we will use in this book:
+    </p>
+
+    <p>
+      <ul>
+        <li>
+          <p>
+            This is a <em>maximum</em> problem, so we will use the variable <m>z</m> for the objective and <m>x_i</m> for each of the variables.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            If instead we have a <em>minimum</em> problem, then we will use <m>w</m> for the objective and <m>y_i</m> for the variables.
+            We will see another problem like this later.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            The variables (either <m>x_i</m> or <m>y_i</m>) need to have the non-negative constraint that is the last line of the LOP in <xref ref="prob-lop1" />.
+          </p>
+        </li>
+      </ul>
+    </p>
+
+    <note>
+      <p>
+        Many LOPs naturally have the nonnegative constraint, because they arise from realistic problems in which variables cannot be negative.
+        however, more abstract problems or mathematical problems may not have such constraints.
+        We will learn in <xref ref="ch-general-lops"/> how to either take such problems and both add nonnegative constraints and then solve them without such constraints.
+      </p>
+    </note>
+
+    <p>
+      An example of a minimum problem is the following.
+    </p>
+
+
+    <problem xml:id="prob-min-lop">
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Minimize} \amp \amp w = 4y_1 + 3y_2, \amp \\ \text{subject to} \amp \amp y_1 + y_2 \amp \geq 40, \\ \amp \amp 3y_1 + 2y_2 \amp \geq 95, \\ \amp \amp y_1 + 4 y_2 \amp \geq 55, \\ \text{and} \amp \amp y_1, y_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <p>
+      As you can see, we have use the variable <m>w</m> for the objective function and <m>y_i</m> for the variable.
+      Another difference with <xref ref="prob-lop1"/> is that the first three constraints are of the form <m>\geq</m>.
+      Although this is not necessary, it is common.
+      We will graph this feasible set in the next section and the characteristics of this set often are paired with a minimum problem.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-std-form">
+    <title>Standard Form</title>
+
+    <p>
+      The LOP that we have been working on the past two section is in a special form that is needed for solving these problems using a technique we will develop in <xref ref="ch-simplex"/>.
+      We define it below and then explain how to get other problems into this form.
+    </p>
+
+    <definition xml:id="def-std-max-form">
+      <statement>
+        <p>
+          A Linear Optimization Problem is in <term>standard form</term> if the following are conditions are met:
+          <ol>
+            <li>
+              <p>
+                It is a maximum problem.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                All the constraints are of the form <m>\leq b</m>, some constant.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                All variables are nonnegative.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Not all LOPs are in standard form.
+      Clearly <xref ref="prob-min-lop"/> and many in <xref ref="sect-linear-models"/> as well.
+      However, there is a systematic way to put such problems in standard form.
+    </p>
+
+    <p>
+      <ol>
+        <li>
+          <p>
+            If the problem is a minimize problem in the form <m>w = c_1 y_1 + c_2 y_2 + \cdots c_n y_n</m>, define <m>z=-(c_1 y_1 + c_2 y_2 + \cdots + c_n y_n)</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            Any inequality in the form <m>a_1 x_1 + a_2 x_2 + \cdots + a_n x_n \geq b_n </m> should be multiplied by <m>-1</m> to get
+          </p>
+          <p>
+            <me>
+              -a_1 x_1 - a_2 x_2 - \cdots a_n x_n \leq -b_n
+            </me>
+          </p>
+        </li>
+        <li>
+          <p>
+            There are techniques to handle cases when the nonnegative constraint is not satisfied.  We will see how to handle these cases in <xref ref="ch-general-lops"/>.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      The following example shows how to put an LOP that is not in Standard Form into one that is.
+    </p>
+
+    <example>
+      <statement>
+        <p>
+          Put <xref ref="prob-min-lop"/> in standard form.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          First, if the objective is a minimum problem, then we can make it a maximum problem by writing <m>z=-w</m>.
+          In this case, <m>z=-3y_1-2y_2</m>.
+        </p>
+
+        <p>
+          Next, to get the inequalities in the proper form, multiply by <m>-1</m> and recall that changes a <m>\geq</m> to a <m>\leq</m>.
+          In this problems
+        </p>
+
+        <p>
+          <md>
+            <mrow>-y_1 - y_2 \amp \leq -40,</mrow>
+            <mrow>-3y_1-2y_2 \amp \leq -95,</mrow>
+            <mrow>-y_1-4y_2 \amp \leq -55.</mrow>
+          </md>
+        </p>
+
+        <p>
+          Therefore the problem in <em>Standard Form</em> is
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize}\amp \amp z  = -3 y_1 - 2y_2,\amp \\ \text{subject to}\amp\amp -y_1 - y_2 \amp \leq -40, \\ \amp \amp-3y_1-2y_2 \amp \leq -95, \\ \amp \amp -y_1-4y_2 \amp \leq -55,\\ \text{and}\amp\amp y_1, y_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+
+  <subsection xml:id="sect-lop-general">
+    <title>General and Matrix Forms of an LOP</title>
+
+    <p>
+      In this section, we write the <term>General Form</term> of an Linear Optimization problem.
+      Assume that there are <m>n</m> variables.
+      If we have a maximum problem, we will use the variables <m>x_i</m> and a general constraint can be written
+    </p>
+
+    <p>
+      <me>
+        \sum_{j=1}^n a_{i,j} x_j \leq b_i,
+      </me>
+    </p>
+
+    <p>
+      where  <m>i</m> will be between 1 and <m>m</m>.
+      So in general a maximum problem can be written:
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} \text{Maximize} \amp \amp  z = \sum_{j=1}^n c_j x_j  \amp \\ \text{subject to} \amp \amp \sum_{j=1}^n a_{i,j} x_j \leq b_i \amp \qquad \text{where $i=1,2,\ldots,n$}, \\ \text{and} \amp \amp  x_j \geq 0, \amp \qquad\text{where $j=1,2, \ldots,n$}. \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      These problems can be written in <term>Matrix Form</term> in the following way:
+    </p>
+    <p>
+      <me>
+        \begin{aligned}
+        \text{Maximize} \amp \amp z = \boldsymbol{c}^{\intercal}\boldsymbol{x}, \amp \\
+        \text{subject to} \amp \amp A \boldsymbol{x} \leq \boldsymbol{b}, \\
+        \text{and} \amp \amp \boldsymbol{x} \geq \boldsymbol{0}.
+        \end{aligned}
+      </me>
+    </p>
+    <p>
+      where the inequalities must hold for each element of the vector.
+    </p>
+  </subsection>
+</section>

@@ -1,0 +1,604 @@
+<section xml:id="sect-general-applied">
+  <title>General Applied Problems</title>
+
+  <introduction>
+    <p>
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-tsp">
+    <title>Traveling Salesperson</title>
+
+    <p>
+      Sylvia has to travel to 5 towns in Massachusetts: Fitchburg, Boston, Lowell, Fall River and Worcester.
+      The following weighted graph shows the distances between every pair of towns.
+    </p>
+
+    <figure xml:id="fig-tsp">
+      <caption></caption>
+      <image width="75%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+          <![CDATA[
+          \begin{tikzpicture}
+          \node [circle,draw] at (-3,5)(F) {F};
+\node [circle,draw] at (3,5) (L) {L};
+\node [circle,draw] at (-5,0) (W) {W};
+\node [circle,draw] at (0,-3) (FR) {FR};
+\node [circle,draw] at (5,0) (B) {B};
+\draw [-] (F) -- (FR) node [midway,left] {83.4};
+\draw [-] (F) -- (B) node [midway,above right] {46.9};
+\draw [-] (F) -- (L) node [midway,above] {32.4};
+\draw [-] (F) -- (W) node [pos=0.5,left] {27.5} ;
+\draw [-] (FR) -- (B) node [midway,below right]{54.2};
+\draw [-] (FR) -- (L) node [midway,right] {77.5} ;
+\draw [-] (FR) -- (W) node [midway,below left]{56.1};
+\draw [-] (B) -- (L) node [midway,right] {31.2} ;
+\draw [-] (B) -- (W) node [midway,below] {43.3};
+\draw [-] (L) -- (W) node [midway,above left] {41.0} ;
+\end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      She wishes to travel in a manner to minimize the total distance travelled and not travel through any town more than once.
+    </p>
+
+    <p>
+      One method of solving this problem is by setting up an LOP.
+      First, we defined all of the paths between two towns and assign it to a variable that will be 1 if she travels between the towns and 0 otherwise.
+      In particular:
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} x_1 = \amp \text{travel between F and L} \\ x_2 = \amp \text{travel between F and B} \\ x_3 = \amp \text{travel between F and FR} \\ x_4 = \amp \text{travel between F and W} \\ x_5 = \amp \text{travel between L and B} \\ x_6 = \amp \text{travel between L and FR} \\ x_7 = \amp \text{travel between L and W} \\ x_8 = \amp \text{travel between B and FR} \\ x_9 = \amp \text{travel between B and W} \\ x_{10} = \amp \text{travel between FR and W} \\ \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      and each of these values will be 0 or 1.
+      The objective function is sum of each variable times the distance between the two cities.
+      This is to be minimized so
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} w = \amp 32.4 x_1 + 46.9 x_2 + 83.4 x_3 + 27.5 x_4 + 31.2 x_5 + 77.5 x_6 + 41.0 x_7 \\ \amp \qquad + 54.2 x_8 + 43.3 x_9 + 56.1 x_{10} \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      The constraints are that each town must be entered once and leave once.
+      In terms of the variables, the sum of all variables into a town must equal 2.
+      Thus there are the constraints:
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} x_1 + x_2 + x_3 + x_4    = \amp 2 \\ x_1 + x_5 + x_6 + x_7    = \amp 2 \\ x_2 + x_5 + x_8 + x_9    = \amp 2 \\ x_3 + x_6 + x_8 + x_{10} = \amp 2 \\ x_4 + x_7 + x_9 + x_{10} = \amp 2 \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      Let's try solving this with the adapted simplex method from this chapter.
+      A small difference that we will use is that we multiply the objective by 10 to get integer coefficients.
+      This will keep all numbers in the tableau as integers.
+      The simplex tableau for this problem is
+    </p>
+
+    <p>
+      <me>
+        \left[\begin{array}{rrrrrrrrrrr|r} 1 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2\\ 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 2\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1 \amp 0 \amp 1 \amp 0 \amp 2\\ 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1 \amp 1 \amp 0 \amp 2\\ \hline 324 \amp 469 \amp 834 \amp 275 \amp 312 \amp 775 \amp 410 \amp 542 \amp 433 \amp 561 \amp 1 \amp 0\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      and recall that there are no inequalities in this, so no slack variables.
+      We now pivot to bring 4 variables into the basis<mdash/>the basis is empty currently.
+    </p>
+
+    <p>
+      <me>
+        \emptyset \mapsto 1 \qquad \left[\begin{array}{rrrrrrrrrrr|r} 1 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2\\ 0 \amp -1 \amp -1 \amp -1 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 2\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1 \amp 0 \amp 1 \amp 0 \amp 2\\ 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1 \amp 1 \amp 0 \amp 2\\ \hline 0 \amp 145 \amp 510 \amp -49 \amp 312 \amp 775 \amp 410 \amp 542 \amp 433 \amp 561 \amp 1 \amp -648\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      <me>
+        \emptyset \mapsto 2 \qquad \left[\begin{array}{rrrrrrrrrrr|r} 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2\\ 0 \amp 1 \amp 1 \amp 1 \amp -1 \amp -1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp -1 \amp -1 \amp 2 \amp 1 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 2\\ 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1 \amp 1 \amp 0 \amp 2\\ \hline 0 \amp 0 \amp 365 \amp -194 \amp 457 \amp 920 \amp 555 \amp 542 \amp 433 \amp 561 \amp 1 \amp -648\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      <me>
+        \emptyset \mapsto 3 \qquad \left[\begin{array}{rrrrr|rrrrrr|r} 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 2\\ 0 \amp 0 \amp 1 \amp 1 \amp -2 \amp -1 \amp -1 \amp -1 \amp -1 \amp 0 \amp 0 \amp -2\\ 0 \amp 0 \amp 0 \amp -1 \amp 2 \amp 2 \amp 1 \amp 2 \amp 1 \amp 1 \amp 0 \amp 4\\ 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1 \amp 1 \amp 0 \amp 2\\ \hline 0 \amp 0 \amp 0 \amp -559 \amp 1187 \amp 1285 \amp 920 \amp 907 \amp 798 \amp 561 \amp 1 \amp 82\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      <me>
+        \emptyset \mapsto 4 \qquad \left[\begin{array}{rrrrr|rrrrrr|r} 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 2\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1 \amp 0 \amp 1 \amp 0 \amp 2\\ 0 \amp 0 \amp 0 \amp 1 \amp -2 \amp -2 \amp -1 \amp -2 \amp -1 \amp -1 \amp 0 \amp -4\\ 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 2 \amp 2 \amp 2 \amp 2 \amp 0 \amp 6\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 69 \amp 167 \amp 361 \amp -211 \amp 239 \amp 2 \amp 1 \amp -2154\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      <me>
+        \emptyset \mapsto 5 \qquad \left[\begin{array}{rrrrr|rrrrrr|r} 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2 \amp -2 \amp -2 \amp 0 \amp -2\\ 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp -2 \amp -2 \amp 0 \amp 0 \amp -2 \amp 0 \amp -2\\ 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 2 \amp 0 \amp 2 \amp 0 \amp 4\\ 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 2 \amp 2 \amp 0 \amp 4\\ 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 2 \amp 2 \amp 2 \amp 2 \amp 0 \amp 6\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 196 \amp 584 \amp -560 \amp 340 \amp -134 \amp 2 \amp -4722\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      And now there are five variables in the basis and this finishes Stage 0.
+      There are two infeasible variable (<m>x_1, x_2</m>) and so we bring the first into the basis with the leftmost negative in the 1st row (<m>x_8</m>) into the basis.
+    </p>
+
+    <p>
+      <me>
+        8 \mapsto 1 \qquad \left[\begin{array}{rrrrrr|rrrrr|r} -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 2 \amp 0 \amp 2\\ 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp -2 \amp -2 \amp 0 \amp 0 \amp -2 \amp 0 \amp -2\\ 2 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 2\\ 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 2 \amp 2 \amp 0 \amp 4\\ 2 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4\\ \hline -560 \amp 0 \amp 0 \amp 0 \amp 0 \amp 196 \amp 584 \amp 0 \amp 900 \amp 426 \amp 2 \amp -4162\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      <me>
+        6 \mapsto 2 \qquad \left[\begin{array}{rrrrr|rrrrrr|r} -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 2 \amp 0 \amp 2\\ 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 2\\ 2 \amp 2 \amp 2 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp -2 \amp -2 \amp 0 \amp 0\\ 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 2 \amp 2 \amp 0 \amp 4\\ 2 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp 2\\ \hline -560 \amp 196 \amp 0 \amp 0 \amp 0 \amp 0 \amp 388 \amp 0 \amp 900 \amp 230 \amp 2 \amp -4358\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      There are no infeasible variables, so Stage I is also complete and we move onto Stage II.
+      There is a negative in the objective row, so Stage II is not complete.
+      Forming <m>\boldsymbol{x}</m>-ratios for variable <m>x_1</m> and taking the smallest nonnegative ratio is in the 3rd row so
+    </p>
+
+    <p>
+      <me>
+        1 \mapsto 3 \qquad \left[\begin{array}{rrrrr|rrrrrr|r} 0 \amp 2 \amp 2 \amp 0 \amp 0 \amp 0 \amp -2 \amp 2 \amp 0 \amp 0 \amp 0 \amp 2\\ 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 2\\ 2 \amp 2 \amp 2 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp -2 \amp -2 \amp 0 \amp 0\\ 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 2 \amp 2 \amp 0 \amp 4\\ 0 \amp 0 \amp -2 \amp 0 \amp 2 \amp 0 \amp 2 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2\\ \hline 0 \amp 756 \amp 560 \amp 0 \amp 0 \amp 0 \amp -172 \amp 0 \amp 340 \amp -330 \amp 2 \amp -4358\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      And this is still not feasible so bring <m>x_{10}</m> into the basis.
+    </p>
+
+    <p>
+      <me>
+        10 \mapsto 6 \qquad \left[\begin{array}{rrrrr|rrrrrr|r} 0 \amp 2 \amp 2 \amp 0 \amp 0 \amp 0 \amp -2 \amp 2 \amp 0 \amp 0 \amp 0 \amp 2\\ 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 2\\ 2 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 2\\ 0 \amp 2 \amp 0 \amp 2 \amp 0 \amp -2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2\\ 0 \amp 0 \amp -2 \amp 0 \amp 2 \amp 0 \amp 2 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2\\ \hline 0 \amp 426 \amp 560 \amp 0 \amp 0 \amp 330 \amp 158 \amp 0 \amp 340 \amp 0 \amp 2 \amp -4028\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      This is no optimal and the basic solution is
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x} = \left[ \begin{array}{rrrrrrrrrr} 1 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 1  \amp 0 \amp 1 \end{array}\right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      This corresponds to the path Fitchburg <m>\to</m> Lowell <m>\to</m> Boston <m>\to</m> Fall River <m>\to</m> Worcester.
+    </p>
+
+    <note>
+      <p>
+        We got a bit lucky with this problem in two ways.
+        First, we didn't apply the binary constraint to the variables, they just happened to fall into either 0 or 1.
+        Secondly, as we will see later, there is no guarantee that the result is a continuous loop.
+        As these problems get larger, the optimal solution could be multiple loops.
+        See below to handle problems like this.
+      </p>
+    </note>
+  </subsection>
+
+
+  <subsection xml:id="sect-min-piecewise-linear">
+    <title>Minimizing Piecewise Linear Fucntions</title>
+
+    <p>
+      Let's consider minimizing <m>f(x) = |2x-4|</m>, which has the graph:
+    </p>
+
+    <figure xml:id="fig-min-piecewise-linear1">
+      <caption></caption>
+      <image width="75%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+      <![CDATA[
+      \begin{tikzpicture}
+\draw [->,-latex] (-3,0) -- (6,0) node [at end,above right] {$x$};
+\draw [->,-latex] (0,-1.5) -- (0,6) node [at end,above right] {$y$};
+\foreach \x in {-3,-2,-1,1,2,...,5}  {
+	\draw (\x,-0.1) -- (\x,0.1) node [at start, below] {$\x$};}
+\foreach \y in {-1,1,2,...,5} {
+	\draw (-0.1,\y) -- (0.1,\y) node [at start, left] {$\y$}; }
+\draw [<->, thick](-1,6) -- (2,0) -- (5,6);
+\end{tikzpicture}
+      ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      This seems obvious looking at the graph (the minimum is 0 at <m>x=2</m>), however, we use this to explore more difficult problems.
+      We are going to create a feasible set with the boundary as the function and then minimize the <m>y</m> value in this set.
+      More specifically,
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} \text{Minimize} \amp \amp w = x_2 \amp \\ \text{subject to} \amp \amp x_2 \geq -2x_1 + 4, \\ \amp \amp x_2 \geq 2x_1 - 4, \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      and no constraints on <m>x_1, x_2</m> so these are free variables.
+    </p>
+
+    <p>
+      We can write this in standard form as
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} \text{Maximize} \amp \amp z = - x_2 \amp \\ \text{subject to} \amp \amp -2x_1 - x_2 \leq -4, \\ \amp \amp 2x_1 - x_2 \leq 4, \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      and then as a simplex tableu as
+    </p>
+
+    <p>
+      <me>
+        \left[\begin{array}{rr|rrr|r} {\small F} \amp {\small F} \\ -2 \amp -1 \amp 1 \amp 0 \amp 0 \amp -4\\ 2 \amp -1 \amp 0 \amp 1 \amp 0 \amp 4\\ \hline 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      Because there are free variables that are not in the basis, this is in Stage 0.
+      The first two steps will bring these into the basis.
+    </p>
+
+    <p>
+      <me>
+        1 \mapsto 3 \qquad \left[\begin{array}{rr|rrr|r} {\small F} \amp {\small F} \\ 2 \amp 1 \amp -1 \amp 0 \amp 0 \amp 4\\ 0 \amp -4 \amp 2 \amp 2 \amp 0 \amp 0\\ \hline 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      <me>
+        2 \mapsto 4 \qquad \left[\begin{array}{rr|rrr|r} {\small F} \amp {\small F} \\ 4 \amp 0 \amp -1 \amp 1 \amp 0 \amp 8\\ 0 \amp 4 \amp -2 \amp -2 \amp 0 \amp 0\\ \hline 0 \amp 0 \amp 2 \amp 2 \amp 4 \amp 0\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      And now that both <m>x_1</m> and <m>x_2</m> are in the basis, Stage 0 is finished.
+      All other variables are feasible, so Stage I is done, and there are no negatives in the objective row, so Stage II is done.
+      The basic and optimal solution is
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x} = \left[\begin{array}{rr|rr} 2 \amp 0 \amp 0 \amp 0 \end{array}\right]
+      </me>
+    </p>
+
+    <p>
+      or the expected value of <m>x_1=2</m> that we can see from the plot.
+      The next example shows this same way to set up a problem in multiple dimensions.
+    </p>
+
+    <example>
+      <statement>
+        <p>
+          Find the minimum of <m>f(x,y) = |2x-4|+|3y+9|-2</m>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Similar to the previous problem, we will set <m>u_{1} = 2x-4</m> and <m>u_{2} = 3y+9</m> and then this is the following LOP:
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \text{Min.}\amp\amp w = u_{1} + u_{2} -2\amp\\
+            \text{s.t.}\amp\amp u_{1}\amp\geq 2x-4 \\
+            \amp\amp u_{1}\amp\geq -(2x-4) \\
+            \amp\amp u_{2}\amp\geq 3y+9 \\
+            \amp\amp u_{2}\amp\geq - (3y+9) \\
+            \amp\amp u_{1}, u_{2}\amp\geq 0
+            \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          and <m>x</m> and <m>y</m> are free.
+        </p>
+
+        <p>
+          This in standard form is
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \text{Max.}\amp\amp z = -u_{1}-u_{2}+2 \\
+            \text{s.t.}\amp\amp2x -u_{1}\amp\leq 4 \\
+            \amp\amp -2x -u_{1}\amp\leq 4 \\
+            \amp\amp 3y -u_{2}\amp\leq -9 \\
+            \amp\amp -3y -u_{2}\amp\leq -9\\
+            \amp\amp u_{1}, u_{2}\amp\geq 0
+            \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          The initial tableau is
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrrr|rrrrr|r}
+            {\small F} \amp {\small F} \\
+            2 \amp 0 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4\\
+-2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -4\\
+0 \amp 3 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -9\\
+0 \amp -3 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 9\\ \hline
+0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 2\\
+            \end{array} \right]
+          </me>
+        </p>
+        <p>
+          where the columns are <m>x, y, u_1, u_2, x_5, x_6, x_7, x_8</m>, where the last four are slack variables.
+        </p>
+        <p>
+          Bringing <m>x</m> and <m>y</m> into the basis:
+        </p>
+        <p>
+          <me>
+            1 \mapsto 5 \qquad \left[\begin{array}{rrrr|rrrrr|r}
+            {\small F} \amp {\small F} \\
+2 \amp 0 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4\\
+0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0\\
+0 \amp 6 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp -18\\
+0 \amp -6 \amp 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 18\\ \hline
+0 \amp 0 \amp 2 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 4\\
+ \end{array} \right]
+          </me>
+        </p>
+        <p>
+          <me>
+           2 \mapsto 7 \qquad \left[\begin{array}{rrrr|rrrrr|r}
+            {\small F} \amp {\small F} \\
+6 \amp 0 \amp -3 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12\\
+0 \amp 0 \amp 0 \amp 0 \amp 6 \amp 6 \amp 0 \amp 0 \amp 0 \amp 0\\
+0 \amp 6 \amp 0 \amp 2 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp -18\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6 \amp 6 \amp 0 \amp 0\\ \hline
+0 \amp 0 \amp 6 \amp 6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6 \amp 12\\
+            \end{array} \right]
+          </me>
+        </p>
+        <p>Since the two free variables in the basis, we are done with State 0.  Also, non-free variables are feasible, so we are done with Stage I and there are no negative in the objective row, so we are done with Stage II.
+        </p>
+        <p>
+          The optimal basic solution is
+        </p>
+        <p>
+          <me>
+            \boldsymbol{x} = \left[\begin{array}{rrrr|rrrr}
+            2 \amp -3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0
+            \end{array}\right]
+          </me>
+        </p>
+        <p>
+          Returning back to the original problem, this is <m>x=2, y=-3</m> with <m>w=-2</m>.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+  <subsection xml:id="sect-best-fit-line">
+    <title>Best-Fit Lines</title>
+    <p>
+      A common desire is to fine a line that best fits through some data.  If we have the points <m>\{(1,6), (2,4), (3,3), (5,2)\}</m>, then a plot of this is
+    </p>
+    <figure xml:id="fig-best-fit-line">
+      <caption></caption>
+      <image width="75%">
+        <shortdescription></shortdescription>
+        <latex-image>
+          <![CDATA[
+          \begin{tikzpicture}[domain=-1:7]
+\draw [->,-latex] (-1,0) -- (8,0) node [at end,above right] {$x$};
+\draw [->,-latex] (0,-1) -- (0,8) node [at end,above right] {$y$};
+
+
+\foreach \x in {1,2,...,7}  {
+	\draw (\x,-0.1) -- (\x,0.1) node [at start, below] {$\x$};}
+\foreach \y in {1,2,...,7} {
+	\draw (-0.1,\y) -- (0.1,\y) node [at start, left] {$\y$}; }
+
+\draw [fill=black] (1,6) circle (2pt);
+\draw [fill=black] (2,4) circle (2pt);
+\draw [fill=black] (3,3) circle (2pt);
+\draw [fill=black] (5,2) circle (2pt);
+
+\draw[<->,red, thick] plot(\x,{-33/35*\x+222/35});
+%\draw [<->,blue] plot (\x,{-1*\x+13/2});
+%\draw [<->,green] (-1,6) -- (8,0);
+
+\end{tikzpicture}
+
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      where the line (in red) is possible best fit line.
+    </p>
+    <p>
+      A common way to find the line is to minimize the error between the line and the data in a <em>least-squares</em> sense, in which the sum of squares of differenceces between the data and the line or
+    </p>
+    <p>
+      <me>
+      E = \sum_{i=1}^N (a_1 x_i +a_0 - y_i)^2
+      </me>
+    </p>
+  <p>
+    is defined.  The coefficients <m>a_0</m> and <m>a_1</m> are found by finding the minimum of the function <m>E</m>.
+  </p>
+  <p>
+    An alternative way to do this is to minimize
+  </p>
+<p>
+  <men xml:id="eq-line-min">
+    E = \sum_{i=1}^N |a_1 x_i + a_0 - y_i |
+  </men>
+</p>
+<exercise>
+  <statement>
+    <p>
+      Find the best-fit line through  <m>\{(1,6), (2,4), (3,3), (5,2)\}</m> by setting up an LOP and solving it.
+    </p>
+  </statement>
+
+  <solution>
+    <p>
+      We will introduce new variables <m>u_1, u_2, u_3, u_4 </m> that will satisfies  (NOT QUITE RIGHT)
+    </p>
+    <p>
+      <me>
+        -(a_1 x_i + a_0 - y_i) \leq u_i \leq a_1 x_i + a_0 - y_i
+      </me>
+    </p>
+    <p>
+      then the LOP can be written as
+    </p>
+    <p>
+      <me>
+        \begin{aligned}
+      \text{Minimize} \amp \amp w = \amp  u_1 + u_2 + u_3 + u_4 \\
+      \text{subject to} \amp \amp u_1 \amp \geq a_1 \cdot 1 + a_0 - 6 \\
+      \amp \amp u_1 \amp \geq -(a_1 \cdot 1 + a_0 - 6) \\
+      \amp \amp u_2 \amp \geq a_1 \cdot 2 + a_0 - 4 \\
+      \amp \amp u_2 \amp \geq -(a_1 \cdot 2 + a_0 - 4) \\
+      \amp \amp u_3 \amp \geq a_1 \cdot 3 + a_0 -3 \\
+      \amp \amp u_3 \amp \geq -(a_1 \cdot 3 + a_0 -3) \\
+      \amp \amp u_4 \amp \geq a_1 \cdot 5 + a_0 -2 \\
+      \amp \amp u_4 \amp \geq -(a_1 \cdot 5 + a_0 -2)
+      \end{aligned}
+      </me>
+    </p>
+    <p>
+      The variables for this are <m>a_0, a_1, u_1, u_2, u_3, u_4</m>.  The first two are free and the last are restricted since each <m>u_i</m> is either <m>a_1 x_i + a_0 - y_i</m> or its negative, so much be positive.  There will be 8 slack variables as well.
+    </p>
+    <p>
+      If this is put in standard form (not shown) then the simplex tableau is
+    </p>
+    <p>
+      <me>
+        {\small
+        \left[\begin{array}{rr|rrrr|rrrrrrrrr|r}
+-1 \amp -1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -6\\
+1 \amp 1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6\\
+-2 \amp -1 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4\\
+2 \amp 1 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4\\
+-3 \amp -1 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3\\
+3 \amp 1 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 3\\
+-5 \amp -1 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -2\\
+5 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 2\\ \hline
+0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+        }
+      </me>
+
+    </p>
+    <p>
+      where the columns are <m>a_1, a_0, u_1, u_2, u_3 u_4</m> (which will also be labelled <m>x_1, x_2, \ldots, x_6</m>) and then the slack variables <m>x_7, x_8, \ldots, x_{14}</m>.
+    </p>
+    <p>
+      There are two steps of Stage 0 to get the first two columns into the basis, <m>1 \mapsto 7</m> then <m>2 \mapsto 9</m> to
+    </p>
+    <p>
+      <me>
+        {\small
+        \left[\begin{array}{rr|rrrr|rrrrrrrrr|r}
+1 \amp 0 \amp -1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2\\
+0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0\\
+0 \amp 1 \amp 2 \amp -1 \amp 0 \amp 0 \amp -2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 8\\
+0 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0\\
+0 \amp 0 \amp -1 \amp 2 \amp -1 \amp 0 \amp 1 \amp 0 \amp -2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1\\
+0 \amp 0 \amp 1 \amp -2 \amp -1 \amp 0 \amp -1 \amp 0 \amp 2 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1\\
+0 \amp 0 \amp -3 \amp 4 \amp 0 \amp -1 \amp 3 \amp 0 \amp -4 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -4\\
+0 \amp 0 \amp 3 \amp -4 \amp 0 \amp -1 \amp -3 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 4\\ \hline
+0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right] }
+      </me>
+
+    </p>
+    <p>
+      and then stage I with the pivots recalling that <m>x_1, x_2</m> are free variables so they don't leave the basis.  <m>3 \mapsto 13</m> and <m>4 \mapsto 12</m> to get
+    </p>
+    <p>
+      <me>
+        {\small
+          \left[\begin{array}{rr|rrrr|rrrrrrrrr|r}
+          4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp -1 \amp -2 \amp 0 \amp 0 \amp -2\\
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp -1 \amp 1 \amp 0 \amp 0 \amp 2 \amp -2 \amp -2 \amp 0 \amp 0 \amp 4\\
+          0 \amp 4 \amp 0 \amp 0 \amp 0 \amp -6 \amp 0 \amp 0 \amp 0 \amp 0 \amp -5 \amp 5 \amp 6 \amp 0 \amp 0 \amp 18\\
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp -2 \amp 2 \amp 3 \amp -3 \amp -2 \amp 0 \amp 0 \amp 2\\
+          0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0\\
+          0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 2 \amp 0 \amp 0 \amp -4 \amp 0 \amp 3 \amp -3 \amp -2 \amp 0 \amp 0 \amp 2\\
+          0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 1 \amp -1 \amp -1 \amp 0 \amp 0 \amp 2\\
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0\\ \hline
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2 \amp 4 \amp 0 \amp 4 \amp 0 \amp -5 \amp 9 \amp 6 \amp 0 \amp 4 \amp -10\\
+          \end{array} \right]
+
+
+        }
+      </me>
+
+    </p>
+    <p>
+      Now this is ready for Phase II.  To move through this, <m>5 \mapsto 11</m>, <m>6 \mapsto 10</m> and then <m>10 \mapsto 5</m>, resulting in
+    </p>
+    <p>
+      <me>{ \small
+        \left[\begin{array}{rr|rrrr|rrrrrrrrr|r}
+6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 1 \amp -1 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp -4\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp -3 \amp 3 \amp 4 \amp -4 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 8\\
+0 \amp 6 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0 \amp -5 \amp 5 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 32\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp -2 \amp 2 \amp 3 \amp -3 \amp -2 \amp 0 \amp 0 \amp 2\\
+0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 1 \amp 0 \amp 0 \amp -1 \amp 1 \amp 0 \amp -3 \amp -1 \amp 0 \amp 0 \amp 1\\
+0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0\\
+0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 1 \amp -3 \amp 0 \amp 2 \amp -2 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 4\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0\\ \hline
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp 6 \amp 0 \amp 1 \amp 5 \amp 0 \amp 6 \amp 4 \amp 0 \amp 6 \amp -10\\
+\end{array} \right]}
+      </me>
+    </p>
+    <p>
+      And this is optimal.  We can pull all of the variables, but only the first two, <m>a_1=-2/3</m> and <m>a_0=16/3</m> are needed.  Thus, the best fit line in the <m>L^{1}</m> sense is
+    </p>
+    <p>
+      <me>
+        y = -\frac{2}{3} x + \frac{16}{3}
+      </me>
+    </p>
+  </solution>
+</exercise>
+<exercise>
+  <statement>
+    <p>
+      Solve the LOP in ??? using Julia.
+    </p>
+  </statement>
+</exercise>
+  </subsection>
+</section>

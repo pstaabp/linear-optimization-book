@@ -1,0 +1,458 @@
+<section xml:id="sect-julia-vect-arrays">
+  <title>Vectors and Matrices in Julia</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Understand how to create and manipulate vectors and matrices in Julia.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understand how to access elements in a vector or matrix.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understand how to use comprehensions to create vectors and matrices.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understand how to use broadcasting to apply functions to vectors and matrices.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understand how to concatenate matrices and create submatrices in Julia.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understand how to create rational matrices in Julia.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      As we have seen, vectors and matrices play an extremely important role in linear optimization.
+      In this section, we will see how to create and manipulate vectors and matrices in Julia.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Vectors in Julia</title>
+
+    <p>
+      An array in Julia is a sequence of values of a single type in any number of dimensions.
+      The most common are one-dimensional, called a <c>Vector</c> and two-dimensional, called a <c>Matrix</c>.
+      We will use both to solve LOPs.
+    </p>
+
+    <p>
+      To produce an array with specific values, use <c>[]</c>.
+      For example, <c> v = [1; 2; 3]</c> returns a vector as
+    </p>
+
+    <p>
+      <cd>
+      <cline>3-element Vector{Int64}:</cline>
+      <cline>  1</cline>
+      <cline>  2</cline>
+      <cline>  3</cline>
+      </cd>
+    </p>
+
+    <p>
+      Notice that this is returned as a vector with type <c>Vector{Int64}</c>.
+      This is called a parametric type (we saw this with rational numbers as well).
+      The <c>Vector</c> part of the type is an alias for an 1-D array and the type within the <c>{}</c> is the subtype indicating that this is an array of integers (specificially 64-bit integers).
+    </p>
+
+    <p>
+      A row vector can be made like <c>r=[1 2 3] </c> (and can optionally have commas between the entries).
+      This is returned as
+    </p>
+
+    <p>
+      <cd>
+      <cline>1×3 Matrix{Int64}:</cline>
+      <cline> 1  2  3</cline>
+      </cd>
+    </p>
+
+    <p>
+      However notice that this is technically a matrix of size 1×3.
+      Matrices are in the next section.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-matrices-julia">
+    <title>Matrices in Julia</title>
+
+    <p>
+      A <c>Matrix</c> in Julia is a two-dimensional array, but can be used for many standard Matrix operations.
+      If you have a specific matrix to enter, the numbers are entered line by line with lines separated by a <c>;</c>.
+      For example:
+    </p>
+
+    <p>
+      <cd>
+      <cline>A = [ 1 2 3 4; 5 6 7 8; 9 10 11 12]</cline>
+      </cd>
+    </p>
+
+    <p>
+      will produce the <m>3 \times 4</m> matrix which is returned:
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×4 Matrix{Int64}:</cline>
+      <cline> 1   2   3   4</cline>
+      <cline> 5   6   7   8</cline>
+      <cline> 9  10  11  12</cline>
+      </cd>
+    </p>
+
+    <p>
+      If you are entering a matrix in a notebook environment, you can put each line separately as in
+    </p>
+
+
+    <program language="julia">
+      <code>
+        A = [1 2 3 4;
+             5 6 7 8;
+             9 10 11 12]
+      </code>
+    </program>
+
+    <p>
+      where the <c>;</c> ending lines is optional.
+      Also, like in vectors, the entries in row can optionally be separated by commas <c>,</c>.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-julia-accessing-matrix">
+    <title>Accessing elements in a Vector or Matrix</title>
+
+    <p>
+      Consider the vector <c>v=[10; 5; 15; 20]</c>.
+      One can access the elements with <c>[index]</c>, where index is the index of the value.
+      <c>v[2]</c> will return <c>5</c>, the 2nd element of the vector.
+    </p>
+
+    <p>
+      Accessing elements in a Matrix is similar.
+      Consider the matrix <c>A</c> that was created above.
+      If we way the element in the 3rd row, 2nd column, <c>A[3,2]</c> will do that.
+    </p>
+
+    <note>
+      <p>
+        The first index of a Julia vector is 1.
+        This is different than many other languages like C, javascript, and Python, but more intuitive for students coming from Linear Algebra.
+        Also, the upper left element of a matrix <c>A</c> will be <c>A[1,1]</c>.
+      </p>
+    </note>
+  </subsection>
+
+
+  <subsection xml:id="sect-comprenhension-julia">
+    <title>Constructing Vectors and Matrices with Comprehensions</title>
+
+    <p>
+      Another feature related to arrays in Julia is that of comprenhensions.
+      If a vector (or matrix) can be generated with a formula for each element, then a comprehension is often used to simplify its creation.
+      For example, if we want to produce a vector of squares or <c> v= [1; 4; 9; 16; 25; 36; 49; 64] </c>, then
+    </p>
+
+
+    <program language="julia">
+      <code>
+        v = [i^2 for i=1:8]
+      </code>
+    </program>
+
+    <p>
+      will accomplish this.
+      Matrices can be made with comprehensions with a two variable for loop as in <c>[i+j for i=1:3, j=1:4]</c>
+    </p>
+
+    <p>
+      which returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×4 Matrix{Int64}:</cline>
+      <cline> 2  3  4  5</cline>
+      <cline> 3  4  5  6</cline>
+      <cline> 4  5  6  7</cline>
+      </cd>
+    </p>
+
+    <p>
+      and if you need to make any vector or matrix with a pattern, then generally comprehensions is the easiest way to do this.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-broadcasting">
+    <title>Broadcasting</title>
+
+    <p>
+      Because operations on arrays are very common there is a nice syntax for applying a function to array.
+      Let's say we have the array <c>x=[2*i for i=1:5]</c> which will be the even integers up to 10.
+      To square each of these, we prepend a <c>.</c> to the <c>^</c> operator or
+    </p>
+
+    <p>
+      <cd>
+      <cline>x.^2</cline>
+      </cd>
+    </p>
+
+    <p>
+      which returns the array:
+    </p>
+
+    <p>
+      <cd>
+      <cline>5-element Vector{Int64}:</cline>
+      <cline>   4</cline>
+      <cline>  16</cline>
+      <cline>  36</cline>
+      <cline>  64</cline>
+      <cline> 100</cline>
+      </cd>
+    </p>
+
+    <p>
+      This can also be thought of a function that is applied to each element of the array.
+    </p>
+
+    <p>
+      Named functions can also be used with broadcasting.
+      If we want to take the modulus 3 of these, use <c>mod.(x,3)</c> which returns the array <c>[2,1,0,2,1]</c>.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-julia-matrix-concat">
+    <title>Concatenating Matrices in Julia</title>
+
+    <p>
+      Hopefully the wheels are turning and you're thinking about how to handle simplex tableaus in Julia.
+      From the above sections, you can imagine how to enter a tableau, for example, the one in <xref ref="eq-tableau-LOP1"/> can be entered directly by typing in the numbers directly, as in
+    </p>
+
+
+    <program language="julia">
+      <code>
+      T = [4 3 1 0 0 0 120
+          1 2 0 1 0 0 40
+          0 1 0 0 1 0 16
+         -1 -3 0 0 0 1   0]
+      </code>
+    </program>
+<p>
+  There is an alternative way to do this since the sections of the matrix have specific form, and in many cases it can be easier.
+      If we define
+</p>
+
+    <program language="julia">
+      <code>
+        A = [4 3; 1 2; 0 1]
+        b = [120; 40; 16]
+        c = [-1 -3]
+      </code>
+    </program>
+    <p>
+      we can construct the left two columns with the <c>vcat</c> command for a vertical concatenation like: <c>vcat(A,c)</c> which would create the matrix:
+    </p>
+
+    <p>
+      <cd>
+      <cline>4×2 Matrix{Int64}:</cline>
+      <cline> 4   3</cline>
+      <cline> 1   2</cline>
+      <cline> 0   1</cline>
+      <cline>-1  -3</cline>
+      </cd>
+    </p>
+
+    <p>
+      There is an <c>hcat</c> function as well and we can construct the tableau in <xref ref="eq-tableau-LOP1"/> with <c>hcat(vcat(A,c), I(4), vcat(b,[0]))</c>, using the function <c>I(4)</c> that makes a 4×4 identity matrix<fn>If this doesn't work, make sure that you have loaded the LinearAlgebra package with <c>using LinearAlgebra</c>.</fn>.
+      This returns the matrix
+    </p>
+
+    <p>
+      <cd>
+      <cline>4×7 Matrix{Int64}:</cline>
+      <cline> 4   3  1  0  0  0  120</cline>
+      <cline> 1   2  0  1  0  0   40</cline>
+      <cline> 0   1  0  0  1  0   16</cline>
+      <cline>-1  -3  0  0  0  1    0</cline>
+      </cd>
+    </p>
+
+    <p>
+      which seems to be a straightforward way to do this. There is an alternative (and simpler) way to construct a matrix using blocks.
+      The above can also be made with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        ST = [A I zeros(Int, 3) b
+          c zeros(Int,1,3) I [0]]
+      </code>
+    </program>
+
+    <p>
+      where the top row are all matrices or vectors with 3 rows.
+      The bottom row above are all row vectors.
+      Notice that in this case, we have just used <c>I</c> for the identity and the correct size is determined automatically and the function <c>zeros(Int, 3)</c> for a vector of length 3 and <c>zeros(Int,1,3)</c> for a row vector.<fn>Alternatively the zeros can be made with <c>[0; 0; 0]</c> and <c>[0 0 0]</c> instead.
+      </fn>
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-julia-submatrix">
+    <title>Submatrices in Julia</title>
+
+    <p>
+      We will see that is is quite nice to be able to do submatrices in Julia.
+      That is, given a matrix, pull specific rows and columns.
+      Let's start with the simplex tableau <c>ST</c> above.
+    </p>
+
+    <p>
+      We can pull out a single column, say the 2nd, with the expression <c>ST[:,2]</c>, and this returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>4-element Vector{Int64}:</cline>
+      <cline>  3</cline>
+      <cline>  2</cline>
+      <cline>  1</cline>
+      <cline> -3</cline>
+      </cd>
+    </p>
+
+    <p>
+      Notice that the first slot is a <c>:</c>, indicating to use all rows.
+      If we wanted the column not including the last element (say, for example, to use this to calculate <m>\boldsymbol{b}</m>-ratios), we can do <c>ST[1:end-1,2]</c>, where it is understood that <c>end</c> in this context is 4.
+    </p>
+
+    <p>
+      Similarly, if we want the last row, we can do <c>ST[end,:]</c> which returns:
+    </p>
+
+    <p>
+      <cd>
+      <cline>7-element Vector{Int64}:</cline>
+      <cline> -1</cline>
+      <cline> -3</cline>
+      <cline>  0</cline>
+      <cline>  0</cline>
+      <cline>  0</cline>
+      <cline>  1</cline>
+      <cline>  0</cline>
+      </cd>
+    </p>
+
+    <p>
+      which is the last row, however, notice that the result is a <c>Vector</c>, instead of a row vector, which is a Matrix with a single row.
+      This has advantages and disadvantages, but just be aware of the result.
+    </p>
+
+    <p>
+      We can also extract a block or submatrix from an existing matrix.
+      Using the matrix defined in <c>ST</c>, <c>ST[1:3,1:2]</c> returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×2 Matrix{Int64}:</cline>
+      <cline> 4  3</cline>
+      <cline> 1  2</cline>
+      <cline> 0  1</cline>
+      </cd>
+    </p>
+
+    <p>
+      which is rows 1 through 3 and columns 1 and 2.
+    </p>
+
+    <p>
+      Another nice feature is to extract specific rows or columns.
+      We will see in <xref ref="ch-matrix-form"/> that it is advantageous to get say columns 1,3 and 4 from the top rows of matrix.
+      The expression <c>ST[1:3,[1,3,4]]</c> will return
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×3 Matrix{Int64}:</cline>
+      <cline> 4  1  0</cline>
+      <cline> 1  0  1</cline>
+      <cline> 0  0  0</cline>
+      </cd>
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-julia-rational-matrices">
+    <title>Creating Rational Matrices in Julia</title>
+
+    <p>
+      Everything we have done in this chapter was with Integer matrices and this corresponds to that in this text which has formulated the simplex tableaus with integers to prevent errors associated with round off in floating-point numbers.
+      Another type of matrix that is built-in to Julia that won't have roundoff are Rational numbers that we saw in <xref ref="sect-intro-julia"/>.
+    </p>
+
+    <p>
+      If we have a matrix with rational entries, we can create one such as
+    </p>
+
+
+    <program language="julia">
+      <code>
+A2 = [ 2//3 1//4 7//2; -3//2 5//3 9//4]
+      </code>
+    </program>
+
+    <p>
+      and notice that the type returned is <c>Matrix{Rational{Int64}}:</c> indicating that the numbers stored in the Matrix are of type <c>Rational{Int64}</c> or rational numbers with 64-bit integer parts.
+    </p>
+
+    <p>
+      If a matrix is integer, though and we would like to convert it to rational, then one way to accomplish this is
+    </p>
+
+
+    <program language="julia">
+      <code>
+        ST = rationalize.([A I zeros(Int, 3) b
+          c zeros(Int,1,3) I [0]])
+      </code>
+    </program>
+
+    <p>
+      where the <c>rationalize</c> command is applied to each element of the created matrix with broadcasting.
+    </p>
+  </subsection>
+</section>

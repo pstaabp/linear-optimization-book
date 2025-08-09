@@ -1,0 +1,257 @@
+INFO    : Since no target was supplied, we will use "web".
+
+INFO    : Building target web
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : Generating any needed assets.
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/pretext-enhanced-source.xsl
+INFO    : converting latex-image pictures from /Users/pstaab/code/linear-optimization-book/source/main.ptx to svg graphics for placement in /Users/pstaab/code/linear-optimization-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /Users/pstaab/code/linear-optimization-book/source/main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'cli.version': '2.25', 'publisher': '/Users/pstaab/code/linear-optimization-book/publication/publication.ptx'}
+INFO    : discovering source file's directory name: /Users/pstaab/code/linear-optimization-book/source
+INFO    : verifying and expanding input directory: /Users/pstaab/code/linear-optimization-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /Users/pstaab/code/linear-optimization-book/generated-assets
+INFO    : verifying and expanding input directory: /Users/pstaab/code/linear-optimization-book/source/../assets
+INFO    : input directory expanded to absolute path: /Users/pstaab/code/linear-optimization-book/assets
+INFO    : discovering source file's directory name: /Users/pstaab/code/linear-optimization-book/source
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/extract-latex-image.xsl
+INFO    : messages from the log for XSL processing:
+INFO    : * PTX:INFO:   checking ONLY the last TWO YEARS of element deprecations.
+Rerun with the string parameter "author.deprecations.all" set to "yes" to check your source against all deprecations.
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/extract-latex-image.xsl
+INFO    : converting fig-fs-ilop2-2.tex to fig-fs-ilop2-2.pdf
+INFO    : cropping fig-fs-ilop2-2.pdf to cropped-fig-fs-ilop2-2.pdf
+INFO    : renaming cropped-fig-fs-ilop2-2.pdf to fig-fs-ilop2-2.pdf
+INFO    : converting fig-fs-ilop2-2.pdf to fig-fs-ilop2-2.svg
+INFO    : converting fig-bb-1-2.tex to fig-bb-1-2.pdf
+INFO    : cropping fig-bb-1-2.pdf to cropped-fig-bb-1-2.pdf
+INFO    : renaming cropped-fig-bb-1-2.pdf to fig-bb-1-2.pdf
+INFO    : converting fig-bb-1-2.pdf to fig-bb-1-2.svg
+INFO    : converting sect-phase-zero-33-2-2.tex to sect-phase-zero-33-2-2.pdf
+INFO    : cropping sect-phase-zero-33-2-2.pdf to cropped-sect-phase-zero-33-2-2.pdf
+INFO    : renaming cropped-sect-phase-zero-33-2-2.pdf to sect-phase-zero-33-2-2.pdf
+INFO    : converting sect-phase-zero-33-2-2.pdf to sect-phase-zero-33-2-2.svg
+INFO    : converting fig-general-lop2-2.tex to fig-general-lop2-2.pdf
+INFO    : cropping fig-general-lop2-2.pdf to cropped-fig-general-lop2-2.pdf
+INFO    : renaming cropped-fig-general-lop2-2.pdf to fig-general-lop2-2.pdf
+INFO    : converting fig-general-lop2-2.pdf to fig-general-lop2-2.svg
+INFO    : converting fig-convex-objs-2.tex to fig-convex-objs-2.pdf
+INFO    : cropping fig-convex-objs-2.pdf to cropped-fig-convex-objs-2.pdf
+INFO    : renaming cropped-fig-convex-objs-2.pdf to fig-convex-objs-2.pdf
+INFO    : converting fig-convex-objs-2.pdf to fig-convex-objs-2.svg
+INFO    : converting fig-ilop1-cutting-plane-2.tex to fig-ilop1-cutting-plane-2.pdf
+INFO    : cropping fig-ilop1-cutting-plane-2.pdf to cropped-fig-ilop1-cutting-plane-2.pdf
+INFO    : renaming cropped-fig-ilop1-cutting-plane-2.pdf to fig-ilop1-cutting-plane-2.pdf
+INFO    : converting fig-ilop1-cutting-plane-2.pdf to fig-ilop1-cutting-plane-2.svg
+INFO    : converting plot-intersect-lines2.tex to plot-intersect-lines2.pdf
+INFO    : cropping plot-intersect-lines2.pdf to cropped-plot-intersect-lines2.pdf
+INFO    : renaming cropped-plot-intersect-lines2.pdf to plot-intersect-lines2.pdf
+INFO    : converting plot-intersect-lines2.pdf to plot-intersect-lines2.svg
+INFO    : converting streets.tex to streets.pdf
+INFO    : cropping streets.pdf to cropped-streets.pdf
+INFO    : renaming cropped-streets.pdf to streets.pdf
+INFO    : converting streets.pdf to streets.svg
+INFO    : converting fig-fs-maximize-2.tex to fig-fs-maximize-2.pdf
+INFO    : cropping fig-fs-maximize-2.pdf to cropped-fig-fs-maximize-2.pdf
+INFO    : renaming cropped-fig-fs-maximize-2.pdf to fig-fs-maximize-2.pdf
+INFO    : converting fig-fs-maximize-2.pdf to fig-fs-maximize-2.svg
+INFO    : converting fig-feasible-example-2.tex to fig-feasible-example-2.pdf
+INFO    : cropping fig-feasible-example-2.pdf to cropped-fig-feasible-example-2.pdf
+INFO    : renaming cropped-fig-feasible-example-2.pdf to fig-feasible-example-2.pdf
+INFO    : converting fig-feasible-example-2.pdf to fig-feasible-example-2.svg
+INFO    : converting plot-lines3.tex to plot-lines3.pdf
+INFO    : cropping plot-lines3.pdf to cropped-plot-lines3.pdf
+INFO    : renaming cropped-plot-lines3.pdf to plot-lines3.pdf
+INFO    : converting plot-lines3.pdf to plot-lines3.svg
+INFO    : converting fig-best-fit-line-2.tex to fig-best-fit-line-2.pdf
+INFO    : cropping fig-best-fit-line-2.pdf to cropped-fig-best-fit-line-2.pdf
+INFO    : renaming cropped-fig-best-fit-line-2.pdf to fig-best-fit-line-2.pdf
+INFO    : converting fig-best-fit-line-2.pdf to fig-best-fit-line-2.svg
+INFO    : converting plot-intersect-lines.tex to plot-intersect-lines.pdf
+INFO    : cropping plot-intersect-lines.pdf to cropped-plot-intersect-lines.pdf
+INFO    : renaming cropped-plot-intersect-lines.pdf to plot-intersect-lines.pdf
+INFO    : converting plot-intersect-lines.pdf to plot-intersect-lines.svg
+INFO    : converting fig-example-two-lines-2.tex to fig-example-two-lines-2.pdf
+INFO    : cropping fig-example-two-lines-2.pdf to cropped-fig-example-two-lines-2.pdf
+INFO    : renaming cropped-fig-example-two-lines-2.pdf to fig-example-two-lines-2.pdf
+INFO    : converting fig-example-two-lines-2.pdf to fig-example-two-lines-2.svg
+INFO    : converting fig-bb-2-2.tex to fig-bb-2-2.pdf
+INFO    : cropping fig-bb-2-2.pdf to cropped-fig-bb-2-2.pdf
+INFO    : renaming cropped-fig-bb-2-2.pdf to fig-bb-2-2.pdf
+INFO    : converting fig-bb-2-2.pdf to fig-bb-2-2.svg
+INFO    : converting fig-ilop1-flowchart-2.tex to fig-ilop1-flowchart-2.pdf
+INFO    : cropping fig-ilop1-flowchart-2.pdf to cropped-fig-ilop1-flowchart-2.pdf
+INFO    : renaming cropped-fig-ilop1-flowchart-2.pdf to fig-ilop1-flowchart-2.pdf
+INFO    : converting fig-ilop1-flowchart-2.pdf to fig-ilop1-flowchart-2.svg
+INFO    : converting fig-unbounded-fs-2.tex to fig-unbounded-fs-2.pdf
+INFO    : cropping fig-unbounded-fs-2.pdf to cropped-fig-unbounded-fs-2.pdf
+INFO    : renaming cropped-fig-unbounded-fs-2.pdf to fig-unbounded-fs-2.pdf
+INFO    : converting fig-unbounded-fs-2.pdf to fig-unbounded-fs-2.svg
+INFO    : converting fig-tsp-2.tex to fig-tsp-2.pdf
+INFO    : cropping fig-tsp-2.pdf to cropped-fig-tsp-2.pdf
+INFO    : renaming cropped-fig-tsp-2.pdf to fig-tsp-2.pdf
+INFO    : converting fig-tsp-2.pdf to fig-tsp-2.svg
+INFO    : converting fig-general-lop1-2.tex to fig-general-lop1-2.pdf
+INFO    : cropping fig-general-lop1-2.pdf to cropped-fig-general-lop1-2.pdf
+INFO    : renaming cropped-fig-general-lop1-2.pdf to fig-general-lop1-2.pdf
+INFO    : converting fig-general-lop1-2.pdf to fig-general-lop1-2.svg
+INFO    : converting fig-lop-1-extra-2.tex to fig-lop-1-extra-2.pdf
+INFO    : cropping fig-lop-1-extra-2.pdf to cropped-fig-lop-1-extra-2.pdf
+INFO    : renaming cropped-fig-lop-1-extra-2.pdf to fig-lop-1-extra-2.pdf
+INFO    : converting fig-lop-1-extra-2.pdf to fig-lop-1-extra-2.svg
+INFO    : converting fig-lop-1-2.tex to fig-lop-1-2.pdf
+INFO    : cropping fig-lop-1-2.pdf to cropped-fig-lop-1-2.pdf
+INFO    : renaming cropped-fig-lop-1-2.pdf to fig-lop-1-2.pdf
+INFO    : converting fig-lop-1-2.pdf to fig-lop-1-2.svg
+INFO    : converting fig-fs-unbounded-2.tex to fig-fs-unbounded-2.pdf
+INFO    : cropping fig-fs-unbounded-2.pdf to cropped-fig-fs-unbounded-2.pdf
+INFO    : renaming cropped-fig-fs-unbounded-2.pdf to fig-fs-unbounded-2.pdf
+INFO    : converting fig-fs-unbounded-2.pdf to fig-fs-unbounded-2.svg
+INFO    : converting fig-nonconvex-objs-2.tex to fig-nonconvex-objs-2.pdf
+INFO    : cropping fig-nonconvex-objs-2.pdf to cropped-fig-nonconvex-objs-2.pdf
+INFO    : renaming cropped-fig-nonconvex-objs-2.pdf to fig-nonconvex-objs-2.pdf
+INFO    : converting fig-nonconvex-objs-2.pdf to fig-nonconvex-objs-2.svg
+INFO    : converting fig-exercise-inequality-2.tex to fig-exercise-inequality-2.pdf
+INFO    : cropping fig-exercise-inequality-2.pdf to cropped-fig-exercise-inequality-2.pdf
+INFO    : renaming cropped-fig-exercise-inequality-2.pdf to fig-exercise-inequality-2.pdf
+INFO    : converting fig-exercise-inequality-2.pdf to fig-exercise-inequality-2.svg
+INFO    : converting fig-chessboard-queen-2.tex to fig-chessboard-queen-2.pdf
+INFO    : cropping fig-chessboard-queen-2.pdf to cropped-fig-chessboard-queen-2.pdf
+INFO    : renaming cropped-fig-chessboard-queen-2.pdf to fig-chessboard-queen-2.pdf
+INFO    : converting fig-chessboard-queen-2.pdf to fig-chessboard-queen-2.svg
+INFO    : converting fig-infeasible-1-2.tex to fig-infeasible-1-2.pdf
+INFO    : cropping fig-infeasible-1-2.pdf to cropped-fig-infeasible-1-2.pdf
+INFO    : renaming cropped-fig-infeasible-1-2.pdf to fig-infeasible-1-2.pdf
+INFO    : converting fig-infeasible-1-2.pdf to fig-infeasible-1-2.svg
+INFO    : converting fig-non-convex-fs-2.tex to fig-non-convex-fs-2.pdf
+INFO    : cropping fig-non-convex-fs-2.pdf to cropped-fig-non-convex-fs-2.pdf
+INFO    : renaming cropped-fig-non-convex-fs-2.pdf to fig-non-convex-fs-2.pdf
+INFO    : converting fig-non-convex-fs-2.pdf to fig-non-convex-fs-2.svg
+INFO    : converting fig-gridburg-2.tex to fig-gridburg-2.pdf
+INFO    : cropping fig-gridburg-2.pdf to cropped-fig-gridburg-2.pdf
+INFO    : renaming cropped-fig-gridburg-2.pdf to fig-gridburg-2.pdf
+INFO    : converting fig-gridburg-2.pdf to fig-gridburg-2.svg
+INFO    : converting fig-min-piecewise-linear1-2.tex to fig-min-piecewise-linear1-2.pdf
+INFO    : cropping fig-min-piecewise-linear1-2.pdf to cropped-fig-min-piecewise-linear1-2.pdf
+INFO    : renaming cropped-fig-min-piecewise-linear1-2.pdf to fig-min-piecewise-linear1-2.pdf
+INFO    : converting fig-min-piecewise-linear1-2.pdf to fig-min-piecewise-linear1-2.svg
+INFO    : converting fig-4by4-chessboard-queen-2.tex to fig-4by4-chessboard-queen-2.pdf
+INFO    : cropping fig-4by4-chessboard-queen-2.pdf to cropped-fig-4by4-chessboard-queen-2.pdf
+INFO    : renaming cropped-fig-4by4-chessboard-queen-2.pdf to fig-4by4-chessboard-queen-2.pdf
+INFO    : converting fig-4by4-chessboard-queen-2.pdf to fig-4by4-chessboard-queen-2.svg
+INFO    : converting fig-gomory-ex-1-2.tex to fig-gomory-ex-1-2.pdf
+INFO    : cropping fig-gomory-ex-1-2.pdf to cropped-fig-gomory-ex-1-2.pdf
+INFO    : renaming cropped-fig-gomory-ex-1-2.pdf to fig-gomory-ex-1-2.pdf
+INFO    : converting fig-gomory-ex-1-2.pdf to fig-gomory-ex-1-2.svg
+INFO    : converting fig-example-inequality-3-2.tex to fig-example-inequality-3-2.pdf
+INFO    : cropping fig-example-inequality-3-2.pdf to cropped-fig-example-inequality-3-2.pdf
+INFO    : renaming cropped-fig-example-inequality-3-2.pdf to fig-example-inequality-3-2.pdf
+INFO    : converting fig-example-inequality-3-2.pdf to fig-example-inequality-3-2.svg
+INFO    : converting fig-example-min-lop-2.tex to fig-example-min-lop-2.pdf
+INFO    : cropping fig-example-min-lop-2.pdf to cropped-fig-example-min-lop-2.pdf
+INFO    : renaming cropped-fig-example-min-lop-2.pdf to fig-example-min-lop-2.pdf
+INFO    : converting fig-example-min-lop-2.pdf to fig-example-min-lop-2.svg
+INFO    : converting fig-gomory-ex-2-2.tex to fig-gomory-ex-2-2.pdf
+INFO    : cropping fig-gomory-ex-2-2.pdf to cropped-fig-gomory-ex-2-2.pdf
+INFO    : renaming cropped-fig-gomory-ex-2-2.pdf to fig-gomory-ex-2-2.pdf
+INFO    : converting fig-gomory-ex-2-2.pdf to fig-gomory-ex-2-2.svg
+INFO    : converting fig-example-inequality-2-2.tex to fig-example-inequality-2-2.pdf
+INFO    : cropping fig-example-inequality-2-2.pdf to cropped-fig-example-inequality-2-2.pdf
+INFO    : renaming cropped-fig-example-inequality-2-2.pdf to fig-example-inequality-2-2.pdf
+INFO    : converting fig-example-inequality-2-2.pdf to fig-example-inequality-2-2.svg
+INFO    : converting fig-infeasible-2-2.tex to fig-infeasible-2-2.pdf
+INFO    : cropping fig-infeasible-2-2.pdf to cropped-fig-infeasible-2-2.pdf
+INFO    : renaming cropped-fig-infeasible-2-2.pdf to fig-infeasible-2-2.pdf
+INFO    : converting fig-infeasible-2-2.pdf to fig-infeasible-2-2.svg
+INFO    : converting fig-slack-vars-2.tex to fig-slack-vars-2.pdf
+INFO    : cropping fig-slack-vars-2.pdf to cropped-fig-slack-vars-2.pdf
+INFO    : renaming cropped-fig-slack-vars-2.pdf to fig-slack-vars-2.pdf
+INFO    : converting fig-slack-vars-2.pdf to fig-slack-vars-2.svg
+INFO    : converting fig-general-lop-no-solution-2.tex to fig-general-lop-no-solution-2.pdf
+INFO    : cropping fig-general-lop-no-solution-2.pdf to cropped-fig-general-lop-no-solution-2.pdf
+INFO    : renaming cropped-fig-general-lop-no-solution-2.pdf to fig-general-lop-no-solution-2.pdf
+INFO    : converting fig-general-lop-no-solution-2.pdf to fig-general-lop-no-solution-2.svg
+INFO    : converting fig-exercise-lines-2.tex to fig-exercise-lines-2.pdf
+INFO    : cropping fig-exercise-lines-2.pdf to cropped-fig-exercise-lines-2.pdf
+INFO    : renaming cropped-fig-exercise-lines-2.pdf to fig-exercise-lines-2.pdf
+INFO    : converting fig-exercise-lines-2.pdf to fig-exercise-lines-2.svg
+INFO    : converting fig-coffee-2.tex to fig-coffee-2.pdf
+INFO    : cropping fig-coffee-2.pdf to cropped-fig-coffee-2.pdf
+INFO    : renaming cropped-fig-coffee-2.pdf to fig-coffee-2.pdf
+INFO    : converting fig-coffee-2.pdf to fig-coffee-2.svg
+INFO    : converting fig-example-inequality-2.tex to fig-example-inequality-2.pdf
+INFO    : cropping fig-example-inequality-2.pdf to cropped-fig-example-inequality-2.pdf
+INFO    : renaming cropped-fig-example-inequality-2.pdf to fig-example-inequality-2.pdf
+INFO    : converting fig-example-inequality-2.pdf to fig-example-inequality-2.svg
+INFO    : converting Asymptote diagrams from /Users/pstaab/code/linear-optimization-book/source/main.ptx to HTML graphics for placement in /Users/pstaab/code/linear-optimization-book/generated-assets/asymptote with method "AsyMethod.SERVER"
+INFO    : extracting Asymptote diagrams from /Users/pstaab/code/linear-optimization-book/source/main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'cli.version': '2.25', 'publisher': '/Users/pstaab/code/linear-optimization-book/publication/publication.ptx'}
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/extract-asymptote.xsl
+INFO    : messages from the log for XSL processing:
+INFO    : * PTX:INFO:   checking ONLY the last TWO YEARS of element deprecations.
+Rerun with the string parameter "author.deprecations.all" set to "yes" to check your source against all deprecations.
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/extract-asymptote.xsl
+INFO    : converting /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-9goik9tr/fig-plane-2-2.asy to /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-9goik9tr/fig-plane-2-2.html
+INFO    : converting /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-9goik9tr/fig-plane-2.asy to /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-9goik9tr/fig-plane-2.html
+INFO    : Removing temporary directory /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-ii2y644n
+INFO    : Removing temporary directory /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-9goik9tr
+INFO    : Finished generating assets.
+
+INFO    : Preparing to build into /Users/pstaab/code/linear-optimization-book/output/web.
+INFO    : discovering source file's directory name: /Users/pstaab/code/linear-optimization-book/source
+INFO    : verifying and expanding input directory: /Users/pstaab/code/linear-optimization-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /Users/pstaab/code/linear-optimization-book/generated-assets
+INFO    : verifying and expanding input directory: /Users/pstaab/code/linear-optimization-book/source/../assets
+INFO    : input directory expanded to absolute path: /Users/pstaab/code/linear-optimization-book/assets
+INFO    : discovering source file's directory name: /Users/pstaab/code/linear-optimization-book/source
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/report-publisher-variables.xsl
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/utilities/report-publisher-variables.xsl
+INFO    : Downloading rs services file from https://runestone.academy/cdn/runestone/latest/webpack_static_imports.xml.
+INFO    : Runestone Services via online CDN query: version 7.9.5
+INFO    : Downloading Runestone Services, version 7.9.5
+INFO    : Extracting Runestone Services from archive file
+INFO    : Building custom css theme: theme-default-modern
+INFO    : converting /Users/pstaab/code/linear-optimization-book/source/main.ptx to HTML in /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-xm4accr7
+INFO    : XSL conversion of /Users/pstaab/code/linear-optimization-book/source/main.ptx by /Users/pstaab/.ptx/2.25.1/core/xsl/pretext-html.xsl
+INFO    : messages from the log for XSL processing:
+INFO    : * PTX:INFO:   checking ONLY the last TWO YEARS of element deprecations.
+Rerun with the string parameter "author.deprecations.all" set to "yes" to check your source against all deprecations.
+INFO    : successful application of /Users/pstaab/.ptx/2.25.1/core/xsl/pretext-html.xsl
+INFO    : Removing temporary directory /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-xm4accr7
+INFO    : Removing temporary directory /var/folders/f1/91842b0j29ncg7q803d3lvbr0000gp/T/ptx-ol0pg495
+INFO    : 
+Finished build for target web. Run `pretext view web` to see the results.
+
+INFO    : 
+Success!  Built requested target(s) without errors.
+
+INFO    : 

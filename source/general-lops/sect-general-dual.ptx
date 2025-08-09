@@ -1,0 +1,7 @@
+<section xml:id="sect-general-dual">
+  <title>General Dual Problems</title>
+
+  <p>
+    Because of the equality constraints and the free variables, dual problems take on a different form.
+  </p>
+</section>

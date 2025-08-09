@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Introduction to Linear Optimization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Linear Optimization">
+<meta property="book:author" content="Peter Staab">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.9.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.21df2a4c52b86839.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.28cc3c4821792be5.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.8141ae22fd347e48.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="linopt-staab" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="linear-optimization-julia.html"><span class="title">Linear Optimization</span> <span class="subtitle">Modeling and Solving Linear problems with Julia and WebCAS</span></a></h1>
+<p class="byline">Peter Staab</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="ch-linear-models.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-linear-models.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sect-lops.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter"><div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-background.html" class="internal"><span class="codenumber">1</span> <span class="title">Background Mathematics for Linear Optimization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lines-planes.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-lines" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-linear-inequality" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Linear Inequalities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-bounded-feasible-sets" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Bounded and Unbounded Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-planes" class="internal"><span class="codenumber">1.1.4</span> <span class="title">Planes and Hyperplanes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-convex" class="internal"><span class="codenumber">1.1.5</span> <span class="title">Convex Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-plotting-software.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Using Software for Plotting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-plotting-lines" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Plotting Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-plotting-inequalities" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Plotting Inequalities and Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-graphing-planes" class="internal"><span class="codenumber">1.2.3</span> <span class="title">Graphing Planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-matrix-reduction.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Matrices and Matrix Reduction</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-linear-systems" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Linear Systems</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-elementary-row-operations" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Elementary Row Operations</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-gauss-method" class="internal"><span class="codenumber">1.3.2.1</span> <span class="title">Gauss’s Method</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrices" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrix-reduction-6" class="internal"><span class="codenumber">1.3.4</span> <span class="title">Matrices and Linear Systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-row-operations-and-matrices" class="internal"><span class="codenumber">1.3.5</span> <span class="title">Row Operations and Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrix-pivot" class="internal"><span class="codenumber">1.3.6</span> <span class="title">Matrix Pivots</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-geom-lin-sys-2var" class="internal"><span class="codenumber">1.3.7</span> <span class="title">Geometry of Linear Systems of 2 variables</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-pivot-webcas.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Using Software to Perform Matrix Pivots</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-webcas-rowop" class="internal"><span class="codenumber">1.4.1</span> <span class="title">Using WebCAS to do Row Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-webcas-pivot" class="internal"><span class="codenumber">1.4.2</span> <span class="title">Matrix Pivots in WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-click-to-pivot" class="internal"><span class="codenumber">1.4.3</span> <span class="title">Click to Pivot in WebCAS</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-linear-models.html" class="internal"><span class="codenumber">2</span> <span class="title">Developing Linear Models</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sect-linear-models.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Introduction to Linear Optimization</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-linear-models.html#sect-create-linear-model" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Creating Linear Models</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sect-linear-models.html#sect-other-problems" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Non-Obvious Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sect-linear-models.html#prob-n-queens-form" class="internal"><span class="codenumber">2.1.2.1</span> <span class="title">LOP Formulation of <span class="process-math">\(n\)</span>-queens Problem</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lops.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-def-lop" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Defintions and Conventions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-std-form" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Standard Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-lop-general" class="internal"><span class="codenumber">2.2.3</span> <span class="title">General and Matrix Forms of an LOP</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-geometry.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Geometry of Feasible Sets</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-geometry-fs-2d" class="internal"><span class="codenumber">2.3.1</span> <span class="title">Geometry of 2D Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-possible-algorithm" class="internal"><span class="codenumber">2.3.2</span> <span class="title">Solving LOPs — Possible Algorithm</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-convex-fs" class="internal"><span class="codenumber">2.3.3</span> <span class="title">Feasible Sets are Convex</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-simplex.html" class="internal"><span class="codenumber">3</span> <span class="title">The Simplex Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-slack-dict.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Slack Variables and Dictionaries</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-slack-dict-4" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Slack Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-dictionary" class="internal"><span class="codenumber">3.1.2</span> <span class="title">The Dictionary for an LOP</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-basic-solutions" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Basic Solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-develop-simplex" class="internal"><span class="codenumber">3.1.4</span> <span class="title">Developing the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-tableau.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Tableaus and the Simplex Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-intro-tableaus" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Introduction to tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-5" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Operations on Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-6" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Performing Tableau Operations with WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-7" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Phase II of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-phase1.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Simplex Method for Infeasible Tableaus</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-simplex-phase1" class="internal"><span class="codenumber">3.3.1</span> <span class="title">Infeasible Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-phaseI-algorithm" class="internal"><span class="codenumber">3.3.2</span> <span class="title">Phase I of the Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-phase1-6" class="internal"><span class="codenumber">3.3.3</span> <span class="title">Summary of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-infeasible-unbounded.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Infeasibility and Unboundedness</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-infeasible-unbounded.html#sect-unbounded" class="internal"><span class="codenumber">3.4.1</span> <span class="title">Unbounded Problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-infeasible-unbounded.html#sect-infeasibility" class="internal"><span class="codenumber">3.4.2</span> <span class="title">Infeasibility</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-simplex-summary.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Summary of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-integer-problems.html" class="internal"><span class="codenumber">4</span> <span class="title">Integer Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-intro-ilops.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Introduction to Integer Linear Optimization Problems</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-cutting-planes.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Cutting Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sect-finding-cutting-planes" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Finding Cutting Planes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#subsec-gomory" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Gomory’s Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-branch-bound.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Branch and Bound</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-branch-bound.html#sect-branch-bound-4" class="internal"><span class="codenumber">4.3.1</span> <span class="title">A Branch and Bound Flowchart</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-branch-bound.html#sect-branch-bound-5" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Systematic Branch and Bound Algorithm</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-lop-julia.html" class="internal"><span class="codenumber">5</span> <span class="title">Solving Linear Optimization Problems using Software</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-intro-julia.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Introduction to the Julia Language</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-intro-julia-4" class="internal"><span class="codenumber">5.1.1</span> <span class="title">Basics of Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-intro-julia-5" class="internal"><span class="codenumber">5.1.2</span> <span class="title">For Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-number-types" class="internal"><span class="codenumber">5.1.3</span> <span class="title">Number Types in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-enter-unicode" class="internal"><span class="codenumber">5.1.4</span> <span class="title">Unicode Characters in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-julia-packages" class="internal"><span class="codenumber">5.1.5</span> <span class="title">Packages in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-julia-vect-arrays.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Vectors and Matrices in Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-vect-arrays-4" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Vectors in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-matrices-julia" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Matrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-accessing-matrix" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Accessing elements in a Vector or Matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-comprenhension-julia" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Constructing Vectors and Matrices with Comprehensions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-broadcasting" class="internal"><span class="codenumber">5.2.5</span> <span class="title">Broadcasting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-matrix-concat" class="internal"><span class="codenumber">5.2.6</span> <span class="title">Concatenating Matrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-submatrix" class="internal"><span class="codenumber">5.2.7</span> <span class="title">Submatrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-rational-matrices" class="internal"><span class="codenumber">5.2.8</span> <span class="title">Creating Rational Matrices in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-julia-linear-algebra.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Linear Algebra in Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-matrix-ops" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Basic Matrix Operations in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-other-ops" class="internal"><span class="codenumber">5.3.2</span> <span class="title">Other Matrix Operations in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-matrix-inverse" class="internal"><span class="codenumber">5.3.3</span> <span class="title">Matrix Inverse in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-package-lop.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Julia Packages for LOPs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-jump-setup" class="internal"><span class="codenumber">5.4.1</span> <span class="title">Setting up an LOP using JuMP</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-package-lop-5" class="internal"><span class="codenumber">5.4.2</span> <span class="title">Where’s the Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-julia-infeasible" class="internal"><span class="codenumber">5.4.3</span> <span class="title">Infeasible and Unbounded Problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-ilop-julia.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Cutting Planes and Branch and Bound with Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop" class="internal"><span class="codenumber">5.5.1</span> <span class="title">Solving Integer Problems with Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-blops" class="internal"><span class="codenumber">5.5.2</span> <span class="title">Solving Binary LOPs using Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop-julia-6" class="internal"><span class="codenumber">5.5.3</span> <span class="title">Does the 3-queens problem have a solution?</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-dual-problems.html" class="internal"><span class="codenumber">6</span> <span class="title">Dual Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-intro-dual.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Introduction to Dual Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-devel-dual" class="internal"><span class="codenumber">6.1.1</span> <span class="title">Developing a Dual Problem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-dual-form" class="internal"><span class="codenumber">6.1.2</span> <span class="title">Generalizing the Dual</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-weak-primal-dual" class="internal"><span class="codenumber">6.1.3</span> <span class="title">Weak Primal-Dual Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-primal-dual.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Primal-Dual Relationships</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-dual-certificates.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Finding Optimal Certificates</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-general-lops.html" class="internal"><span class="codenumber">7</span> <span class="title">General Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-general-form.html" class="internal"><span class="codenumber">7.1</span> <span class="title">General Form of an LOP</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-gen-lop-std-form" class="internal"><span class="codenumber">7.1.1</span> <span class="title">Writing a General LOP in Standard Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-adaptive-simplex" class="internal"><span class="codenumber">7.1.2</span> <span class="title">Adapting the Simplex Method to Equality Constraints and Free Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-tableau-phase0" class="internal"><span class="codenumber">7.1.3</span> <span class="title">Simplex Method: Phase 0</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-phase0-geometry" class="internal"><span class="codenumber">7.1.4</span> <span class="title">Geometry of Phase 0</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-phase-zero.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Solving General Linear Optimization Problems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-general-dual.html" class="internal"><span class="codenumber">7.3</span> <span class="title">General Dual Problems</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-general-applied.html" class="internal"><span class="codenumber">7.4</span> <span class="title">General Applied Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-tsp" class="internal"><span class="codenumber">7.4.1</span> <span class="title">Traveling Salesperson</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-min-piecewise-linear" class="internal"><span class="codenumber">7.4.2</span> <span class="title">Minimizing Piecewise Linear Fucntions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-best-fit-line" class="internal"><span class="codenumber">7.4.3</span> <span class="title">Best-Fit Lines</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-matrix-form.html" class="internal"><span class="codenumber">8</span> <span class="title">Matrix Formulation of Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lop-matrix.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Writing a LOP in Matrix Form</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix.html#sect-simplex-matrix" class="internal"><span class="codenumber">8.1.1</span> <span class="title">The Matrix Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix.html#sect-matrix-tableau-compare" class="internal"><span class="codenumber">8.1.2</span> <span class="title">Comparison to the Tableau</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lop-matrix-software.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Performing LOP Matrix Operations using Software</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix-software.html#sect-lop-matrix-webcas" class="internal"><span class="codenumber">8.2.1</span> <span class="title">Perform the Matrix Operations to Solve LOP problems in WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix-software.html#sect-lop-matrix-julia" class="internal"><span class="codenumber">8.2.2</span> <span class="title">Using Julia to perform Matrix Operations in solving LOP problems.</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-matrix-simplex.html" class="internal"><span class="codenumber">8.3</span> <span class="title">Performing the Matrix Simplex Method</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-simplex.html#sect-matrix-simplex-summary" class="internal"><span class="codenumber">8.3.1</span> <span class="title">The Matrix Simplex Method</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="backmatter-2.html" class="internal"><span class="codenumber">A</span> <span class="title"></span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="backmatter-2-1.html" class="internal"><span class="codenumber">A.9</span> <span class="title">Installing Julia</span></a></div></li>
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="ch-julia-packages.html" class="internal"><span class="codenumber">A.10</span> <span class="title">Managing Packages in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="backmatter-3.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sect-linear-models"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Introduction to Linear Optimization</span>
+</h2>
+<article class="objectives goal-like" id="sect-linear-models-2"><h3 class="heading"><span class="type">Objectives</span></h3>
+<ul class="disc" id="sect-linear-models-2-1">
+<li id="sect-linear-models-2-1-1">
+<div class="para" id="sect-linear-models-2-1-1-1">Provide examples of linear optimization problems.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Objective"><a href="#sect-linear-models-2-1-1" title="Copy heading and permalink for Objective" aria-label="Copy heading and permalink for Objective">🔗</a></div>
+</li>
+<li id="sect-linear-models-2-1-2">
+<div class="para" id="sect-linear-models-2-1-2-1">Writing down an applied problem as a mathematical linear optimization problem.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Objective"><a href="#sect-linear-models-2-1-2" title="Copy heading and permalink for Objective" aria-label="Copy heading and permalink for Objective">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Objectives 2.1"><a href="#sect-linear-models-2" title="Copy heading and permalink for Objectives 2.1" aria-label="Copy heading and permalink for Objectives 2.1">🔗</a></div></article><section class="introduction" id="sect-linear-models-3"><div class="para" id="sect-linear-models-3-1">This section goes into a number of applied problems that have linear constraints and a linear objective function. Consider the following:<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="prob-toymaker" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The toy car problem.</span>
+</h3></summary><article class="problem example-like knowl__content"><div class="para" id="prob-toymaker-2">Luis is a toymaker who builds toy cars with wood. His most popular toys are a car, an SUV and a truck. The car is made with 6 units of pine, 3 units of birch and take a total of 45 minutes to make. The SUV is made with 5 units of pine, 6 units of birch and takes a total of 75 minutes to make. The truck takes 4 units of pine, 7 units of birch and takes a total of 90 minutes to make. For each car he makes $10 in profit, for each SUV is $15 in profit and for each truck is $12 in profit.<div class="autopermalink" data-description="Paragraph"><a href="#prob-toymaker-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-toymaker-3">Luis has 183 units of pine, 204 units of birch. For the week, he has a total of 2655 minutes of time the shop can spend building toys. How many of each toy should he make to maximize his profit?<div class="autopermalink" data-description="Paragraph"><a href="#prob-toymaker-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.1: The toy car problem"><a href="#prob-toymaker" title="Copy heading and permalink for Problem 2.1.1: The toy car problem" aria-label="Copy heading and permalink for Problem 2.1.1: The toy car problem">🔗</a></div></article></details><div class="para" id="sect-linear-models-3-3">Example of Linear Optimization Problems (LOPs) occur in many fields. This section introduces a few more examples.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="prob-coffee" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Shipping Coffee Problem.</span>
+</h3></summary><article class="problem example-like knowl__content"><div class="para" id="prob-coffee-2-1">A coffee supplier has warehouses in Seattle and San José. The coffee supplier receives orders from coffee retailers in Salt Lake City and Reno.<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="prob-coffee-2-2">The retailer in Salt Lake City needs 400 pounds of coffee and the the retailer in Reno needs 350 pounds of coffee. The Seattle warehouse has 700 pounds available and the San José warehouse has 500 pounds available.<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="prob-coffee-2-3">The cost of shipping from Seattle to Salt Lake City is $2.50 per pound, from Seattle to Reno $3 per pound, from San José to Salt Lake is $4 per pound and from San José to Reno is $2 per pound.<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="prob-coffee-2-4">Find the number of pounds to be shipped from each warehouse to each retailer to minimize the cost.<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.2: Shipping Coffee Problem"><a href="#prob-coffee" title="Copy heading and permalink for Problem 2.1.2: Shipping Coffee Problem" aria-label="Copy heading and permalink for Problem 2.1.2: Shipping Coffee Problem">🔗</a></div></article></details><details id="sect-linear-models-3-5" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Scheduling Librarians.</span>
+</h3></summary><article class="problem example-like knowl__content"><div class="para" id="sect-linear-models-3-5-2-1">The FSU library needs to make sure that there is at least one reference librarian on duty during open hours. If there are 3 reference librarians, how do you schedule them to work such that a) each one works at least 30 hours per week. b) No one work longer than 10 hours in a given day. How would you schedule them such that the total number of hours worked by all reference librarians is minimized.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.3: Scheduling Librarians"><a href="#sect-linear-models-3-5" title="Copy heading and permalink for Problem 2.1.3: Scheduling Librarians" aria-label="Copy heading and permalink for Problem 2.1.3: Scheduling Librarians">🔗</a></div></article></details><details id="prob-diet" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A Diet Problem.</span>
+</h3></summary><article class="problem example-like knowl__content"><div class="para" id="prob-diet-2-1">Consider the problem: Gary goes on a diet eating only a salad, turkey sandwich or a bagel with cream cheese for a week. (Yes. It’s the worst!). The following table shows important information for each<div class="autopermalink" data-description="Paragraph"><a href="#prob-diet-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b2 r0 l0 t0 lines"></td>
+<td class="l m b2 r0 l0 t0 lines">calories</td>
+<td class="l m b2 r0 l0 t0 lines">protein</td>
+<td class="l m b2 r0 l0 t0 lines">carbs</td>
+<td class="l m b2 r0 l0 t0 lines">fat</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">salad</td>
+<td class="l m b0 r0 l0 t0 lines">600</td>
+<td class="l m b0 r0 l0 t0 lines">5</td>
+<td class="l m b0 r0 l0 t0 lines">7</td>
+<td class="l m b0 r0 l0 t0 lines">4</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">sandwich</td>
+<td class="l m b0 r0 l0 t0 lines">750</td>
+<td class="l m b0 r0 l0 t0 lines">18</td>
+<td class="l m b0 r0 l0 t0 lines">10</td>
+<td class="l m b0 r0 l0 t0 lines">8</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">bagel</td>
+<td class="l m b0 r0 l0 t0 lines">500</td>
+<td class="l m b0 r0 l0 t0 lines">10</td>
+<td class="l m b0 r0 l0 t0 lines">24</td>
+<td class="l m b0 r0 l0 t0 lines">12</td>
+</tr>
+</table></div> <div class="para" id="prob-diet-2-3">Gary is trying to minimize the total calories ensuring that he eats at least 54 grams of protein, 45 grams of fat and 60 grams of carbs. Write down the objective function and the set of linear constraints?<div class="autopermalink" data-description="Paragraph"><a href="#prob-diet-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.4: A Diet Problem"><a href="#prob-diet" title="Copy heading and permalink for Problem 2.1.4: A Diet Problem" aria-label="Copy heading and permalink for Problem 2.1.4: A Diet Problem">🔗</a></div></article></details><details id="sect-linear-models-3-7" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Blending Problem.</span>
+</h3></summary><article class="problem example-like knowl__content"><div class="para" id="sect-linear-models-3-7-2">
+<em class="emphasis">Becky’s Bakery</em> has the following amounts of ingredients on hand: 32 cups flour, 2 dozen eggs and 20 cups of sugar. They would like to make some number of batches of Chocolate Chip Cookies, Brownies and Sugar Cookies. The recipes for these call for the following amounts of flour, eggs and sugar:<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-7-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b2 r0 l0 t0 lines">Recipe</td>
+<td class="l m b2 r0 l0 t0 lines">Flour</td>
+<td class="l m b2 r0 l0 t0 lines">Eggs</td>
+<td class="l m b2 r0 l0 t0 lines">Sugar</td>
+</tr>
+<tr><td class="l m b0 r0 l0 t0 lines"></td></tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Choc. Chip Cookies</td>
+<td class="l m b0 r0 l0 t0 lines">3</td>
+<td class="l m b0 r0 l0 t0 lines">2</td>
+<td class="l m b0 r0 l0 t0 lines">1</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Brownies</td>
+<td class="l m b0 r0 l0 t0 lines">2</td>
+<td class="l m b0 r0 l0 t0 lines">1</td>
+<td class="l m b0 r0 l0 t0 lines">2</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Sugar Cookies</td>
+<td class="l m b0 r0 l0 t0 lines">1</td>
+<td class="l m b0 r0 l0 t0 lines">2</td>
+<td class="l m b0 r0 l0 t0 lines">2</td>
+</tr>
+</table></div>
+<div class="para" id="sect-linear-models-3-7-4">If the profit made for each recipe is 20, 24, and 16 dollars respectively, find the number of batches of each baked good that the bakery should make to maximize the profit.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-7-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.5: Blending Problem"><a href="#sect-linear-models-3-7" title="Copy heading and permalink for Problem 2.1.5: Blending Problem" aria-label="Copy heading and permalink for Problem 2.1.5: Blending Problem">🔗</a></div></article></details><details id="sect-linear-models-3-8" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Allocation Problem.</span>
+</h3></summary><article class="problem example-like knowl__content"><div class="para" id="sect-linear-models-3-8-2">Jane has four courses this given semester. Let’s call them Mathematics (M), History (H), Writing (W) and Psychology (Psy). We want to determine a number of constraints on the amount of studying she does in these classes.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-8-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-linear-models-3-8-3">
+<ol class="decimal" id="sect-linear-models-3-8-3-1">
+<li id="sect-linear-models-3-8-3-1-1">
+<div class="para" id="sect-linear-models-3-8-3-1-1-1">The total number of hours for studying is 360.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-8-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#sect-linear-models-3-8-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="sect-linear-models-3-8-3-1-2">
+<div class="para" id="sect-linear-models-3-8-3-1-2-1">Jane is on a scholarship and needs to keep a 3.0.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-8-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#sect-linear-models-3-8-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="sect-linear-models-3-8-3-1-3">
+<div class="para" id="sect-linear-models-3-8-3-1-3-1">Jane needs to pass every class to stay on the scholarship.<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-8-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#sect-linear-models-3-8-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="sect-linear-models-3-8-3-1-4">
+<div class="para" id="sect-linear-models-3-8-3-1-4-1">From past experience, the following table lists the amount of time Jane needs to earn 1 grade point in each course:<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-8-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b2 r0 l0 t0 lines">Course</td>
+<td class="l m b2 r0 l0 t0 lines">hour/grade point</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Mathematics</td>
+<td class="l m b0 r0 l0 t0 lines">30</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Psychology</td>
+<td class="l m b0 r0 l0 t0 lines">20</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">History</td>
+<td class="l m b0 r0 l0 t0 lines">25</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Writing</td>
+<td class="l m b0 r0 l0 t0 lines">20</td>
+</tr>
+</table></div>
+<div class="autopermalink" data-description="Item 4"><a href="#sect-linear-models-3-8-3-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-8-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-linear-models-3-8-4">What is the minimum number of hours that Jane should study in each class?<div class="autopermalink" data-description="Paragraph"><a href="#sect-linear-models-3-8-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.6: Allocation Problem"><a href="#sect-linear-models-3-8" title="Copy heading and permalink for Problem 2.1.6: Allocation Problem" aria-label="Copy heading and permalink for Problem 2.1.6: Allocation Problem">🔗</a></div></article></details><details id="prob-urban-farm" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Urban Farming Project.</span>
+</h3></summary><article class="problem example-like knowl__content"><div class="para" id="prob-urban-farm-2">A non-profit organization, <em class="emphasis">GreenHarvest</em>, aims to establish a sustainable urban farm within a limited city space.<details class="ptx-footnote" aria-live="polite" id="prob-urban-farm-2-2"><summary class="ptx-footnote__number" title="Footnote 2.1.1"><sup> 1 </sup></summary><div class="ptx-footnote__contents" id="prob-urban-farm-2-2">This problem was created in part using Google Gemini.</div></details> They want to maximize their total profit from selling produce to local restaurants and farmers’ markets while adhering to various constraints. They have identified four key crops to cultivate:<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-urban-farm-3">
+<ol class="decimal" id="prob-urban-farm-3-1">
+<li id="prob-urban-farm-3-1-1">
+<div class="para" id="prob-urban-farm-3-1-1-1">Heirloom Tomatoes (T): High-profit, but require significant space and water.<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#prob-urban-farm-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="prob-urban-farm-3-1-2">
+<div class="para" id="prob-urban-farm-3-1-2-1">Organic Lettuce (L): Moderate profit, quick growing, but sensitive to sun exposure.<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#prob-urban-farm-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="prob-urban-farm-3-1-3">
+<div class="para" id="prob-urban-farm-3-1-3-1">Specialty Herbs (H): Low profit per plant, but very space-efficient and high demand.<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#prob-urban-farm-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="prob-urban-farm-3-1-4">
+<div class="para" id="prob-urban-farm-3-1-4-1">Root Vegetables (R): Moderate profit, require deep soil beds and longer growth cycles.<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#prob-urban-farm-3-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-urban-farm-4">The project has 50 growing beds for all crops. Due to city regulations and sustainable practices, there’s a limit on daily water consumption. Each crop type has different water requirements per bed. The total water usage cannot exceed 1500 liters per day.<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-urban-farm-5">
+<ul class="disc" id="prob-urban-farm-5-1">
+<li id="prob-urban-farm-5-1-1">
+<div class="para" id="prob-urban-farm-5-1-1-1">Heirloom Tomatoes: 40 liters/bed<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-5-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#prob-urban-farm-5-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="prob-urban-farm-5-1-2">
+<div class="para" id="prob-urban-farm-5-1-2-1">Organic Lettuce: 25 liters/bed<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-5-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#prob-urban-farm-5-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="prob-urban-farm-5-1-3">
+<div class="para" id="prob-urban-farm-5-1-3-1">Specialty Herbs: 15 liters/bed<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-5-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#prob-urban-farm-5-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="prob-urban-farm-5-1-4">
+<div class="para" id="prob-urban-farm-5-1-4-1">Root Vegetables: 30 liters/bed<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-5-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#prob-urban-farm-5-1-4" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-urban-farm-6">To meet the demand from local restaurants that rely heavily on fresh herbs, GreenHarvest wants to ensure at least 5 beds are dedicated to Specialty Herbs.<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-urban-farm-7">To maintain crop diversity and manage pest control effectively, the number of Heirloom Tomato beds should be no more than twice the number of Organic Lettuce beds.<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-urban-farm-8">Profit per bed (estimated per growing season):<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-urban-farm-9">
+<ol class="decimal" id="prob-urban-farm-9-1">
+<li id="prob-urban-farm-9-1-1">
+<div class="para" id="prob-urban-farm-9-1-1-1">Heirloom Tomatoes: $300<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-9-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#prob-urban-farm-9-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="prob-urban-farm-9-1-2">
+<div class="para" id="prob-urban-farm-9-1-2-1">Organic Lettuce: $180<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-9-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#prob-urban-farm-9-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="prob-urban-farm-9-1-3">
+<div class="para" id="prob-urban-farm-9-1-3-1">Specialty Herbs: $100<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-9-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#prob-urban-farm-9-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="prob-urban-farm-9-1-4">
+<div class="para" id="prob-urban-farm-9-1-4-1">Root Vegetables: $220<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-9-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#prob-urban-farm-9-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-urban-farm-10">The goal of this problem is to determine the number of beds to devote to each of the different types of crops in order to maximize the profit.<div class="autopermalink" data-description="Paragraph"><a href="#prob-urban-farm-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.7: Urban Farming Project"><a href="#prob-urban-farm" title="Copy heading and permalink for Problem 2.1.7: Urban Farming Project" aria-label="Copy heading and permalink for Problem 2.1.7: Urban Farming Project">🔗</a></div></article></details></section><section class="subsection" id="sect-create-linear-model"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Creating Linear Models</span>
+</h3>
+<div class="para" id="sect-create-linear-model-2">We have seen a number of problems in this chapter that will fit into a linear model. Let’s look at <a href="sect-linear-models.html#prob-toymaker" class="xref" data-knowl="./knowl/xref/prob-toymaker.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 2.1.1: The toy car problem">Problem 2.1.1</a> as a example of how to approach creating a linear model. We’ll write the common steps and fill in those steps for this problem.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-create-linear-model-3">
+<ol class="decimal" id="sect-create-linear-model-3-1">
+<li id="sect-create-linear-model-3-1-1">
+<div class="para" id="sect-create-linear-model-3-1-1-1">What are the variables? Clearly list each one or perhaps if they are indexed, write down what each indexed variable represents.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-create-linear-model-3-1-1-2">
+<em class="alert">Solution:</em> There are 3 types of toys for this problem:<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-create-linear-model-3-1-1-3">
+<div class="displaymath process-math" id="sect-create-linear-model-3-1-1-3-1">
+\begin{align*}
+x_1 \amp = \text{number of cars to be produced},\\
+x_2 \amp = \text{number of SUVs to be produced},\\
+x_3 \amp = \text{number of trucks to be produced}.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-1-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#sect-create-linear-model-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="sect-create-linear-model-3-1-2">
+<div class="para" id="sect-create-linear-model-3-1-2-1">What is the objective?   Is it to be minimized or maximized.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-create-linear-model-3-1-2-2">
+<em class="alert">Solution:</em> In this case, the profit is to be <em class="emphasis">maximized</em> and can be written<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-create-linear-model-3-1-2-3">
+<div class="displaymath process-math">
+\begin{equation*}
+z = 10 x_1 + 15 x_2 + 12 x_3.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#sect-create-linear-model-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="sect-create-linear-model-3-1-3">
+<div class="para" id="sect-create-linear-model-3-1-3-1">What are the contraints?  Note: one way to think about this is the case of something being maximized, why can’t the objective be increased without bound.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-create-linear-model-3-1-3-2">
+<em class="alert">Solution:</em> The profit cannot be increased with bound because there is a limit on the amount of wood and labor that can be used.  For each of these, we build a constraint.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-create-linear-model-3-1-3-3">
+<ul class="disc" id="sect-create-linear-model-3-1-3-3-1">
+<li id="sect-create-linear-model-3-1-3-3-1-1">
+<div class="para" id="sect-create-linear-model-3-1-3-3-1-1-1">For the amount of pine: <span class="process-math">\(6x_1 + 5x_2 + 4x_3 \leq 183.\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-3-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sect-create-linear-model-3-1-3-3-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sect-create-linear-model-3-1-3-3-1-2">
+<div class="para" id="sect-create-linear-model-3-1-3-3-1-2-1">For the amount of birch: <span class="process-math">\(3x_1 + 6x_2 + 7x_3 \leq 204.\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-3-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sect-create-linear-model-3-1-3-3-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sect-create-linear-model-3-1-3-3-1-3">
+<div class="para" id="sect-create-linear-model-3-1-3-3-1-3-1">For the amount of labor: <span class="process-math">\(45x_1 + 75x_2 + 90x_3 \leq 2655.\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-3-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sect-create-linear-model-3-1-3-3-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#sect-create-linear-model-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="sect-create-linear-model-3-1-4">
+<div class="para" id="sect-create-linear-model-3-1-4-1">Check if the nonnegative constraints on the variables are needed assumptions.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-create-linear-model-3-1-4-2">
+<em class="alert">Solution:</em> Yes.  Since the variables represent the numbers of things (in this case toys) to make, the nonnegative assumptions on each variable makes sense.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-create-linear-model-3-1-4-3">
+<div class="displaymath process-math">
+\begin{equation*}
+x_1, x_2, x_3 \geq 0
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-4-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#sect-create-linear-model-3-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li id="sect-create-linear-model-3-1-5">
+<div class="para" id="sect-create-linear-model-3-1-5-1">Check if either integer or binary constraints are reasonable.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-create-linear-model-3-1-5-2">
+<em class="alert">Solution:</em> Since the variables are numbers of toys to make, they must be integers,<details class="ptx-footnote" aria-live="polite" id="sect-create-linear-model-3-1-5-2-2"><summary class="ptx-footnote__number" title="Footnote 2.1.2"><sup> 2 </sup></summary><div class="ptx-footnote__contents" id="sect-create-linear-model-3-1-5-2-2">There are a few different ways to denote the set of nonnegative integers, however, in this text, we will use <span class="process-math">\(\mathbb{N}_0\)</span> to represent <span class="process-math">\(\{0,1,2,3, \ldots \}\text{.}\)</span>
+</div></details> but not binary.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-create-linear-model-3-1-5-3">
+<div class="displaymath process-math">
+\begin{equation*}
+x_1, x_2, x_3 \in \mathbb{N}_0
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3-1-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#sect-create-linear-model-3-1-5" title="Copy heading and permalink for Item 5" aria-label="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-create-linear-model-4">The next problem shows how to attack another linear problem.<div class="autopermalink" data-description="Paragraph"><a href="#sect-create-linear-model-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="prob-coffee-setup" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="problem example-like knowl__content"><div class="para" id="prob-coffee-setup-1-1">Use the steps above to write the LOP for <a href="sect-linear-models.html#prob-coffee" class="xref" data-knowl="./knowl/xref/prob-coffee.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 2.1.2: Shipping Coffee Problem">Problem 2.1.2</a>.<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="prob-coffee-setup-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="prob-coffee-setup-2-1">
+<ol class="decimal" id="prob-coffee-setup-2-1-1">
+<li id="prob-coffee-setup-2-1-1-1">
+<div class="para" id="prob-coffee-setup-2-1-1-1-1">What are the variables?<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-coffee-setup-2-1-1-1-2">
+<em class="alert">Solution:</em> In this case, first note that we need to know the amount of coffee shipped between warehouses and retail outlets. The following graph is helpful for this:<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-coffee"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;"><img src="generated/latex-image/fig-coffee-2.svg" role="img" class="contained" alt=""></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.9<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><div class="autopermalink" data-description="Figure 2.1.9"><a href="#fig-coffee" title="Copy heading and permalink for Figure 2.1.9" aria-label="Copy heading and permalink for Figure 2.1.9">🔗</a></div></figcaption></figure><div class="para" id="prob-coffee-setup-2-1-1-1-4">Specificially we have the following:<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-1-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-coffee-setup-2-1-1-1-5">
+<div class="displaymath process-math" id="prob-coffee-setup-2-1-1-1-5-1">
+\begin{align*}
+x_1 \amp = \text{number of pounds of coffee to ship from Seattle to Reno},\\
+x_2 \amp = \text{number of pounds of coffee to ship from Seattle to Salt Lake City},\\
+x_3 \amp = \text{number of pounds of coffee to ship from San José  to Reno},\\
+x_4 \amp = \text{number of pounds of coffee to ship from San José to Salt Lake. City}
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-1-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#prob-coffee-setup-2-1-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="prob-coffee-setup-2-1-1-2">
+<div class="para" id="prob-coffee-setup-2-1-1-2-1">
+<em class="emphasis">What is the objective?</em><div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-coffee-setup-2-1-1-2-2">The objective is the total cost and it is to be minimized or<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-coffee-setup-2-1-1-2-3">
+<div class="displaymath process-math">
+\begin{equation*}
+z = 3 x_1 + 2.50 x_2 + 4 x_3 + 2 x_4.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#prob-coffee-setup-2-1-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="prob-coffee-setup-2-1-1-3">
+<div class="para" id="prob-coffee-setup-2-1-1-3-1">
+<em class="emphasis">What are the constraints?</em><div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-coffee-setup-2-1-1-3-2">The variables are going to be the total amount of coffee to be shipped from the two warehouses to the two retail locations. If we look first at the amount of coffee that the Salt Lake City and Reno locations need then we need to ship at least this amount or<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-coffee-setup-2-1-1-3-3">
+<div class="displaymath process-math" id="prob-coffee-setup-2-1-1-3-3-1">
+\begin{align*}
+x_2 + x_3 \amp \geq 400, \\
+x_1 + x_4 \amp \geq 350. 
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-coffee-setup-2-1-1-3-4">Since the warehouses have a limited supply, they can only ship what they have so there are two additional constraints, one for each warehouse<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-3-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-coffee-setup-2-1-1-3-5">
+<div class="displaymath process-math" id="prob-coffee-setup-2-1-1-3-5-1">
+\begin{align*}
+x_1 + x_2 \amp \leq 700,\\
+x_3 + x_4 \amp \leq 500.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-3-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#prob-coffee-setup-2-1-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="prob-coffee-setup-2-1-1-4">
+<div class="para" id="prob-coffee-setup-2-1-1-4-1">Check if the nonnegative constraints on the variables are needed assumptions.<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-coffee-setup-2-1-1-4-2">
+<em class="alert">Solution:</em> Each amount of coffee shipped should be nonnegative, so <span class="process-math">\(x_1, x_2, x_3, x_4 \geq 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#prob-coffee-setup-2-1-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+<li id="prob-coffee-setup-2-1-1-5">
+<div class="para" id="prob-coffee-setup-2-1-1-5-1">
+<em class="emphasis">Check if either integer or binary constraint are needed.</em><div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-coffee-setup-2-1-1-5-2">In this case, because coffee does not need to be shipped in integer amounts of pounds, this is not needed.<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1-1-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 5"><a href="#prob-coffee-setup-2-1-1-5" title="Copy heading and permalink for Item 5" aria-label="Copy heading and permalink for Item 5">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-coffee-setup-2-2">We can combine all of these into the following LOP:<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-coffee-setup-2-3">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} \text{Minimize} \amp \amp  z = 2.5 x_1 + 3 x_2 + 4 x_3 + 2 x_4,\amp \\ \text{subject to} \amp \amp x_2 + x_3 \amp \geq 400.\\ \amp \amp x_1 + x_4 \amp \geq 350,\\ \amp \amp x_1 + x_2 \amp \leq 700,\\ \amp \amp x_3 + x_4 \amp \leq 500,\\ \text{and}\amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+\end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-coffee-setup-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.1.8.1"><a href="#prob-coffee-setup-2" title="Copy heading and permalink for Solution 2.1.8.1" aria-label="Copy heading and permalink for Solution 2.1.8.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Problem 2.1.8"><a href="#prob-coffee-setup" title="Copy heading and permalink for Problem 2.1.8" aria-label="Copy heading and permalink for Problem 2.1.8">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 2.1.1: Creating Linear Models"><a href="#sect-create-linear-model" title="Copy heading and permalink for Subsection 2.1.1: Creating Linear Models" aria-label="Copy heading and permalink for Subsection 2.1.1: Creating Linear Models">🔗</a></div></section><section class="subsection" id="sect-other-problems"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Non-Obvious Linear Optimization Problems</span>
+</h3>
+<section class="introduction" id="sect-other-problems-2"><div class="para" id="sect-other-problems-2-1">Perhaps as you have read through the problems at the top of this section and then the mathematical formulation of each in <a href="sect-linear-models.html#sect-create-linear-model" class="internal" title="Subsection 2.1.1: Creating Linear Models">Subsection 2.1.1</a> and notice that there are some similarities between the problems. Each clearly has an objective that is to optimized and has a number of constraints. However, there are other problems that with some creativity can be written as an LOP. Consider the following:<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="prob-n-queens" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.10</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title"><span class="process-math">\(n\)</span>-queens problem.</span>
+</h4></summary><article class="problem example-like knowl__content"><div class="para" id="prob-n-queens-2-1">A chessboard is a grid of spaces in which pieces move around the board according to various rules. A queen is a piece that can move left, right, up, down or diagonal any number of squares. <a href="sect-linear-models.html#fig-chessboard-queen" class="xref" data-knowl="./knowl/xref/fig-chessboard-queen.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 2.1.11">Figure 2.1.11</a> shows the standard 8 by 8 chessboard and one queen.<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="prob-n-queens-2-2">The <span class="process-math">\(n\)</span>-queens problem asks if <span class="process-math">\(n\)</span> queens can appear on an <span class="process-math">\(n\)</span> by <span class="process-math">\(n\)</span> chessboard, so that no queen can attacker another queen.<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.10: n-queens problem"><a href="#prob-n-queens" title="Copy heading and permalink for Problem 2.1.10: n-queens problem" aria-label="Copy heading and permalink for Problem 2.1.10: n-queens problem">🔗</a></div></article></details><figure class="figure figure-like" id="fig-chessboard-queen"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/fig-chessboard-queen-2.svg" role="img" class="contained" alt=""></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.11<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>An 8 by 8 chessboard with a queen on a square.  The arrows indicate the other squares that can attack with this piece.<div class="autopermalink" data-description="Figure 2.1.11"><a href="#fig-chessboard-queen" title="Copy heading and permalink for Figure 2.1.11" aria-label="Copy heading and permalink for Figure 2.1.11">🔗</a></div></figcaption></figure><div class="para" id="sect-other-problems-2-4">It’s not clear what the objective function is for this problem (although there is one). The constraints for the problem might be the constraints on a queen. Also, what are the variables?  We’ll see how to approach this later.<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="sect-other-problems-2-5" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.12</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Room Scheduling.</span>
+</h4></summary><article class="problem example-like knowl__content"><div class="para" id="sect-other-problems-2-5-2">The registrar at State University needs to schedule rooms for a set of classes in a time block. For simplification, the classes will be A, B, C, ..., H and they will be put in rooms 1,2,3, ..., 8. Not every class can be scheduled in every room. Some classes need to be in a computer class, some classes need to be on the first floor of the building, some faculty prefer whiteboards, some faculty prefer to use a project. Here’s all of these constraints:<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-other-problems-2-5-3">
+<ul class="disc" id="sect-other-problems-2-5-3-1">
+<li id="sect-other-problems-2-5-3-1-1">
+<div class="para" id="sect-other-problems-2-5-3-1-1-1">Classes A, B and C need to be scheduled in a computer lab (rooms 1, 4, 6, 8).<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-5-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sect-other-problems-2-5-3-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sect-other-problems-2-5-3-1-2">
+<div class="para" id="sect-other-problems-2-5-3-1-2-1">Classes D and E need to be on the first floor the building (rooms 1, 2, 3).<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-5-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sect-other-problems-2-5-3-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sect-other-problems-2-5-3-1-3">
+<div class="para" id="sect-other-problems-2-5-3-1-3-1">Classes B, E, F, G, H need a whiteboard and cannot be in rooms 1, 2 or 7.<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-5-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sect-other-problems-2-5-3-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="sect-other-problems-2-5-3-1-4">
+<div class="para" id="sect-other-problems-2-5-3-1-4-1">Classes C, D, F and H need a projector and cannot be in room 2, 5, or 8.<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-5-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#sect-other-problems-2-5-3-1-4" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-other-problems-2-5-4">What is a reasonable scheduling of the rooms if possible?<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-5-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.12: Room Scheduling"><a href="#sect-other-problems-2-5" title="Copy heading and permalink for Problem 2.1.12: Room Scheduling" aria-label="Copy heading and permalink for Problem 2.1.12: Room Scheduling">🔗</a></div></article></details><div class="para" id="sect-other-problems-2-6">This problem seems to have similarties with the previous problem, and similar questions arise. What are the variables for the problem?  There are clearly some constraints in that certain classes need to be in a some rooms, but not others. It’s unclear what the objective is.<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="prob-mars-rover" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.13</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Mars Rover.</span>
+</h4></summary><article class="problem example-like knowl__content"><div class="para" id="prob-mars-rover-2">You are the lead mission planner for NASA’s new Mars rover, “Curiosity II.” The rocket launching the rover has a strict weight limit for its scientific payload. Exceeding this limit is not an option. A team of scientists has reviewed all possible instruments and assigned each a “scientific value” score based on the mission’s objectives (like finding signs of past life or analyzing atmospheric composition). Your job is to select the combination of instruments that will maximize the total scientific value of the mission without exceeding the weight limit. <details class="ptx-footnote" aria-live="polite" id="prob-mars-rover-2-3"><summary class="ptx-footnote__number" title="Footnote 2.1.3"><sup> 3 </sup></summary><div class="ptx-footnote__contents" id="prob-mars-rover-2-3">This was generated with help from Gemini AI.</div></details><div class="autopermalink" data-description="Paragraph"><a href="#prob-mars-rover-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="table-knapsack-rover"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.14<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Mars Rover Instrument Options<div class="autopermalink" data-description="Table 2.1.14: Mars Rover Instrument Options"><a href="#table-knapsack-rover" title="Copy heading and permalink for Table 2.1.14: Mars Rover Instrument Options" aria-label="Copy heading and permalink for Table 2.1.14: Mars Rover Instrument Options">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b2 r0 l0 t0 lines">Instrument Name</th>
+<th scope="col" class="c m b2 r0 l0 t0 lines">Weight (kg)</th>
+<th scope="col" class="c m b2 r0 l0 t0 lines">Scientific Value Score</th>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Alpha Particle X-ray Spectrometer</td>
+<td class="c m b0 r0 l0 t0 lines">35</td>
+<td class="c m b0 r0 l0 t0 lines">30</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">High-Resolution Panoramic Camera</td>
+<td class="c m b0 r0 l0 t0 lines">30</td>
+<td class="c m b0 r0 l0 t0 lines">25</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Subsurface Drilling Unit</td>
+<td class="c m b0 r0 l0 t0 lines">60</td>
+<td class="c m b0 r0 l0 t0 lines">55</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Weather &amp; Radiation Monitor</td>
+<td class="c m b0 r0 l0 t0 lines">45</td>
+<td class="c m b0 r0 l0 t0 lines">35</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Laser-Induced Breakdown Spectrometer</td>
+<td class="c m b0 r0 l0 t0 lines">40</td>
+<td class="c m b0 r0 l0 t0 lines">40</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">Robotic Scoop &amp; Soil Analyzer</td>
+<td class="c m b0 r0 l0 t0 lines">55</td>
+<td class="c m b0 r0 l0 t0 lines">50</td>
+</tr>
+</table></div></figure><div class="autopermalink" data-description="Problem 2.1.13: Mars Rover"><a href="#prob-mars-rover" title="Copy heading and permalink for Problem 2.1.13: Mars Rover" aria-label="Copy heading and permalink for Problem 2.1.13: Mars Rover">🔗</a></div></article></details><div class="para" id="sect-other-problems-2-8">This problem falls into a class of problems called knapsack problems. The idea is that you have a knapsack (backpack) with limited capacity and you want to include as much as possible, whether that is volume, weight or some other measure (like scientific value).<div class="autopermalink" data-description="Paragraph"><a href="#sect-other-problems-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="prob-mailbox" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.15</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Mailbox Problem.</span>
+</h4></summary><article class="problem example-like knowl__content"><div class="para" id="prob-mailbox-2-1">Consider a city that is 4 blocks by 6 blocks in a grid as shown below<div class="autopermalink" data-description="Paragraph"><a href="#prob-mailbox-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <figure class="figure figure-like" id="fig-gridburg"><div class="image-box" style="width: 75%; margin-left: 12.5%; margin-right: 12.5%;"><img src="generated/latex-image/fig-gridburg-2.svg" role="img" class="contained" alt=""></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.16<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><div class="autopermalink" data-description="Figure 2.1.16"><a href="#fig-gridburg" title="Copy heading and permalink for Figure 2.1.16" aria-label="Copy heading and permalink for Figure 2.1.16">🔗</a></div></figcaption></figure> <div class="para" id="prob-mailbox-2-3">The postal chief wants to arrange mailboxes such that anywhere in the city, one does not need to walk any more than one block to reach a mailbox.  Where should the mailboxes be placed to minimize the number of mailboxes.<details class="ptx-footnote" aria-live="polite" id="prob-mailbox-2-3-1"><summary class="ptx-footnote__number" title="Footnote 2.1.4"><sup> 4 </sup></summary><div class="ptx-footnote__contents" id="prob-mailbox-2-3-1">This problem is a nod to Glenn Hurlbert, whose book <em class="emphasis">Linear Optimization: a Handbook</em> motivated this work.  The book had a number of problems in <em class="emphasis">Gridburg</em> a town on a grid like above.</div></details><div class="autopermalink" data-description="Paragraph"><a href="#prob-mailbox-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 2.1.15: The Mailbox Problem"><a href="#prob-mailbox" title="Copy heading and permalink for Problem 2.1.15: The Mailbox Problem" aria-label="Copy heading and permalink for Problem 2.1.15: The Mailbox Problem">🔗</a></div></article></details></section><section class="subsubsection" id="prob-n-queens-form"><h4 class="heading hide-type">
+<span class="type">Subsubsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">LOP Formulation of <span class="process-math">\(n\)</span>-queens Problem</span>
+</h4>
+<div class="para" id="prob-n-queens-form-2">Perhaps looking at <a href="sect-linear-models.html#prob-n-queens" class="xref" data-knowl="./knowl/xref/prob-n-queens.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 2.1.10: n-queens problem">Problem 2.1.10</a>, it would not seem like it is a linear optimization problem. You might think that there are constraints—no queen can attack another one, but what is the objective function?<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-n-queens-form-3">First, to formulate the problem, we need to know the variables. A common situation is to place objects in a grid or other arrangement and then use a variable to denote whether or not to place the object at the grid point. In this case, we are going to use <span class="process-math">\(x_{i,j}\)</span> to be a binary variable that is 1 if there is a queen at row <span class="process-math">\(i\)</span> and column <span class="process-math">\(j\)</span> and 0 otherwise.<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-n-queens-form-4">The constraints will be that there is at most one queen in any row, column or diagonal of the chessboard. At most a single queen in any row or column can be written as<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-n-queens-form-5">
+<div class="displaymath process-math" id="prob-n-queens-form-5-1">
+\begin{align}
+\sum_{j=1}^n x_{i,j} \amp \leq 1 \qquad \text{for $i=1, 2, \ldots n$} \tag{2.1.1}\\
+\sum_{i=1}^n x_{i,j} \amp \leq 1 \qquad \text{for $j=1, 2, \ldots n$} \tag{2.1.2}
+\end{align}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-n-queens-form-6">Note that in <a href="sect-linear-models.html#prob-n-queens-form-5-1" class="xref" data-knowl="./knowl/xref/eq-queen-row.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.1.1">(2.1.1)</a>, the sum is across row <span class="process-math">\(i\)</span> and the inequality with <span class="process-math">\(\leq 1\)</span> means that at most there is 1 queen in each row. Similarly in <a href="sect-linear-models.html#prob-n-queens-form-5-1" class="xref" data-knowl="./knowl/xref/eq-queen-col.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 2.1.2">(2.1.2)</a>, the sum in for a given column, so there is at most one queen in a column.<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-n-queens-form-7">The diagonals are trickier. In the diagonal from the lower left to upper right then summing <span class="process-math">\(\sum_{i=1}^n x_{i,i}  \leq 1 \text{,}\)</span> but this is also true for every diagonal that parallels this one. The inequality for this is in the problem below.<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-n-queens-form-8">There is also a diagonal from the upper left to lower right with the inequality <span class="process-math">\(\sum_{i=1}^n x_{i,n+1-i} \leq 1\text{,}\)</span> but also with every other diagonal parallel to these, which are listed below.<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-n-queens-form-9">Finally, we will use the objective that the total number of queens on the board to be minimized. The total number can be calculated with<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-n-queens-form-10">
+<div class="displaymath process-math">
+\begin{equation*}
+z = \sum_{i=1}^n \sum_{j=1}^n x_{i,j}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-n-queens-form-11">Here’s a summary of the <span class="process-math">\(n\)</span>-queens problems:<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="prob-n-queens-form-12">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} \text{Minimize} \amp \amp z \amp = \sum_{i=1}^n \sum_{j=1}^n x_{i,j}, \\ \text{subject to} \amp \amp \sum_{i=1}^n x_{i,j} \amp \leq 1 \qquad \text{for $j=1, 2, \ldots n$} \\ \amp \amp \sum_{j=1}^n x_{i,j} \amp \leq 1 \qquad \text{for $i=1, 2, \ldots n$} \\ \amp \amp \sum_{i=1}^{n-k} x_{i,i+k} \amp \leq 1 \qquad \text{for $k=0, 1, \ldots n-1$} \\ \amp \amp \sum_{i=k-1}^{n-1} x_{i,i-k} \amp \leq 1 \qquad \text{for $k=1,2, \ldots n-1$} \\ \amp \amp \sum_{i=1}^{n-k} x_{i,n-k} \amp \leq 1 \qquad \text{for $k=0, 1, \ldots n-1$} \\ \amp \amp \sum_{i=k-1}^{n-1} x_{n-i,k} \amp \leq 1 \qquad \text{for $k=1,2, \ldots n-1$} \\ \text{and} \amp \amp x_{i,j} \amp \in \{0,1\} \qquad \text{for $i=1,\ldots, n, j = 1, \ldots n$} \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="prob-n-queens-form-13">The first inequality is the column sum for every <span class="process-math">\(j\text{,}\)</span> the second is the row sum for every <span class="process-math">\(i\text{.}\)</span> The third and fourth are the diagonals that run from bottom left to upper right on the chessboard and the fifth and sixth are the upper left to lower right.<div class="autopermalink" data-description="Paragraph"><a href="#prob-n-queens-form-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsubsection 2.1.2.1: LOP Formulation of n-queens Problem"><a href="#prob-n-queens-form" title="Copy heading and permalink for Subsubsection 2.1.2.1: LOP Formulation of n-queens Problem" aria-label="Copy heading and permalink for Subsubsection 2.1.2.1: LOP Formulation of n-queens Problem">🔗</a></div></section><div class="autopermalink" data-description="Subsection 2.1.2: Non-Obvious Linear Optimization Problems"><a href="#sect-other-problems" title="Copy heading and permalink for Subsection 2.1.2: Non-Obvious Linear Optimization Problems" aria-label="Copy heading and permalink for Subsection 2.1.2: Non-Obvious Linear Optimization Problems">🔗</a></div></section><div class="autopermalink" data-description="Section 2.1: Introduction to Linear Optimization"><a href="#sect-linear-models" title="Copy heading and permalink for Section 2.1: Introduction to Linear Optimization" aria-label="Copy heading and permalink for Section 2.1: Introduction to Linear Optimization">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="ch-linear-models.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sect-lops.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

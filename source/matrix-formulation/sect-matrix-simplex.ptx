@@ -1,0 +1,326 @@
+<section xml:id="sect-matrix-simplex">
+  <title>Performing the Matrix Simplex Method</title>
+
+<introduction>
+
+  <p>
+    We now adapt the simplex method to using the matrices from the previous section instead of a tableau.
+  </p>
+
+  <p>
+    Let's return to <xref ref="prob-matrix-lop-ex"/>, which was written in matrix form in <xref ref="sect-lop-matrix"/>.
+    We use all of the matrix notation from that section to adapt the simplex method to solve such LOPs.
+  </p>
+
+  <p>
+    <ol>
+      <li>
+        <p>
+          Initially the basis for this problem is <m>\beta=\{4,5,6,7\}</m> and <m>\pi=\{1,2,3\}.</m>, therefore the first step is to find <m>B</m> for this basis which are the 4th throw 7th columns of the simplex tableau or just the identity matrix.
+          Therefore <m>B=I</m> and also <m>B'=I</m> and the basic solution is <m>B'\boldsymbol{b}</m>, which is just <m>\boldsymbol{b}</m>.
+        </p>
+
+        <p>
+          <me>
+            B' \boldsymbol{b} = \begin{bmatrix} -85 \\ -70 \\ 250 \\ 180 \end{bmatrix}.
+          </me>
+        </p>
+
+        <p>
+          Also, note that the parameter columns (which are quite important in the simplex method) are in <m>B'\Pi</m> which in the first step, just <m>\Pi</m> which is
+        </p>
+
+        <p>
+          <me>
+            \Pi = \begin{bmatrix} -18 \amp -5 \amp -10 \\ -4 \amp -20 \amp -15 \\ 10 \amp 15 \amp 18 \\ 20 \amp 16 \amp 4 \end{bmatrix}.
+          </me>
+        </p>
+
+        <p>
+          Since the left column (which is <m>B'\boldsymbol{b}</m>) has negatives in this, we need to use phase I.
+          In this case, we find the most negative in this vector, which occurs in the first row.
+          Note that the first row corresponds to <m>x_4</m>, so this is the leaving variable.
+        </p>
+
+        <p>
+          To find the entering variable, find the largest negative in the first row of <m>\Pi</m>.
+          This occurs in the second row of <m>\Pi</m>, which is the second variable in <m>\pi</m>, so <m>x_2</m>.
+          We thus to a pivot <m>2 \mapsto 4</m>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          There the new basis is <m>\beta = \{2,5,6,7\}</m> and <m>\pi=\{1,3,4\}</m>.
+          This means that
+        </p>
+
+        <p>
+          <me>
+            B = \begin{bmatrix} -5 \amp 0 \amp 0 \amp 0 \\ -20 \amp 1 \amp 0 \amp 0 \\ 15 \amp 0 \amp 1 \amp 0 \\ 16 \amp 0 \amp 0 \amp 1 \end{bmatrix} \qquad \Pi = \begin{bmatrix} -18  \amp -10 \amp  1 \\ -4  \amp -15 \amp  0 \\ 10  \amp  18 \amp  0 \\ 20  \amp   4 \amp  0 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          We can the calculate the determinant of <m>B</m> to be <m>d_{\beta} = 5</m> (take the absolute value) and
+        </p>
+
+        <p>
+          <me>
+            B' = d_{\beta} B^{-1} = \begin{bmatrix} -1 \amp  0 \amp  0 \amp  0 \\ -20 \amp 5 \amp  0 \amp  0 \\ 15 \amp  0 \amp 5 \amp  0 \\ 16 \amp  0 \amp  0 \amp 5 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          And then calculate
+        </p>
+
+        <p>
+          <me>
+            B' \boldsymbol{b} = \begin{bmatrix}   85 \\ 1350 \\  -25 \\ -460 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          This shows that the tableau is still infeasible and we continue with phase I.
+          We need to find
+        </p>
+
+        <p>
+          <me>
+            B'\Pi = \begin{bmatrix} 18 \amp   10 \amp  -1 \\ 340 \amp  125 \amp -20 \\ -220 \amp  -60 \amp  15 \\ -188 \amp -140 \amp  16 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          The smallest (most negative) number in <m>B' \boldsymbol{b}</m> is in the last row, so the leaving variable is the corresponding leaving variable is the last basis variable or <m>x_7</m>.
+          The entering variable will be the largest negative in the 4th row of <m>B'\Pi</m>, which occurs in the 2nd column, so the entering variable is the second parameter or <m>x_3</m>.
+          We then perform a pivot <m>3 \mapsto 7</m>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The new basis will be <m>\beta = \{2,3,5,6\}</m> and <m>\pi=\{1,4,7\}</m>.
+          Therefore the result is
+        </p>
+
+        <p>
+          <me>
+            B = \begin{bmatrix} -5 \amp -10 \amp 0 \amp 0 \\ -20 \amp -15 \amp 1 \amp 0 \\ 15 \amp  18 \amp 0 \amp 1 \\ 16 \amp   4 \amp 0 \amp 0 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -18 \amp 1 \amp 0 \\ -4 \amp 0 \amp 0 \\ 10 \amp 0 \amp 0 \\ 20 \amp 0 \amp 1 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          The determinant of <m>B</m> is 140, so this is <m>d_{\beta}</m> and
+        </p>
+
+        <p>
+          <me>
+            B' = d_{\beta} B^{-1} = \begin{bmatrix} 4 \amp   0 \amp   0 \amp  10 \\ -16 \amp   0 \amp   0 \amp  -5 \\ -160 \amp 140 \amp   0 \amp 125 \\ 228 \amp   0 \amp 140 \amp -60 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and then
+        </p>
+
+        <p>
+          <me>
+            B' \boldsymbol{b} = \begin{bmatrix}  1460 \\  460 \\ 26300 \\  4820 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          There are no negatives in this vector so phase I is complete and we move to phase II.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          In phase II, using the simplex tableau, we need to examine the objective row.
+          In the matrix formulation, we need the coefficient of the parameters in this row and this corresponnds to <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}</m> and this is calculated for this basis as
+        </p>
+
+        <p>
+          <me>
+            \begin{bmatrix} 12544 \amp  -1008  \amp 0 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and since there are negatives in this row, it is not optimal.
+          This also shows that the entering variable is the leftmost negative (only in this case) is the 2nd one, corresponding to the 2nd parameter or <m>x_4</m>.
+          To find the leaving variable, we need to examine
+        </p>
+
+        <p>
+          <me>
+            B' \Pi = \begin{bmatrix} 128 \amp    4 \amp  10 \\ 188 \amp  -16 \amp  -5 \\ 4820 \amp -160 \amp 125 \\ -3904 \amp  228 \amp -60 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and create <m>\boldsymbol{b}</m>-ratios using the 2nd column of <m>B' \boldsymbol{b}</m>
+        </p>
+
+        <p>
+          <me>
+            \begin{bmatrix} 1460/4 \\ 460/(-16) \\ 26300/(-160) \\ 4820/(228) \end{bmatrix} \approx \begin{bmatrix} 365 \\ -28.75 \\ -164.375 \\ 21.14 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          The smallest ratio is in the 4th row, which corresponds to the 4th basis element or <m>x_6</m>, so this is the leaving vector.
+          Therefore we need to perform the pivot <m>4 \mapsto 6</m>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          We are still in phase II and after the pivot <m>4 \mapsto 6</m>, the basis is now <m>\beta = \{2,3,4,5\}</m> with <m>\pi = \{1,6,7\}</m>.
+          The corresponding matrices are
+        </p>
+
+        <p>
+          <me>
+            B = \begin{bmatrix} -5 \amp -10 \amp 1 \amp 0 \\ -20 \amp -15 \amp 0 \amp 1 \\ 15 \amp  18 \amp 0 \amp 0 \\ 16 \amp   4 \amp 0 \amp 0 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -18 \amp 0 \amp 0 \\ -4 \amp 0 \amp 0 \\ 10 \amp 1 \amp 0 \\ 20 \amp 0 \amp 1 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          The determinant of <m>B</m> is <m>-228</m>, so <m>d_{\beta} = 228</m> and
+        </p>
+
+        <p>
+          <me>
+            B' = d_{\beta} B^{-1} = \begin{bmatrix} 0 \amp   0 \amp  -4 \amp  18 \\ 0 \amp   0 \amp  16 \amp -15 \\ 228 \amp   0 \amp 140 \amp -60 \\ 0 \amp 228 \amp 160 \amp 135 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and then since we are in phase II, examine:
+        </p>
+
+        <p>
+          <me>
+            \boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal} = \begin{bmatrix} -7680 \amp 1008 \amp -432 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          which shows that this basic solution is not optimal.
+          We use the leftmost negative, which is the first parameter and corresponds to <m>x_1</m>, so this is he entering variable.
+          To decide the leaving, we need to find the <m>\boldsymbol{b}</m>-ratios using:
+        </p>
+
+        <p>
+          <me>
+            B' \boldsymbol{b} = \begin{bmatrix} 2240 \\ 1300 \\ 4820 \\ 48340 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and
+        </p>
+
+        <p>
+          <me>
+            B'\Pi = \begin{bmatrix} 320 \amp  -4 \amp  18 \\ -140 \amp  16 \amp -15 \\ -3904 \amp 140 \amp -60 \\ 3388 \amp 160 \amp 135 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and the <m>\boldsymbol{b}</m>-ratios are found by dividing elements in <m> B' \boldsymbol{b}</m> by the elements in the first column of <m>B'\Pi</m> to get
+        </p>
+
+        <p>
+          <me>
+            \begin{bmatrix} 2240/320 \\ 1300/(-140) \\ 4820/(-3904) \\ 48340/3388 \end{bmatrix} \approx \begin{bmatrix} 7 \\ -9.29 \\ -1.23 \\ 14.27 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and the smallest nonnegative ratio is in the first row.
+          This corresponds to the first basis element or <m>x_2</m>, so we perform the pivot <m>1 \mapsto 2</m>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The pivot <m>1 \mapsto 2</m> results in the basis <m>\beta = \{1,3,4,5\}</m> with <m>\pi=\{2,6,7\}</m>.
+          The corresponding matrices are
+        </p>
+
+        <p>
+          <me>
+            B = \begin{bmatrix} -18 \amp -10 \amp 1 \amp 0 \\ -4 \amp -15 \amp 0 \amp 1 \\ 10 \amp  18 \amp 0 \amp 0 \\ 20 \amp   4 \amp 0 \amp 0 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -5 \amp 0 \amp 0 \\ -20 \amp 0 \amp 0 \\ 15 \amp 1 \amp 0 \\ 16 \amp 0 \amp 1 \\ \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          The determinant of <m>B</m> is <m>-320</m>, so <m>d_{\beta}=320</m> and
+        </p>
+
+        <p>
+          <me>
+            B' = \begin{bmatrix} 0 \amp   0 \amp  -4 \amp  18 \\ 0 \amp   0 \amp  20 \amp -10 \\ 320 \amp   0 \amp 128 \amp 224 \\ 0 \amp 320 \amp 284 \amp -78 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and since we are in phase II, we check:
+        </p>
+
+        <p>
+          <me>
+            \boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal} = \begin{bmatrix} 7680 \amp 1280 \amp 0 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and note that there are no negatives in this vector, so this solution is optimal.
+          The basic solution to this is <m> B' \boldsymbol{b}</m> for the basic variables or
+        </p>
+
+        <p>
+          <me>
+            B' \boldsymbol{b} = \begin{bmatrix} 2240 \\ 3200 \\ 45120 \\ 34560 \end{bmatrix}
+          </me>
+        </p>
+
+        <p>
+          and in terms of the original variables, the optimal solution is
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} x_1 \amp = \frac{2240}{320} = 7 \\ x_2 \amp = 0 \\ x_3 \amp = \frac{3200}{320} = 10 \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          and the objective is found with
+        </p>
+
+        <p>
+          <me>
+            z = \frac{1}{d_{\beta}} \boldsymbol{c}^{\intercal}_{\beta} B' \boldsymbol{b} = \frac{320000}{320} = 1000
+          </me>
+        </p>
+      </li>
+    </ol>
+  </p>
+  </introduction>
+
+  <subsection xml:id="sect-matrix-simplex-summary">
+    <title>The Matrix Simplex Method</title>
+
+    <p>
+      This is now the steps of the simplex method if one is using the matrix formulation.
+    </p>
+
+
+
+  </subsection>
+</section>

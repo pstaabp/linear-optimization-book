@@ -1,0 +1,604 @@
+<section xml:id="sect-package-lop">
+  <title>Julia Packages for LOPs</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Understand how to set up a Linear Optimization Problem (LOP) using the <c>JuMP</c> package.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Learn how to solve a LOP using the <c>HiGHS</c> package and ensure that the solution is correct.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      Before continuing, make sure you have some grasp of the Julia language as in <xref ref="sect-intro-julia"/><ndash/><xref ref="sect-julia-linear-algebra"/> especially the proper syntax.
+      Additionally, you should know how to install packages described in APPENDIX ???
+    </p>
+
+    <p>
+      If you haven't already, make sure the packages <c>JuMP</c> and <c>HiGHS</c> are installed.
+      The <c>JuMP</c> package which allows optimization problems to be constructed with the variables, constraints and objective defined.
+      This package allows for many different types of problems to be contructed that fall outside of the realm of this book.
+      The <c>JuMP</c> package only creates the problems, it does not do the work to optimize the problem.
+      For that, we need the <c>HiGHS</c> package.
+    </p>
+
+    <p>
+      The <c>HiGHS</c> package is useful for solving Linear Optimization Problems of the type we have covered in this book.
+      It does the hard work of the algorithms discussed in this text including the simplex method, cutting planes and branch-and-bound, however, you do not need to specify which method to use.
+      Depending on the type of problem constructed, the HiGHS package will perform the correct technique.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-jump-setup">
+    <title>Setting up an LOP using JuMP</title>
+
+    <p>
+      Before getting started, make sure that we have loaded the two packages discussed with
+    </p>
+
+
+    <program language="julia">
+      <code>
+        using JuMP, HiGHS
+      </code>
+    </program>
+
+    <p>
+      and the result doesn't return anything.
+    </p>
+
+    <p>
+      As noted above, the <c>JuMP</c> package is used to define a problem.
+      With the use of a few macros, many problems are easily constructed in Julia.
+      For example, let's use <xref ref="prob-lop1"/> and walk through the steps to set this up.
+    </p>
+
+    <p>
+      <em>Step 1: create a model</em>
+    </p>
+
+
+    <program language="julia">
+      <code>
+m = Model(HiGHS.Optimizer)
+      </code>
+    </program>
+
+    <p>
+      will create a <c>JuMP</c> model and assign the <c>HiGHS.Optimzer</c> as the solver.<fn>We will always use this Model call throughout this book, however, if you are using <c>JuMP</c> for doing other solves, like a nonlinear minimization, then you will use a different package and it's related <c>Optimizer</c>.
+      </fn> If the line above is the only expression in the cell, this returns the following:
+    </p>
+
+    <p>
+      <cd>
+      <cline>A JuMP Model</cline>
+      <cline>├ solver: HiGHS</cline>
+      <cline>├ objective_sense: FEASIBILITY_SENSE</cline>
+      <cline>├ num_variables: 0</cline>
+      <cline>├ num_constraints: 0</cline>
+      <cline>└ Names registered in the model: none</cline>
+      </cd>
+    </p>
+
+    <p>
+      This doesn't have a lot of information because we haven't added variables or constraints to the equation.
+      We will see this change as develop the model.
+    </p>
+
+    <p>
+      <em>Step 2: Add variables</em>
+    </p>
+
+
+    <program language="julia">
+      <code>
+        @variable(m, x₁ ≥ 0)
+        @variable(m, x₂ ≥ 0)
+      </code>
+    </program>
+
+    <p>
+      These lines adds the two variables <c>x₁</c> and <c>x₂</c> to the model and they are both nonnegative variables.
+      The subscripts are unicode characters that you can enter as <c>\_1</c>, then TAB inside a Jupyter notebook.
+      Also, the <m>\geq</m> character is entered as <c>\geq</c> then TAB.
+      Neither are necessary, but make the constraints look like they do written out mathematically.
+      If these are placed in a notebook cell then <m>x_2</m> is echoed out only.
+    </p>
+
+    <p>
+      <em>Step Three: add the constraints</em>
+    </p>
+
+
+    <program language="julia">
+      <code>
+        @constraint(m, 4x₁ + 3x₂ ≤ 120)
+        @constraint(m, x₁ + 2x₂ ≤ 40)
+        @constraint(m, x₂ ≤ 16)
+      </code>
+    </program>
+
+    <p>
+      and again, if all three are in a single cell, you'll only see the last constraint echoed out.
+    </p>
+
+    <p>
+      <em>Step Four: add the objective function</em>
+    </p>
+
+
+    <program language="julia">
+      <code>
+        @objective(m, Max, x₁+3x₂)
+      </code>
+    </program>
+
+    <p>
+      And note that the second argument is <c>Max</c> indicating that this is a maximum problem and the third argument is the function.
+      We have now added all of the elements of this problem (variables, constraints, objective).
+      If one enters <c>print(m)</c> in a  cell by itself you can look at the internals of the model:
+    </p>
+
+    <p>
+      <cd>
+      <cline>Max x₁ + 3 x₂</cline>
+      <cline>Subject to</cline>
+      <cline> 4 x₁ + 3 x₂ ≤ 120</cline>
+      <cline> x₁ + 2 x₂ ≤ 40</cline>
+      <cline> x₂ ≤ 16</cline>
+      <cline> x₁ ≥ 0</cline>
+      <cline> x₂ ≥ 0</cline>
+      </cd>
+    </p>
+
+    <p>
+      and this looks almost identical to the way we write down the LOP.
+    </p>
+
+    <p>
+      <em>Step Five: Find the optimal value</em>
+    </p>
+
+    <p>
+      To find the optimal value, we use the command
+    </p>
+
+
+    <program language="julia">
+      <code>
+        optimize!(m)
+      </code>
+    </program>
+
+    <p>
+      where it is important to include the <c>!</c> at the end of the <c>optimize!</c> function.<fn>As mentioned before, Julia has a convention that if a function modifies its arguments--instead of just returning something, a <c>!</c> should be used to tip off the Julia coder that the arguments are changing.
+      </fn>
+    </p>
+
+    <p>
+      This function returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>Running HiGHS 1.10.0 (git hash: fd8665394e): Copyright (c) 2025 HiGHS under MIT licence terms</cline>
+      <cline>  LP   has 3 rows; 2 cols; 5 nonzeros</cline>
+      <cline>  Coefficient ranges:</cline>
+      <cline>    Matrix [1e+00, 4e+00]</cline>
+      <cline>    Cost   [1e+00, 3e+00]</cline>
+      <cline>    Bound  [0e+00, 0e+00]</cline>
+      <cline>    RHS    [2e+01, 1e+02]</cline>
+      <cline>  Presolving model</cline>
+      <cline>  2 rows, 2 cols, 4 nonzeros  0s</cline>
+      <cline>  2 rows, 2 cols, 4 nonzeros  0s</cline>
+      <cline>  Presolve : Reductions: rows 2(-1); columns 2(-0); elements 4(-1)</cline>
+      <cline>  Solving the presolved LP</cline>
+      <cline>  Using EKK dual simplex solver - serial</cline>
+      <cline>    Iteration        Objective     Infeasibilities num(sum)</cline>
+      <cline>            0    -9.9999494546e-01 Ph1: 2(5); Du: 1(0.999995) 0s</cline>
+      <cline>            2    -5.6000000000e+01 Pr: 0(0) 0s</cline>
+      <cline>  Solving the original LP from the solution after postsolve</cline>
+      <cline>  Model status        : Optimal</cline>
+      <cline>  Simplex   iterations: 2</cline>
+      <cline>  Objective value     :  5.6000000000e+01</cline>
+      <cline>  Relative P-D gap    :  0.0000000000e+00</cline>
+      <cline>  HiGHS run time      :          0.00</cline>
+      </cd>
+    </p>
+
+    <p>
+      Generally unless something goes wrong, this information isn't helpful.
+      Therefore, before running the <c>optimize!(m)</c> command, run <c>set_silent(model)</c> and you won't get all of the output.
+    </p>
+
+    <p>
+      <em>Step Six: Ensure the Solution</em>
+    </p>
+
+    <p>
+      If you supress the optimizer output (which should be done), you want to make sure that a solution is reached.
+      If you enter
+    </p>
+
+
+    <program language="julia">
+      <code>
+        is_solved_and_feasible(m)
+      </code>
+    </program>
+
+    <p>
+      and <c>true</c> is returned then all is well.
+    </p>
+
+    <p>
+      <em>Step Seven: determine the variable values and the objective of the optimal solution</em>
+    </p>
+
+    <p>
+      The last step is generally to get the values of variables and objective of the optimal solution.
+      To get the value of a variable use the <c>value(VAR)</c> command where the argument is the variable you want.
+      In this case, if we do
+    </p>
+
+
+    <program language="julia">
+      <code>
+        value(x₁), value(x₂)
+      </code>
+    </program>
+
+    <p>
+      the result is <c>(8.0, 16.0)</c>.
+      The objective value is found with <c>objective_value(m)</c> and in this case, this returns <c>56.0</c>.
+      These are the same values that we get when we solved problem <q>by hand</q>.
+    </p>
+
+    <note>
+      <p>
+        Although the steps here are shown, typically many are done together.
+        Usually set up the problem with steps 1-4, then steps 5 and 6 (solve and verify), then get the variable and objective values.
+      </p>
+    </note>
+
+    <p>
+      We'll see how to better approach this in the next example.
+    </p>
+
+    <example xml:id="ex-solve-diet">
+      <statement>
+        <p>
+          Use Julia with the <c>JuMP</c> and <c>HiGHS</c> packages to solve <xref ref="prob-diet"/>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          In this case, set up the model, variables, constraints and objectives as follows.
+        </p>
+
+
+        <program language="julia" line-numbers="yes">
+          <code>
+            m2 = Model(HiGHS.Optimizer)
+            @variable(m2, y₁ ≥ 0)
+            @variable(m2, y₂ ≥ 0)
+            @variable(m2, y₃ ≥ 0)
+            @constraint(m2, 5y₁ + 18y₂ + 10y₃ ≥ 54)
+            @constraint(m2, 7y₁ + 10y₂ + 24y₃ ≥ 60)
+            @constraint(m2, 4y₁ + 8y₂ + 12y₃ ≥ 45)
+            @objective(m2, Min, 600y₁ + 750y₂ + 500y₃ )
+            print(m2)
+          </code>
+        </program>
+
+        <p>
+          which produce the model:
+        </p>
+
+        <p>
+          <cd>
+          <cline>Min 600 y₁ + 750 y₂ + 500 y₃</cline>
+          <cline>Subject to</cline>
+          <cline> 5 y₁ + 18 y₂ + 10 y₃ ≥ 54</cline>
+          <cline> 7 y₁ + 10 y₂ + 24 y₃ ≥ 60</cline>
+          <cline> 4 y₁ + 8 y₂ + 12 y₃ ≥ 45</cline>
+          <cline> 4 y₁ + 8 y₂ + 12 y₃ ≤ 70</cline>
+          <cline> y₁ ≥ 0</cline>
+          <cline> y₂ ≥ 0</cline>
+          <cline> y₃ ≥ 0</cline>
+          </cd>
+        </p>
+
+        <p>
+          We will suppress the output from the Optimizer code, run the optimizer and determine if it was solved and feasible.
+        </p>
+
+
+        <program language="julia">
+          <code>
+        set_silent(m2)
+        optimize!(m2)
+        assert_is_solved_and_feasible(m2)
+          </code>
+        </program>
+
+        <p>
+          and the last line returns <c>true</c> indicating that this is a good solution.
+          We can find the values of it with
+        </p>
+
+        <p>
+          <cd>
+          <cline>value(y₁),value(y₂), value(y₃) </cline>
+          </cd>
+        </p>
+
+        <p>
+          and the result is
+        </p>
+
+        <p>
+          <cd>
+          <cline>(0.0, 1.4558823529411764, 2.7794117647058827)</cline>
+          </cd>
+        </p>
+
+        <p>
+          and the objective value is found with <c>objective_value(m2)</c> which returns <c>2481.62</c>.
+        </p>
+
+        <p>
+          This shows that Gary shouldn't eat any salads, 1.455 sandwiches and 2.779 bagels.
+          The total number of calories from these food items is 2481.62.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+
+  <subsection>
+    <title>Where's the Simplex Method</title>
+
+    <p>
+      I know you are wondering what happend to the simplex method in this chapter.
+      We've spent a long chapter on how to create simplex tableaus and use them to step-by-step go through to the solution.
+      We then spent another chapter on Integer problems with Cutting Planes and Branch and Bound, which use simplex method under the hood.
+      With Julia and the JuMP and HiGHS packages, it seems totally unnecessary to learn all of that.
+    </p>
+
+    <p>
+      We won't go through the details of how the HiGHS package finds the optimal solution to problems, but it is equivalent to using the simplex method and the Cutting Planes and Branch and Bound.
+    </p>
+
+    <p>
+      Understanding the simplex method is important.
+      The basis of the algorithm in the HiGHS package uses the simplex method, as well as the integer techniques of <xref ref="ch-integer-problems"/>.
+      It much like any technology in that to completely understand how to use software like this, you need to understand the underlying algorithm.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-julia-infeasible">
+    <title>Infeasible and Unbounded Problems</title>
+
+    <p>
+      In <xref ref="sect-infeasible-unbounded"/>, we discussed how to determine if a problem is infeasible or unbounded.
+      The <c>JuMP</c> and <c>HiGHS</c> packages can also determine this for you.
+    </p>
+
+    <p>
+      Let's start with the unbounded problem in <xref ref="prob-unbounded-LOP"/>.
+      We can set this up using JuMP as follows:
+    </p>
+
+
+    <program language="julia">
+      <code>
+        m4 = Model(HiGHS.Optimizer)
+        @variable(m4, x₁ ≥ 0)
+        @variable(m4, x₂ ≥ 0)
+        @constraint(m4, x₁ - 2x₂ ≤ -6)
+        @constraint(m4, -5x₁ + 2x₂ ≤ -20)
+        @constraint(m4, -3x₁ -5x₂ ≤ -75)
+        @objective(m4, Max, 5x₁ + 3x₂)
+        print(m4)
+      </code>
+    </program>
+
+    <p>
+      which returns:
+    </p>
+
+    <p>
+      <cd>
+      <cline>m4 = Model(HiGHS.Optimizer)</cline>
+      <cline>@variable(m4, x₁ ≥ 0)</cline>
+      <cline>@variable(m4, x₂ ≥ 0)</cline>
+      <cline>@constraint(m4, x₁ - 2x₂ ≤ -6)</cline>
+      <cline>@constraint(m4, -5x₁ + 2x₂ ≤ -20)</cline>
+      <cline>@constraint(m4, -3x₁ -5x₂ ≤ -75)</cline>
+      <cline>@objective(m4, Max, 5x₁ + 3x₂)</cline>
+      <cline>print(m4)</cline>
+      </cd>
+    </p>
+
+    <p>
+      and this looks like the problem in <xref ref="prob-unbounded-LOP"/>.
+      However, if we run the following code:
+    </p>
+
+
+    <program language="julia">
+      <code>
+        set_silent(m4)
+        optimize!(m4)
+        is_solved_and_feasible(m4)
+      </code>
+    </program>
+
+    <p>
+      the result is <c>false</c>.
+      This may not be surprsing because we know it is unbounded.
+      To see a bit more about what is happening, if we enter:
+    </p>
+
+
+    <program language="julia">
+      <code>
+        assert_is_solved_and_feasible(m4)
+      </code>
+    </program>
+
+    <p>
+      then we get the following information:
+    </p>
+
+    <p>
+      <cd>
+      <cline>The model was not solved correctly. Here is the output of `solution_summary` to help debug why this happened:</cline>
+      <cline></cline>
+      <cline>solution_summary(; result = 1, verbose = false)</cline>
+      <cline>├ solver_name          : HiGHS</cline>
+      <cline>├ Termination</cline>
+      <cline>│ ├ termination_status : DUAL_INFEASIBLE</cline>
+      <cline>│ ├ result_count       : 1</cline>
+      <cline>│ ├ raw_status         : kHighsModelStatusUnbounded</cline>
+      <cline>│ └ objective_bound    : 7.08065e+01</cline>
+      <cline>├ Solution (result = 1)</cline>
+      <cline>│ ├ primal_status        : INFEASIBILITY_CERTIFICATE</cline>
+      <cline>│ ├ dual_status          : INFEASIBLE_POINT</cline>
+      <cline>│ ├ objective_value      : 8.06452e-01</cline>
+      <cline>│ ├ dual_objective_value : 7.08065e+01</cline>
+      <cline>│ └ relative_gap         : 7.00000e+01</cline>
+      <cline>└ Work counters</cline>
+      <cline>  ├ solve_time (sec)   : 3.10550e-03</cline>
+      <cline>  ├ simplex_iterations : 2</cline>
+      <cline>  ├ barrier_iterations : 0</cline>
+      <cline>  └ node_count         : -1</cline>
+      <cline></cline>
+      <cline></cline>
+      <cline>Stacktrace:</cline>
+      <cline> [1] error(s::String)</cline>
+      <cline>   @ Base ./error.jl:44</cline>
+      <cline> [2] #assert_is_solved_and_feasible#102</cline>
+      <cline>   @ ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1008 [inlined]</cline>
+      <cline> [3] assert_is_solved_and_feasible(model::Model)</cline>
+      <cline>   @ JuMP ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1002</cline>
+      <cline> [4] top-level scope</cline>
+      <cline>   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_df34fa98e69747e1a8f8a730347b8e2f_X25sZmlsZQ==.jl:3</cline>
+      </cd>
+    </p>
+
+    <p>
+      This shows that the model was not solved correctly and the termination status is <c>DUAL_INFEASIBLE</c>.
+      We will discuss the details of Dual Problems, however, at this point, you can translate this <c>DUAL_INFEASIBLE</c> to mean that the problem is unbounded.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          Use the <c>JuMP</c> and <c>HiGHS</c> packages to set up and solve the problem in <xref ref="prob-infeasible-LOP"/>.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          The problem in <xref ref="prob-infeasible-LOP"/> can be set up as follows:
+        </p>
+
+
+        <program language="julia">
+          <code>
+            m5 = Model(HiGHS.Optimizer)
+            @variable(m5, x₁ ≥ 0)
+            @variable(m5, x₂ ≥ 0)
+            @constraint(m5, -x₁ + 2x₂ ≤ 6)
+            @constraint(m5, 5x₁ - 2x₂ ≤ 20)
+            @constraint(m5, -3x₁ -5x₂ ≤ -75)
+            @objective(m5, Max, 5x₁ + 3x₂)
+            print(m5)
+          </code>
+        </program>
+
+        <p>
+          and then attempt to find the solution with:
+        </p>
+
+
+        <program language="julia">
+          <code>
+    set_silent(m5)
+optimize!(m5)
+is_solved_and_feasible(m5)
+          </code>
+        </program>
+
+        <p>
+          However, this results in <c>false</c>.
+          To determine the reason, we use:
+        </p>
+
+
+        <program language="julia">
+          <code>
+    assert_is_solved_and_feasible(m5)
+          </code>
+        </program>
+
+        <p>
+          The output is similar to the one above for the unbounded problem:
+        </p>
+
+        <p>
+          <cd>
+          <cline>The model was not solved correctly. Here is the output of `solution_summary` to help debug why this happened:</cline>
+          <cline></cline>
+          <cline>solution_summary(; result = 1, verbose = false)</cline>
+          <cline>├ solver_name          : HiGHS</cline>
+          <cline>├ Termination</cline>
+          <cline>│ ├ termination_status : INFEASIBLE</cline>
+          <cline>│ ├ result_count       : 1</cline>
+          <cline>│ ├ raw_status         : kHighsModelStatusInfeasible</cline>
+          <cline>│ └ objective_bound    : 0.00000e+00</cline>
+          <cline>├ Solution (result = 1)</cline>
+          <cline>│ ├ primal_status        : NO_SOLUTION</cline>
+          <cline>│ ├ dual_status          : INFEASIBILITY_CERTIFICATE</cline>
+          <cline>│ ├ objective_value      : 0.00000e+00</cline>
+          <cline>│ ├ dual_objective_value : -1.76364e+01</cline>
+          <cline>│ └ relative_gap         : Inf</cline>
+          <cline>└ Work counters</cline>
+          <cline>  ├ solve_time (sec)   : 2.22933e-03</cline>
+          <cline>  ├ simplex_iterations : 2</cline>
+          <cline>  ├ barrier_iterations : 0</cline>
+          <cline>  └ node_count         : -1</cline>
+          <cline></cline>
+          <cline></cline>
+          <cline>Stacktrace:</cline>
+          <cline> [1] error(s::String)</cline>
+          <cline>   @ Base ./error.jl:44</cline>
+          <cline> [2] #assert_is_solved_and_feasible#102</cline>
+          <cline>   @ ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1008 [inlined]</cline>
+          <cline> [3] assert_is_solved_and_feasible(model::Model)</cline>
+          <cline>   @ JuMP ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1002</cline>
+          <cline> [4] top-level scope</cline>
+          <cline>   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_df34fa98e69747e1a8f8a730347b8e2f_X31sZmlsZQ==.jl:1</cline>
+          </cd>
+        </p>
+        <p>
+          However, note that the <c>termination_status</c> is <c>INFEASIBLE</c>.  This is because the problem is infeasible.
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+</section>

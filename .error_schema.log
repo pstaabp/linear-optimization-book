@@ -1,0 +1,5 @@
+/Users/pstaab/code/linear-optimization-book/source/main.ptx:35:0:ERROR:RELAXNGV:RELAXNG_ERR_ELEMNAME: Expecting element biography, got colophon
+/Users/pstaab/code/linear-optimization-book/source/main.ptx:5:0:ERROR:RELAXNGV:RELAXNG_ERR_NOELEM: Expecting an element li, got nothing
+/Users/pstaab/code/linear-optimization-book/source/main.ptx:4:0:ERROR:RELAXNGV:RELAXNG_ERR_ELEMNAME: Expecting element p, got objectives
+/Users/pstaab/code/linear-optimization-book/source/main.ptx:73:0:ERROR:RELAXNGV:RELAXNG_ERR_NOELEM: Expecting an element nbsp, got nothing
+/Users/pstaab/code/linear-optimization-book/source/main.ptx:73:0:ERROR:RELAXNGV:RELAXNG_ERR_ELEMNAME: Expecting element blockquote, got p

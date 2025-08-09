@@ -1,0 +1,231 @@
+<section xml:id="sect-julia-linear-algebra">
+  <title>Linear Algebra in Julia</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Understand how to perform basic matrix operations in Julia.
+        </p>
+      </li>
+      <li>
+        <p>
+          Compute the determinant, transpose, and adjoint of a matrix in Julia.
+        </p>
+      </li>
+      <li>
+        <p>
+          Calculate the inverse of a matrix in Julia using both floating-point and rational numbers.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+
+  <introduction>
+    <p>
+      As we saw in the previous section, creating and manipulating matrices is quite easy and natural in Julia.
+      This section will show how to perform a number of basic Linear Algebra tasks.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-julia-matrix-ops">
+    <title>Basic Matrix Operations in Julia</title>
+
+    <p>
+      Many of the basic operations from Linear Algebra are natural in julia.
+      Let's say that we have
+    </p>
+
+
+    <program language="julia">
+      <code>
+          A = [ 1 2 3 4; 5 6 7 8; 9 10 11 12]
+          B=[i+j for i=1:3, j=1:4]
+          C=[(-1)^(i+j) for i=1:3, j=1:3]
+      </code>
+    </program>
+
+    <p>
+      Then <c>A+B</c> returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×4 Matrix{Int64}:</cline>
+      <cline> 3   5   7   9</cline>
+      <cline> 8  10  12  14</cline>
+      <cline>13  15  17  19</cline>
+      </cd>
+    </p>
+
+    <p>
+      and <c>A-B</c> returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×4 Matrix{Int64}:</cline>
+      <cline>-1  -1  -1  -1</cline>
+      <cline> 2   2   2   2</cline>
+      <cline> 5   5   5   5</cline>
+      </cd>
+    </p>
+
+    <p>
+      which perform matrix addition and subtraction.
+      <c>4A</c> returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×4 Matrix{Int64}:</cline>
+      <cline> 4   8  12  16</cline>
+      <cline>20  24  28  32</cline>
+      <cline>36  40  44  48</cline>
+      </cd>
+    </p>
+
+    <p>
+      is scalar multiplication and note again that if a variable is left-multiplied by a constant then the multiplication operator <c>*</c> is optional.
+    </p>
+
+    <p>
+      An example of matrix multiplication is <c>C*A</c> resulting in
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×4 Matrix{Int64}:</cline>
+      <cline> 5   6   7   8</cline>
+      <cline>-5  -6  -7  -8</cline>
+      <cline> 5   6   7   8</cline>
+      </cd>
+    </p>
+
+    <p>
+      and if you mulitiply incompatible matrices like <c>A*B</c> you will get the error:
+    </p>
+
+    <p>
+      <cd>
+      <cline>DimensionMismatch: incompatible dimensions for matrix multiplication: tried to multiply a matrix of size (3, 4) with a matrix of size (3, 4). The second dimension of the first matrix: 4, does not match the first dimension of the second matrix: 3. </cline>
+      </cd>
+    </p>
+
+    <p>
+      which is perhaps the most detailed matrix incompatibility description in most software.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-julia-other-ops">
+    <title>Other Matrix Operations in Julia</title>
+
+    <p>
+      Some other important matrix operations include the determinant, the transpose, ...
+    </p>
+
+    <p>
+      Let's say that we have defined
+    </p>
+
+    <p>
+      <cd>
+      <cline>A = [2i+3j for i=1:3, j=1:3]</cline>
+      </cd>
+    </p>
+
+    <p>
+      then the determinant of this can be found with <c>det(A)</c> returning <c>-1.0658141036401493e-14</c>.<fn>Note that even though the matrix <c>A</c> is an integer matrix, then the determinant is a floating-point number although the result will be an integer.
+      This has to do with the way that the algorithm uses floating points in the calculation.</fn>
+    </p>
+
+    <p>
+      The transpose of the matrix can be found with <c>transpose</c> as in <c>transpose(A)</c> which returns.
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×3 transpose(::Matrix{Int64}) with eltype Int64:</cline>
+      <cline>  5   7   9</cline>
+      <cline>  8  10  12</cline>
+      <cline> 11  13  15</cline>
+      </cd>
+    </p>
+
+    <p>
+      This actually performs what is called a <em>lazy transpose</em>, which just flags the matrix as a transpose without flipping the elements due to speed.
+    </p>
+
+    <p>
+      The related operation of the <term>adjoint</term> of the matrix combines the transpose and the complex conjugate.
+      If the matrix is real, the adjoint and transpose are identical and is often used because the operation <c>'</c> is used.
+      For example, <c>A'</c> returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×3 adjoint(::Matrix{Int64}) with eltype Int64:</cline>
+      <cline> 5   7   9</cline>
+      <cline> 8  10  12</cline>
+      <cline>11  13  15</cline>
+      </cd>
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-julia-matrix-inverse">
+    <title>Matrix Inverse in Julia</title>
+
+    <p>
+      The inverse of a matrix can be found with the <c>inv</c> function.
+      If we have a matrix <c>A</c> defined as
+    </p>
+
+
+    <program language="julia">
+      <code>
+        A = [3 2 1; 1 1 1; 3 1 1]
+      </code>
+    </program>
+
+    <p>
+      then the inverse can be found with <c>inv(A)</c> which returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×3 Matrix{Float64}:</cline>
+      <cline> -6.4763e-17  -0.5   0.5</cline>
+      <cline> 1.0           0.0  -1.0</cline>
+      <cline>-1.0           1.5   0.5</cline>
+      </cd>
+    </p>
+
+    <p>
+      where the upper left element is very close to zero due to numerical errors.
+      Note that the inverse is a floating-point matrix even though the original matrix is an integer matrix.
+      This is because the inverse is calculated using floating-point arithmetic.
+    </p>
+
+    <p>
+      It is often nice to have the inverse in terms of rational numbers.
+      To accomplish this, we need to rationalize the matrix A.
+      This can be one with <c>rationalize.(A)</c> and if the inverse of that is found with <c>inv(rationalize.(A))</c> resulting in
+    </p>
+
+    <p>
+      <cd>
+      <cline>3×3 Matrix{Rational{Int64}}:</cline>
+      <cline>  0  -1//2  1//2</cline>
+      <cline>  1    0    -1</cline>
+      <cline> -1   3//2  1//2</cline>
+      </cd>
+    </p>
+    <p>
+      Which is the rational version of the one above, but notice that the numerical error in the upper left element is now gone.
+    </p>
+  </subsection>
+</section>

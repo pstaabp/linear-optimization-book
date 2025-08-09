@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Julia Packages for LOPs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Linear Optimization">
+<meta property="book:author" content="Peter Staab">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.9.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.21df2a4c52b86839.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.28cc3c4821792be5.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.8141ae22fd347e48.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="linopt-staab" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="linear-optimization-julia.html"><span class="title">Linear Optimization</span> <span class="subtitle">Modeling and Solving Linear problems with Julia and WebCAS</span></a></h1>
+<p class="byline">Peter Staab</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sect-julia-linear-algebra.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-lop-julia.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sect-ilop-julia.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter"><div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-background.html" class="internal"><span class="codenumber">1</span> <span class="title">Background Mathematics for Linear Optimization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lines-planes.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-lines" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-linear-inequality" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Linear Inequalities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-bounded-feasible-sets" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Bounded and Unbounded Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-planes" class="internal"><span class="codenumber">1.1.4</span> <span class="title">Planes and Hyperplanes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-convex" class="internal"><span class="codenumber">1.1.5</span> <span class="title">Convex Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-plotting-software.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Using Software for Plotting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-plotting-lines" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Plotting Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-plotting-inequalities" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Plotting Inequalities and Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-graphing-planes" class="internal"><span class="codenumber">1.2.3</span> <span class="title">Graphing Planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-matrix-reduction.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Matrices and Matrix Reduction</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-linear-systems" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Linear Systems</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-elementary-row-operations" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Elementary Row Operations</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-gauss-method" class="internal"><span class="codenumber">1.3.2.1</span> <span class="title">Gauss’s Method</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrices" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrix-reduction-6" class="internal"><span class="codenumber">1.3.4</span> <span class="title">Matrices and Linear Systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-row-operations-and-matrices" class="internal"><span class="codenumber">1.3.5</span> <span class="title">Row Operations and Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrix-pivot" class="internal"><span class="codenumber">1.3.6</span> <span class="title">Matrix Pivots</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-geom-lin-sys-2var" class="internal"><span class="codenumber">1.3.7</span> <span class="title">Geometry of Linear Systems of 2 variables</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-pivot-webcas.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Using Software to Perform Matrix Pivots</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-webcas-rowop" class="internal"><span class="codenumber">1.4.1</span> <span class="title">Using WebCAS to do Row Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-webcas-pivot" class="internal"><span class="codenumber">1.4.2</span> <span class="title">Matrix Pivots in WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-click-to-pivot" class="internal"><span class="codenumber">1.4.3</span> <span class="title">Click to Pivot in WebCAS</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-linear-models.html" class="internal"><span class="codenumber">2</span> <span class="title">Developing Linear Models</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-linear-models.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Introduction to Linear Optimization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-linear-models.html#sect-create-linear-model" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Creating Linear Models</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sect-linear-models.html#sect-other-problems" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Non-Obvious Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sect-linear-models.html#prob-n-queens-form" class="internal"><span class="codenumber">2.1.2.1</span> <span class="title">LOP Formulation of <span class="process-math">\(n\)</span>-queens Problem</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lops.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-def-lop" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Defintions and Conventions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-std-form" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Standard Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-lop-general" class="internal"><span class="codenumber">2.2.3</span> <span class="title">General and Matrix Forms of an LOP</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-geometry.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Geometry of Feasible Sets</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-geometry-fs-2d" class="internal"><span class="codenumber">2.3.1</span> <span class="title">Geometry of 2D Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-possible-algorithm" class="internal"><span class="codenumber">2.3.2</span> <span class="title">Solving LOPs — Possible Algorithm</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-convex-fs" class="internal"><span class="codenumber">2.3.3</span> <span class="title">Feasible Sets are Convex</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-simplex.html" class="internal"><span class="codenumber">3</span> <span class="title">The Simplex Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-slack-dict.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Slack Variables and Dictionaries</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-slack-dict-4" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Slack Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-dictionary" class="internal"><span class="codenumber">3.1.2</span> <span class="title">The Dictionary for an LOP</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-basic-solutions" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Basic Solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-develop-simplex" class="internal"><span class="codenumber">3.1.4</span> <span class="title">Developing the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-tableau.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Tableaus and the Simplex Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-intro-tableaus" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Introduction to tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-5" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Operations on Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-6" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Performing Tableau Operations with WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-7" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Phase II of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-phase1.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Simplex Method for Infeasible Tableaus</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-simplex-phase1" class="internal"><span class="codenumber">3.3.1</span> <span class="title">Infeasible Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-phaseI-algorithm" class="internal"><span class="codenumber">3.3.2</span> <span class="title">Phase I of the Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-phase1-6" class="internal"><span class="codenumber">3.3.3</span> <span class="title">Summary of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-infeasible-unbounded.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Infeasibility and Unboundedness</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-infeasible-unbounded.html#sect-unbounded" class="internal"><span class="codenumber">3.4.1</span> <span class="title">Unbounded Problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-infeasible-unbounded.html#sect-infeasibility" class="internal"><span class="codenumber">3.4.2</span> <span class="title">Infeasibility</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-simplex-summary.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Summary of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-integer-problems.html" class="internal"><span class="codenumber">4</span> <span class="title">Integer Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-intro-ilops.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Introduction to Integer Linear Optimization Problems</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-cutting-planes.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Cutting Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sect-finding-cutting-planes" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Finding Cutting Planes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#subsec-gomory" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Gomory’s Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-branch-bound.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Branch and Bound</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-branch-bound.html#sect-branch-bound-4" class="internal"><span class="codenumber">4.3.1</span> <span class="title">A Branch and Bound Flowchart</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-branch-bound.html#sect-branch-bound-5" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Systematic Branch and Bound Algorithm</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-lop-julia.html" class="internal"><span class="codenumber">5</span> <span class="title">Solving Linear Optimization Problems using Software</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-intro-julia.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Introduction to the Julia Language</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-intro-julia-4" class="internal"><span class="codenumber">5.1.1</span> <span class="title">Basics of Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-intro-julia-5" class="internal"><span class="codenumber">5.1.2</span> <span class="title">For Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-number-types" class="internal"><span class="codenumber">5.1.3</span> <span class="title">Number Types in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-enter-unicode" class="internal"><span class="codenumber">5.1.4</span> <span class="title">Unicode Characters in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-julia-packages" class="internal"><span class="codenumber">5.1.5</span> <span class="title">Packages in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-julia-vect-arrays.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Vectors and Matrices in Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-vect-arrays-4" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Vectors in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-matrices-julia" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Matrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-accessing-matrix" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Accessing elements in a Vector or Matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-comprenhension-julia" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Constructing Vectors and Matrices with Comprehensions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-broadcasting" class="internal"><span class="codenumber">5.2.5</span> <span class="title">Broadcasting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-matrix-concat" class="internal"><span class="codenumber">5.2.6</span> <span class="title">Concatenating Matrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-submatrix" class="internal"><span class="codenumber">5.2.7</span> <span class="title">Submatrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-rational-matrices" class="internal"><span class="codenumber">5.2.8</span> <span class="title">Creating Rational Matrices in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-julia-linear-algebra.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Linear Algebra in Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-matrix-ops" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Basic Matrix Operations in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-other-ops" class="internal"><span class="codenumber">5.3.2</span> <span class="title">Other Matrix Operations in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-matrix-inverse" class="internal"><span class="codenumber">5.3.3</span> <span class="title">Matrix Inverse in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sect-package-lop.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Julia Packages for LOPs</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-jump-setup" class="internal"><span class="codenumber">5.4.1</span> <span class="title">Setting up an LOP using JuMP</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-package-lop-5" class="internal"><span class="codenumber">5.4.2</span> <span class="title">Where’s the Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-julia-infeasible" class="internal"><span class="codenumber">5.4.3</span> <span class="title">Infeasible and Unbounded Problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-ilop-julia.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Cutting Planes and Branch and Bound with Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop" class="internal"><span class="codenumber">5.5.1</span> <span class="title">Solving Integer Problems with Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-blops" class="internal"><span class="codenumber">5.5.2</span> <span class="title">Solving Binary LOPs using Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop-julia-6" class="internal"><span class="codenumber">5.5.3</span> <span class="title">Does the 3-queens problem have a solution?</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-dual-problems.html" class="internal"><span class="codenumber">6</span> <span class="title">Dual Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-intro-dual.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Introduction to Dual Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-devel-dual" class="internal"><span class="codenumber">6.1.1</span> <span class="title">Developing a Dual Problem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-dual-form" class="internal"><span class="codenumber">6.1.2</span> <span class="title">Generalizing the Dual</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-weak-primal-dual" class="internal"><span class="codenumber">6.1.3</span> <span class="title">Weak Primal-Dual Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-primal-dual.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Primal-Dual Relationships</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-dual-certificates.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Finding Optimal Certificates</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-general-lops.html" class="internal"><span class="codenumber">7</span> <span class="title">General Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-general-form.html" class="internal"><span class="codenumber">7.1</span> <span class="title">General Form of an LOP</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-gen-lop-std-form" class="internal"><span class="codenumber">7.1.1</span> <span class="title">Writing a General LOP in Standard Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-adaptive-simplex" class="internal"><span class="codenumber">7.1.2</span> <span class="title">Adapting the Simplex Method to Equality Constraints and Free Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-tableau-phase0" class="internal"><span class="codenumber">7.1.3</span> <span class="title">Simplex Method: Phase 0</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-phase0-geometry" class="internal"><span class="codenumber">7.1.4</span> <span class="title">Geometry of Phase 0</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-phase-zero.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Solving General Linear Optimization Problems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-general-dual.html" class="internal"><span class="codenumber">7.3</span> <span class="title">General Dual Problems</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-general-applied.html" class="internal"><span class="codenumber">7.4</span> <span class="title">General Applied Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-tsp" class="internal"><span class="codenumber">7.4.1</span> <span class="title">Traveling Salesperson</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-min-piecewise-linear" class="internal"><span class="codenumber">7.4.2</span> <span class="title">Minimizing Piecewise Linear Fucntions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-best-fit-line" class="internal"><span class="codenumber">7.4.3</span> <span class="title">Best-Fit Lines</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-matrix-form.html" class="internal"><span class="codenumber">8</span> <span class="title">Matrix Formulation of Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lop-matrix.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Writing a LOP in Matrix Form</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix.html#sect-simplex-matrix" class="internal"><span class="codenumber">8.1.1</span> <span class="title">The Matrix Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix.html#sect-matrix-tableau-compare" class="internal"><span class="codenumber">8.1.2</span> <span class="title">Comparison to the Tableau</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lop-matrix-software.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Performing LOP Matrix Operations using Software</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix-software.html#sect-lop-matrix-webcas" class="internal"><span class="codenumber">8.2.1</span> <span class="title">Perform the Matrix Operations to Solve LOP problems in WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix-software.html#sect-lop-matrix-julia" class="internal"><span class="codenumber">8.2.2</span> <span class="title">Using Julia to perform Matrix Operations in solving LOP problems.</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-matrix-simplex.html" class="internal"><span class="codenumber">8.3</span> <span class="title">Performing the Matrix Simplex Method</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-simplex.html#sect-matrix-simplex-summary" class="internal"><span class="codenumber">8.3.1</span> <span class="title">The Matrix Simplex Method</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="backmatter-2.html" class="internal"><span class="codenumber">A</span> <span class="title"></span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="backmatter-2-1.html" class="internal"><span class="codenumber">A.9</span> <span class="title">Installing Julia</span></a></div></li>
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="ch-julia-packages.html" class="internal"><span class="codenumber">A.10</span> <span class="title">Managing Packages in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="backmatter-3.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sect-package-lop"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">5.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Julia Packages for LOPs</span>
+</h2>
+<article class="objectives goal-like" id="sect-package-lop-2"><h3 class="heading"><span class="type">Objectives</span></h3>
+<ul class="disc" id="sect-package-lop-2-1">
+<li id="sect-package-lop-2-1-1">
+<div class="para" id="sect-package-lop-2-1-1-1">Understand how to set up a Linear Optimization Problem (LOP) using the <code class="code-inline tex2jax_ignore">JuMP</code> package.<div class="autopermalink" data-description="Paragraph"><a href="#sect-package-lop-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Objective"><a href="#sect-package-lop-2-1-1" title="Copy heading and permalink for Objective" aria-label="Copy heading and permalink for Objective">🔗</a></div>
+</li>
+<li id="sect-package-lop-2-1-2">
+<div class="para" id="sect-package-lop-2-1-2-1">Learn how to solve a LOP using the <code class="code-inline tex2jax_ignore">HiGHS</code> package and ensure that the solution is correct.<div class="autopermalink" data-description="Paragraph"><a href="#sect-package-lop-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Objective"><a href="#sect-package-lop-2-1-2" title="Copy heading and permalink for Objective" aria-label="Copy heading and permalink for Objective">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Objectives 5.4"><a href="#sect-package-lop-2" title="Copy heading and permalink for Objectives 5.4" aria-label="Copy heading and permalink for Objectives 5.4">🔗</a></div></article><section class="introduction" id="sect-package-lop-3"><div class="para" id="sect-package-lop-3-1">Before continuing, make sure you have some grasp of the Julia language as in <a href="sect-intro-julia.html" class="internal" title="Section 5.1: Introduction to the Julia Language">Section 5.1</a>–<a href="sect-julia-linear-algebra.html" class="internal" title="Section 5.3: Linear Algebra in Julia">Section 5.3</a> especially the proper syntax. Additionally, you should know how to install packages described in APPENDIX ???<div class="autopermalink" data-description="Paragraph"><a href="#sect-package-lop-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-package-lop-3-2">If you haven’t already, make sure the packages <code class="code-inline tex2jax_ignore">JuMP</code> and <code class="code-inline tex2jax_ignore">HiGHS</code> are installed. The <code class="code-inline tex2jax_ignore">JuMP</code> package which allows optimization problems to be constructed with the variables, constraints and objective defined. This package allows for many different types of problems to be contructed that fall outside of the realm of this book. The <code class="code-inline tex2jax_ignore">JuMP</code> package only creates the problems, it does not do the work to optimize the problem. For that, we need the <code class="code-inline tex2jax_ignore">HiGHS</code> package.<div class="autopermalink" data-description="Paragraph"><a href="#sect-package-lop-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-package-lop-3-3">The <code class="code-inline tex2jax_ignore">HiGHS</code> package is useful for solving Linear Optimization Problems of the type we have covered in this book. It does the hard work of the algorithms discussed in this text including the simplex method, cutting planes and branch-and-bound, however, you do not need to specify which method to use. Depending on the type of problem constructed, the HiGHS package will perform the correct technique.<div class="autopermalink" data-description="Paragraph"><a href="#sect-package-lop-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><section class="subsection" id="sect-jump-setup"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">5.4.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Setting up an LOP using JuMP</span>
+</h3>
+<div class="para" id="sect-jump-setup-2">Before getting started, make sure that we have loaded the two packages discussed with<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">using JuMP, HiGHS
+</code></pre></div>
+<div class="para" id="sect-jump-setup-4">and the result doesn’t return anything.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-5">As noted above, the <code class="code-inline tex2jax_ignore">JuMP</code> package is used to define a problem. With the use of a few macros, many problems are easily constructed in Julia. For example, let’s use <a href="sect-lops.html#prob-lop1" class="xref" data-knowl="./knowl/xref/prob-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 2.2.2">Problem 2.2.2</a> and walk through the steps to set this up.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-6">
+<em class="emphasis">Step 1: create a model</em><div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">m = Model(HiGHS.Optimizer)
+</code></pre></div>
+<div class="para" id="sect-jump-setup-8">will create a <code class="code-inline tex2jax_ignore">JuMP</code> model and assign the <code class="code-inline tex2jax_ignore">HiGHS.Optimzer</code> as the solver.<details class="ptx-footnote" aria-live="polite" id="sect-jump-setup-8-3"><summary class="ptx-footnote__number" title="Footnote 5.4.1"><sup> 1 </sup></summary><div class="ptx-footnote__contents" id="sect-jump-setup-8-3">We will always use this Model call throughout this book, however, if you are using <code class="code-inline tex2jax_ignore">JuMP</code> for doing other solves, like a nonlinear minimization, then you will use a different package and it’s related <code class="code-inline tex2jax_ignore">Optimizer</code>.</div></details> If the line above is the only expression in the cell, this returns the following:<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-jump-setup-9">
+<pre class="code-display tex2jax_ignore clipboardable">A JuMP Model
+├ solver: HiGHS
+├ objective_sense: FEASIBILITY_SENSE
+├ num_variables: 0
+├ num_constraints: 0
+└ Names registered in the model: none
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-10">This doesn’t have a lot of information because we haven’t added variables or constraints to the equation. We will see this change as develop the model.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-11">
+<em class="emphasis">Step 2: Add variables</em><div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">@variable(m, x₁ ≥ 0)
+@variable(m, x₂ ≥ 0)
+</code></pre></div>
+<div class="para" id="sect-jump-setup-13">These lines adds the two variables <code class="code-inline tex2jax_ignore">x₁</code> and <code class="code-inline tex2jax_ignore">x₂</code> to the model and they are both nonnegative variables. The subscripts are unicode characters that you can enter as <code class="code-inline tex2jax_ignore">\_1</code>, then TAB inside a Jupyter notebook. Also, the <span class="process-math">\(\geq\)</span> character is entered as <code class="code-inline tex2jax_ignore">\geq</code> then TAB. Neither are necessary, but make the constraints look like they do written out mathematically. If these are placed in a notebook cell then <span class="process-math">\(x_2\)</span> is echoed out only.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-14">
+<em class="emphasis">Step Three: add the constraints</em><div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">@constraint(m, 4x₁ + 3x₂ ≤ 120)
+@constraint(m, x₁ + 2x₂ ≤ 40)
+@constraint(m, x₂ ≤ 16)
+</code></pre></div>
+<div class="para" id="sect-jump-setup-16">and again, if all three are in a single cell, you’ll only see the last constraint echoed out.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-17">
+<em class="emphasis">Step Four: add the objective function</em><div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">@objective(m, Max, x₁+3x₂)
+</code></pre></div>
+<div class="para" id="sect-jump-setup-19">And note that the second argument is <code class="code-inline tex2jax_ignore">Max</code> indicating that this is a maximum problem and the third argument is the function. We have now added all of the elements of this problem (variables, constraints, objective). If one enters <code class="code-inline tex2jax_ignore">print(m)</code> in a  cell by itself you can look at the internals of the model:<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-jump-setup-20">
+<pre class="code-display tex2jax_ignore clipboardable">Max x₁ + 3 x₂
+Subject to
+ 4 x₁ + 3 x₂ ≤ 120
+ x₁ + 2 x₂ ≤ 40
+ x₂ ≤ 16
+ x₁ ≥ 0
+ x₂ ≥ 0
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-20" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-21">and this looks almost identical to the way we write down the LOP.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-21" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-22">
+<em class="emphasis">Step Five: Find the optimal value</em><div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-22" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-23">To find the optimal value, we use the command<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-23" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">optimize!(m)
+</code></pre></div>
+<div class="para" id="sect-jump-setup-25">where it is important to include the <code class="code-inline tex2jax_ignore">!</code> at the end of the <code class="code-inline tex2jax_ignore">optimize!</code> function.<details class="ptx-footnote" aria-live="polite" id="sect-jump-setup-25-3"><summary class="ptx-footnote__number" title="Footnote 5.4.2"><sup> 2 </sup></summary><div class="ptx-footnote__contents" id="sect-jump-setup-25-3">As mentioned before, Julia has a convention that if a function modifies its arguments--instead of just returning something, a <code class="code-inline tex2jax_ignore">!</code> should be used to tip off the Julia coder that the arguments are changing.</div></details><div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-25" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-26">This function returns<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-26" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-jump-setup-27">
+<pre class="code-display tex2jax_ignore clipboardable">Running HiGHS 1.10.0 (git hash: fd8665394e): Copyright (c) 2025 HiGHS under MIT licence terms
+  LP   has 3 rows; 2 cols; 5 nonzeros
+  Coefficient ranges:
+    Matrix [1e+00, 4e+00]
+    Cost   [1e+00, 3e+00]
+    Bound  [0e+00, 0e+00]
+    RHS    [2e+01, 1e+02]
+  Presolving model
+  2 rows, 2 cols, 4 nonzeros  0s
+  2 rows, 2 cols, 4 nonzeros  0s
+  Presolve : Reductions: rows 2(-1); columns 2(-0); elements 4(-1)
+  Solving the presolved LP
+  Using EKK dual simplex solver - serial
+    Iteration        Objective     Infeasibilities num(sum)
+            0    -9.9999494546e-01 Ph1: 2(5); Du: 1(0.999995) 0s
+            2    -5.6000000000e+01 Pr: 0(0) 0s
+  Solving the original LP from the solution after postsolve
+  Model status        : Optimal
+  Simplex   iterations: 2
+  Objective value     :  5.6000000000e+01
+  Relative P-D gap    :  0.0000000000e+00
+  HiGHS run time      :          0.00
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-27" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-28">Generally unless something goes wrong, this information isn’t helpful. Therefore, before running the <code class="code-inline tex2jax_ignore">optimize!(m)</code> command, run <code class="code-inline tex2jax_ignore">set_silent(model)</code> and you won’t get all of the output.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-28" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-29">
+<em class="emphasis">Step Six: Ensure the Solution</em><div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-29" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-30">If you supress the optimizer output (which should be done), you want to make sure that a solution is reached. If you enter<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-30" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">is_solved_and_feasible(m)
+</code></pre></div>
+<div class="para" id="sect-jump-setup-32">and <code class="code-inline tex2jax_ignore">true</code> is returned then all is well.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-32" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-33">
+<em class="emphasis">Step Seven: determine the variable values and the objective of the optimal solution</em><div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-33" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-jump-setup-34">The last step is generally to get the values of variables and objective of the optimal solution. To get the value of a variable use the <code class="code-inline tex2jax_ignore">value(VAR)</code> command where the argument is the variable you want. In this case, if we do<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-34" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">value(x₁), value(x₂)
+</code></pre></div>
+<div class="para" id="sect-jump-setup-36">the result is <code class="code-inline tex2jax_ignore">(8.0, 16.0)</code>. The objective value is found with <code class="code-inline tex2jax_ignore">objective_value(m)</code> and in this case, this returns <code class="code-inline tex2jax_ignore">56.0</code>. These are the same values that we get when we solved problem “by hand”.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-36" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="note remark-like" id="sect-jump-setup-37"><h4 class="heading">
+<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">5.4.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4>
+<div class="para" id="sect-jump-setup-37-1">Although the steps here are shown, typically many are done together. Usually set up the problem with steps 1-4, then steps 5 and 6 (solve and verify), then get the variable and objective values.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-37-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 5.4.1"><a href="#sect-jump-setup-37" title="Copy heading and permalink for Note 5.4.1" aria-label="Copy heading and permalink for Note 5.4.1">🔗</a></div></article><div class="para" id="sect-jump-setup-38">We’ll see how to better approach this in the next example.<div class="autopermalink" data-description="Paragraph"><a href="#sect-jump-setup-38" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="ex-solve-diet" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">5.4.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-solve-diet-1-1">Use Julia with the <code class="code-inline tex2jax_ignore">JuMP</code> and <code class="code-inline tex2jax_ignore">HiGHS</code> packages to solve <a href="sect-linear-models.html#prob-diet" class="xref" data-knowl="./knowl/xref/prob-diet.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 2.1.4: A Diet Problem">Problem 2.1.4</a><div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="ex-solve-diet-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="ex-solve-diet-2-1">In this case, set up the model, variables, constraints and objectives as follows.<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable line-numbers"><code class="language-none">m2 = Model(HiGHS.Optimizer)
+@variable(m2, y₁ ≥ 0)
+@variable(m2, y₂ ≥ 0)
+@variable(m2, y₃ ≥ 0)
+@constraint(m2, 5y₁ + 18y₂ + 10y₃ ≥ 54)
+@constraint(m2, 7y₁ + 10y₂ + 24y₃ ≥ 60)
+@constraint(m2, 4y₁ + 8y₂ + 12y₃ ≥ 45)
+@objective(m2, Min, 600y₁ + 750y₂ + 500y₃ )
+print(m2)
+</code></pre></div>
+<div class="para" id="ex-solve-diet-2-3">which produce the model:<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-solve-diet-2-4">
+<pre class="code-display tex2jax_ignore clipboardable">Min 600 y₁ + 750 y₂ + 500 y₃
+Subject to
+ 5 y₁ + 18 y₂ + 10 y₃ ≥ 54
+ 7 y₁ + 10 y₂ + 24 y₃ ≥ 60
+ 4 y₁ + 8 y₂ + 12 y₃ ≥ 45
+ 4 y₁ + 8 y₂ + 12 y₃ ≤ 70
+ y₁ ≥ 0
+ y₂ ≥ 0
+ y₃ ≥ 0
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-solve-diet-2-5">We will suppress the output from the Optimizer code, run the optimizer and determine if it was solved and feasible.<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">set_silent(m2)
+optimize!(m2)
+assert_is_solved_and_feasible(m2)
+</code></pre></div>
+<div class="para" id="ex-solve-diet-2-7">and the last line returns <code class="code-inline tex2jax_ignore">true</code> indicating that this is a good solution. We can find the values of it with<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-solve-diet-2-8">
+<pre class="code-display tex2jax_ignore clipboardable">value(y₁),value(y₂), value(y₃) 
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-solve-diet-2-9">and the result is<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-solve-diet-2-10">
+<pre class="code-display tex2jax_ignore clipboardable">(0.0, 1.4558823529411764, 2.7794117647058827)
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-solve-diet-2-11">and the objective value is found with <code class="code-inline tex2jax_ignore">objective_value(m2)</code> which returns <code class="code-inline tex2jax_ignore">2481.62</code>.<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-solve-diet-2-12">This shows that Gary shouldn’t eat any salads, 1.455 sandwiches and 2.779 bagels. The total number of calories from these food items is 2481.62.<div class="autopermalink" data-description="Paragraph"><a href="#ex-solve-diet-2-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 5.4.2.1"><a href="#ex-solve-diet-2" title="Copy heading and permalink for Solution 5.4.2.1" aria-label="Copy heading and permalink for Solution 5.4.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Example 5.4.2"><a href="#ex-solve-diet" title="Copy heading and permalink for Example 5.4.2" aria-label="Copy heading and permalink for Example 5.4.2">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 5.4.1: Setting up an LOP using JuMP"><a href="#sect-jump-setup" title="Copy heading and permalink for Subsection 5.4.1: Setting up an LOP using JuMP" aria-label="Copy heading and permalink for Subsection 5.4.1: Setting up an LOP using JuMP">🔗</a></div></section><section class="subsection" id="sect-package-lop-5"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">5.4.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Where’s the Simplex Method</span>
+</h3>
+<div class="para" id="sect-package-lop-5-2">I know you are wondering what happend to the simplex method in this chapter. We’ve spent a long chapter on how to create simplex tableaus and use them to step-by-step go through to the solution. We then spent another chapter on Integer problems with Cutting Planes and Branch and Bound, which use simplex method under the hood. With Julia and the JuMP and HiGHS packages, it seems totally unnecessary to learn all of that.<div class="autopermalink" data-description="Paragraph"><a href="#sect-package-lop-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-package-lop-5-3">We won’t go through the details of how the HiGHS package finds the optimal solution to problems, but it is equivalent to using the simplex method and the Cutting Planes and Branch and Bound.<div class="autopermalink" data-description="Paragraph"><a href="#sect-package-lop-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-package-lop-5-4">Understanding the simplex method is important. The basis of the algorithm in the HiGHS package uses the simplex method, as well as the integer techniques of <a href="ch-integer-problems.html" class="internal" title="Chapter 4: Integer Linear Optimization Problems">Chapter 4</a>. It much like any technology in that to completely understand how to use software like this, you need to understand the underlying algorithm.<div class="autopermalink" data-description="Paragraph"><a href="#sect-package-lop-5-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 5.4.2: Where’s the Simplex Method"><a href="#sect-package-lop-5" title="Copy heading and permalink for Subsection 5.4.2: Where’s the Simplex Method" aria-label="Copy heading and permalink for Subsection 5.4.2: Where’s the Simplex Method">🔗</a></div></section><section class="subsection" id="sect-julia-infeasible"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">5.4.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Infeasible and Unbounded Problems</span>
+</h3>
+<div class="para" id="sect-julia-infeasible-2">In <a href="sect-infeasible-unbounded.html" class="internal" title="Section 3.4: Infeasibility and Unboundedness">Section 3.4</a>, we discussed how to determine if a problem is infeasible or unbounded. The <code class="code-inline tex2jax_ignore">JuMP</code> and <code class="code-inline tex2jax_ignore">HiGHS</code> packages can also determine this for you.<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-julia-infeasible-3">Let’s start with the unbounded problem in <a href="sect-infeasible-unbounded.html#prob-unbounded-LOP" class="xref" data-knowl="./knowl/xref/prob-unbounded-LOP.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 3.4.1">Problem 3.4.1</a>. We can set this up using JuMP as follows:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">m4 = Model(HiGHS.Optimizer)
+@variable(m4, x₁ ≥ 0)
+@variable(m4, x₂ ≥ 0)
+@constraint(m4, x₁ - 2x₂ ≤ -6)
+@constraint(m4, -5x₁ + 2x₂ ≤ -20)
+@constraint(m4, -3x₁ -5x₂ ≤ -75)
+@objective(m4, Max, 5x₁ + 3x₂)
+print(m4)
+</code></pre></div>
+<div class="para" id="sect-julia-infeasible-5">which returns:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-julia-infeasible-6">
+<pre class="code-display tex2jax_ignore clipboardable">m4 = Model(HiGHS.Optimizer)
+@variable(m4, x₁ ≥ 0)
+@variable(m4, x₂ ≥ 0)
+@constraint(m4, x₁ - 2x₂ ≤ -6)
+@constraint(m4, -5x₁ + 2x₂ ≤ -20)
+@constraint(m4, -3x₁ -5x₂ ≤ -75)
+@objective(m4, Max, 5x₁ + 3x₂)
+print(m4)
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-julia-infeasible-7">and this looks like the problem in <a href="sect-infeasible-unbounded.html#prob-unbounded-LOP" class="xref" data-knowl="./knowl/xref/prob-unbounded-LOP.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 3.4.1">Problem 3.4.1</a>. However, if we run the following code:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">set_silent(m4)
+optimize!(m4)
+is_solved_and_feasible(m4)
+</code></pre></div>
+<div class="para" id="sect-julia-infeasible-9">the result is <code class="code-inline tex2jax_ignore">false</code>. This may not be surprsing because we know it is unbounded. To see a bit more about what is happening, if we enter:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">assert_is_solved_and_feasible(m4)
+</code></pre></div>
+<div class="para" id="sect-julia-infeasible-11">then we get the following information:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-julia-infeasible-12">
+<pre class="code-display tex2jax_ignore clipboardable">The model was not solved correctly. Here is the output of `solution_summary` to help debug why this happened:
+
+solution_summary(; result = 1, verbose = false)
+├ solver_name          : HiGHS
+├ Termination
+│ ├ termination_status : DUAL_INFEASIBLE
+│ ├ result_count       : 1
+│ ├ raw_status         : kHighsModelStatusUnbounded
+│ └ objective_bound    : 7.08065e+01
+├ Solution (result = 1)
+│ ├ primal_status        : INFEASIBILITY_CERTIFICATE
+│ ├ dual_status          : INFEASIBLE_POINT
+│ ├ objective_value      : 8.06452e-01
+│ ├ dual_objective_value : 7.08065e+01
+│ └ relative_gap         : 7.00000e+01
+└ Work counters
+  ├ solve_time (sec)   : 3.10550e-03
+  ├ simplex_iterations : 2
+  ├ barrier_iterations : 0
+  └ node_count         : -1
+
+
+Stacktrace:
+ [1] error(s::String)
+   @ Base ./error.jl:44
+ [2] #assert_is_solved_and_feasible#102
+   @ ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1008 [inlined]
+ [3] assert_is_solved_and_feasible(model::Model)
+   @ JuMP ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1002
+ [4] top-level scope
+   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_df34fa98e69747e1a8f8a730347b8e2f_X25sZmlsZQ==.jl:3
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-julia-infeasible-13">This shows that the model was not solved correctly and the termination status is <code class="code-inline tex2jax_ignore">DUAL_INFEASIBLE</code>. We will discuss the details of Dual Problems, however, at this point, you can translate this <code class="code-inline tex2jax_ignore">DUAL_INFEASIBLE</code> to mean that the problem is unbounded.<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="sect-julia-infeasible-14" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">5.4.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="exercise exercise-like knowl__content"><div class="para" id="sect-julia-infeasible-14-1-1">Use the <code class="code-inline tex2jax_ignore">JuMP</code> and <code class="code-inline tex2jax_ignore">HiGHS</code> packages to set up and solve the problem in <a href="sect-infeasible-unbounded.html#prob-infeasible-LOP" class="xref" data-knowl="./knowl/xref/prob-infeasible-LOP.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 3.4.3">Problem 3.4.3</a>.<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-14-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sect-julia-infeasible-14-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sect-julia-infeasible-14-2-1">The problem in <a href="sect-infeasible-unbounded.html#prob-infeasible-LOP" class="xref" data-knowl="./knowl/xref/prob-infeasible-LOP.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 3.4.3">Problem 3.4.3</a> can be set up as follows:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-14-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">m5 = Model(HiGHS.Optimizer)
+@variable(m5, x₁ ≥ 0)
+@variable(m5, x₂ ≥ 0)
+@constraint(m5, -x₁ + 2x₂ ≤ 6)
+@constraint(m5, 5x₁ - 2x₂ ≤ 20)
+@constraint(m5, -3x₁ -5x₂ ≤ -75)
+@objective(m5, Max, 5x₁ + 3x₂)
+print(m5)
+</code></pre></div>
+<div class="para" id="sect-julia-infeasible-14-2-3">and then attempt to find the solution with:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-14-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">    set_silent(m5)
+optimize!(m5)
+is_solved_and_feasible(m5)
+</code></pre></div>
+<div class="para" id="sect-julia-infeasible-14-2-5">However, this results in <code class="code-inline tex2jax_ignore">false</code>. To determine the reason, we use:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-14-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">assert_is_solved_and_feasible(m5)
+</code></pre></div>
+<div class="para" id="sect-julia-infeasible-14-2-7">The output is similar to the one above for the unbounded problem:<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-14-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-julia-infeasible-14-2-8">
+<pre class="code-display tex2jax_ignore clipboardable">The model was not solved correctly. Here is the output of `solution_summary` to help debug why this happened:
+
+solution_summary(; result = 1, verbose = false)
+├ solver_name          : HiGHS
+├ Termination
+│ ├ termination_status : INFEASIBLE
+│ ├ result_count       : 1
+│ ├ raw_status         : kHighsModelStatusInfeasible
+│ └ objective_bound    : 0.00000e+00
+├ Solution (result = 1)
+│ ├ primal_status        : NO_SOLUTION
+│ ├ dual_status          : INFEASIBILITY_CERTIFICATE
+│ ├ objective_value      : 0.00000e+00
+│ ├ dual_objective_value : -1.76364e+01
+│ └ relative_gap         : Inf
+└ Work counters
+  ├ solve_time (sec)   : 2.22933e-03
+  ├ simplex_iterations : 2
+  ├ barrier_iterations : 0
+  └ node_count         : -1
+
+
+Stacktrace:
+ [1] error(s::String)
+   @ Base ./error.jl:44
+ [2] #assert_is_solved_and_feasible#102
+   @ ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1008 [inlined]
+ [3] assert_is_solved_and_feasible(model::Model)
+   @ JuMP ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1002
+ [4] top-level scope
+   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_df34fa98e69747e1a8f8a730347b8e2f_X31sZmlsZQ==.jl:1
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-14-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-julia-infeasible-14-2-9">However, note that the <code class="code-inline tex2jax_ignore">termination_status</code> is <code class="code-inline tex2jax_ignore">INFEASIBLE</code>.  This is because the problem is infeasible.<div class="autopermalink" data-description="Paragraph"><a href="#sect-julia-infeasible-14-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 5.4.3.1"><a href="#sect-julia-infeasible-14-2" title="Copy heading and permalink for Solution 5.4.3.1" aria-label="Copy heading and permalink for Solution 5.4.3.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Checkpoint 5.4.3"><a href="#sect-julia-infeasible-14" title="Copy heading and permalink for Checkpoint 5.4.3" aria-label="Copy heading and permalink for Checkpoint 5.4.3">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 5.4.3: Infeasible and Unbounded Problems"><a href="#sect-julia-infeasible" title="Copy heading and permalink for Subsection 5.4.3: Infeasible and Unbounded Problems" aria-label="Copy heading and permalink for Subsection 5.4.3: Infeasible and Unbounded Problems">🔗</a></div></section><div class="autopermalink" data-description="Section 5.4: Julia Packages for LOPs"><a href="#sect-package-lop" title="Copy heading and permalink for Section 5.4: Julia Packages for LOPs" aria-label="Copy heading and permalink for Section 5.4: Julia Packages for LOPs">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="sect-julia-linear-algebra.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sect-ilop-julia.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

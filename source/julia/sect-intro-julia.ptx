@@ -1,0 +1,323 @@
+<section xml:id="sect-intro-julia">
+  <title>Introduction to the Julia Language</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Learning how to assign variables and use basic operations in Julia.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The syntax of for loops in Julia.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Understanding the different number types in Julia.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          How to use unicode characters in Julia.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          How to use packages in Julia.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      The <url href="julialang.org">Julia Language</url> was developed starting about 2010 as a language for Scientific Computing, a field which basically covers how to solve problems in mathematics and the sciences which often require the use of software to find or approximate the solutuion.
+    </p>
+
+    <p>
+      It is useful to have the background in some computing language<mdash/>especially the basics of variables, arrays, loops and branching, however you can solve relatively complex LOPs using Julia.
+      We will cover the basics here, but see <url href="" >the author's Julia text</url> for a deep dive into Julia.
+    </p>
+
+    <p>
+      Julia is a scripting functional language that is often run inside a Jupyter Notebook<fn>In fact it is the Ju part of Jupyter</fn> and see APPENDIX ??? for details on how to install it.
+    </p>
+
+    <p>
+      One of the features of Julia is that of a package manager, which handles installing extra code.
+      Relevant for Linear Optimization Problems, there are packages <c>JuMP</c> and <c>HiGHS</c> that are important, and yes, the capitalization is important.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Basics of Julia</title>
+
+    <p>
+      The syntax of Julia expressions should be familiar to those who have programmed in python, but not too dissimilar for those with knowledge of C, C++, Javascript, or Java.
+      For example, to declare a variable, enter
+    </p>
+
+
+    <program language="julia">
+      <code>
+        x= 3
+      </code>
+    </program>
+
+    <p>
+      to assign the value <c>3</c> to the variable <c>x</c>.
+    </p>
+
+    <note>
+      <p>
+        It is assumed here that you are using a Jupyter notebook, which has cells in which to enter code.
+        If you enter more than one line of code in a cell, then only the last expression is echoed back to the notebook.
+        That is if you have
+      </p>
+
+
+      <program language="julia">
+        <code>
+      x = 3
+      y = 4
+        </code>
+      </program>
+
+      <p>
+        then you will only see <c>4</c> echoed back after the cell.
+        If you wish to suppress this output, append a semicolon, <c>;</c> to the end of the line.
+      </p>
+    </note>
+  </subsection>
+
+
+  <subsection>
+    <title>For Loops</title>
+
+    <p>
+      A for loop is a piece of code that is executed a fixed number of times.
+      The following is an example of just printing out the values of a loop.
+    </p>
+
+
+
+    <listing xml:id="prog-for-loop">
+      <caption></caption>
+      <program language="julia" >
+        <code>
+          for i = 1:10
+            @show i
+          end
+        </code>
+      </program>
+    </listing>
+
+    <p>
+      where the syntax <c>1:10</c> means that <c>i</c> takes on the values 1, 2, 3, ..., 10.
+      Julia does have <c>print</c> and <c>println</c> commands, however, the <c>@show</c> macro is nice in that it also prints out the name of variable that you wish view its value.
+    </p>
+
+    <note>
+      <p>
+        Although the code in <xref ref="prog-for-loop"/> has code that is indented, it is not required, like in python.
+        It is typically indented for readability.
+        In fact, <c>for i=1:5 @show i end</c> would produce the same result.
+      </p>
+    </note>
+
+    <p>
+      The for loop in <xref ref="prog-for-loop"/> went through every integer between 1 and 10, but if you wish to skip values (whether positive or negative skip), the top line of a <c>for</c> loop can use the syntax <c>start:skip:stop</c>.
+      For example
+    </p>
+
+
+    <program language="julia">
+      <code>
+        for i=2:2:14
+          @show i
+        end
+      </code>
+    </program>
+
+    <p>
+      will print out the values 2, 4, 6, ..., 14.
+      And
+    </p>
+
+
+    <program language="julia">
+      <code>
+        for i=15:-3:0
+          @show i
+        end
+      </code>
+    </program>
+
+    <p>
+      will print out the values 15, 12, 9, ..., 0.
+    </p>
+
+    <note>
+      <p>
+        There are commands and functions in Julia with an <c>@</c>-sign in the front.
+        <c>@show</c> is the first one you see, but there are important ones later.
+        These are called macros.
+        A macro does things a bit different behind the scenes and if you become a expert Julia programmer, it is important to know the difference, for purposes in this course, you can use them interchangeably.
+      </p>
+
+      <p>
+        One difference that you may see is that a macro is often not written with  parentheses after the name (although it can be).
+      </p>
+    </note>
+  </subsection>
+
+
+  <subsection xml:id="sect-number-types">
+    <title>Number Types in Julia</title>
+
+    <p>
+      There are various number types in Julia including integers, floating points and rationals.
+      <fn>There are other number types including complex types that won't be covered here.</fn>
+    </p>
+
+    <p>
+      Creating numbers with a given type are given with an example below
+    </p>
+
+
+    <program language="julia">
+      <code>
+        a = 139
+        x = 3.14159
+        p = 2//3
+      </code>
+    </program>
+
+    <p>
+      which make an integer, floating point and a rational respectively.<fn>There are different types of each of these, the main difference being the storage size (in bits) of each number.
+      Nearly all computers these days will default to 64-bit numbers and not knowing differences is not an issue for the material in this text.</fn> Basic operations within a number type often keep the same number type (except for division between integers).
+    </p>
+
+    <p>
+      The techniques in this text usually use problems with integer coefficients, however, we will also see that Rational numbers are quite helpful as well.
+      Floating-point numbers, however are generally the backboard of all number systems and solving problems with packages will use this type for all results.
+    </p>
+
+    <p>
+      Notice that basic operations between numbers results in a type that is the more general between the numbers.
+      For example,
+    </p>
+
+
+    <program language="julia">
+      <code>
+        3 + 4.5
+        3 + 3//4
+        3 + 7
+      </code>
+    </program>
+
+    <p>
+      results in the floating point number <c>7.5</c>, the rational <c>15//4</c> and the integer <c>10</c>.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-enter-unicode">
+    <title>Unicode Characters in Julia</title>
+
+    <p>
+      One nice feature of Julia is that instead of relying on the standard ASCII characters, that most of the set of unicode characters can be used.
+      For example, we may want to use Greek letters and we can assign one a value with
+    </p>
+
+    <p>
+      <me>
+        \alpha = 2
+      </me>
+    </p>
+
+    <p>
+      and use it in expressions.
+      To enter <m>\alpha</m>, inside of a Jupyter notebook, type <c>\alpha</c> then hit the TAB key and you will get a list of characters starting with <c>\alpha</c>.
+      Select the character.
+    </p>
+
+    <p>
+      Another option is to use subscripts to make expressions look more like how we express them in writing or typed out.
+      The character <m>x_1</m> can be created with <c>x\_1</c> then TAB.
+      This variable is two characters long where the second character is the subscript.
+    </p>
+
+    <p>
+      Although there are a lot of options including using emoji for characters, the other relevant character is the <m>\geq</m> (using \geq) and ≤ (using \leq).
+      Those familiar with LaTeX will notice that the backslash and the shortcut is the same in LaTeX.
+      In fact, many characters from LaTeX will transfer over.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-julia-packages">
+    <title>Packages in Julia</title>
+
+    <p>
+      Julia uses packages/modules for additional functionality.
+      Some modules are built-in to Julia, like <c>LinearAlgebra</c>, which has a lot of additional matrix functions.
+      Other modules need to be downloaded.
+    </p>
+
+    <p>
+      Let's say that we want to use the <c>cross</c> function that calculates the cross product between vectors.
+      If we have
+    </p>
+
+
+    <program language="julia">
+      <code>
+        x = [1; 2; 3]
+        y = [-2; 4; 1]
+        cross(x,y)
+      </code>
+    </program>
+
+    <p>
+      then we get the following:
+    </p>
+
+    <p>
+      <cd>
+      <cline>UndefVarError: `cross` not defined in `Main`</cline>
+      <cline>  Suggestion: check for spelling errors or missing imports.</cline>
+      <cline>  Hint: a global variable of this name also exists in LinearAlgebra.</cline>
+      </cd>
+    </p>
+
+    <p>
+      Looking at the last line, we get the idea that this function is in a package.
+      To use this, we will need to enter <c>using LinearAlgebra</c><fn>With Julia 1.12, if a package is not installed, it should autoinstall.
+      Inside of Jupyter notebooks, like in VS Code, the UI is hard to see, so you may either need to wait a while if doing a <c>using</c> statement or install other ways.</fn>.
+      If this is run first, then rerun the above 3 lines, then we get:
+    </p>
+
+    <p>
+      <cd>
+      <cline>3-element Vector{Int64}:</cline>
+      <cline>  -10</cline>
+      <cline>   -7</cline>
+      <cline>    8</cline>
+      </cd>
+    </p>
+
+    <p>
+      If you want to find all permutations of a vector, then there is a <c>permutations</c> function that is in a package.
+      But if we try
+    </p>
+  </subsection>
+</section>

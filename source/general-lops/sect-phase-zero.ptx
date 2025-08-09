@@ -1,0 +1,356 @@
+<section xml:id="sect-phase-zero">
+  <title>Solving General Linear Optimization Problems</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Write a general Linear Optimization Problem (LOP) in general form.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Provide the Phase 0 method of the simplex method.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <p>
+    The previous section <xref ref="sect-general-form"/> updated the simplex method to handle free variables as well as equality constraints
+  </p>
+
+  <p>
+    <me>
+      \begin{aligned} \text{Maximize} \amp\amp z  = \sum_{j=1}^n c_j x_j,\amp \\ \text{subject to} \amp\amp \sum_{j=1}^n a_{ij} x_j \amp\leq b_i, \qquad \text{if $i \in I$}, \\ \amp\amp \sum_{j=1}^n a_{ij} x_j \amp= b_i, \qquad \text{if $i \in E$}, \\ \text{and} \amp\amp x_j \amp\geq 0 \qquad \text{if $j \in R$.} \end{aligned}
+    </me>
+  </p>
+
+  <p>
+    where <m>I \subset \{1,2,\ldots,m\}</m> are the constraints which are inequalities, <m>E = \{1,2,\ldots,m\}-I</m> are the constraints which are equalities.
+    <m>R \subset \{1,2,\ldots, n\}</m> are restricted to be nonnegative which <m>F = \{1,2,\ldots, n\} - R</m> are those that are free variables.
+  </p>
+
+  <p>
+    The algorithm denoted Phase 0 was developed in <xref ref="sect-general-form"/> to solve general LOPs.
+    The following is a summary of the steps and how phase I and II need to be adapted to solve these problems.
+  </p>
+
+  <p>
+    <alert>Phase 0 method</alert>
+  </p>
+
+  <p>
+    <ol>
+      <li>
+        <p>
+          As with all other LOPs, the problem needs to be written in standard form.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          In building the simplex tableau, for equality statements, do not add a slack variable, but add the equation in the tableau.
+          For free variables, note the column of that variable.
+          This is often done by writing <m>F</m> above the column in the tableau for the free variables.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          If there are equality constraints in the tableau, pivot to bring a standard variable into the basis.
+          Give preference to free variables and otherwise chose the lowest subscript.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          If there are free variables still not in the basis, pivot them to be in the basis.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Repeat these steps 3 and 4 until all free variables and all equality constraints are in the basis, if possible.
+          If this is not possible, then there is no solution.
+        </p>
+      </li>
+    </ol>
+  </p>
+
+  <p>
+    <alert>Phase I revisited</alert>
+  </p>
+
+  <p>
+    Recall that the goal of Phase 1 is to make a set feasible.
+    If a free variable has a negative value for its basic variable, that's okay.
+    Phase I should not take a free variable out of the basis variables.
+  </p>
+
+  <p>
+    In short, phase I now only removes negative variables from restricted variables.
+  </p>
+
+  <p>
+    <alert>Phase II revisited</alert>
+  </p>
+
+  <p>
+    In phase 2, recall that we are trying to pivot to increase the value of <m>z</m>.
+    This typically means that if any number is negative in the objective row, that we enter that variable.
+    After phase 0, all free variables should be in the basis and phase 1 should not remove them, so only restricted variables can have a negative number in the objective row.
+  </p>
+
+  <p>
+    Next, we typically chose the pivot row based on not making the tableau infeasible.
+    However, recall that since free variables can take on any value, we pivot to increase <m>z</m> the most and should never remove a free variable from the basis.
+  </p>
+
+
+  <problem>
+    <statement>
+      <p>
+        Solve the following Linear Optimization Problem using the adapted Simplex method
+      </p>
+
+      <p>
+        <me>
+          \begin{aligned} \text{Minimize} \amp\amp z = 2x_1 + 4x_2, \amp \\ \text{s.t.} \amp\amp x_1 - x_2 \amp \geq 0, \\ \amp\amp3x_1 + 2x_2 \amp \leq 24, \\ \amp\amp 2x_1 - 3x_2 \amp \leq 12.
+          \end{aligned}
+        </me>
+      </p>
+    </statement>
+  </problem>
+
+  <p>
+    Note that there are no nonnegative constraints so both <m>x_1</m> and <m>x_2</m> are free.
+    The first inequality is not in standard form, so we multiply through by <m>-1</m> first.
+    Also, this is a minimum problem, so we write the maximum version as <m>w = -2x_1-4x_2</m>.
+    The simplex tableau can be written as
+  </p>
+
+  <p>
+    <me>
+      \left[\begin{array}{rr|rrrr|r} {\small F} \amp {\small F} \\ -1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0\\ 3 \amp 2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 24\\ 2 \amp -3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 12\\ \hline 2 \amp 4 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+    </me>
+  </p>
+
+  <p>
+    Since both <m>x_1</m> and <m>x_2</m> are free, we will pivot to bring them into the basis.
+    There's not a clear choice for what leaves the basis, so we will select <m>x_3</m> and <m>x_4</m> to leave.
+  </p>
+
+  <p>
+    <me>
+      1 \mapsto 3 \qquad \left[\begin{array}{rr|rrrr|r} {\small F} \amp {\small F} \\ 1 \amp -1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 5 \amp 3 \amp 1 \amp 0 \amp 0 \amp 24\\ 0 \amp -1 \amp 2 \amp 0 \amp 1 \amp 0 \amp 12\\ \hline 0 \amp 6 \amp 2 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+    </me>
+  </p>
+
+  <p>
+    <me>
+      2 \mapsto 4 \qquad \left[\begin{array}{rr|rrrr|r} {\small F} \amp {\small F} \\ 5 \amp 0 \amp -2 \amp 1 \amp 0 \amp 0 \amp 24\\ 0 \amp 5 \amp 3 \amp 1 \amp 0 \amp 0 \amp 24\\ 0 \amp 0 \amp 13 \amp 1 \amp 5 \amp 0 \amp 84\\ \hline 0 \amp 0 \amp -8 \amp -6 \amp 0 \amp 5 \amp -144\\ \end{array} \right]
+    </me>
+  </p>
+
+  <p>
+    Now that both free variables are in the basis, Stage 0 is finished.
+  </p>
+
+  <p>
+    Note that all of the variables are feasible, so there is no need to perform any Phase I steps.
+    Next we move to Phase II and we perform the matrix pivot on row 3, column 3:
+  </p>
+
+  <p>
+    Recall that the <m>\boldsymbol{b}</m>-ratios,
+  </p>
+
+  <p>
+    <me>
+      \frac{\boldsymbol{b}}{A_3} = \begin{bmatrix} -24/2 \\ 24/3 \\ 84/13 \end{bmatrix} \approx \begin{bmatrix} -12 \\ 8 \\ 6.46 \end{bmatrix}
+    </me>
+  </p>
+
+  <p>
+    and then typically the smallest nonnegative ratio is selected.
+    This ensures that the solution stays feasible.
+    This is a bit different with free variables, because they can take on negative numbers.
+    However since <m>x_3</m> is entering the basis and it is restricted to be nonnegative, we still select the 3rd variable above, and <m>x_5</m> will leave the basis.
+  </p>
+
+  <p>
+    <me>
+      3 \mapsto 5 \qquad \left[\begin{array}{rr|rrrr|r} 13 \amp 0 \amp 0 \amp 3 \amp 2 \amp 0 \amp 96\\ 0 \amp 13 \amp 0 \amp 2 \amp -3 \amp 0 \amp 12\\ 0 \amp 0 \amp 13 \amp 1 \amp 5 \amp 0 \amp 84\\ \hline 0 \amp 0 \amp 0 \amp -14 \amp 8 \amp 13 \amp -240\\ \end{array} \right]
+    </me>
+  </p>
+
+  <p>
+    and still this isn't an optimal solution, so we'll do one more pivot.
+    Again, the following <m>\boldsymbol{b}</m>-ratio is found
+  </p>
+
+  <p>
+    <me>
+      \frac{\boldsymbol{b}}{A_4} = \begin{bmatrix}96/3 \\ 12/2 \\ 84/1 \end{bmatrix} = \begin{bmatrix} 32 \\ 6 \\ 84 \end{bmatrix}
+    </me>
+  </p>
+
+  <p>
+    and if we do the standard smallest nonegative ratio, we would choose the 2nd one.
+    However, that would remove <m>x_2</m> from the basis, so we don't select that or the first one, which would remove <m>x_1</m>.
+    The only result is <m>x_3</m>.
+    Therefore, we perform
+  </p>
+
+  <p>
+    <me>
+      4 \mapsto 3 \qquad \left[\begin{array}{rr|rrrr|r} 1 \amp 0 \amp -3 \amp 0 \amp -1 \amp 0 \amp -12\\ 0 \amp 1 \amp -2 \amp 0 \amp -1 \amp 0 \amp -12\\ 0 \amp 0 \amp 13 \amp 1 \amp 5 \amp 0 \amp 84\\ \hline 0 \amp 0 \amp 14 \amp 0 \amp 6 \amp 1 \amp 72\\ \end{array} \right]
+    </me>
+  </p>
+
+  <p>
+    This results in an optimal solution
+  </p>
+
+  <p>
+    <me>
+      \boldsymbol{x} = \left[\begin{array}{rr|rrr} -12 \amp -12 \amp 0 \amp 84 \amp 0 \end{array}\right]^{\intercal}
+    </me>
+  </p>
+
+  <exercise>
+    <statement>
+      <p>
+        Graph the feasible set and label on the set the points <m>(x_1, x_2)</m> with the step number.
+      </p>
+    </statement>
+
+    <solution>
+      <p>
+        A graph of the feasible set is
+      </p>
+
+      <image width="75%">
+        <latex-image>
+  <![CDATA[
+  \begin{tikzpicture}[scale=0.5]
+\draw [fill=lightgray] (-12,-12) -- (4.8,4.8) -- (7.38,0.923)  -- cycle;
+\draw [->,-latex] (-12,0) -- (12,0) node [at end,above right] {$x$};
+\draw [->,-latex] (0,-12) -- (0,12) node [at end,above right] {$y$};
+\foreach \x in {-12,-10,...,-2,2,4,...,8,10}  {
+	\draw (\x,-0.1) -- (\x,0.1) node [at start, below] {$\x$};}
+\foreach \y in {-12,-10,...,-2,2,4,...,8,10}{
+	\draw (-0.1,\y) -- (0.1,\y) node [at start, left] {$\y$}; }
+\draw (-12,-12) -- (12,12);
+\draw (-12,-12) -- (12,4);
+\draw (0,12) -- (12,-6);
+\fill (0,0) circle[radius = 3pt] node [above left] {$\boldsymbol{x}^{(0)}$, $\boldsymbol{x}^{(1)}$};
+\fill (4.8, 4.8) circle[radius = 3pt] node [above] {$\boldsymbol{x}^{(2)}$};
+\fill ({95/13},{12/13}) circle[radius = 3pt] node [right] {$\boldsymbol{x}^{(3)}$};
+\fill (-12, -12) circle[radius = 3pt] node [above left] {$\boldsymbol{x}^{(4)}$};
+\end{tikzpicture}
+  ]]>
+        </latex-image>
+      </image>
+
+      <p>
+        Note that the first step does not move the basic solution due to the line passing through the origin.
+      </p>
+
+      <p>
+        If you notice this and the problem above, once the free variables are brought into the basis, they will not be confined to the first quadrant, which they are in the standard simplex method.
+      </p>
+    </solution>
+  </exercise>
+
+  <exercise xml:id="ex-general-lop-no-solution">
+    <statement>
+      <p>
+        Solve the following LOP using the full simplex method described above.
+      </p>
+
+
+      <problem xml:id="prob-general-lop-no-solution">
+        <statement>
+          <p>
+            <me>
+              \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 + 4x_2, \amp \\ \text{such that} \amp\amp x_1 + 2x_2 \amp = 12, \\ \amp\amp 4x_1 + 3x_2 \amp = 18, \\ \amp \amp x_1 - 2x_2 \amp = 4, \\ \amp \amp x_1 + x_2 \amp \leq 10.
+              \end{aligned}
+            </me>
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            This problem is in standard form, so we can write the tableau as
+          </p>
+
+          <p>
+            <me>
+              \left[\begin{array}{rr|rr|r} 1 \amp 1 \amp 1 \amp 0 \amp 10\\ 1 \amp 2 \amp 0 \amp 0 \amp 12\\ 4 \amp 3 \amp 0 \amp 0 \amp 18\\ 1 \amp -2 \amp 0 \amp 0 \amp 4\\ \hline -3 \amp -4 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+            </me>
+          </p>
+
+          <p>
+            Note that both <m>x_1</m> and <m>x_2</m> are free variables, so we will pivot to bring them into the basis.
+          </p>
+
+          <p>
+            <me>
+              1 \mapsto \emptyset \qquad \left[\begin{array}{rr|rr|r} 1 \amp 1 \amp 1 \amp 0 \amp 10\\ 1 \amp 2 \amp 0 \amp 0 \amp 12\\ 4 \amp 3 \amp 0 \amp 0 \amp 18\\ 1 \amp -2 \amp 0 \amp 0 \amp 4\\ \hline -3 \amp -4 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+            </me>
+          </p>
+
+          <p>
+            <me>
+              2 \mapsto \emptyset \qquad \left[\begin{array}{rr|rr|r} 0 \amp 0 \amp 11 \amp 0 \amp 60\\ 0 \amp 0 \amp 0 \amp 0 \amp 80\\ 0 \amp 11 \amp 0 \amp 0 \amp 2\\ 11 \amp 0 \amp 0 \amp 0 \amp 48\\ \hline 0 \amp 0 \amp 0 \amp 11 \amp 152\\ \end{array} \right]
+            </me>
+          </p>
+
+          <p>
+            At this point the two free variables are in the basis, so we can move to Phase I.
+            However, all of the variables are feasible (and would be anyway since they are free variables), so we do not need to perform any Phase I steps.
+          </p>
+
+          <p>
+            If we move to Phase II, it appears that the solution is optimal because there are no negative numbers in the objective row.
+            However, examining the 2nd row, the corresponding equation to this is <m>0 = 80</m>, which is not possible.
+            This is because there is no solution to this problem.
+          </p>
+
+          <p>
+            Since this problem has only two variables, the constraints can be graphed.
+          </p>
+
+          <figure xml:id="fig-general-lop-no-solution">
+            <caption>A plot of the feasible set of <xref ref="prob-general-lop-no-solution"/>. </caption>
+            <image width="75%">
+              <latex-image>
+  <![CDATA[
+ \begin{tikzpicture}[scale=0.5]
+\draw [fill=lightgray] (-0.5,10.5) -- (10.5,-0.5) -- (10.5,-10.5) -- (-10.5,-10.5) -- (-10.5,10.5) -- cycle;
+\draw [->,-latex] (-11,0) -- (11,0) node [at end,above right] {$x_1$};
+\draw [->,-latex] (0,-11) -- (0,11) node [at end,above right] {$x_2$};
+\foreach \x in {-10,-8,...,-2,2,4,...,10}  {
+	\draw (\x,-0.1) -- (\x,0.1) node [at start, below] {$\x$};}
+\foreach \y in {-10,-8,...,-2,2,4,...,10} {
+	\draw (-0.1,\y) -- (0.1,\y) node [at start, left] {$\y$}; }
+\draw[thick,<->] (-0.5,10.5) -- (10.5,-0.5);
+\draw[color=red, thick, <->] (-10,{(12-(-10))/2}) -- (10,{(12-(10))/2});
+\draw [color=red, thick, <->](-4,{(18-4*(-4))/3}) -- (10,{(18-4*(10))/3});
+\draw [color=red, thick, <->](-10,{(4-(-10))/(-2)}) -- (10,{(4-(10))/(-2)});
+\end{tikzpicture}
+  ]]>
+              </latex-image>
+            </image>
+          </figure>
+          <p>
+            The solution needs to be within the gray area (feasible side of the inqequality constraint) as well as on all three lines.  Since they do not intersect, there is no solution to this.
+          </p>
+        </solution>
+      </problem>
+    </statement>
+  </exercise>
+</section>

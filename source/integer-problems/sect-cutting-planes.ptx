@@ -1,0 +1,1032 @@
+<section xml:id="sect-cutting-planes">
+  <title>Cutting Planes</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Find a cutting plane that removes part of the feasible set of a LOP without removing integer solutions.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Develop a method that uses cutting planes to solve an ILOP (Integer Linear Optimization Problem).
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+  <introduction>
+    <p>
+      A problem like <xref ref="prob-ilop2" /> does not result in an integer solution when the Simplex Method is used and in general, the simplex method does not solve these.
+      In this section, we introduce cutting planes, which impose additional constraints on a problem that will reduce the feasible set without cutting away any integer solutions.
+    </p>
+
+    <p>
+      For example, the solution to <xref ref="prob-ilop2"/> is <m>(256,119)^{T}/60\approx (4.266,1.983)</m> and <m>z^{\star}=1619/60\approx 26.983</m>.
+      We found the solution to the ILOP at the end of the previous section by checking all integer solutions in the feasible set and using this technique, the optimal point is <m>(4,2)</m> and <m>z=26</m>.
+    </p>
+
+    <p>
+      A <term>cutting plane</term> is an additional constraint that does not remove any integer solutions.
+      For example, the constraints:
+    </p>
+
+    <p>
+      <men xml:id="eq-ilop1-cutting-plane">
+        \begin{aligned} x_1 + x_2 \amp \leq 6 \\ x_1 +2x_2 \amp \leq 8.
+        \end{aligned}
+      </men>
+    </p>
+
+    <p>
+      together with the constraints in <xref ref="prob-ilop2"/> would lead to the following feasible set:
+    </p>
+
+    <figure xml:id="fig-ilop1-cutting-plane">
+      <caption>The feasible set from <xref ref="prob-ilop2"/> together with the constraints in <xref ref="eq-ilop1-cutting-plane"/>. The two constraints labelled <m>x_5=0</m> and <m>x_6=0</m> are cutting planes to the original problem.  </caption>
+      <image width="70%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+      <![CDATA[
+        \begin{tikzpicture}
+          \draw[->] (-0.5,0) -- (8.5,0) node [above right] {$x_1$};
+          \foreach \x in {1,...,8} \draw (\x,0.15) -- (\x,-0.15) node [below] {\x};
+          \draw[->] (0,-0.5) -- (0,6.5) node [above right] {$x_2$};
+          \foreach \y in {1,...,6} \draw (0.15,\y) -- (-0.15,\y) node [left] {\y};
+          \foreach \x in {0,...,6} \fill (\x,0) circle [radius=2pt];
+          \foreach \x in {0,...,5} \fill (\x,1) circle [radius=2pt];
+          \foreach \x in {0,...,4} \fill (\x,2) circle [radius=2pt];
+          \foreach \x in {0,...,2} \fill (\x,3) circle [radius=2pt];
+          \fill (0,4) circle [radius=2pt];
+          \draw[thick, <->] (-0.5,{(136-17*(-0.5))/32}) -- (8.5,{(136-17*(8.5))/32}) node [pos = 0, above left] {$x_3=0$};
+          \draw[thick, <->] (-0.5,{(25-4*(-0.5))/4}) -- (6.5,{(25-4*(6.5))/4}) node [pos = 0, above left] {$x_4=0$};
+          \draw[blue, <->] (-0.5,{(8-(-0.5))/2}) -- (8.5,{(8-(8.5))/2}) node [pos=0, below left] {$x_5=0$};
+          \draw[thick, <->] (-0.5,6.5) -- (6.5,-0.5) node [pos = 0, below left] {$x_6=0$};
+        \end{tikzpicture}
+        ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      The two constraints in <xref ref="eq-ilop1-cutting-plane" /> are examples of cutting planes.
+      If we include these two constraints with the original problem, we would get the optimal integer solution.
+      The next section will show how to systematically find cutting planes for a given problem.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-finding-cutting-planes">
+    <title>Finding Cutting Planes</title>
+
+    <p>
+      In <xref ref="ex-ilop2-simplex"/>, we used the simplex method to solve <xref ref="prob-ilop2" /> resulting in the following:
+    </p>
+
+    <p>
+      <md>
+        <mrow> \amp \qquad \left[\begin{array}{rr|rrr|r} 17 \amp 32 \amp 1 \amp 0 \amp 0 \amp 136\\ 4 \amp 4 \amp 0 \amp 1 \amp 0 \amp 25\\ \hline -4 \amp -5 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right] </mrow>
+        <mrow xml:id="eq-ilop2-step2" number="yes"> \begin{array}{r} 1 \mapsto 4,\\ 2 \mapsto 3, \end{array} \amp \qquad \left[\begin{array}{rr|rrr|r} 0 \amp 60 \amp 4 \amp -17 \amp 0 \amp 119\\ 60 \amp 0 \amp -4 \amp 32 \amp 0 \amp 256\\ \hline 0 \amp 0 \amp 4 \amp 43 \amp 60 \amp 1619\\ \end{array} \right] </mrow>
+      </md>
+    </p>
+
+    <p>
+      The solution to this <m>\boldsymbol{x}^{\star}= (119, 256~|~0,0)^{T}/60</m>, which is non-integral.
+      The 1st row of the tableau in <xref ref="eq-ilop2-step2"/> is the equation:
+    </p>
+
+    <p>
+      <me>
+        60 x_{2} +4x_{3} -17 x_{4} = 119
+      </me>
+    </p>
+
+    <p>
+      which can be rewritten by adding <m>-4x_{3}-43x_{4}-60</m> to both sides to get:
+    </p>
+
+    <p>
+      <me>
+        60(x_{2} - x_{4} -1) = 59 - 4x_{3} -43x_{4}
+      </me>
+    </p>
+
+    <p>
+      And we are looking for integer values of <m>x</m>’s and since the left side is a multiple of 60, the right side must be as well.
+      In addition, since <m>x_{3}, x_{4} \geq 0</m>, then the most it could be is 59, which is not a multiple of 60.
+      Thus the left hand side can be at most 0.
+      Therefore we include the constraint:
+    </p>
+
+    <p>
+      <md>
+        <mrow> 59-4x_{3}-43x_{4}\amp \leq 0 \amp \amp \text{or} \amp -4x_3 -43x_4 \amp \leq -59 </mrow>
+      </md>
+    </p>
+
+    <p>
+      We then include this into the tableau by introducing the scaled slack variable <m>60x_{5}</m> to make the equation:
+    </p>
+
+    <p>
+      <me>
+        -4x_{3}-43x_{4} + 60x_{5}= - 59
+      </me>
+    </p>
+
+    <p>
+      which generates the new tableau:
+    </p>
+
+    <p>
+      <men xml:id="eq-gomory-ex-1">
+        \left[\begin{array}{rr|rrrr|r} 0 \amp 60 \amp 4 \amp -17 \amp 0 \amp 0 \amp 119\\ 60 \amp 0 \amp -4 \amp 32 \amp 0 \amp 0 \amp 256\\ 0 \amp 0 \amp -4 \amp -43 \amp 60 \amp 0 \amp -59\\ \hline 0 \amp 0 \amp 4 \amp 43 \amp 0 \amp 60 \amp 1619\\ \end{array} \right]
+      </men>
+    </p>
+
+    <p>
+      We now have a tableau that is infeasible and you might think that we need to use phase I of the simplex method to solve this and we do, but before doing this, bring <m>x_{3}, x_{4}</m> and <m>x_{5}</m> into the basis with
+    </p>
+
+    <p>
+      <men xml:id="eq-gomory-ex-2">
+        \begin{array}{r} 3 \mapsto 2, \\ 4 \mapsto 1, \end{array} \qquad \left[\begin{array}{rr|rrrr|r} 17 \amp 32 \amp 1 \amp 0 \amp 0 \amp 0 \amp 136\\ 4 \amp 4 \amp 0 \amp 1 \amp 0 \amp 0 \amp 25\\ 4 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 26\\ \hline -4 \amp -5 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+      </men>
+    </p>
+
+    <p>
+      and notice that the third line of <xref ref="eq-gomory-ex-1" /> is the new constraint, <m>4x_1 + 5x_2 \leq 26</m>, which is the cutting plane found above in which the variables are returned to the original <m>x_1</m> and <m>x_2</m>.
+      If we graph all three constraints:
+    </p>
+
+    <figure xml:id="fig-gomory-ex-1">
+      <caption>The feasible set from <xref ref="prob-ilop2"/> together with the constraints <m>4x_1+5x_2 \leq 26</m> as found above.  Note that the cutting plane <m>x_5=0</m> (a heavy blue line) has trimmed away part of the feasible set, but not an integer solution. </caption>
+      <image width="75%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}
+              \draw[->] (-0.5,0) -- (8.5,0) node [above right] {$x_1$};
+              \foreach \x in {1,...,8} \draw (\x,0.15) -- (\x,-0.15) node [below] {\x};
+              \draw[->] (0,-0.5) -- (0,6.5) node [above right] {$x_2$};
+              \foreach \y in {1,...,6} \draw (0.15,\y) -- (-0.15,\y) node [left] {\y};
+              \foreach \x in {0,...,6} \fill (\x,0) circle [radius=2pt];
+              \foreach \x in {0,...,5} \fill (\x,1) circle [radius=2pt];
+              \foreach \x in {0,...,4} \fill (\x,2) circle [radius=2pt];
+              \foreach \x in {0,...,2} \fill (\x,3) circle [radius=2pt];
+              \fill (0,4) circle [radius=2pt];
+              \draw[<->] (-0.5,{(25-4*(-0.5))/4})--(6.5,{(25-4*(6.5))/4}) node[pos=0,above left] {$x_3=0$};
+              \draw[<->] (-0.5,{(136-17*(-0.5))/32})--(8.2,{(136-17*(8.2))/32}) node[pos=0, left] {$x_4=0$};
+              \draw[blue, thick, <->] (-0.5,{(26-4*(-0.5))/5})--(7,{(26-4*(7))/5}) node[pos=0, left] {$x_5=0$};
+            \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      where the linear constraints are labelled by their slack variables.
+      Notice that it appears that the <m>x_5</m> line has cut off some the feasible set leaving the integer points.
+      Perhaps this cutting plane is enough to solve the ILOP<fn>However, an astute eye notices that the likely optimal vertex is left and above the known solution of <m>(4,2)</m>. </fn>
+      Returning to <xref ref="eq-gomory-ex-1" />, we use phase I to perform the matrix pivot about row 3, column 3 to get
+    </p>
+
+    <p>
+      <men xml:id="eq-ilop-ex-step3">
+        3 \mapsto 5, \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 4 \amp 0 \amp -4 \amp 4 \amp 0 \amp 4\\ 4 \amp 0 \amp 0 \amp 5 \amp -4 \amp 0 \amp 21\\ 0 \amp 0 \amp 4 \amp 43 \amp -60 \amp 0 \amp 59\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 4 \amp 104\\ \end{array} \right]
+      </men>
+    </p>
+
+    <p>
+      and this has the basic solution
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x} = \frac{1}{4} \left[\begin{array}{rr|rrr} 21 \amp 4 \amp 59 \amp 0 \amp 0 \end{array} \right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      which still isn't integral, so let's try this again.
+      The 2nd row of <xref ref="eq-ilop-ex-step3"/> can be written:
+    </p>
+
+    <p>
+      <me>
+        4x_1 + 5x_4 -4x_5 = 21,
+      </me>
+    </p>
+
+    <p>
+      and add <m>-x_{4} -20</m> to both sides of the equation, one gets:
+    </p>
+
+    <p>
+      <me>
+        4(x_1+x_4-x_5-5) = 1-x_4
+      </me>
+    </p>
+
+    <p>
+      and the left must be negative or <m>-x_{4} \leq -1</m>. This logic is similar to above in which a integer solution must be a multiple of 4 on the left side, so similar on the right.  Since <m>x_4 \geq 0</m>, this means the right side can be no larger than zero.
+      Introduce this into the tableau with a new slack variable <m>4x_6</m>, where the 4 is the pivot constant as seen in the rest of the tableau.
+    </p>
+
+    <p>
+      <men xml:id="eq-gomory-ex-3">
+        \left[\begin{array}{rr|rrrrr|r} 0 \amp 4 \amp 0 \amp -4 \amp 4 \amp 0 \amp 0 \amp 4\\ 4 \amp 0 \amp 0 \amp 5 \amp -4 \amp 0 \amp 0 \amp 21\\ 0 \amp 0 \amp 4 \amp 43 \amp -60 \amp 0 \amp 0 \amp 59\\ 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 4 \amp 0 \amp -1\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 4 \amp 104\\ \end{array} \right]
+      </men>
+    </p>
+
+    <p>
+      and again before performing phase I, we bring <m>x_{3}, x_{4}, x_{5}</m> and <m>x_{6}</m> into the basis with
+    </p>
+
+    <p>
+      <me>
+        \begin{array}{r}5 \mapsto 3 \\ 4 \mapsto 1 \\ 3 \mapsto 2 \end{array} \qquad \left[\begin{array}{rr|rrrrr|r} 17 \amp 32 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 136\\ 4 \amp 4 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 25\\ 4 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 26\\ 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 6\\ \hline -4 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      and notice that the first three rows are those that appeared before and the fourth row is the new constraint <m>x_1 + x_2 \leq 6</m>.
+    </p>
+
+    <figure xml:id="fig-gomory-ex-2">
+      <caption>The feasible set from <xref ref="prob-ilop2"/> together with the two sets of constraints derived above (in blue and green).</caption>
+      <image width="75%">
+        <shortdescription>
+        </shortdescription>
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}
+              \draw[->] (-0.5,0) -- (8.5,0) node [above right] {$x_1$};
+              \foreach \x in {1,...,8} \draw (\x,0.15) -- (\x,-0.15) node [below] {\x};
+              \draw[->] (0,-0.5) -- (0,6.5) node [above right] {$x_2$};
+              \foreach \y in {1,...,6} \draw (0.15,\y) -- (-0.15,\y) node [left] {\y};
+              \foreach \x in {0,...,6} \fill (\x,0) circle [radius=2pt];
+              \foreach \x in {0,...,5} \fill (\x,1) circle [radius=2pt];
+              \foreach \x in {0,...,4} \fill (\x,2) circle [radius=2pt];
+              \foreach \x in {0,...,2} \fill (\x,3) circle [radius=2pt];
+              \fill (0,4) circle [radius=2pt];
+              \draw[<->] (-0.5,{(25-4*(-0.5))/4})--(6.5,{(25-4*(6.5))/4}) node[pos=0,above left] {$x_3=0$};
+              \draw[<->] (-0.5,{(136-17*(-0.5))/32})--(8.2,{(136-17*(8.2))/32}) node[pos=0, left] {$x_4=0$};
+              \draw[blue, thick, <->] (-0.5,{(26-4*(-0.5))/5})--(7,{(26-4*(7))/5}) node[pos=0, left] {$x_5=0$};
+              \draw[DarkGreen, thick, <->] (-0.5,6.5) -- (6.5,-0.5) node [pos=0, left] {$x_6=0$};
+            \end{tikzpicture}
+            ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      Returning to <xref ref="eq-gomory-ex-3" />, we perform a matrix pivot on row 4, column 4, resulting in
+    </p>
+
+    <p>
+      <me>
+        4 \mapsto 7, \qquad \left[\begin{array}{rr|rrrrr|r} 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp -4 \amp 0 \amp 2\\ 1 \amp 0 \amp 0 \amp 0 \amp -1 \amp 5 \amp 0 \amp 4\\ 0 \amp 0 \amp 1 \amp 0 \amp -15 \amp 43 \amp 0 \amp 4\\ 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp -4 \amp 0 \amp 1\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1 \amp 26\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      and this now has the basic solution
+    </p>
+
+    <p>
+      <me>
+        \boldsymbol{x} = \left[\begin{array}{rr|rrrr}4 \amp 2 \amp 4 \amp 1 \amp 0 \amp 0 \end{array}\right]^{\intercal}
+      </me>
+    </p>
+
+    <p>
+      with objective value of <m>z=26</m> which is now integral, so this is the optimal solution to <xref ref="prob-ilop1" />.  This also has the same solution as the geometric argument in <xref ref="sect-intro-ilops"/>
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="subsec-gomory">
+    <title>Gomory's Method</title>
+
+    <p>
+      The techniques in <xref ref="sect-finding-cutting-planes" /> is formalized into what is called <term>Gomory's Method</term>.
+      <ol>
+        <li>
+          <p>
+            Set up the LOP and solve using the Simplex method.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            If the solution is all integers, stop!! You have the solution.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            If not, select the row with largest <m>b_{i} \mod d</m>, where <m>b_{i}</m> is the element in the last column and <m>d</m> is value of the basic variable.  This is row <m>i</m>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Determine a new inequality by rewriting the row <m>i</m> in step 3 by putting multiples of <m>d</m> on the left hand side and the remainders on the right (making sure each term is negative).
+            Insert this new constraint into the tableau.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Solve the tableau using simplex method.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Goto step 2.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      Let's see this in action again with another example.
+    </p>
+
+
+    <problem>
+      <statement>
+        <p>
+          Use Gomory's method to solve the following:
+        </p>
+
+        <p>
+          <me>
+            \begin{aligned} \text{Max.} \amp\amp z  = 3x_1 +6x_2, \amp \\ \text{such that} \amp\amp x_1 + 7 x_2 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 \amp \leq 65, \\ \amp\amp x_1, x_2 \amp \in \mathbb{N}_0 \end{aligned}
+          </me>
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          First, the initial tableau for this problem is
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rr|rrrr|r} 1 \amp 7 \amp 1 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 1 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\ \hline -3 \amp -6 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and now perform the simplex method:
+        </p>
+
+        <p>
+          <md>
+            <mrow>1 \mapsto 5\qquad \amp \left[\begin{array}{rr|rrrr|r} 0 \amp 56 \amp 8 \amp 0 \amp -1 \amp 0 \amp 359\\ 0 \amp 40 \amp 0 \amp 8 \amp -5 \amp 0 \amp 83\\ 8 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\ \hline 0 \amp -48 \amp 0 \amp 0 \amp 3 \amp 8 \amp 195\\ \end{array} \right] </mrow>
+            <mrow>2 \mapsto 4 \qquad \amp \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 40 \amp -56 \amp 30 \amp 0 \amp 1214\\ 0 \amp 40 \amp 0 \amp 8 \amp -5 \amp 0 \amp 83\\ 40 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 325\\ \hline 0 \amp 0 \amp 0 \amp 48 \amp -15 \amp 40 \amp 1473\\ \end{array} \right]</mrow>
+            <mrow> 5 \mapsto 3, \qquad\amp \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 40 \amp -56 \amp 30 \amp 0 \amp 1214\\ 0 \amp 30 \amp 5 \amp -1 \amp 0 \amp 0 \amp 214\\ 30 \amp 0 \amp -5 \amp 7 \amp 0 \amp 0 \amp 92\\ \hline 0 \amp 0 \amp 15 \amp 15 \amp 0 \amp 30 \amp 1560\\ \end{array} \right]</mrow>
+          </md>
+        </p>
+
+        <p>
+          which now has an optimal solution, however it is not integral.
+          Now, we will add another constraint.
+          We find <m>b_{i} \mod d</m>, where <m>d=30</m> and the top row has the largest value or 14.
+          So we write down the top line and rearrange it to get a multiple of 30 of all terms on the left and ensure that the other variables have negative coefficients:
+        </p>
+
+        <p>
+          <md>
+            <mrow>40 x_3-56 x_4 + 30 x_5 \amp = 1214 </mrow>
+            <mrow>30 x_5 -56x_4 -4 x_4 + 30 x_3 - 1200 \amp = 14 - 4x_4 - 10 x_3 </mrow>
+            <mrow> 30 (x_5 - 2x_4 -x_3 -40) \amp = 14 - 4 x_4 - 10 x_3 \amp </mrow>
+          </md>
+        </p>
+
+        <p>
+          So the new constraint is <m>14 - 4 x_{4} - 10 x_{3} \leq 0</m> or <m>-4 x_{4} -10x_{3} \leq -14</m> and making it an equation with a slack variable (or <m>d</m> times this new variable)
+        </p>
+
+        <p>
+          <me>
+            -5 x_3 - 2x_4 + 30 x_6 = -7
+          </me>
+        </p>
+
+        <p>
+          Now introduce this into the above tableau
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rr|rrrrr|r} 0 \amp 0 \amp 40 \amp -56 \amp 30 \amp 0 \amp 0 \amp 1214\\ 0 \amp 30 \amp 5 \amp -1 \amp 0 \amp 0 \amp 0 \amp 214\\ 30 \amp 0 \amp -5 \amp 7 \amp 0 \amp 0 \amp 0 \amp 92\\ 0 \amp 0 \amp -5 \amp -2 \amp 0 \amp 30 \amp 0 \amp -7\\ \hline 0 \amp 0 \amp 15 \amp 15 \amp 0 \amp 0 \amp 30 \amp 1560\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and again perform the simplex method:
+        </p>
+
+        <p>
+          <me>
+            3 \mapsto 6, \qquad \left[\begin{array}{rr|rrrrr|r} 0 \amp 0 \amp 0 \amp -24 \amp 10 \amp 80 \amp 0 \amp 386\\ 0 \amp 10 \amp 0 \amp -1 \amp 0 \amp 10 \amp 0 \amp 69\\ 10 \amp 0 \amp 0 \amp 3 \amp 0 \amp -10 \amp 0 \amp 33\\ 0 \amp 0 \amp 10 \amp 4 \amp 0 \amp -60 \amp 0 \amp 14\\ \hline 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 30 \amp 10 \amp 513\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          And this still does not have an integral solution, so we repeat another set of steps of Gomory's method.
+          We take the largest <m>b_i \mod 10</m> and this occurs in the 2nd row, therefore:
+        </p>
+
+        <p>
+          <md>
+            <mrow>10x_2 - x_4 + 10x_6 \amp = 69 </mrow>
+            <mrow>10 (x_2 + x_6 - x_4-6)  \amp = 9 - 9x_4 </mrow>
+          </md>
+        </p>
+
+        <p>
+          and this new inequality is <m>9-9x_4 \leq 0</m> or <m>-9x_4 \leq -9</m>.
+          Note that we can cancel the <m>9</m> on either side, but let's leave it.
+          Introducing a slack variable results in the new equation
+        </p>
+
+        <p>
+          <me>
+            -9x_4 + 10 x_7 = -9
+          </me>
+        </p>
+
+        <p>
+          and introduce this into the tableau results in
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rr|rrrrrr|r} 0 \amp 0 \amp 0 \amp -24 \amp 10 \amp 80 \amp 0 \amp 0 \amp 386\\ 0 \amp 10 \amp 0 \amp -1 \amp 0 \amp 10 \amp 0 \amp 0 \amp 69\\ 10 \amp 0 \amp 0 \amp 3 \amp 0 \amp -10 \amp 0 \amp 0 \amp 33\\ 0 \amp 0 \amp 10 \amp 4 \amp 0 \amp -60 \amp 0 \amp 0 \amp 14\\ 0 \amp 0 \amp 0 \amp -9 \amp 0 \amp 0 \amp 10 \amp 0 \amp -9\\ \hline 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 30 \amp 0 \amp 10 \amp 513\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and performing the simplex method:
+        </p>
+
+        <p>
+          <me>
+            4 \mapsto 8, \qquad \left[\begin{array}{rr|rrrrrr|r} 0 \amp 0 \amp 0 \amp 0 \amp 18 \amp 144 \amp -48 \amp 0 \amp 738\\ 0 \amp 18 \amp 0 \amp 0 \amp 0 \amp 18 \amp -2 \amp 0 \amp 126\\ 18 \amp 0 \amp 0 \amp 0 \amp 0 \amp -18 \amp 6 \amp 0 \amp 54\\ 0 \amp 0 \amp 18 \amp 0 \amp 0 \amp -108 \amp 8 \amp 0 \amp 18\\ 0 \amp 0 \amp 0 \amp 18 \amp 0 \amp 0 \amp -20 \amp 0 \amp 18\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 54 \amp 6 \amp 18 \amp 918\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          The basic solution to this is
+        </p>
+
+        <p>
+          <md>
+            <mrow> \boldsymbol{x} \amp = \frac{1}{18}  \left[\begin{array}{rr|rrrrrr} 54 \amp 126 \amp 18 \amp 18 \amp 738 \amp 0 \amp 0 \end{array}\right]^{\intercal} </mrow>
+            <mrow> \amp =  \left[\begin{array}{rr|rrrrrr} 3 \amp 7 \amp 1 \amp 1 \amp 41 \amp 0 \amp 0 \end{array}\right]^{\intercal} </mrow>
+          </md>
+        </p>
+
+        <p>
+          And this is now a integral solution, so this is the optimal solution to the ILOP.
+        </p>
+      </solution>
+    </problem>
+
+    <p>
+      The two problems we solved in this section only have 2 variables.  This is nice in terms of plotting the feasible set, however let's look at another problem with more variables.
+    </p>
+
+    <problem xml:id="ex-ilop-3vars">
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Max.} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}. \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <exercise>
+      <statement>
+        <p>
+          Solve the ILOP in <xref ref="ex-ilop-3vars"/> using Gomory's method.
+        </p>
+      </statement>
+      <solution>
+        <p>
+First set up the initial tableau:
+        </p>
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrr|r}
+1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 53\\
+4 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 51\\
+8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\ \hline
+-3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\end{array} \right]
+          </me>
+        </p>
+        <p>
+          perform standard phase II pivots:
+        </p>
+        <p>
+          <me>
+            \begin{array}{r} 1 \mapsto 6, \\ 2 \mapsto 5, \\ 3 \mapsto 4, \\ 5 \mapsto 1, \end{array}
+            \qquad \left[\begin{array}{rrr|rrrr|r}
+56 \amp 0 \amp 28 \amp 0 \amp 0 \amp 7 \amp 0 \amp 455\\
+-20 \amp 28 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp 17\\
+240 \amp 0 \amp 0 \amp -20 \amp 28 \amp 15 \amp 0 \amp 1343\\ \hline
+76 \amp 0 \amp 0 \amp 24 \amp 0 \amp 17 \amp 28 \amp 2377\\
+\end{array} \right]
+
+
+          </me>
+        </p>
+        <p>
+          To find a cutting plane, find the right column mod 28 and the largest one is in the 3rd row.  We write down the equation:
+        </p>
+        <p>
+          <me>
+           240 x_1 - 20 x_4 + 28x_5 +15 x_6 = 1343
+          </me>
+        </p>
+        <p>
+          The goal is now to make the left side a multiple of 28 (the slack variable coefficient) and to accomplish this, put parameters on the right side with  coefficients that are negative and not less than <m>-28</m>.  This is done by adding/subtracting appropriate mutliples of terms.
+          For example, subtract <m>1316</m> as well as <m>16x_1, 8x_4</m> and <m>15x_6</m> from both sides to get:
+        </p>
+        <p>
+          <me>
+            \begin{aligned}
+            224 x_1 -28 x_4 - 28 x_5 -1316 \amp =  27 - 16 x_1 - 8x_4 - 15 x_6 \\
+            28 (8x_1 - x_4 -x_5 - 47) \amp = 27 - 16x_1 -8x_4 -16x_6
+            \end{aligned}
+          </me>
+        </p>
+        <p>
+        and the new constraint is the right hand side needs to be 0 at most or
+        </p>
+        <p>
+          <me>
+            -16x_1 -8x_4 - 15 x_6 \leq -27
+          </me>
+        </p>
+        <p>
+          Add a slack variable to this in the form <m>28x_7</m> to this constraint:
+        </p>
+        <p>
+          <me>
+          -16x_1-8x_4-15x_6 + 28 x_7 = -27
+          </me>
+        </p>
+        <p>
+          Add this to the tableau to get:
+        </p>
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrr|r}
+56 \amp 0 \amp 28 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 455\\
+-20 \amp 28 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp 0 \amp 17\\
+240 \amp 0 \amp 0 \amp -20 \amp 28 \amp 15 \amp 0 \amp 0 \amp 1343\\
+-16 \amp 0 \amp 0 \amp -8 \amp 0 \amp -15 \amp 28 \amp 0 \amp -27\\ \hline
+76 \amp 0 \amp 0 \amp 24 \amp 0 \amp 17 \amp 0 \amp 28 \amp 2377\\
+\end{array} \right]
+
+          </me>
+        </p>
+        <p>
+          This is infeasible and the pivot <m>1 \mapsto 7</m> makes it feasible.  Then the follow phase II pivots solve this LOP:
+        </p>
+        <p>
+          <me>
+            \begin{array}{r} 4 \mapsto 1, \\ 6 \mapsto 4, \end{array}
+            \qquad
+            \left[\begin{array}{rrr|rrrrr|r}
+26 \amp 0 \amp 15 \amp -2 \amp 0 \amp 0 \amp 7 \amp 0 \amp 237\\
+-9 \amp 15 \amp 0 \amp 3 \amp 0 \amp 0 \amp -3 \amp 0 \amp 12\\
+120 \amp 0 \amp 0 \amp -15 \amp 15 \amp 0 \amp 15 \amp 0 \amp 705\\
+16 \amp 0 \amp 0 \amp 8 \amp 0 \amp 15 \amp -28 \amp 0 \amp 27\\ \hline
+31 \amp 0 \amp 0 \amp 8 \amp 0 \amp 0 \amp 17 \amp 15 \amp 1257\\
+\end{array} \right]
+
+          </me>
+        </p>
+        <p>
+          This is optimal, but is not integral, so perform another step of Gomory's method.  Take the right column mod 15 and the largest value is rows 1, 2 or 4.  We'll take row 1 and write down the equation:
+        </p>
+        <p>
+          <me>
+            26 x_1 + 15 x_3 - 2x_4 + 7 x_7 =237  \\
+          </me>
+        </p>
+        <p>
+          And again, we manipulate this equation to get the left side to be a multiple of the slack variable coefficient (15) with the paramter coefficients negative.
+        </p>
+        <p>
+          <me>
+            \begin{aligned}
+            15 x_1 + 15 x_3 - 15x_4  -225 \amp =12 - 11x_1 - 13x_4 - 7 x_7 \\
+            15 (x_1 + x_3 -x_4 -15) \amp = 12 - 11x_1 -13 x_4 -7 x_7
+            \end{aligned}
+          </me>
+        </p>
+        <p>
+          The new constraint is that the right hand side is bounded above by 0 or
+        </p>
+        <p>
+          <me>
+            -11 x_1 - 13 x_4 - 7 x_7 \leq -12
+          </me>
+        </p>
+        <p>
+          which including a slack variable <m>15 x_8</m> results in
+        </p>
+        <p>
+          <me>
+           -11 x_1 - 13 x_4 - 7 x_7  + 15 x_ 8 = -12
+          </me>
+
+        </p>
+        <p>
+          resulting in the tableau:
+        </p>
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrrr|r}
+26 \amp 0 \amp 15 \amp -2 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 237\\
+-9 \amp 15 \amp 0 \amp 3 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 12\\
+120 \amp 0 \amp 0 \amp -15 \amp 15 \amp 0 \amp 15 \amp 0 \amp 0 \amp 705\\
+16 \amp 0 \amp 0 \amp 8 \amp 0 \amp 15 \amp -28 \amp 0 \amp 0 \amp 27\\
+-11 \amp 0 \amp 0 \amp -13 \amp 0 \amp 0 \amp -7 \amp 15 \amp 0 \amp -12\\ \hline
+31 \amp 0 \amp 0 \amp 8 \amp 0 \amp 0 \amp 17 \amp 0 \amp 15 \amp 1257\\
+\end{array} \right]
+
+          </me>
+        </p>
+        <p>
+          The pivot <m>1 \mapsto 8</m> will make this tableau feasible and then one gets the following phase II pivots and resulting tableau
+        </p>
+        <p>
+          <me>
+            \begin{array}{r} 4 \mapsto 1, \end{array} \qquad
+            \left[\begin{array}{rrr|rrrrrr|r}
+24 \amp 0 \amp 13 \amp 0 \amp 0 \amp 0 \amp 7 \amp -2 \amp 0 \amp 207\\
+-10 \amp 13 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 3 \amp 0 \amp 8\\
+115 \amp 0 \amp 0 \amp 0 \amp 13 \amp 0 \amp 20 \amp -15 \amp 0 \amp 623\\
+8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 13 \amp -28 \amp 8 \amp 0 \amp 17\\
+11 \amp 0 \amp 0 \amp 13 \amp 0 \amp 0 \amp 7 \amp -15 \amp 0 \amp 12\\ \hline
+21 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp 8 \amp 13 \amp 1083\\
+\end{array} \right]
+
+
+          </me>
+        </p>
+        <p>
+          The basic solution of this tableau is not integral, so we perform another step.  Take the right column mod 13 and the largest value is in the 1st, 3rd  and 5th rows.  We'll use the first row for the new constraint.  This row can be written as
+        </p>
+        <p>
+          <me>
+            \begin{aligned}
+            24 x_1 -13 x_3 + 7x_7 -2 x_8 \amp = 207  \\
+            13 x_1 -13 x_3  -13 x_8 -195 \amp = 12 -11 x_1 - 7 x_7 - 11 x_8 \\
+            13(x_1 - x_3 - x_8) \amp = 12 -11 x_1 -7x_7 -11x_8
+            \end{aligned}
+          </me>
+        </p>
+        <p>
+        Again, the new constraint is that the left side needs to be bounded above by 0 or
+        </p>
+        <p>
+          <me>
+            12 -11 x_1 -7x_7 -11x_8 \leq 0.
+          </me>
+        </p>
+        <p>
+          Adding this to the tableau results in
+        </p>
+        <p>
+        <me>
+          \left[\begin{array}{rrr|rrrrrrr|r}
+24 \amp 0 \amp 13 \amp 0 \amp 0 \amp 0 \amp 7 \amp -2 \amp 0 \amp 0 \amp 207\\
+-10 \amp 13 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 3 \amp 0 \amp 0 \amp 8\\
+115 \amp 0 \amp 0 \amp 0 \amp 13 \amp 0 \amp 20 \amp -15 \amp 0 \amp 0 \amp 623\\
+8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 13 \amp -28 \amp 8 \amp 0 \amp 0 \amp 17\\
+11 \amp 0 \amp 0 \amp 13 \amp 0 \amp 0 \amp 7 \amp -15 \amp 0 \amp 0 \amp 12\\
+-11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp -11 \amp 13 \amp 0 \amp -12\\ \hline
+21 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp 8 \amp 0 \amp 13 \amp 1083\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        This is not feasible (as is true after every added constraint).  First, <m>1 \mapsto 9</m> will make the above feasible and then the following will give a optimal tableau:
+      </p>
+      <p>
+        <me>
+          \begin{array}{r} 7 \mapsto 1, \\ 8 \mapsto 7, \end{array}  \qquad
+          \left[\begin{array}{rrr|rrrrrrr|r}
+22 \amp 0 \amp 11 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp -2 \amp 0 \amp 177\\
+-11 \amp 11 \amp 0 \amp 0 \amp 0 \amp 0 \amp -5 \amp 0 \amp 3 \amp 0 \amp 4\\
+110 \amp 0 \amp 0 \amp 0 \amp 11 \amp 0 \amp 25 \amp 0 \amp -15 \amp 0 \amp 541\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp -28 \amp 0 \amp 8 \amp 0 \amp 7\\
+22 \amp 0 \amp 0 \amp 11 \amp 0 \amp 0 \amp 14 \amp 0 \amp -15 \amp 0 \amp 24\\
+11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 11 \amp -13 \amp 0 \amp 12\\ \hline
+11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 8 \amp 11 \amp 909\\
+\end{array} \right]
+
+        </me>
+      </p>
+      <p>
+        This tableau's basic solution is not integral, so we add another constraint.  In this case, take the right column mod 11 and find the largest. The largest value is in row 4 which we write:
+      </p>
+      <p>
+        <me>
+          \begin{aligned}
+          11 x_6 - 28 x_7 + 8 x_9 \amp = 7 \\
+          11 x_6 - 33 x_7 \amp  = 7 - 5 x_7 - 8 x_9 \\
+          11 (x_6 - 3 x_7) \amp = 7 - 5x_7 -8 x_9
+          \end{aligned}
+        </me>
+      </p>
+      <p>
+        So we add the constraint: <m>7-5x_7-8x_9 \leq 0</m> to the tableau to get:
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rrr|rrrrrrrr|r}
+22 \amp 0 \amp 11 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp -2 \amp 0 \amp 0 \amp 177\\
+-11 \amp 11 \amp 0 \amp 0 \amp 0 \amp 0 \amp -5 \amp 0 \amp 3 \amp 0 \amp 0 \amp 4\\
+110 \amp 0 \amp 0 \amp 0 \amp 11 \amp 0 \amp 25 \amp 0 \amp -15 \amp 0 \amp 0 \amp 541\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp -28 \amp 0 \amp 8 \amp 0 \amp 0 \amp 7\\
+22 \amp 0 \amp 0 \amp 11 \amp 0 \amp 0 \amp 14 \amp 0 \amp -15 \amp 0 \amp 0 \amp 24\\
+11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 11 \amp -13 \amp 0 \amp 0 \amp 12\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -5 \amp 0 \amp -8 \amp 11 \amp 0 \amp -7\\ \hline
+11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 8 \amp 0 \amp 11 \amp 909\\
+\end{array} \right]
+        </me>
+
+      </p>
+      <p>
+        and then since this is in phase I, perform a pivot
+      </p>
+      <p>
+        <me>
+          7 \mapsto 10, \qquad \left[\begin{array}{rrr|rrrrrrrr|r}
+10 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -6 \amp 7 \amp 0 \amp 76\\
+-5 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp -5 \amp 0 \amp 5\\
+50 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp -25 \amp 25 \amp 0 \amp 230\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 24 \amp -28 \amp 0 \amp 21\\
+10 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp -17 \amp 14 \amp 0 \amp 2\\
+5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp -11 \amp 7 \amp 0 \amp 1\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 8 \amp -11 \amp 0 \amp 7\\ \hline
+5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 5 \amp 410\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        This is optimal, but this is still not integral.  Let's try another step.  Finding the last column modulo 5, the largest value is in rows 5 and 7.  As is standard, with a tie, we'll use the smaller indexed one or row 5, which can be written:
+      </p>
+      <p>
+        <me>
+          \begin{aligned}
+          10 x_1 + 5 x_4 -17 x_9 + 14 x_{10}  \amp = 2 \\
+          10 x_1 + 5 x_4 -20 x_9 + 10 x_{10} \amp = 2 - 3x_9 - 4x_{10} \\
+          5(2x_1 + x_4 - 4 x_9 + 2 x_{10}) \amp = 2 - 3x_9 - 4x_{10}
+          \end{aligned}
+        </me>
+      </p>
+      <p>
+        and the new constraint is that the right side is bounded above by 0, which is
+      </p>
+      <p>
+        <me>
+          2 - 3x_9 -4x_{10} \leq 0
+        </me>
+
+      </p>
+      <p>
+        and adding a slack variable can result in
+      </p>
+      <p>
+        <me>
+          -3x_9 -4x_{10} + 5x_{11} = -2
+        </me>
+      </p>
+      <p>
+        Adding this to the tableau is
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rrr|rrrrrrrrr|r}
+10 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -6 \amp 7 \amp 0 \amp 0 \amp 76\\
+-5 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp -5 \amp 0 \amp 0 \amp 5\\
+50 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp -25 \amp 25 \amp 0 \amp 0 \amp 230\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 24 \amp -28 \amp 0 \amp 0 \amp 21\\
+10 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp -17 \amp 14 \amp 0 \amp 0 \amp 2\\
+5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp -11 \amp 7 \amp 0 \amp 0 \amp 1\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 8 \amp -11 \amp 0 \amp 0 \amp 7\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp -4 \amp 5 \amp 0 \amp -2\\ \hline
+5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 5 \amp 410\\
+\end{array} \right]
+
+        </me>
+
+      </p>
+      <p>
+        Note that the last row is not feasible, so perform a pivot to make it feasible:
+      </p>
+      <p>
+        <me>
+          9 \mapsto 11 \qquad \left[\begin{array}{rrr|rrrrrrrrr|r}
+          6 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 9 \amp -6 \amp 0 \amp 48\\
+          -3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 5 \amp 0 \amp 1\\
+          30 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 35 \amp -25 \amp 0 \amp 148\\
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp -36 \amp 24 \amp 0 \amp 3\\
+          6 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 22 \amp -17 \amp 0 \amp 8\\
+          3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 13 \amp -11 \amp 0 \amp 5\\
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -13 \amp 8 \amp 0 \amp 1\\
+          0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 4 \amp -5 \amp 0 \amp 2\\ \hline
+          3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 3 \amp 246\\
+          \end{array} \right]
+        </me>
+      </p>
+      <p>
+        And this is both feasible and optimal, but not integral.  If we take the last column modulo 3, the largest value is in rows 5, 6 and 8, and if we write down the equation of row 5:
+      </p>
+      <p>
+        <me>
+          \begin{aligned}
+          6 x_1 + 3x_4 +22 x_{10}-17x_{11} \amp = 8 \\
+          6x_1 + 3x_4 +21 x_{10} -18x_{11}-6          \amp  = 2 - x_{10} - x_{11} \\
+          3(2x_1+x_4+7x_{10}-2x_{11}-2) \amp = 2 - x_{10}-x_{11}
+          \end{aligned}
+        </me>
+      </p>
+      <p>
+        And the new constraint is the right side less than or equal to 0.  Adding a slack variable results in
+      </p>
+      <p>
+        <me>
+        -x_{10}-x_{11}+3x_{12} = -2
+        </me>
+      </p>
+      <p>
+        and adding it to the tableau is
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rrr|rrrrrrrrrr|r}
+6 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 9 \amp -6 \amp 0 \amp 0 \amp 48\\
+-3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 5 \amp 0 \amp 0 \amp 1\\
+30 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 35 \amp -25 \amp 0 \amp 0 \amp 148\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp -36 \amp 24 \amp 0 \amp 0 \amp 3\\
+6 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 22 \amp -17 \amp 0 \amp 0 \amp 8\\
+3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 13 \amp -11 \amp 0 \amp 0 \amp 5\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -13 \amp 8 \amp 0 \amp 0 \amp 1\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 4 \amp -5 \amp 0 \amp 0 \amp 2\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp -1 \amp 3 \amp 0 \amp -2\\ \hline
+3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 3 \amp 246\\
+\end{array} \right]
+
+        </me>
+
+      </p>
+      <p>
+        This is infeasible, so use the following pivots
+      </p>
+      <p>
+        <me>
+          \begin{array}{r} 10 \mapsto 12, \\ 11 \mapsto 2, \end{array} \qquad
+          \left[\begin{array}{rrr|rrrrrrrrrr|r}
+3 \amp 5 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\
+-1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp -7 \amp 0 \amp 5\\
+20 \amp 20 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 204\\
+20 \amp -20 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0\\
+-5 \amp 13 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 17\\
+-4 \amp 8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 12\\
+7 \amp -7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 1\\
+-3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp -5 \amp 0 \amp 7\\
+1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -5 \amp 0 \amp 3\\ \hline
+3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 4 \amp 325\\
+\end{array} \right]
+
+        </me>
+      </p>
+      <p>
+        And now this is optimal, but still not integral, so we perform another step.  Again taking the last column mod 4, shows that the largest value is in rows 8 and 9 and we will select row 8 which can be written as:
+      </p>
+      <p>
+        <me>
+          \begin{aligned}
+          x_1 - x_2 + 4x_{10}- 5x_{12} \amp = 3 \\
+          -4x_2 + 4x_{10} - 8x_{12} \amp = 3 - x_1 -3x_2 - 3x_{12} \\
+          4(-x_2+x_{10}-2x_{12}) \amp = 3 - x_1 -3x_2 - 3x_{12}
+          \end{aligned}
+        </me>
+      </p>
+      <p>
+        and we bound the left hand side to be <m>\leq 0</m>.  This results in a new constraint and adding a slack variable:
+      </p>
+      <p>
+        <me>
+          -x_1 -3x_2-3x_{12} +4x_{13} = -3
+        </me>
+      </p>
+      <p>
+        and adding to the simplex tableau results in
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rrr|rrrrrrrrrrr|r}
+3 \amp 5 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 65\\
+-1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp -7 \amp 0 \amp 0 \amp 5\\
+20 \amp 20 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 204\\
+20 \amp -20 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0 \amp 0\\
+-5 \amp 13 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 17\\
+-4 \amp 8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0 \amp 12\\
+7 \amp -7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 1\\
+-3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp -5 \amp 0 \amp 0 \amp 7\\
+1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -5 \amp 0 \amp 0 \amp 3\\
+-1 \amp -3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 4 \amp 0 \amp -3\\ \hline
+3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 4 \amp 325\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        and this is infeasible, but the pivots <m>1 \mapsto 13, 2 \mapsto 6</m> makes it feasible, but results in
+      </p>
+      <p>
+        <me>
+          \left[\begin{array}{rrr|rrrrrrrrrrr|r}
+0 \amp 0 \amp 20 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -24 \amp 40 \amp 0 \amp 295\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 20 \amp -36 \amp 0 \amp 0 \amp 25\\
+0 \amp 0 \amp 0 \amp 0 \amp 20 \amp -10 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -140 \amp 200 \amp 0 \amp 870\\
+0 \amp 20 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 16 \amp -20 \amp 0 \amp 15\\
+0 \amp 0 \amp 0 \amp 20 \amp 0 \amp 7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -52 \amp 40 \amp 0 \amp 55\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 20 \amp 0 \amp 0 \amp 0 \amp -40 \amp 20 \amp 0 \amp 45\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 20 \amp 0 \amp 0 \amp 0 \amp 0 \amp -8 \amp 0 \amp 0 \amp 5\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 20 \amp 0 \amp 0 \amp -28 \amp 0 \amp 0 \amp 35\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 20 \amp 0 \amp -24 \amp 0 \amp 0 \amp 15\\
+20 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12 \amp -20 \amp 0 \amp 15\\ \hline
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12 \amp 20 \amp 20 \amp 1610\\
+\end{array} \right]
+
+        </me>
+
+      </p>
+      <p>
+        although this isn't optimal, but
+      </p>
+      <p>
+        <me>
+        6 \mapsto 1 \qquad
+        \left[\begin{array}{rrr|rrrrrrrrrrr|r}
+1 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 5 \amp 0 \amp 45\\
+-1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp -6 \amp 1 \amp 0 \amp 3\\
+10 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -15 \amp 20 \amp 0 \amp 138\\
+1 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp -4 \amp 0 \amp 3\\
+-7 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -12 \amp 13 \amp 0 \amp 3\\
+-5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp -9 \amp 8 \amp 0 \amp 3\\
+7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp -7 \amp 0 \amp 6\\
+-3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -6 \amp 3 \amp 0 \amp 3\\
+1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp -3 \amp -1 \amp 0 \amp 3\\
+20 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12 \amp -20 \amp 0 \amp 15\\ \hline
+2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 1 \amp 3 \amp 243\\
+\end{array} \right]
+        </me>
+      </p>
+      <p>
+        results in an optimal and integral tableau. The basic variable for this is
+      </p>
+      <p>
+        <me>
+          \begin{aligned}
+          \boldsymbol{x} \amp = \frac{1}{3}
+          \left[\begin{array}{rrr|rrrrrrrrrrr}
+          0 \amp 3 \amp 45 \amp 3 \amp 138 \amp 15 \amp 6 \amp 3 \amp 3 \amp 3 \amp 3 \amp 0 \amp 0
+          \end{array}\right] \\
+          \amp = \left[\begin{array}{rrr|rrrrrrrrrrr}
+          0 \amp 1 \amp 15 \amp 1 \amp 46 \amp 6 \amp 2 \amp 1 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0
+          \end{array}\right]
+          \end{aligned}
+        </me>
+      </p>
+<p>
+  and in the original variables, <m>x_1 = 0, x_2 = 1</m> and <m>x_3=15</m>.  The objective value is 81.
+</p>
+      </solution>
+    </exercise>
+
+    <p>
+      This exercise showed how to apply Gomory's method to a problem with more than two original variables. It also shows that often this takes many steps to reach an integer solution.  Although it can be done <q>by hand</q>, this is done with software.  See <xref ref="ch-lop-julia"/> and more specifically <xref ref="sect-ilop-julia"/> for information of how to use the Julia language to solve these problems.
+    </p>
+  </subsection>
+</section>

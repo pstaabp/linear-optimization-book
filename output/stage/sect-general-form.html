@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>General Form of an LOP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Linear Optimization">
+<meta property="book:author" content="Peter Staab">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.9.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.21df2a4c52b86839.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.28cc3c4821792be5.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.8141ae22fd347e48.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="linopt-staab" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="linear-optimization-julia.html"><span class="title">Linear Optimization</span> <span class="subtitle">Modeling and Solving Linear problems with Julia and WebCAS</span></a></h1>
+<p class="byline">Peter Staab</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="ch-general-lops.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-general-lops.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sect-phase-zero.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter"><div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-background.html" class="internal"><span class="codenumber">1</span> <span class="title">Background Mathematics for Linear Optimization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lines-planes.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Lines and Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-lines" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-linear-inequality" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Linear Inequalities</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-bounded-feasible-sets" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Bounded and Unbounded Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-planes" class="internal"><span class="codenumber">1.1.4</span> <span class="title">Planes and Hyperplanes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lines-planes.html#sect-convex" class="internal"><span class="codenumber">1.1.5</span> <span class="title">Convex Sets</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-plotting-software.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Using Software for Plotting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-plotting-lines" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Plotting Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-plotting-inequalities" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Plotting Inequalities and Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-plotting-software.html#sect-graphing-planes" class="internal"><span class="codenumber">1.2.3</span> <span class="title">Graphing Planes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-matrix-reduction.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Matrices and Matrix Reduction</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-linear-systems" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Linear Systems</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-elementary-row-operations" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Elementary Row Operations</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-gauss-method" class="internal"><span class="codenumber">1.3.2.1</span> <span class="title">Gauss’s Method</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrices" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrix-reduction-6" class="internal"><span class="codenumber">1.3.4</span> <span class="title">Matrices and Linear Systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-row-operations-and-matrices" class="internal"><span class="codenumber">1.3.5</span> <span class="title">Row Operations and Matrices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-matrix-pivot" class="internal"><span class="codenumber">1.3.6</span> <span class="title">Matrix Pivots</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-reduction.html#sect-geom-lin-sys-2var" class="internal"><span class="codenumber">1.3.7</span> <span class="title">Geometry of Linear Systems of 2 variables</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-pivot-webcas.html" class="internal"><span class="codenumber">1.4</span> <span class="title">Using Software to Perform Matrix Pivots</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-webcas-rowop" class="internal"><span class="codenumber">1.4.1</span> <span class="title">Using WebCAS to do Row Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-webcas-pivot" class="internal"><span class="codenumber">1.4.2</span> <span class="title">Matrix Pivots in WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-pivot-webcas.html#sect-click-to-pivot" class="internal"><span class="codenumber">1.4.3</span> <span class="title">Click to Pivot in WebCAS</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-linear-models.html" class="internal"><span class="codenumber">2</span> <span class="title">Developing Linear Models</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-linear-models.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Introduction to Linear Optimization</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-linear-models.html#sect-create-linear-model" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Creating Linear Models</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sect-linear-models.html#sect-other-problems" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Non-Obvious Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sect-linear-models.html#prob-n-queens-form" class="internal"><span class="codenumber">2.1.2.1</span> <span class="title">LOP Formulation of <span class="process-math">\(n\)</span>-queens Problem</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lops.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-def-lop" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Defintions and Conventions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-std-form" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Standard Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lops.html#sect-lop-general" class="internal"><span class="codenumber">2.2.3</span> <span class="title">General and Matrix Forms of an LOP</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-geometry.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Geometry of Feasible Sets</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-geometry-fs-2d" class="internal"><span class="codenumber">2.3.1</span> <span class="title">Geometry of 2D Feasible Sets</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-possible-algorithm" class="internal"><span class="codenumber">2.3.2</span> <span class="title">Solving LOPs — Possible Algorithm</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-geometry.html#sect-convex-fs" class="internal"><span class="codenumber">2.3.3</span> <span class="title">Feasible Sets are Convex</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-simplex.html" class="internal"><span class="codenumber">3</span> <span class="title">The Simplex Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-slack-dict.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Slack Variables and Dictionaries</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-slack-dict-4" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Slack Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-dictionary" class="internal"><span class="codenumber">3.1.2</span> <span class="title">The Dictionary for an LOP</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-basic-solutions" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Basic Solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-slack-dict.html#sect-develop-simplex" class="internal"><span class="codenumber">3.1.4</span> <span class="title">Developing the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-tableau.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Tableaus and the Simplex Method</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-intro-tableaus" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Introduction to tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-5" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Operations on Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-6" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Performing Tableau Operations with WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-tableau.html#sect-tableau-7" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Phase II of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-phase1.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Simplex Method for Infeasible Tableaus</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-simplex-phase1" class="internal"><span class="codenumber">3.3.1</span> <span class="title">Infeasible Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-phaseI-algorithm" class="internal"><span class="codenumber">3.3.2</span> <span class="title">Phase I of the Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-phase1.html#sect-phase1-6" class="internal"><span class="codenumber">3.3.3</span> <span class="title">Summary of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-infeasible-unbounded.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Infeasibility and Unboundedness</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-infeasible-unbounded.html#sect-unbounded" class="internal"><span class="codenumber">3.4.1</span> <span class="title">Unbounded Problems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-infeasible-unbounded.html#sect-infeasibility" class="internal"><span class="codenumber">3.4.2</span> <span class="title">Infeasibility</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-simplex-summary.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Summary of the Simplex Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-integer-problems.html" class="internal"><span class="codenumber">4</span> <span class="title">Integer Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-intro-ilops.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Introduction to Integer Linear Optimization Problems</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-cutting-planes.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Cutting Planes</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sect-finding-cutting-planes" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Finding Cutting Planes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#subsec-gomory" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Gomory’s Method</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-branch-bound.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Branch and Bound</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-branch-bound.html#sect-branch-bound-4" class="internal"><span class="codenumber">4.3.1</span> <span class="title">A Branch and Bound Flowchart</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-branch-bound.html#sect-branch-bound-5" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Systematic Branch and Bound Algorithm</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-lop-julia.html" class="internal"><span class="codenumber">5</span> <span class="title">Solving Linear Optimization Problems using Software</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-intro-julia.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Introduction to the Julia Language</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-intro-julia-4" class="internal"><span class="codenumber">5.1.1</span> <span class="title">Basics of Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-intro-julia-5" class="internal"><span class="codenumber">5.1.2</span> <span class="title">For Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-number-types" class="internal"><span class="codenumber">5.1.3</span> <span class="title">Number Types in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-enter-unicode" class="internal"><span class="codenumber">5.1.4</span> <span class="title">Unicode Characters in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-julia.html#sect-julia-packages" class="internal"><span class="codenumber">5.1.5</span> <span class="title">Packages in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-julia-vect-arrays.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Vectors and Matrices in Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-vect-arrays-4" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Vectors in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-matrices-julia" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Matrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-accessing-matrix" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Accessing elements in a Vector or Matrix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-comprenhension-julia" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Constructing Vectors and Matrices with Comprehensions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-broadcasting" class="internal"><span class="codenumber">5.2.5</span> <span class="title">Broadcasting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-matrix-concat" class="internal"><span class="codenumber">5.2.6</span> <span class="title">Concatenating Matrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-submatrix" class="internal"><span class="codenumber">5.2.7</span> <span class="title">Submatrices in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-vect-arrays.html#sect-julia-rational-matrices" class="internal"><span class="codenumber">5.2.8</span> <span class="title">Creating Rational Matrices in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-julia-linear-algebra.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Linear Algebra in Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-matrix-ops" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Basic Matrix Operations in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-other-ops" class="internal"><span class="codenumber">5.3.2</span> <span class="title">Other Matrix Operations in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-julia-linear-algebra.html#sect-julia-matrix-inverse" class="internal"><span class="codenumber">5.3.3</span> <span class="title">Matrix Inverse in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-package-lop.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Julia Packages for LOPs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-jump-setup" class="internal"><span class="codenumber">5.4.1</span> <span class="title">Setting up an LOP using JuMP</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-package-lop-5" class="internal"><span class="codenumber">5.4.2</span> <span class="title">Where’s the Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-package-lop.html#sect-julia-infeasible" class="internal"><span class="codenumber">5.4.3</span> <span class="title">Infeasible and Unbounded Problems</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-ilop-julia.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Cutting Planes and Branch and Bound with Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop" class="internal"><span class="codenumber">5.5.1</span> <span class="title">Solving Integer Problems with Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-blops" class="internal"><span class="codenumber">5.5.2</span> <span class="title">Solving Binary LOPs using Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop-julia-6" class="internal"><span class="codenumber">5.5.3</span> <span class="title">Does the 3-queens problem have a solution?</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-dual-problems.html" class="internal"><span class="codenumber">6</span> <span class="title">Dual Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-intro-dual.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Introduction to Dual Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-devel-dual" class="internal"><span class="codenumber">6.1.1</span> <span class="title">Developing a Dual Problem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-dual-form" class="internal"><span class="codenumber">6.1.2</span> <span class="title">Generalizing the Dual</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-intro-dual.html#sect-weak-primal-dual" class="internal"><span class="codenumber">6.1.3</span> <span class="title">Weak Primal-Dual Theorem</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-primal-dual.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Primal-Dual Relationships</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-dual-certificates.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Finding Optimal Certificates</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-general-lops.html" class="internal"><span class="codenumber">7</span> <span class="title">General Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="sect-general-form.html" class="internal"><span class="codenumber">7.1</span> <span class="title">General Form of an LOP</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-gen-lop-std-form" class="internal"><span class="codenumber">7.1.1</span> <span class="title">Writing a General LOP in Standard Form</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-adaptive-simplex" class="internal"><span class="codenumber">7.1.2</span> <span class="title">Adapting the Simplex Method to Equality Constraints and Free Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-tableau-phase0" class="internal"><span class="codenumber">7.1.3</span> <span class="title">Simplex Method: Phase 0</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-form.html#sect-phase0-geometry" class="internal"><span class="codenumber">7.1.4</span> <span class="title">Geometry of Phase 0</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-phase-zero.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Solving General Linear Optimization Problems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-general-dual.html" class="internal"><span class="codenumber">7.3</span> <span class="title">General Dual Problems</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-general-applied.html" class="internal"><span class="codenumber">7.4</span> <span class="title">General Applied Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-tsp" class="internal"><span class="codenumber">7.4.1</span> <span class="title">Traveling Salesperson</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-min-piecewise-linear" class="internal"><span class="codenumber">7.4.2</span> <span class="title">Minimizing Piecewise Linear Fucntions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-general-applied.html#sect-best-fit-line" class="internal"><span class="codenumber">7.4.3</span> <span class="title">Best-Fit Lines</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-matrix-form.html" class="internal"><span class="codenumber">8</span> <span class="title">Matrix Formulation of Linear Optimization Problems</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lop-matrix.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Writing a LOP in Matrix Form</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix.html#sect-simplex-matrix" class="internal"><span class="codenumber">8.1.1</span> <span class="title">The Matrix Simplex Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix.html#sect-matrix-tableau-compare" class="internal"><span class="codenumber">8.1.2</span> <span class="title">Comparison to the Tableau</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-lop-matrix-software.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Performing LOP Matrix Operations using Software</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix-software.html#sect-lop-matrix-webcas" class="internal"><span class="codenumber">8.2.1</span> <span class="title">Perform the Matrix Operations to Solve LOP problems in WebCAS</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-lop-matrix-software.html#sect-lop-matrix-julia" class="internal"><span class="codenumber">8.2.2</span> <span class="title">Using Julia to perform Matrix Operations in solving LOP problems.</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-matrix-simplex.html" class="internal"><span class="codenumber">8.3</span> <span class="title">Performing the Matrix Simplex Method</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-matrix-simplex.html#sect-matrix-simplex-summary" class="internal"><span class="codenumber">8.3.1</span> <span class="title">The Matrix Simplex Method</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="backmatter-2.html" class="internal"><span class="codenumber">A</span> <span class="title"></span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="backmatter-2-1.html" class="internal"><span class="codenumber">A.9</span> <span class="title">Installing Julia</span></a></div></li>
+<li class="toc-item toc-chapter"><div class="toc-title-box"><a href="ch-julia-packages.html" class="internal"><span class="codenumber">A.10</span> <span class="title">Managing Packages in Julia</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="backmatter-3.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sect-general-form"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">General Form of an LOP</span>
+</h2>
+<article class="objectives goal-like" id="sect-general-form-2"><h3 class="heading"><span class="type">Objectives</span></h3>
+<ul class="disc" id="sect-general-form-2-1">
+<li id="sect-general-form-2-1-1">
+<div class="para" id="sect-general-form-2-1-1-1">Understand how to write a general LOP in standard form.<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-form-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Objective"><a href="#sect-general-form-2-1-1" title="Copy heading and permalink for Objective" aria-label="Copy heading and permalink for Objective">🔗</a></div>
+</li>
+<li id="sect-general-form-2-1-2">
+<div class="para" id="sect-general-form-2-1-2-1">Adapt the simplex method to handle equality constraints and free variables.<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-form-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Objective"><a href="#sect-general-form-2-1-2" title="Copy heading and permalink for Objective" aria-label="Copy heading and permalink for Objective">🔗</a></div>
+</li>
+<li id="sect-general-form-2-1-3">
+<div class="para" id="sect-general-form-2-1-3-1">Develop additional steps to the simplex method to handle equality constraints and free variables.<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-form-2-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Objective"><a href="#sect-general-form-2-1-3" title="Copy heading and permalink for Objective" aria-label="Copy heading and permalink for Objective">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Objectives 7.1"><a href="#sect-general-form-2" title="Copy heading and permalink for Objectives 7.1" aria-label="Copy heading and permalink for Objectives 7.1">🔗</a></div></article><section class="introduction" id="sect-general-form-3"><div class="para" id="sect-general-form-3-1">Throughout this book, we have seen linear problems with many different types of linear constraints. This however, is not the most general types of problems we can handle. This chapter goes into adding linear equality constraints as well as cases when variables lose the non-negative constraint, which is crucial to getting the simplex method to solve correctly.<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-form-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><section class="subsection" id="sect-gen-lop-std-form"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Writing a General LOP in Standard Form</span>
+</h3>
+<div class="para" id="sect-gen-lop-std-form-2">Consider the LOP:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="prob-general-lop1" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="problem example-like knowl__content"><div class="para logical" id="prob-general-lop1-1-1">
+<div class="displaymath process-math" id="eq-general-lop1">
+\begin{equation}
+\begin{aligned} \text{maximize} \amp\amp z=5x_1+3x_2, \amp  \\ \text{subject to} \amp\amp x_1 + x_2 \amp\leq 6, \\ \amp\amp 2x_1 - 3x_2 \amp\leq 12, \\ \amp\amp -2x_1 +x_2 \amp = -2, \\ \amp\amp x_1 \amp \geq 0.
+\end{aligned}\tag{7.1.1}
+\end{equation}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-general-lop1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 7.1.1"><a href="#prob-general-lop1" title="Copy heading and permalink for Problem 7.1.1" aria-label="Copy heading and permalink for Problem 7.1.1">🔗</a></div></article></details><div class="para" id="sect-gen-lop-std-form-4">A graph of the feasible set is<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-general-lop1"><div class="image-box" style="width: 75%; margin-left: 12.5%; margin-right: 12.5%;"><img src="generated/latex-image/fig-general-lop1-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><div class="autopermalink" data-description="Figure 7.1.2"><a href="#fig-general-lop1" title="Copy heading and permalink for Figure 7.1.2" aria-label="Copy heading and permalink for Figure 7.1.2">🔗</a></div></figcaption></figure><div class="para" id="sect-gen-lop-std-form-6">Note that in <a href="sect-general-form.html#prob-general-lop1" class="xref" data-knowl="./knowl/xref/prob-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 7.1.1">Problem 7.1.1</a> the third constraint is an equality constraint and the second variable, <span class="process-math">\(x_2\text{,}\)</span> does not have a nonnegative constraint. We will see how to handle these cases in this section.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-7">The solution needs to be on both on the line (in red) as well as in the gray triangular region. A keen observation would notice that in the upper right direction along the line increases the objective function, so the solution must be at the intersection of the red line and the upper boundary of the triangle. We will see how to solve this in general.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-8">We can put this in standard form to solve using the objective function. First, the equality as the third constraint in <a href="sect-general-form.html#eq-general-lop1" class="xref" data-knowl="./knowl/xref/eq-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.1.1">(7.1.1)</a> can be written as two inequalities.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gen-lop-std-form-9">
+<div class="displaymath process-math" id="sect-gen-lop-std-form-9-1">
+\begin{align*}
+-2 x_1 + x_2 \amp \leq -2 \\
+-2 x_1 + x_2 \amp \geq -2
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-10">and the set of points that satisfy both of these is the line.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-11">Secondly, notice that the variable <span class="process-math">\(x_2\)</span> in <a href="sect-general-form.html#prob-general-lop1" class="xref" data-knowl="./knowl/xref/prob-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 7.1.1">Problem 7.1.1</a> does not have a nonnegative constraint. We can handle a case like this by introducing two new variables, <span class="process-math">\(x_2^+\)</span> and <span class="process-math">\(x_2^-\text{,}\)</span> then rewrite <span class="process-math">\(x_2 = x_2^+-x_2^-\text{,}\)</span> where <span class="process-math">\(x_2^+ \geq 0\)</span> and <span class="process-math">\(x_2^- \geq 0\text{.}\)</span> Basically this is saying that a variable with no constraints can be the difference of two nonnegative variables. The new version of <a href="sect-general-form.html#prob-general-lop1" class="xref" data-knowl="./knowl/xref/prob-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 7.1.1">Problem 7.1.1</a> can be written<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="sect-gen-lop-std-form-12" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="problem example-like knowl__content"><div class="para logical" id="sect-gen-lop-std-form-12-1-1">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} \text{Maximize} \amp\amp z = 5x_1 +3(x_2^+ - x_2^-) \amp \\ \text{subject to} \amp\amp x_1 + x_2^+ - x_2^- \amp \leq 6, \\ \amp\amp 2x_1 -3(x_2^+ - x_2^-)  \amp \leq 12, \\ \amp\amp -2x_1 + x_2^+ - x_2^- \amp\leq -2, \\ \amp\amp 2x_1 - (x_2^+ - x_2^-) \amp \leq 2, \\ \text{and}\amp\amp x_1, x_2^+, x_2^- \amp \geq 0.
+\end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-12-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 7.1.3"><a href="#sect-gen-lop-std-form-12" title="Copy heading and permalink for Problem 7.1.3" aria-label="Copy heading and permalink for Problem 7.1.3">🔗</a></div></article></details><div class="para" id="sect-gen-lop-std-form-13">with the updated inequality constraints and the introduction of the new variables, this is now in standard form and can be solved using the standard simplex method:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gen-lop-std-form-14">
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|rrrrr|r} 1 \amp 1 \amp -1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6\\ 2 \amp -3 \amp 3 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 12\\ -2 \amp 1 \amp -1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -2\\ 2 \amp -1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 2\\ \hline -5 \amp -3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-15">where the first three columns are labelled <span class="process-math">\(x_1, x_2^+, x_2^-\)</span> and the slack variables are <span class="process-math">\(x_3,x_4,x_5,x_6\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-16">If we perform the simplex pivots of <span class="process-math">\(x_5 \mapsto x_1\text{,}\)</span> <span class="process-math">\(x_3 \mapsto x_2^+\)</span> and <span class="process-math">\(x_6 \mapsto x_5\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gen-lop-std-form-17">
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|rrrrr|r} 0 \amp 3 \amp -3 \amp 2 \amp 0 \amp 0 \amp -1 \amp 0 \amp 10\\ 0 \amp 0 \amp 0 \amp 4 \amp 3 \amp 0 \amp -5 \amp 0 \amp 50\\ 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 8\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 3 \amp 0 \amp 0\\ \hline 0 \amp 0 \amp 0 \amp 11 \amp 0 \amp 0 \amp 2 \amp 3 \amp 70\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-18">which is optimal now. The solution is<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gen-lop-std-form-19">
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{x} = \frac{1}{3} \left[\begin{array}{rrr|rrrr} 8 \amp 10 \amp 0 \amp 0 \amp 50 \amp 0 \amp 0 \end{array}\right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-20">which translates back to the original variables as<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-20" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gen-lop-std-form-21">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} x_1 \amp = \frac{8}{3} \amp x_2 \amp = \frac{10}{3} \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-21" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gen-lop-std-form-22">with the objective function of <span class="process-math">\(z= 70/3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-gen-lop-std-form-22" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 7.1.1: Writing a General LOP in Standard Form"><a href="#sect-gen-lop-std-form" title="Copy heading and permalink for Subsection 7.1.1: Writing a General LOP in Standard Form" aria-label="Copy heading and permalink for Subsection 7.1.1: Writing a General LOP in Standard Form">🔗</a></div></section><section class="subsection" id="sect-adaptive-simplex"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Adapting the Simplex Method to Equality Constraints and Free Variables</span>
+</h3>
+<div class="para" id="sect-adaptive-simplex-2">Let’s return to <a href="sect-general-form.html#prob-general-lop1" class="xref" data-knowl="./knowl/xref/prob-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 7.1.1">Problem 7.1.1</a>  that we saw at the top of this section. We will now try to determine a solution without introducing new constraints or variables other than slack variables. To do this, recall that underlying the simplex method is the dictionary. If we write the objective function and constraints with a slack variables as<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-adaptive-simplex-3">
+<div class="displaymath process-math" id="eq-general-lop1-step0">
+\begin{equation}
+\begin{aligned} \text{Maximize} \amp \amp z \amp = 5x_1 + 3x_2, \\ \text{such that} \amp \amp x_3 \amp = 6 - x_1 -x_2 \\ \amp \amp x_4 \amp = 12-2x_1+3x_2 \\ \amp \amp0  \amp = -2 + 2x_1 -x_2   \\ \text{and} \amp \amp x_1, x_3, x_4 \amp \geq 0 \end{aligned}\tag{7.1.2}
+\end{equation}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-4">and again notice that <span class="process-math">\(x_2\)</span> is missing from the nonnegative constraint and the equality constraint does not have a slack variable. Also, the parameters are <span class="process-math">\(x_1, x_2\)</span> or <span class="process-math">\(\pi = \{1,2\}\)</span> and therefore the basic variables are <span class="process-math">\(\beta=\{3,4\}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-5">Note that this has a basic solution of <span class="process-math">\(x_1=0, x_2 = 0, x_3 = 6, x_4 = 12\text{,}\)</span> so it is feasible, so we perform a pivot to increase the objective function. As before, we will select <span class="process-math">\(x_1\text{,}\)</span> which is the smaller index of the parameters that will increase the objective, to enter the basis.<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-6">Previously, we would select a basic variable to leave the basis, however, since we have an equality constraint, we will not do that. It may seem arbitrary to choose either parameter, however, we eventually need to get all free variables into the basis and selecting to bring a free variable is done for efficiency. Therefore <span class="process-math">\(x_2 = -2+2x_1\)</span> and then substitute this into the other equations in <a href="sect-general-form.html#eq-general-lop1-step0" class="xref" data-knowl="./knowl/xref/eq-general-lop1-step0.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.1.2">(7.1.2)</a><div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-adaptive-simplex-7">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} \text{Maximize} \amp \amp z \amp = 5x_1 + 3(-2+2x_1) = -6 + 11 x_1 \\ \text{such that} \amp \amp x_3 \amp = 6 - x_1 - (-2 +2x_1) = 8 - 3x_1 \\ \amp \amp x_4 \amp = 12 - 2x_1 + 3(-2 + 2x_1) = 6 + 4x_1 \\ \amp \amp x_2  \amp = -2 + 2 x_1.
+\end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-8">Notice that the basic solution to this is <span class="process-math">\(x_1 = 0, x_2 = -2, x_3 = 6, x_4 = 12\)</span> and that there is now only 1 parameter so <span class="process-math">\(\pi = \{1\}\)</span> and the basis is <span class="process-math">\(\beta = \{2,3,4\}\text{.}\)</span> We will denote a tableau pivot of this form as <span class="process-math">\(2 \mapsto \emptyset\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-9">One may also cringe a bit with a negative number in the basic solution (althought we could take care of that in phase I), however since <span class="process-math">\(x_2\)</span> is a free variable this is a feasible solution.<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-10">Examining the objective function in the dictionary, note that increasing <span class="process-math">\(x_1\)</span> will increase the objective, so we perform another pivot to bring <span class="process-math">\(x_1\)</span> into the basis. To select the variable to leave the basis, we typically use an argument to increase the objective without making the result infeasible. This is still true, however, it is important that the free variable <span class="process-math">\(x_2\)</span> does not leave the basis. Therefore we need to either select <span class="process-math">\(x_3\)</span> or <span class="process-math">\(x_4\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-11">We’ll use the same argument as before in Phase II except don’t include <span class="process-math">\(x_2\)</span> in the possible list. If we select <span class="process-math">\(x_4\)</span> to leave, then <span class="process-math">\(x_1\)</span> would be negative, so we will select <span class="process-math">\(x_3\)</span> to leave or the tableau pivot of <span class="process-math">\(1 \mapsto 3\text{.}\)</span> This results in <span class="process-math">\(3x_1 = 8- x_3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-12">We will place this in the dictionary (multiplying each row by 3) to get<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-adaptive-simplex-13">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} \text{Maximize} \amp \amp 3z \amp = -18 + 11 (3x_1) = - 18 + 11(8-x_3) = 70 - 11 x_3 \\ \text{such that} \amp \amp 3x_2 \amp = 24 - (8-x_3) = 16 + x_3 \\ \amp \amp 3x_4 \amp = 18 + 4 (3x_1) = 18 + 4 (8-x_3) = 50 - 4 x_3  \\ \amp \amp 3x_1 \amp = 8 - x_3 \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-14">This now has the basic solution:<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-adaptive-simplex-15">
+<div class="displaymath process-math">
+\begin{equation*}
+x_1 = \frac{8}{3}, x_2 = \frac{10}{3}, x_3 = 0, x_4 = \frac{50}{3}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-16">and objective value of <span class="process-math">\(z=70/3\text{.}\)</span> This is the same solution that we found in <a href="sect-general-form.html#sect-gen-lop-std-form" class="internal" title="Subsection 7.1.1: Writing a General LOP in Standard Form">Subsection 7.1.1</a>.<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-adaptive-simplex-17">The steps to work with free variables and equality constraints will be called Phase 0 of the Simplex Method. We will see this same example with a tableau in the next section.<div class="autopermalink" data-description="Paragraph"><a href="#sect-adaptive-simplex-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 7.1.2: Adapting the Simplex Method to Equality Constraints and Free Variables"><a href="#sect-adaptive-simplex" title="Copy heading and permalink for Subsection 7.1.2: Adapting the Simplex Method to Equality Constraints and Free Variables" aria-label="Copy heading and permalink for Subsection 7.1.2: Adapting the Simplex Method to Equality Constraints and Free Variables">🔗</a></div></section><section class="subsection" id="sect-tableau-phase0"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Simplex Method: Phase 0</span>
+</h3>
+<div class="para" id="sect-tableau-phase0-2">We knew from before that using the dictionary to find optimal solutions to LOPs is helpful in understanding, but difficult in performing the arithmetic. In this section, we adapt the steps above to a simplex tableau.<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-tableau-phase0-3">Let’s return to <a href="sect-general-form.html#prob-general-lop1" class="xref" data-knowl="./knowl/xref/prob-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 7.1.1">Problem 7.1.1</a> and write down the simplex tableau if we keep the inequality constraint without a slack variable as in<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-tableau-phase0-4">
+<div class="displaymath process-math" id="sect-tableau-phase0-4-1">
+\begin{align*}
+\amp\begin{array}{rrrrrr}\phantom{11}\amp\phantom{1}\amp F \end{array}\\
+\amp\left[\begin{array}{rr|rrr|r} 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 6\\ 2 \amp -3 \amp 0 \amp 1 \amp 0 \amp 12\\ -2 \amp 1 \amp 0 \amp 0 \amp 0 \amp -2\\ \hline -5 \amp -3 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-tableau-phase0-5">There are two things to note with this. First, the 2nd column has an <span class="process-math">\(F\)</span> above it. This indicates that the 2nd variable is a free variable. Secondly, the 3rd row has no slack variable.<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-tableau-phase0-6">Above, the first step of the solution was to bring <span class="process-math">\(x_2\)</span> into the basis. We will use the notation <span class="process-math">\(2 \mapsto \emptyset\)</span> where <span class="process-math">\(\emptyset\)</span> indicates that nothing leaves the basic. This resulted in a matrix pivot about row 3, column 1.<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-tableau-phase0-7">
+<div class="displaymath process-math">
+\begin{equation*}
+2 \mapsto \emptyset \qquad \left[\begin{array}{rr|rrr|r} 3 \amp 0 \amp 1 \amp 0 \amp 0 \amp 8\\ -4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 6\\ -2 \amp 1 \amp 0 \amp 0 \amp 0 \amp -2\\ \hline -11 \amp 0 \amp 0 \amp 0 \amp 1 \amp -6\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-tableau-phase0-8">Note that the 3rd row is still an inequality and this has the same basic solution as when we used the dictionary to solve this<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-tableau-phase0-9">
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{x} = \left[\begin{array}{rr|rr} 0 \amp -2 \amp 8 \amp 6 \end{array}\right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-tableau-phase0-10">and note that since <span class="process-math">\(x_2\)</span> is a free variable that this is a feasible solution. Now that all of the free variables are in the basis and the equality constraint is written in terms of a basis variable that this is out of phase 0.<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-tableau-phase0-11">Also, since all of the variables are feasible, we do not need to perform any phase 1 pivots. Let’s move to phase 2.<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-tableau-phase0-12">As previous, we select column 1 to  create the <span class="process-math">\(\boldsymbol{b}\)</span>-ratios to bring <span class="process-math">\(x_1\)</span> into the basis. Since <span class="process-math">\(x_2\)</span> is a free variable, when selecting the pivot, do not remove this from the basis. Only removing <span class="process-math">\(x_3\)</span> from the basis will accomplish our tasks.<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-tableau-phase0-13">
+<div class="displaymath process-math">
+\begin{equation*}
+1 \mapsto 3, \qquad \left[\begin{array}{rr|rrr|r} 3 \amp 0 \amp 1 \amp 0 \amp 0 \amp 8\\ 0 \amp 0 \amp 4 \amp 3 \amp 0 \amp 50\\ 0 \amp 3 \amp 2 \amp 0 \amp 0 \amp 10\\ \hline 0 \amp 0 \amp 11 \amp 0 \amp 3 \amp 70\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-tableau-phase0-14">The solution to this is the same as using the dictionary or<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-tableau-phase0-15">
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{x} = \frac{1}{3}\left[\begin{array}{rr|rr} 8 \amp 10 \amp 0 \amp 50 \end{array}\right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-tableau-phase0-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="ex-general-lop2" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="exercise exercise-like knowl__content"><div class="para" id="ex-general-lop2-1-1">Find the solution to the following LOP using the steps in Phase 0 of the simplex method.<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <details id="prob-general-lop2" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h5 class="heading">
+<span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h5></summary><article class="problem example-like knowl__content"><div class="para logical" id="prob-general-lop2-1-1">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} \text{Minimize} \amp\amp w = 5x_1 + x_2,\amp \\ \text{subject to} \amp\amp x_1 + x_2 \amp\leq 5, \\ \amp\amp 2x_1 - x_2 \amp\leq 1, \\ \amp\amp x_1 - x_2 \amp \geq -4, \\ \amp\amp x_1 + 2x_2 \amp = 6, \\ \text{and} \amp\amp x_2 \amp \geq 0.
+\end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#prob-general-lop2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Problem 7.1.5"><a href="#prob-general-lop2" title="Copy heading and permalink for Problem 7.1.5" aria-label="Copy heading and permalink for Problem 7.1.5">🔗</a></div></article></details><div class="solutions"><details id="ex-general-lop2-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="ex-general-lop2-2-1">The first step is to write the problem in standard form, so the third constraint is written as <span class="process-math">\(-x_1+x_2 \leq 4\)</span> and the objective function is written as <span class="process-math">\(z = -5x_1-x_2\)</span> then the simplex tableau can be<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-general-lop2-2-2">
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rr|rrrr|r} 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 5\\ 2 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1\\ -1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 4\\ 1 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6\\ \hline 5 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-general-lop2-2-3">Since <span class="process-math">\(x_1\)</span> is a free variable, but is not in the basis, Phase 0 needs to be performed with<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-general-lop2-2-4">
+<div class="displaymath process-math">
+\begin{equation*}
+1 \mapsto \emptyset \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp -1 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1\\ 0 \amp -5 \amp 0 \amp 1 \amp 0 \amp 0 \amp -11\\ 1 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6\\ 0 \amp 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10\\ \hline 0 \amp -9 \amp 0 \amp 0 \amp 0 \amp 1 \amp -30\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-general-lop2-2-5">This is not feasible, so we are in Phase I. The following steps will create a feasible tableau:<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-general-lop2-2-6">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{array}{r} 2 \mapsto 4  \end{array} \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 5 \amp -1 \amp 0 \amp 0 \amp 6\\ 0 \amp 5 \amp 0 \amp -1 \amp 0 \amp 0 \amp 11\\ 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 0 \amp 17\\ 5 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 8\\ \hline 0 \amp 0 \amp 0 \amp -9 \amp 0 \amp 5 \amp -51\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-general-lop2-2-7">And this is feasible now, however it is not optimal, so continue with Phase II. If we find <span class="process-math">\(\boldsymbol{b}\)</span>-ratios with the 4th column, we get<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-general-lop2-2-8">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{bmatrix} 6/(-1) \\ 11/(-1) \\ 17/3 \\ 8/2 \end{bmatrix} \approx \begin{bmatrix} -6 \\ -11 \\ 5.67 \\ 4 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-general-lop2-2-9">Normally, we would choose the 4th row because it is the smallest nonnegative ratio, however, this corresponds to <span class="process-math">\(x_1\)</span> which is a free variable and cannot remove it from the basis. Therefore we will choose the 3rd row, corresponding to <span class="process-math">\(x_5\)</span> to leave the basis.<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-general-lop2-2-10">
+<div class="displaymath process-math">
+\begin{equation*}
+4 \mapsto 5 \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 3 \amp 0 \amp 1 \amp 0 \amp 7\\ 0 \amp 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10\\ 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 0 \amp 17\\ 3 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp -2\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 9 \amp 3 \amp 0\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-general-lop2-2-11">and this solution is now optimal with the basic solution<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-general-lop2-2-12">
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{x} = \frac{1}{3} \left[\begin{array}{rr|rrrr} -2 \amp 10 \amp 7 \amp 17 \amp 0\end{array}\right].
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-general-lop2-2-13">and recall that since <span class="process-math">\(x_1\)</span> is a free variable, it can take on any value, so the negative number is not a problem.<div class="autopermalink" data-description="Paragraph"><a href="#ex-general-lop2-2-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 7.1.4.1"><a href="#ex-general-lop2-2" title="Copy heading and permalink for Solution 7.1.4.1" aria-label="Copy heading and permalink for Solution 7.1.4.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Checkpoint 7.1.4"><a href="#ex-general-lop2" title="Copy heading and permalink for Checkpoint 7.1.4" aria-label="Copy heading and permalink for Checkpoint 7.1.4">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 7.1.3: Simplex Method: Phase 0"><a href="#sect-tableau-phase0" title="Copy heading and permalink for Subsection 7.1.3: Simplex Method: Phase 0" aria-label="Copy heading and permalink for Subsection 7.1.3: Simplex Method: Phase 0">🔗</a></div></section><section class="subsection" id="sect-phase0-geometry"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Geometry of Phase 0</span>
+</h3>
+<div class="para" id="sect-phase0-geometry-2">As noted in previous sections, understanding the geometry of the simplex method is important to understanding how the algorithm works. Let’s look at the example shown above in <a href="sect-general-form.html#sect-gen-lop-std-form" class="internal" title="Subsection 7.1.1: Writing a General LOP in Standard Form">Subsection 7.1.1</a> and see how the geometry of the solution changes with the introduction of free variables and equality constraints.<div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-phase0-geometry-3">To begin with, revisit <a href="sect-general-form.html#fig-general-lop1" class="xref" data-knowl="./knowl/xref/fig-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 7.1.2">Figure 7.1.2</a> and note that the first step of the simplex method for any problem starts at the origin. The next step way a pivot to bring <span class="process-math">\(x_2\)</span> into the basis, which is shown in <a href="sect-general-form.html#fig-general-lop1" class="xref" data-knowl="./knowl/xref/fig-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 7.1.2">Figure 7.1.2</a> as the point <span class="process-math">\((0,-2)\text{.}\)</span> Note that this is a feasible point (clear from the diagram), but since <span class="process-math">\(x_2\)</span> is a free variable, it can take on any value.<div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-phase0-geometry-4">The next pivot was to bring <span class="process-math">\(x_1\)</span> into the basis, which is shown in <a href="sect-general-form.html#fig-general-lop1" class="xref" data-knowl="./knowl/xref/fig-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 7.1.2">Figure 7.1.2</a> as the point <span class="process-math">\((8/3,10/3)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="sect-phase0-geometry-5" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4></summary><article class="exercise exercise-like knowl__content"><div class="para" id="sect-phase0-geometry-5-1-1">Plot the feasible set from <a href="sect-general-form.html#prob-general-lop2" class="xref" data-knowl="./knowl/xref/prob-general-lop2.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 7.1.5">Problem 7.1.5</a> and on the plot show the location of the basic solution at each step.<div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sect-phase0-geometry-5-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sect-phase0-geometry-5-2-1">From <a href="sect-general-form.html#ex-general-lop2" class="xref" data-knowl="./knowl/xref/ex-general-lop2.html" data-reveal-label="Reveal" data-close-label="Close" title="Checkpoint 7.1.4">Checkpoint 7.1.4</a>, the basic variables at each step are<div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-phase0-geometry-5-2-2">
+<ol class="decimal" id="sect-phase0-geometry-5-2-2-1">
+<li id="sect-phase0-geometry-5-2-2-1-1">
+<div class="para" id="sect-phase0-geometry-5-2-2-1-1-1">
+<span class="process-math">\(\displaystyle (0,0)\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 7.1.6.1"><a href="#sect-phase0-geometry-5-2-2-1-1" title="Copy heading and permalink for Item 7.1.6.1" aria-label="Copy heading and permalink for Item 7.1.6.1">🔗</a></div>
+</li>
+<li id="sect-phase0-geometry-5-2-2-1-2">
+<div class="para" id="sect-phase0-geometry-5-2-2-1-2-1">
+<span class="process-math">\(\displaystyle (6,0)\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 7.1.6.2"><a href="#sect-phase0-geometry-5-2-2-1-2" title="Copy heading and permalink for Item 7.1.6.2" aria-label="Copy heading and permalink for Item 7.1.6.2">🔗</a></div>
+</li>
+<li id="sect-phase0-geometry-5-2-2-1-3">
+<div class="para" id="sect-phase0-geometry-5-2-2-1-3-1">
+<span class="process-math">\(\displaystyle (8/5, 11/5)\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-2-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 7.1.6.3"><a href="#sect-phase0-geometry-5-2-2-1-3" title="Copy heading and permalink for Item 7.1.6.3" aria-label="Copy heading and permalink for Item 7.1.6.3">🔗</a></div>
+</li>
+<li id="sect-phase0-geometry-5-2-2-1-4">
+<div class="para" id="sect-phase0-geometry-5-2-2-1-4-1">
+<span class="process-math">\(\displaystyle (-2/3, 10/3)\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-2-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 7.1.6.4"><a href="#sect-phase0-geometry-5-2-2-1-4" title="Copy heading and permalink for Item 7.1.6.4" aria-label="Copy heading and permalink for Item 7.1.6.4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-phase0-geometry-5-2-3">These are label on the figure below with <span class="process-math">\(\boldsymbol{x}^{(i)}\text{,}\)</span> for the <span class="process-math">\(i\)</span>-th step.<div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-general-lop2"><div class="image-box" style="width: 75%; margin-left: 12.5%; margin-right: 12.5%;"><img src="generated/latex-image/fig-general-lop2-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.1.7<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><div class="autopermalink" data-description="Figure 7.1.7"><a href="#fig-general-lop2" title="Copy heading and permalink for Figure 7.1.7" aria-label="Copy heading and permalink for Figure 7.1.7">🔗</a></div></figcaption></figure><div class="para" id="sect-phase0-geometry-5-2-5">Some commentary on the results is helpful. As mentioned throughout this text, the first step is always at the origin, which is shown in the figure as <span class="process-math">\((0,0)\text{.}\)</span> The next step is to bring <span class="process-math">\(x_1\text{,}\)</span> the free variable into the basis and because there is a linear constraint, the next step is where the free variable or <span class="process-math">\(x_1\)</span> intersects the line <span class="process-math">\(x_1 + 2x_2 = 6\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-phase0-geometry-5-2-6">Since the point <span class="process-math">\(\boldsymbol{x}^{(1)}\)</span> is outside the feasible set, this point (basic solution of the tableau) is in Phase I. We need to make it feasible, so <span class="process-math">\(\boldsymbol{x}^{(2)}\)</span> is the first point on the linear constraint that is inside the feasble set.<div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-phase0-geometry-5-2-7">The last step is Phase II because the basic solution is feasible and the objective function is not optimal. To increase the objective takes the last point to <span class="process-math">\(\boldsymbol{x}^{(3)}\text{,}\)</span> at which the tableau is optimal.<div class="autopermalink" data-description="Paragraph"><a href="#sect-phase0-geometry-5-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 7.1.6.1"><a href="#sect-phase0-geometry-5-2" title="Copy heading and permalink for Solution 7.1.6.1" aria-label="Copy heading and permalink for Solution 7.1.6.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Checkpoint 7.1.6"><a href="#sect-phase0-geometry-5" title="Copy heading and permalink for Checkpoint 7.1.6" aria-label="Copy heading and permalink for Checkpoint 7.1.6">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 7.1.4: Geometry of Phase 0"><a href="#sect-phase0-geometry" title="Copy heading and permalink for Subsection 7.1.4: Geometry of Phase 0" aria-label="Copy heading and permalink for Subsection 7.1.4: Geometry of Phase 0">🔗</a></div></section><div class="autopermalink" data-description="Section 7.1: General Form of an LOP"><a href="#sect-general-form" title="Copy heading and permalink for Section 7.1: General Form of an LOP" aria-label="Copy heading and permalink for Section 7.1: General Form of an LOP">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="ch-general-lops.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sect-phase-zero.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>
