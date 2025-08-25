@@ -516,7 +516,7 @@
       <statement>
         <p>
           <me>
-            \begin{aligned} \text{Maxmize} \amp \amp z = 2x_1+7x_2, \amp \\ \text{subject to} \amp \amp \amp \amp x_1 + x_2 \amp \leq 15, \amp \amp \amp 2x_1 + 3x_2 \amp \leq 38, \amp \amp \amp 4x_1 + x_2 \amp \leq 56,\amp \amp \amp x_1 + 5x_2 \amp \leq 62,\amp \text{and}\amp \amp x_1, x_2 \amp \geq 0.\amp \end{aligned}
+            \begin{aligned} \text{Maximize} \amp \amp z = 2x_1+7x_2, \amp \\ \text{subject to} \amp \amp \amp \amp x_1 + x_2 \amp \leq 15, \amp \amp \amp 2x_1 + 3x_2 \amp \leq 38, \amp \amp \amp 4x_1 + x_2 \amp \leq 56,\amp \amp \amp x_1 + 5x_2 \amp \leq 62,\amp \text{and}\amp \amp x_1, x_2 \amp \geq 0.\amp \end{aligned}
           </me>
         </p>
       </statement>
@@ -569,7 +569,7 @@
         </p>
 
         <p>
-          and smallest nonegative above is 14 in the 3rd row.
+          and smallest nonnegative above is 14 in the 3rd row.
           (this corresponds to the <m>x_5</m> variable).
           Therefore we perform a matrix pivot on row 3, column 1, which corresponds to the tableau pivot of <m>1 \mapsto 5</m>.
         </p>

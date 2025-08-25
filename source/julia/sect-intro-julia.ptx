@@ -23,7 +23,7 @@
 
       <li>
         <p>
-          How to use unicode characters in Julia.
+          How to use Unicode characters in Julia.
         </p>
       </li>
 
@@ -37,7 +37,7 @@
 
   <introduction>
     <p>
-      The <url href="julialang.org">Julia Language</url> was developed starting about 2010 as a language for Scientific Computing, a field which basically covers how to solve problems in mathematics and the sciences which often require the use of software to find or approximate the solutuion.
+      The <url href="julialang.org">Julia Language</url> was developed starting about 2010 as a language for Scientific Computing, a field which basically covers how to solve problems in mathematics and the sciences which often require the use of software to find or approximate the solution.
     </p>
 
     <p>
@@ -230,11 +230,11 @@
   </subsection>
 
 
-  <subsection xml:id="sect-enter-unicode">
+  <subsection xml:id="sect-enter-Unicode">
     <title>Unicode Characters in Julia</title>
 
     <p>
-      One nice feature of Julia is that instead of relying on the standard ASCII characters, that most of the set of unicode characters can be used.
+      One nice feature of Julia is that instead of relying on the standard ASCII characters, that most of the set of Unicode characters can be used.
       For example, we may want to use Greek letters and we can assign one a value with
     </p>
 

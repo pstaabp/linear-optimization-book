@@ -33,9 +33,9 @@
       There are two sections of this web page:
     </p>
 
-    <figure xml:id="fig-matrixops-01">
+    <figure xml:id="fig-matrix-ops-01">
       <caption></caption>
-      <image source="images/matrixops-01.png">
+      <image source="images/matrix-ops-01.png">
         <shortdescription>
           (for accessibility)
         </shortdescription>
@@ -53,9 +53,9 @@
       First, click the <em>Add a new Matrix</em> button and you should see:
     </p>
 
-    <figure xml:id="fig-matrixops-02">
+    <figure xml:id="fig-matrix-ops-02">
       <caption></caption>
-      <image width="50%" source="images/matrixops-02.png">
+      <image width="50%" source="images/matrix-ops-02.png">
         <shortdescription>
           (for accessibility)
         </shortdescription>
@@ -67,9 +67,9 @@
       We first enter the matrix <m>B</m> with the basis <m>\beta=\{1,3,6,7\}</m>.
     </p>
 
-    <figure xml:id="fig-matrixops-03">
+    <figure xml:id="fig-matrix-ops-03">
       <caption></caption>
-      <image width="60%" source="images/matrixops-03.png">
+      <image width="60%" source="images/matrix-ops-03.png">
         <shortdescription>
           (for accessibility)
         </shortdescription>
@@ -90,9 +90,9 @@
       You will see the inverse as
     </p>
 
-    <figure xml:id="fig-matrixops-04">
+    <figure xml:id="fig-matrix-ops-04">
       <caption></caption>
-      <image width="60%" source="images/matrixops-04.png">
+      <image width="60%" source="images/matrix-ops-04.png">
         <shortdescription>
           (for accessibility)
         </shortdescription>
@@ -111,13 +111,13 @@
       Next, let's add another vector and matrix.
       Add <m>\boldsymbol{b}</m> and <m>\Pi</m> from <xref ref="ex-simplex-matrix"/>.
       For the vector, it is a column vector, so each number should be in a separate row.
-      Also, use the name <c>Pi</c> as that we can't put greek letters in for matrix names.
+      Also, use the name <c>Pi</c> as that we can't put Greek letters in for matrix names.
       You should see:
     </p>
 
-    <figure xml:id="fig-matrixops-05">
+    <figure xml:id="fig-matrix-ops-05">
       <caption></caption>
-      <image width="60%" source="images/matrixops-05.png">
+      <image width="60%" source="images/matrix-ops-05.png">
         <shortdescription>
           (for accessibility)
         </shortdescription>
@@ -127,7 +127,7 @@
     <p>
       Next, to continue with the calculations in <xref ref="ex-simplex-matrix"/>, to compute <m>B^{-1}\boldsymbol{b}</m>, enter <c>[1]*b</c>, where <c>[1]</c> is the output on line 1.
       The output is the same as seen in <xref ref="ex-simplex-matrix"/>.
-      Note: the Matrix Operations tool does not perform implicit multiplication, so make sure you specifically enter <c>*</c> for all mutliplications.
+      Note: the Matrix Operations tool does not perform implicit multiplication, so make sure you specifically enter <c>*</c> for all multiplications.
     </p>
 
     <p>
@@ -276,7 +276,7 @@
     </program>
 
     <p>
-      where you can create the beta and pi charaters with <c>\beta</c> or <c>\pi</c> and then hit tab (in a julia environment).
+      where you can create the beta and pi characters with <c>\beta</c> or <c>\pi</c> and then hit tab (in a julia environment).
       Once we have these, we can define <c>B</c> and <c>Π</c> in terms of the basis by
     </p>
 

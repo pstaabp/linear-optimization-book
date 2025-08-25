@@ -1,4 +1,4 @@
-<section xml:id="sect-julia-vect-arrays">
+<section xml:id="sect-julia-vector-arrays">
   <title>Vectors and Matrices in Julia</title>
 
   <objectives>
@@ -75,7 +75,7 @@
     <p>
       Notice that this is returned as a vector with type <c>Vector{Int64}</c>.
       This is called a parametric type (we saw this with rational numbers as well).
-      The <c>Vector</c> part of the type is an alias for an 1-D array and the type within the <c>{}</c> is the subtype indicating that this is an array of integers (specificially 64-bit integers).
+      The <c>Vector</c> part of the type is an alias for an 1-D array and the type within the <c>{}</c> is the subtype indicating that this is an array of integers (specifically 64-bit integers).
     </p>
 
     <p>
@@ -170,11 +170,11 @@
   </subsection>
 
 
-  <subsection xml:id="sect-comprenhension-julia">
+  <subsection xml:id="sect-comprehension-julia">
     <title>Constructing Vectors and Matrices with Comprehensions</title>
 
     <p>
-      Another feature related to arrays in Julia is that of comprenhensions.
+      Another feature related to arrays in Julia is that of comprehensions.
       If a vector (or matrix) can be generated with a formula for each element, then a comprehension is often used to simplify its creation.
       For example, if we want to produce a vector of squares or <c> v= [1; 4; 9; 16; 25; 36; 49; 64] </c>, then
     </p>

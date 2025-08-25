@@ -92,7 +92,7 @@
 
     <p>
       This idea can be extended to plotting sets of inequalities to arrive at a feasible set.
-      Recall that in <xref ref="sect-lines-planes"/> the set of inequalites:
+      Recall that in <xref ref="sect-lines-planes"/> the set of inequalities:
     </p>
 
     <p>
@@ -118,7 +118,7 @@
 
     <p>
       With only two inequalities, visually the overlap (the set of points that satisfy both inequalities) is reasonably easy to see, however, as these grow, it can be more difficulty to see.
-      One way is to plot the opposite inequalty and then area of the plane with no coloring would be the resultant set.
+      One way is to plot the opposite inequality and then area of the plane with no coloring would be the resultant set.
     </p>
 
     <example>

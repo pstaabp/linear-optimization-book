@@ -123,7 +123,7 @@
   </subsection>
 
 
-  <subsection xml:id="sect-blops">
+  <subsection xml:id="sect-binary-lops">
     <title>Solving Binary LOPs using Julia</title>
 
     <p>
@@ -240,7 +240,7 @@ Subject to
     </program>
 
     <p>
-      and if you careful look at all of the contraints that they are all that there is at most one queen (sum of the <c>x</c> values along each row, column and diagonal), that all of the contraints are there.
+      and if you careful look at all of the constraints that they are all that there is at most one queen (sum of the <c>x</c> values along each row, column and diagonal), that all of the constraints are there.
     </p>
 
     <p>

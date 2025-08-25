@@ -263,7 +263,7 @@
 
   <p>
     and again this only differs by a sign in the last row in <xref ref="fig-webcas5"></xref>.
-    Lastly, we perfomed a pivot about row 3, column 6, so <c>piv(3,6)</c> results in
+    Lastly, we performed a pivot about row 3, column 6, so <c>piv(3,6)</c> results in
   </p>
 
   <figure xml:id="fig-webcas10">

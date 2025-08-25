@@ -463,7 +463,7 @@
 
         <li>
           <p>
-            What are the contraints?  Note: one way to think about this is the case of something being maximized, why can't the objective be increased without bound.
+            What are the constraints?  Note: one way to think about this is the case of something being maximized, why can't the objective be increased without bound.
           </p>
 
           <p>
@@ -577,7 +577,7 @@
               </figure>
 
               <p>
-                Specificially we have the following:
+                Specifically we have the following:
               </p>
 
               <p>
@@ -776,7 +776,7 @@
       </problem>
 
       <p>
-        This problem seems to have similarties with the previous problem, and similar questions arise.
+        This problem seems to have similarities with the previous problem, and similar questions arise.
         What are the variables for the problem?  There are clearly some constraints in that certain classes need to be in a some rooms, but not others.
         It's unclear what the objective is.
       </p>

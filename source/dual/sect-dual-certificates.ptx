@@ -1,22 +1,38 @@
 <section xml:id="sect-dual-certificates">
   <title>Finding Optimal Certificates</title>
 
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Explain how the certificate ensures that a solution is optimal.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Use the Complementary Slackness Condition to further deepen your understanding of simplex tableaus.
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
   <p>
     First of all, a reminder that a <alert>certificate</alert> for an LOP is the set of <m>y_{i}</m> values from the dual for a given set of <m>x_{j}</m> value from the Primal.
-    If the values we are discussing arise from an optimal solution, then the <m>y</m>’s are called an <alert>optimal certificate</alert>.
+    If the values we are discussing arise from an optimal solution, then the <m>y</m>'s are called an <alert>optimal certificate</alert>.
   </p>
 
   <p>
-    We will show in this section why a certificate is important--how it can show that a basic solution is optimatl.
+    We will show in this section why a certificate is important<mdash/>how it can show that a basic solution is optimal.
   </p>
 
   <p>
-    For example, in the first example of this chapter we saw that <m>\boldsymbol{x}=(3,0,3)^{\intercal}</m> was a solution to the Primal LOP, with <m>z=30</m>.
-    The certificate is <m>\boldsymbol{y}=(11,1)^{\intercal}/5</m> with <m>w=30</m> and <m>w=z</m>, this is optimal.
+    For example, in the first example of this chapter we saw that <m>\boldsymbol{x}=[3\; 0\; 3]^{\intercal}</m> was a solution to the Primal LOP, with <m>z=30</m>.
+    The certificate is <m>\boldsymbol{y}=[11 \; 1]^{\intercal}/5</m> with <m>w=30</m> and <m>w=z</m>, this is optimal.
   </p>
 
   <p>
-    We’ll use the notation <m>(+,0,\star~|~0,0,+,+,0)^{\intercal}</m>.
+    We'll use the notation <m>(+,0,\star~|~0,0,+,+,0)^{\intercal}</m>.
     to describe any feasible solution of an LOP with 3 variable and 5 constraints for which coordinates labelled 0 have value 0, coordinates labelled + have positive value and coordinates labelled <m>\star</m> have nonnegative values.
   </p>
 
@@ -62,7 +78,7 @@
     These can be used to show that <m>w=30</m>, which equals <m>z</m> so this is optimal.
   </p>
 
-  <theorem xml:id="thm-Pfeasible-Dfeasible">
+  <theorem xml:id="thm-primal-feasible-dual-feasible">
     <statement>
       <p>
         Let <m>\boldsymbol{x}'</m> be <m>P</m>-feasible.
@@ -102,7 +118,7 @@
           </p>
 
           <p>
-            Using <xref ref="thm-Pfeasible-Dfeasible"/>, since <m>x_{1} &gt; 0</m>, <m>x_{3} &gt; 0</m> and <m>x_{4} &gt; 0</m>, then
+            Using <xref ref="thm-primal-feasible-dual-feasible"/>, since <m>x_{1} &gt; 0</m>, <m>x_{3} &gt; 0</m> and <m>x_{4} &gt; 0</m>, then
           </p>
 
           <p>
@@ -123,7 +139,7 @@
 
           <p>
             this implies that <m>y_{2}=0</m> and <m>y_{3}=0</m>.
-            and thus <m>y_{1}=5</m> and <m>\boldsymbol{y}=(5,0,0)^{\intercal}</m> satsifies all the constraints of the dual, so <m>\boldsymbol{x}=(2,0,1,3,0)^{\intercal}</m> is optimal.
+            and thus <m>y_{1}=5</m> and <m>\boldsymbol{y}=(5,0,0)^{\intercal}</m> satisfies all the constraints of the dual, so <m>\boldsymbol{x}=(2,0,1,3,0)^{\intercal}</m> is optimal.
           </p>
         </li>
 
@@ -133,7 +149,7 @@
           </p>
 
           <p>
-            From <xref ref="thm-Pfeasible-Dfeasible"/>, we get that in order to be optimal,
+            From <xref ref="thm-primal-feasible-dual-feasible"/>, we get that in order to be optimal,
           </p>
 
           <p>
@@ -169,8 +185,8 @@
           <p>
             Note from the fact that <m>y_{3}=t\geq0</m>, that the first constraint above is not satisfied, so this is not <m>D</m>-feasible.
           </p>
-      </li>
-    </ol>
-  </p>
-</example>
+        </li>
+      </ol>
+    </p>
+  </example>
 </section>

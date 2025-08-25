@@ -56,7 +56,10 @@
     </p>
 
     <figure xml:id="fig-general-lop1">
-      <caption></caption>
+      <caption>A graph of the feasible set in <xref ref="prob-general-lop1"/>
+      .
+      The inequality constraints are shaded in graph, however there is also an equality constraint, which is the line (in red).
+      </caption>
       <image width="75%">
         <latex-image>
     <![CDATA[
@@ -70,7 +73,7 @@
 	\draw (-0.1,\y) -- (0.1,\y) node [at start, left] {$\y$}; }
 \draw (-1,7) -- (7,-1);
 \draw (-1,-4.6667) -- (8,1.333);
-\draw [color=red] (-1,-4) -- (5,8);
+\draw [color=red, thick] (-1,-4) -- (5,8);
 \end{tikzpicture}
     ]]>
         </latex-image>
@@ -85,11 +88,11 @@
     <p>
       The solution needs to be on both on the line (in red) as well as in the gray triangular region.
       A keen observation would notice that in the upper right direction along the line increases the objective function, so the solution must be at the intersection of the red line and the upper boundary of the triangle.
-      We will see how to solve this in general.
+      However as problems get more complicated, arguments like this will not work and we will adapt the simplex method to solve this in general.
     </p>
 
     <p>
-      We can put this in standard form to solve using the objective function.
+      We can put this problem in standard form for both the equality constraint as well as the lack of nonnegative constraint on the variable.
       First, the equality as the third constraint in <xref ref="eq-general-lop1"/> can be written as two inequalities.
     </p>
 
@@ -105,8 +108,7 @@
     </p>
 
     <p>
-      Secondly, notice that the variable <m>x_2</m> in <xref ref="prob-general-lop1"/> does not have a nonnegative constraint.
-      We can handle a case like this by introducing two new variables, <m>x_2^+</m> and <m>x_2^-</m>, then rewrite <m>x_2 = x_2^+-x_2^-</m>, where <m>x_2^+ \geq 0</m> and <m>x_2^- \geq 0</m>.
+      The lack of nonnegative constraint on <m>x_2</m> in <xref ref="prob-general-lop1"/> can be written by introducing two new variables, <m>x_2^+</m> and <m>x_2^-</m>, then rewriting <m>x_2 = x_2^+-x_2^-</m>, where <m>x_2^+ \geq 0</m> and <m>x_2^- \geq 0</m>.
       Basically this is saying that a variable with no constraints can be the difference of two nonnegative variables.
       The new version of <xref ref="prob-general-lop1"/> can be written
     </p>
@@ -138,12 +140,12 @@
     </p>
 
     <p>
-      If we perform the simplex pivots of <m>x_5 \mapsto x_1</m>, <m>x_3 \mapsto x_2^+</m> and <m>x_6 \mapsto x_5</m>
+      To solve this, we perform the standard simplex method.
     </p>
 
     <p>
       <me>
-        \left[\begin{array}{rrr|rrrrr|r} 0 \amp 3 \amp -3 \amp 2 \amp 0 \amp 0 \amp -1 \amp 0 \amp 10\\ 0 \amp 0 \amp 0 \amp 4 \amp 3 \amp 0 \amp -5 \amp 0 \amp 50\\ 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 8\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 3 \amp 0 \amp 0\\ \hline 0 \amp 0 \amp 0 \amp 11 \amp 0 \amp 0 \amp 2 \amp 3 \amp 70\\ \end{array} \right]
+        \begin{array}{r} x_5 \mapsto x_1, \\ x_3 \mapsto x_2^+ \\ x_6 \mapsto x_5, \end{array} \qquad \left[\begin{array}{rrr|rrrrr|r} 0 \amp 3 \amp -3 \amp 2 \amp 0 \amp 0 \amp -1 \amp 0 \amp 10\\ 0 \amp 0 \amp 0 \amp 4 \amp 3 \amp 0 \amp -5 \amp 0 \amp 50\\ 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 8\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 3 \amp 0 \amp 0\\ \hline 0 \amp 0 \amp 0 \amp 11 \amp 0 \amp 0 \amp 2 \amp 3 \amp 70\\ \end{array} \right]
       </me>
     </p>
 
@@ -164,12 +166,18 @@
 
     <p>
       <me>
-        \begin{aligned} x_1 \amp = \frac{8}{3} \amp x_2 \amp = \frac{10}{3} \end{aligned}
+        \begin{aligned} x_1 \amp = \frac{8}{3} \amp x_2 \amp =  x_2^{+} - x_2^- = \frac{10}{3} - 0 = \frac{10}{3}\end{aligned}
       </me>
     </p>
 
     <p>
       with the objective function of <m>z= 70/3</m>.
+    </p>
+
+    <p>
+      This technique will work for both equality constraints as well as free variables.
+      However, for each equality constraint it introduces another constraint (extra row in the tableau) for each free variable, there is a new variable (extra column in the tableau).
+      Now we will see how to adapt the original simplex tableau and method to directly handle these.
     </p>
   </subsection>
 
@@ -207,10 +215,10 @@
     </p>
 
     <p>
-      <me>
+      <men xml:id="eq-gen-dict-01">
         \begin{aligned} \text{Maximize} \amp \amp z \amp = 5x_1 + 3(-2+2x_1) = -6 + 11 x_1 \\ \text{such that} \amp \amp x_3 \amp = 6 - x_1 - (-2 +2x_1) = 8 - 3x_1 \\ \amp \amp x_4 \amp = 12 - 2x_1 + 3(-2 + 2x_1) = 6 + 4x_1 \\ \amp \amp x_2  \amp = -2 + 2 x_1.
         \end{aligned}
-      </me>
+      </men>
     </p>
 
     <p>
@@ -219,7 +227,7 @@
     </p>
 
     <p>
-      One may also cringe a bit with a negative number in the basic solution (althought we could take care of that in phase I), however since <m>x_2</m> is a free variable this is a feasible solution.
+      One may also cringe a bit with a negative number in the basic solution (although we could take care of that in phase I), however since <m>x_2</m> is a free variable this is a feasible solution.
     </p>
 
     <p>
@@ -296,17 +304,17 @@
     <p>
       Above, the first step of the solution was to bring <m>x_2</m> into the basis.
       We will use the notation <m>2 \mapsto \emptyset</m> where <m>\emptyset</m> indicates that nothing leaves the basic.
-      This resulted in a matrix pivot about row 3, column 1.
+      This results in a matrix pivot about row 3, column 1.
     </p>
 
     <p>
       <me>
-        2 \mapsto \emptyset \qquad \left[\begin{array}{rr|rrr|r} 3 \amp 0 \amp 1 \amp 0 \amp 0 \amp 8\\ -4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 6\\ -2 \amp 1 \amp 0 \amp 0 \amp 0 \amp -2\\ \hline -11 \amp 0 \amp 0 \amp 0 \amp 1 \amp -6\\ \end{array} \right]
+        2 \mapsto \emptyset \qquad \left[\begin{array}{rr|rrr|r} 3 \amp 0 \amp 1 \amp 0 \amp 0 \amp 8\\ -4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 6\\ -2 \amp 1 \amp 0 \amp 0 \amp 0 \amp -2\\ \hline -11 \amp 0 \amp 0 \amp 0 \amp 1 \amp -6\\ \end{array} \right].
       </me>
     </p>
 
     <p>
-      Note that the 3rd row is still an inequality and this has the same basic solution as when we used the dictionary to solve this
+      Note that the 3rd row is still an inequality and this is the tableau version of <xref ref="eq-gen-dict-01"/> with the same basic solution of
     </p>
 
     <p>
@@ -372,9 +380,10 @@
         </p>
 
         <p>
-          <me>
-            \left[\begin{array}{rr|rrrr|r} 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 5\\ 2 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1\\ -1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 4\\ 1 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6\\ \hline 5 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
-          </me>
+          <md>
+            <mrow>\amp\begin{array}{rrrrrr}\amp \phantom{1} F \end{array}</mrow>
+            <mrow>\amp\left[\begin{array}{rr|rrrr|r} 1 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 5\\ 2 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1\\ -1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 4\\ 1 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6\\ \hline 5 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right] </mrow>
+          </md>
         </p>
 
         <p>
@@ -382,9 +391,10 @@
         </p>
 
         <p>
-          <me>
-            1 \mapsto \emptyset \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp -1 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1\\ 0 \amp -5 \amp 0 \amp 1 \amp 0 \amp 0 \amp -11\\ 1 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6\\ 0 \amp 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10\\ \hline 0 \amp -9 \amp 0 \amp 0 \amp 0 \amp 1 \amp -30\\ \end{array} \right]
-          </me>
+          <md>
+            <mrow>\amp\begin{array}{rrrrrr}\phantom{11} F \end{array}</mrow>
+            <mrow> 1 \mapsto \emptyset, \qquad \amp \left[\begin{array}{rr|rrrr|r} 0 \amp -1 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1\\ 0 \amp -5 \amp 0 \amp 1 \amp 0 \amp 0 \amp -11\\ 1 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6\\ 0 \amp 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10\\ \hline 0 \amp -9 \amp 0 \amp 0 \amp 0 \amp 1 \amp -30\\ \end{array} \right] </mrow>
+          </md>
         </p>
 
         <p>
@@ -393,9 +403,10 @@
         </p>
 
         <p>
-          <me>
-            \begin{array}{r} 2 \mapsto 4  \end{array} \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 5 \amp -1 \amp 0 \amp 0 \amp 6\\ 0 \amp 5 \amp 0 \amp -1 \amp 0 \amp 0 \amp 11\\ 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 0 \amp 17\\ 5 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 8\\ \hline 0 \amp 0 \amp 0 \amp -9 \amp 0 \amp 5 \amp -51\\ \end{array} \right]
-          </me>
+          <md>
+            <mrow>\amp\begin{array}{rrrrrr}\phantom{11} F \end{array}</mrow>
+            <mrow> \begin{array}{r} 2 \mapsto 4,  \end{array} \qquad \amp \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 5 \amp -1 \amp 0 \amp 0 \amp 6\\ 0 \amp 5 \amp 0 \amp -1 \amp 0 \amp 0 \amp 11\\ 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 0 \amp 17\\ 5 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 8\\ \hline 0 \amp 0 \amp 0 \amp -9 \amp 0 \amp 5 \amp -51\\ \end{array} \right] </mrow>
+          </md>
         </p>
 
         <p>
@@ -415,9 +426,11 @@
         </p>
 
         <p>
-          <me>
-            4 \mapsto 5 \qquad \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 3 \amp 0 \amp 1 \amp 0 \amp 7\\ 0 \amp 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10\\ 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 0 \amp 17\\ 3 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp -2\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 9 \amp 3 \amp 0\\ \end{array} \right]
-          </me>
+          <md>
+            <mrow>\amp\begin{array}{rrrrrr}\phantom{11} F \end{array}</mrow>
+            <mrow>4 \mapsto 5, \qquad \amp\left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 3 \amp 0 \amp 1 \amp 0 \amp 7\\ 0 \amp 3 \amp 0 \amp 0 \amp 1 \amp 0 \amp 10\\ 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 0 \amp 17\\ 3 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp -2\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 9 \amp 3 \amp 0\\ \end{array} \right]
+          </mrow>
+        </md>
         </p>
 
         <p>
@@ -495,6 +508,7 @@
             </li>
           </ol>
         </p>
+
         <p>
           These are label on the figure below with <m>\boldsymbol{x}^{(i)}</m>, for the <m>i</m>-th step.
         </p>
@@ -529,12 +543,12 @@
         <p>
           Some commentary on the results is helpful.
           As mentioned throughout this text, the first step is always at the origin, which is shown in the figure as <m>(0,0)</m>.
-          The next step is to bring <m>x_1</m>, the free variable into the basis and because there is a linear constraint, the next step is where the free variable or <m>x_1</m> intersects the line <m>x_1 + 2x_2 = 6</m>.
+          The next step is to bring <m>x_1</m>, the free variable into the basis and because there is a linear constraint, the next step is where the free variable or <m>x_1</m> intersects the line <m>x_1 + 2x_2 = 6</m>.  This may seem strange because the origin was in the feasible set and this first step is not infeasible.  However, phase 0 is always to bring free variables into the basis when emphasis on doing this with equality constraints.
         </p>
 
         <p>
           Since the point <m>\boldsymbol{x}^{(1)}</m> is outside the feasible set, this point (basic solution of the tableau) is in Phase I.
-          We need to make it feasible, so <m>\boldsymbol{x}^{(2)}</m> is the first point on the linear constraint that is inside the feasble set.
+          We need to make it feasible, so <m>\boldsymbol{x}^{(2)}</m> is the first point on the linear constraint that is inside the feasible set.
         </p>
 
         <p>

@@ -310,7 +310,7 @@
   </subsection>
 
 
-  <subsection xml:id="subsec-gomory">
+  <subsection xml:id="sub-sect-gomory">
     <title>Gomory's Method</title>
 
     <p>
@@ -561,7 +561,7 @@ First set up the initial tableau:
           </me>
         </p>
         <p>
-          The goal is now to make the left side a multiple of 28 (the slack variable coefficient) and to accomplish this, put parameters on the right side with  coefficients that are negative and not less than <m>-28</m>.  This is done by adding/subtracting appropriate mutliples of terms.
+          The goal is now to make the left side a multiple of 28 (the slack variable coefficient) and to accomplish this, put parameters on the right side with  coefficients that are negative and not less than <m>-28</m>.  This is done by adding/subtracting appropriate multiples of terms.
           For example, subtract <m>1316</m> as well as <m>16x_1, 8x_4</m> and <m>15x_6</m> from both sides to get:
         </p>
         <p>
@@ -629,7 +629,7 @@ First set up the initial tableau:
           </me>
         </p>
         <p>
-          And again, we manipulate this equation to get the left side to be a multiple of the slack variable coefficient (15) with the paramter coefficients negative.
+          And again, we manipulate this equation to get the left side to be a multiple of the slack variable coefficient (15) with the parameter coefficients negative.
         </p>
         <p>
           <me>

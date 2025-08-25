@@ -214,7 +214,7 @@
     <p>
       is a solution to the LOP above.
       This is because if we substitute these values of <m>\boldsymbol{x}</m>, then each equation of the dictionary is satisfied.
-      The vertical line in <xref ref="eq-solution-01"/> between the variables <m>x_2</m> and <m>x_3</m> is used to separate out the original variables from the slack variables and is helpful for readibility.
+      The vertical line in <xref ref="eq-solution-01"/> between the variables <m>x_2</m> and <m>x_3</m> is used to separate out the original variables from the slack variables and is helpful for readability.
     </p>
 
     <p>

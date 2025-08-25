@@ -27,7 +27,8 @@
     </p>
 
     <p>
-      Recall that above we solved <xref ref="prob-ilop2" /> using the simplex method.  The result was <m>\boldsymbol{x}^{\star}=(256,119)^{T}/60\approx (4.266,1.983)</m> and <m>z^{\star}=1619/60\approx 26.983</m>.
+      Recall that above we solved <xref ref="prob-ilop2" /> using the simplex method.
+      The result was <m>\boldsymbol{x}^{\star}=(256,119)^{T}/60\approx (4.266,1.983)</m> and <m>z^{\star}=1619/60\approx 26.983</m>.
     </p>
 
     <p>
@@ -43,8 +44,7 @@
       <statement>
         <p>
           <me>
-            \begin{aligned} \text{Max.} \amp\amp z = 4x_1 + 5x_2, \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2 \amp\leq 25, \\ \amp\amp x_1 \amp \leq 4,
-            \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
+            \begin{aligned} \text{Max.} \amp\amp z = 4x_1 + 5x_2, \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2 \amp\leq 25, \\ \amp\amp x_1 \amp \leq 4, \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
             \end{aligned}
           </me>
         </p>
@@ -57,8 +57,7 @@
 
       <p>
         <me>
-          \begin{aligned} \text{Max.} \amp\amp z = 4x_1 + 5x_2, \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2 \amp\leq 25, \\ \amp\amp x_1 \amp \geq 5,
-          \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
+          \begin{aligned} \text{Max.} \amp\amp z = 4x_1 + 5x_2, \amp \\ \text{such that}\amp\amp 17x_1+32x_2 \amp\leq 136, \\ \amp\amp 4x_1 + 4x_2 \amp\leq 25, \\ \amp\amp x_1 \amp \geq 5, \\ \text{and}\amp\amp x_1, x_2 \amp \in \mathbb{N}_0.
           \end{aligned}
         </me>
       </p>
@@ -121,7 +120,8 @@
     </p>
 
     <p>
-      Note that the optimal solution of LOP A is the upper right corner of <m>F_A</m> and the optimal solution of LOP B is the upper left corner of <m>F_B</m>.  These don't quite fall on integers.
+      Note that the optimal solution of LOP A is the upper right corner of <m>F_A</m> and the optimal solution of LOP B is the upper left corner of <m>F_B</m>.
+      These don't quite fall on integers.
     </p>
 
     <p>
@@ -197,7 +197,9 @@
     </p>
 
     <figure xml:id="fig-bb-2">
-      <caption>The second level feasible sets for <xref ref="prob-ilop2"/>. The feasible set <m>F_{BB}</m> is not shown because it is empty.</caption>
+      <caption>The second level feasible sets for <xref ref="prob-ilop2"/>
+      .
+      The feasible set <m>F_{BB}</m> is not shown because it is empty.</caption>
       <image width="75%">
         <shortdescription>
         </shortdescription>
@@ -247,6 +249,7 @@
       Thus, if any solution has value smaller than 26, we can ignore that.
       For example, any integer solution to LOP AB will be smaller than 24.411 and which is clearly smaller than 26.
     </p>
+
     <p>
       At this point we can stop because any integer solution that is a subset of <m>F_{BA}</m> will has a solution no more that 26.
       Since we are looking for a solution, there may be another integer solution in this set, but we already have one.
@@ -264,7 +267,10 @@
     </p>
 
     <figure xml:id="fig-ilop1-flowchart">
-      <caption>A tree of the branch and bound algorithm for <xref ref="prob-ilop2"/>. Each branch is explored until an integer solution is  found.  If it is clear that other branches will not result in a larger (since this is a maximum problem) objective value, that branch is not further explored.</caption>
+      <caption>A tree of the branch and bound algorithm for <xref ref="prob-ilop2"/>
+      .
+      Each branch is explored until an integer solution is  found.
+      If it is clear that other branches will not result in a larger (since this is a maximum problem) objective value, that branch is not further explored.</caption>
       <image>
         <shortdescription>
         </shortdescription>
@@ -402,7 +408,8 @@
     </p>
 
     <p>
-      In <xref ref="sect-cutting-planes"/>, we solved a ILOP with three variables. The following exercise finds the solution to <xref ref="ex-ilop-3vars"/> using the branch and bound technique.
+      In <xref ref="sect-cutting-planes"/>, we solved a ILOP with three variables.
+      The following exercise finds the solution to <xref ref="ex-ilop-3vars"/> using the branch and bound technique.
     </p>
 
     <exercise xml:id="ex-branch-bound-1">
@@ -445,7 +452,8 @@
 
         <p>
           So this is not integral, so we will form two problems.
-          This solution has <m>x_1=0</m>, so first we will look at <m>x_2</m> and add the two constraints: <m>x_2 \leq 0</m> and <m>x_2 \geq 1</m>.
+          This solution has <m>x_1=0</m>, which is an integer, so start with <m>x_2</m> and add the two constraints: <m>x_2 \leq 0</m> and <m>x_2 \geq 1</m> in order to eliminate the current solution for <m>x_2</m>.
+          These problems are
         </p>
 
 
@@ -487,7 +495,7 @@
         </p>
 
         <p>
-          and the perform the following pivots to get the optimal tableau of problem PA:
+          and then perform the following pivots to get the optimal tableau:
         </p>
 
         <p>
@@ -497,7 +505,7 @@
         </p>
 
         <p>
-          and this has the solution
+          and this has the optimal solution:
         </p>
 
         <p>
@@ -511,7 +519,7 @@
         </p>
 
         <p>
-          Next, return to the simplex tableau corresponding to problem PB, which has the following simplex tableau:
+          Next, return to the simplex tableau corresponding to problem <alert>PB</alert>, which has the following simplex tableau:
         </p>
 
         <p>
@@ -525,7 +533,7 @@
         </p>
 
         <p>
-          The pivots that form the optimal solution are
+          The pivots that first make the tableau feasible, then finds the optimal solution are
         </p>
 
         <p>
@@ -547,8 +555,8 @@
         <p>
           which is not integral.
           We need to do another level.
-          First, let's define PAA and PAB as the two problems that split the feasible set of PA.
-          Since <m>x_1</m> and <m>x_2</m> are both integers, we will split the feasible set of PAA using <m>x_3</m> and the two constraints <m>x_3 \leq 16</m> and <m>x_3 \geq 17</m>.
+          First, let's define <alert>PAA</alert> and <alert>PAB</alert> as the two problems that split the feasible set of <alert>PA</alert>.
+          Since <m>x_1</m> and <m>x_2</m> are both integers, we will split the feasible set of <alert>PAA</alert> using <m>x_3</m> and the two constraints <m>x_3 \leq 16</m> and <m>x_3 \geq 17</m>.
         </p>
 
 
@@ -580,7 +588,7 @@
         </problem>
 
         <p>
-          The solution to PAA is found by starting with the simplex tableau:
+          The solution to <alert>PAA</alert> is found by starting with the simplex tableau:
         </p>
 
         <p>
@@ -604,7 +612,7 @@
         </p>
 
         <p>
-          Next, return to the simplex tableau corresponding to problem PAB, which has the following simplex tableau:
+          Next, return to the simplex tableau corresponding to problem <alert>PAB</alert>, which has the following simplex tableau:
         </p>
 
         <p>
@@ -639,7 +647,7 @@
         </p>
 
         <p>
-          Next, the problem PB is split into two problems, PBA and PBB, where the feasible set of PBA is split using <m>x_1 \leq 0</m> and <m>x_1 \geq 1</m>.
+          Next, the problem <alert>PB</alert> is split into two problems, <alert>PBA</alert> and <alert>PBB</alert>, where the feasible set of <alert>PBA</alert> is split using <m>x_1 \leq 0</m> and <m>x_1 \geq 1</m>.
         </p>
 
 
@@ -671,7 +679,7 @@
         </problem>
 
         <p>
-          The solution to PBA is found by starting with the simplex tableau:
+          The solution to <alert>PBA</alert> is found by starting with the simplex tableau:
         </p>
 
         <p>
@@ -702,12 +710,12 @@
 
         <p>
           which is not integral.
-          Also, note that the objective value of this tableau is <m>248/3\approx 82.667</m>, which is greater than the objective value of problem PAB.
+          Also, note that the objective value of this tableau is <m>248/3\approx 82.667</m>, which is greater than the objective value of problem <alert>PAB</alert>.
           This branch needs to be further explored.
         </p>
 
         <p>
-          Return to Problem PBB, which has the following simplex tableau:
+          Return to Problem <alert>PBB</alert>, which has the following simplex tableau:
         </p>
 
         <p>
@@ -738,11 +746,11 @@
 
         <p>
           Which is not integral, and has an objective value of <m>2284/28\approx 81.571</m>.
-          This is greater than the objective value of problem PAB, so we should explore this branch as well.
+          This is greater than the objective value of problem <alert>PAB</alert>, so we should explore this branch as well.
         </p>
 
         <p>
-          Next, we split the feasible set of PBA using <m>x_3 \leq 15</m> and <m>x_3 \geq 16</m>.
+          Next, we split the feasible set of <alert>PBA</alert> using <m>x_3 \leq 15</m> and <m>x_3 \geq 16</m>.
         </p>
 
 
@@ -774,7 +782,7 @@
         </problem>
 
         <p>
-          The solution to PBAA is found by starting with the simplex tableau:
+          The solution to <alert>PBAA</alert> is found by starting with the simplex tableau:
         </p>
 
         <p>
@@ -805,13 +813,13 @@
         </p>
 
         <p>
-          This is not integral, and the objective value of this tableau is <m>573/7\approx 81.857</m>, which is greater than the objective value of problem PAB.
+          This is not integral, and the objective value of this tableau is <m>573/7\approx 81.857</m>, which is greater than the objective value of problem <alert>PAB</alert>.
           This may still have a viable solution.
           We will explore this below.
         </p>
 
         <p>
-          Next, the solution to PBAB is found by starting with the simplex tableau:
+          Next, the solution to <alert>PBAB</alert> is found by starting with the simplex tableau:
         </p>
 
         <p>
@@ -836,8 +844,8 @@
         </p>
 
         <p>
-          There is still the branch based on PBAA, so we split the feasible set of PBAA using <m>x_2 \leq 1</m> and <m>x_2 \geq 2</m>.
-          The second inequality here is redundant here, since <m>x_2 \geq 1</m> is already a constraint in PBAA, so a problem PBAAB will not be created.
+          There is still the branch based on <alert>PBAA</alert>, so we split the feasible set of <alert>PBAA</alert> using <m>x_2 \leq 1</m> and <m>x_2 \geq 2</m>.
+          The second inequality here is redundant here, since <m>x_2 \geq 1</m> is already a constraint in <alert>PBAA</alert>, so a problem <alert>PBAAB</alert> will not be created.
         </p>
 
 
@@ -851,43 +859,43 @@
                 \end{aligned}
               </me>
             </p>
-
-            <p>
-              This has the simplex tableau of
-            </p>
-
-            <p>
-              <me>
-                \left[\begin{array}{rrr|rrrrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 15\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
-              </me>
-            </p>
-
-            <p>
-              and applying the simplex method, we arrive at the following tableau:
-            </p>
-
-            <p>
-              <me>
-                \begin{array}{r} 2 \mapsto 7, \\ 1 \mapsto 8, \\ 3 \mapsto 9, \\ 7 \mapsto 10, \end{array} \qquad \left[\begin{array}{rrr|rrrrrrrr|r} 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1 \amp -3 \amp -7 \amp 0 \amp 1\\ 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -5 \amp 0 \amp -5 \amp 0 \amp 46\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp -8 \amp -4 \amp 0 \amp 0 \amp 4\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 15\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 6 \amp 1 \amp 81\\ \end{array} \right]
-              </me>
-            </p>
-
-            <p>
-              The basic solution of this tableau is
-            </p>
-
-            <p>
-              <me>
-                \boldsymbol{x} = \left[\begin{array}{rrr|rrrrrrr} 0 \amp 1 \amp 15 \amp 1 \amp 46 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0  \end{array}\right]
-              </me>
-            </p>
-
-            <p>
-              which is an integer solution with an objective value of <m>81</m>.
-              All other
-            </p>
           </statement>
         </problem>
+
+        <p>
+          This has the simplex tableau of
+        </p>
+
+        <p>
+          <me>
+            \left[\begin{array}{rrr|rrrrrrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 64\\ 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 15\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          and applying the simplex method, we arrive at the following tableau:
+        </p>
+
+        <p>
+          <me>
+            \begin{array}{r} 2 \mapsto 7, \\ 1 \mapsto 8, \\ 3 \mapsto 9, \\ 7 \mapsto 10, \end{array} \qquad \left[\begin{array}{rrr|rrrrrrrr|r} 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp -1 \amp -3 \amp -7 \amp 0 \amp 1\\ 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp -5 \amp 0 \amp -5 \amp 0 \amp 46\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp -8 \amp -4 \amp 0 \amp 0 \amp 4\\ 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 1\\ 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0\\ 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 15\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 5 \amp 6 \amp 1 \amp 81\\ \end{array} \right]
+          </me>
+        </p>
+
+        <p>
+          The basic solution of this tableau is
+        </p>
+
+        <p>
+          <me>
+            \boldsymbol{x} = \left[\begin{array}{rrr|rrrrrrr} 0 \amp 1 \amp 15 \amp 1 \amp 46 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0  \end{array}\right]
+          </me>
+        </p>
+
+        <p>
+          which is an integer solution with an objective value of <m>81</m>.
+          Let's see where we stand with the following tree diagram.
+        </p>
       </solution>
     </exercise>
   </subsection>

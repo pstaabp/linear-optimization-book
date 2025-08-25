@@ -4,4 +4,30 @@
   <p>
     Because of the equality constraints and the free variables, dual problems take on a different form.
   </p>
+
+  <p>
+    In <xref ref="ch-dual-problems"/>, we made an argument to develop a bound on the objective function resulting a dual problem.  In the case of general problems with equality constraints and free variables, we repeat these steps.  Let's look at <xref ref="prob-general-lop1"/>.  First, if we multiply the three constraints by <m>y_1, y_2</m> and <m>y_3</m> respectively, then
+  </p>
+
+  <p>
+    <me>
+      \begin{aligned}
+y_1 (x_1 + x_2) \amp \leq 6 y_1, \\
+    y_2 (2x_1-3x_2) \amp \leq 12 y_2, \\
+    y_3 (-2x_1 + x_2) \amp = -2 y_3.
+      \end{aligned}
+    </me>
+  </p>
+   <p>
+    The objective is written:
+   </p>
+  <p>
+    <me>
+      \begin{aligned}
+      z \amp = 5x_1 + 3x_2 \\
+      \amp \leq (y_1 + 2y_2 - 2y_3) x_1 + 3x_2
+      \end{aligned}
+    </me>
+
+  </p>
 </section>

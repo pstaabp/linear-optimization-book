@@ -17,7 +17,7 @@
     </problem>
 
     <p>
-      This can be first written in standard form and then in matrix form by defining
+      This can be first written in standard form and then if the following are defined
     </p>
 
     <p>
@@ -27,7 +27,7 @@
     </p>
 
     <p>
-      Then the problem can be written as
+      Then <xref ref="prob-matrix-lop-ex"/> can be written as
     </p>
 
 
@@ -89,7 +89,7 @@
 
     <p>
       <me>
-        \begin{aligned} \boldsymbol{c}_{\pi} \amp = \text{the $c$ varibles with respect to the basis variables} \\ \boldsymbol{c}_{\beta} \amp = \text{the $c$ varibles with respect to the parameters} \\ \end{aligned}
+        \begin{aligned} \boldsymbol{c}_{\pi} \amp = \text{the $c$ variables with respect to the basis variables} \\ \boldsymbol{c}_{\beta} \amp = \text{the $c$ variables with respect to the parameters} \\ \end{aligned}
       </me>
     </p>
 
@@ -148,7 +148,7 @@
     </p>
 
     <p>
-      For the intial tableau, <m>B = A</m> and <m>\Pi = I</m>
+      For the initial tableau, <m>B = A</m> and <m>\Pi = I</m>
     </p>
 
     <p>

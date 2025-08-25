@@ -139,7 +139,7 @@
       <li>
         <p>
           In phase II, using the simplex tableau, we need to examine the objective row.
-          In the matrix formulation, we need the coefficient of the parameters in this row and this corresponnds to <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}</m> and this is calculated for this basis as
+          In the matrix formulation, we need the coefficient of the parameters in this row and this corresponds to <m>\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}</m> and this is calculated for this basis as
         </p>
 
         <p>

@@ -10,7 +10,7 @@
     </li>
     <li>
       <p>
-        Defintion of the Standard Form of an LOP
+        Definition of the Standard Form of an LOP
       </p>
     </li>
     <li>
@@ -36,12 +36,12 @@
 
 
   <subsection xml:id="sect-def-lop">
-    <title>Defintions and Conventions</title>
+    <title>Definitions and Conventions</title>
 
     <definition xml:id="def-lop">
       <statement>
         <p>
-          A <term>Linear Optimization Problem</term><fn>This is not the most general form of such a problem.  We will see a general linear optimziation problem in <xref ref="ch-general-lops"/>.</fn> consists of
+          A <term>Linear Optimization Problem</term><fn>This is not the most general form of such a problem.  We will see a general linear optimization problem in <xref ref="ch-general-lops"/>.</fn> consists of
         </p>
 
         <p>

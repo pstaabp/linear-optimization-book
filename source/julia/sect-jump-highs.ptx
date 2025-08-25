@@ -26,7 +26,7 @@
     <p>
       If you haven't already, make sure the packages <c>JuMP</c> and <c>HiGHS</c> are installed.
       The <c>JuMP</c> package which allows optimization problems to be constructed with the variables, constraints and objective defined.
-      This package allows for many different types of problems to be contructed that fall outside of the realm of this book.
+      This package allows for many different types of problems to be constructed that fall outside of the realm of this book.
       The <c>JuMP</c> package only creates the problems, it does not do the work to optimize the problem.
       For that, we need the <c>HiGHS</c> package.
     </p>
@@ -75,7 +75,7 @@ m = Model(HiGHS.Optimizer)
     </program>
 
     <p>
-      will create a <c>JuMP</c> model and assign the <c>HiGHS.Optimzer</c> as the solver.<fn>We will always use this Model call throughout this book, however, if you are using <c>JuMP</c> for doing other solves, like a nonlinear minimization, then you will use a different package and it's related <c>Optimizer</c>.
+      will create a <c>JuMP</c> model and assign the <c>HiGHS.Optimizer</c> as the solver.<fn>We will always use this Model call throughout this book, however, if you are using <c>JuMP</c> for doing other solves, like a nonlinear minimization, then you will use a different package and it's related <c>Optimizer</c>.
       </fn> If the line above is the only expression in the cell, this returns the following:
     </p>
 
@@ -109,7 +109,7 @@ m = Model(HiGHS.Optimizer)
 
     <p>
       These lines adds the two variables <c>x₁</c> and <c>x₂</c> to the model and they are both nonnegative variables.
-      The subscripts are unicode characters that you can enter as <c>\_1</c>, then TAB inside a Jupyter notebook.
+      The subscripts are Unicode characters that you can enter as <c>\_1</c>, then TAB inside a Jupyter notebook.
       Also, the <m>\geq</m> character is entered as <c>\geq</c> then TAB.
       Neither are necessary, but make the constraints look like they do written out mathematically.
       If these are placed in a notebook cell then <m>x_2</m> is echoed out only.
@@ -191,7 +191,7 @@ m = Model(HiGHS.Optimizer)
 
     <p>
       <cd>
-      <cline>Running HiGHS 1.10.0 (git hash: fd8665394e): Copyright (c) 2025 HiGHS under MIT licence terms</cline>
+      <cline>Running HiGHS 1.10.0 (git hash: fd8665394e): Copyright (c) 2025 HiGHS under MIT license terms</cline>
       <cline>  LP   has 3 rows; 2 cols; 5 nonzeros</cline>
       <cline>  Coefficient ranges:</cline>
       <cline>    Matrix [1e+00, 4e+00]</cline>
@@ -226,7 +226,7 @@ m = Model(HiGHS.Optimizer)
     </p>
 
     <p>
-      If you supress the optimizer output (which should be done), you want to make sure that a solution is reached.
+      If you suppress the optimizer output (which should be done), you want to make sure that a solution is reached.
       If you enter
     </p>
 
@@ -371,7 +371,7 @@ m = Model(HiGHS.Optimizer)
     <title>Where's the Simplex Method</title>
 
     <p>
-      I know you are wondering what happend to the simplex method in this chapter.
+      I know you are wondering what happened to the simplex method in this chapter.
       We've spent a long chapter on how to create simplex tableaus and use them to step-by-step go through to the solution.
       We then spent another chapter on Integer problems with Cutting Planes and Branch and Bound, which use simplex method under the hood.
       With Julia and the JuMP and HiGHS packages, it seems totally unnecessary to learn all of that.
@@ -449,7 +449,7 @@ m = Model(HiGHS.Optimizer)
 
     <p>
       the result is <c>false</c>.
-      This may not be surprsing because we know it is unbounded.
+      This may not be surprising because we know it is unbounded.
       To see a bit more about what is happening, if we enter:
     </p>
 
@@ -496,7 +496,7 @@ m = Model(HiGHS.Optimizer)
       <cline> [3] assert_is_solved_and_feasible(model::Model)</cline>
       <cline>   @ JuMP ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1002</cline>
       <cline> [4] top-level scope</cline>
-      <cline>   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_df34fa98e69747e1a8f8a730347b8e2f_X25sZmlsZQ==.jl:3</cline>
+      <cline>   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_XXXX=.jl:3</cline>
       </cd>
     </p>
 
@@ -592,7 +592,7 @@ is_solved_and_feasible(m5)
           <cline> [3] assert_is_solved_and_feasible(model::Model)</cline>
           <cline>   @ JuMP ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1002</cline>
           <cline> [4] top-level scope</cline>
-          <cline>   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_df34fa98e69747e1a8f8a730347b8e2f_X31sZmlsZQ==.jl:1</cline>
+          <cline>   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_XXXX==.jl:1</cline>
           </cd>
         </p>
         <p>

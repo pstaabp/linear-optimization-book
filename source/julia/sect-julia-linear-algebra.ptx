@@ -105,7 +105,7 @@
     </p>
 
     <p>
-      and if you mulitiply incompatible matrices like <c>A*B</c> you will get the error:
+      and if you multiply incompatible matrices like <c>A*B</c> you will get the error:
     </p>
 
     <p>

@@ -29,7 +29,7 @@
   </introduction>
 
 
-  <subsection xml:id="sect-devel-dual">
+  <subsection xml:id="sect-develop-dual">
     <title>Developing a Dual Problem</title>
 
     <p>
@@ -80,77 +80,101 @@
     </p>
 
     <p>
-      Alternatively, if we take the 3rd equation and divide by 15, we can get
+      Another possible bound will be to multiply the first constraint by <m>3/2</m>, the second by <m>1/2</m> and the last by <m>1/15</m> or
+    </p>
+
+    <p>
+      <md>
+        <mrow>9 x_1 + \frac{15}{2} x_2 + 6 x_3 \amp \leq  \frac{549}{2} </mrow>
+        <mrow>\frac{3}{2}x_1 + 3 x_2 + \frac{7}{2} x_3 \amp \leq  102 </mrow>
+        <mrow> 3x_1 + 5x_2 + 6x_3 \amp \leq 177 </mrow>
+      </md>
+    </p>
+
+    <p>
+      If we add these three constraints:
     </p>
 
     <p>
       <me>
-        3x_1 + 5x_2 + 6x_3 \leq 177
+        \begin{aligned} \left(9 x_1 + \frac{15}{2} x_2 + 6 x_3  \right) + \amp \left(\frac{3}{2}x_1 + 3 x_2 + \frac{7}{2} x_3 \right) + \left(3x_1 + 5x_2 + 6x_3 \right) \\ \amp = \frac{27}{2} x_1 + \frac{31}{2} x_2 + \frac{31}{2} x_3 \\ \amp \leq \frac{549}{2} + 102 + 177 = 553.5 \end{aligned}
       </me>
     </p>
 
     <p>
-      And then if we take this equation and add the first two constraints to get
-    </p>
-
-    <p>
-      <me>
-        (6x_1+ 5x_2 + 4x_3) + (3x_1 + 6x_2 + 7x_3) + (3x_1 + 5x_2 + 6x_3) = 12 x_1 + 16 x_2 + 17 x_3 \leq 183+204+ 177 = 564
-      </me>
-    </p>
-
-    <p>
-      Since <m>z = 10 x_1 + 15 x_2 + 12 x_3 \leq 12 x_1 + 16 x_2 + 17 x_3</m>, we can conclude that <m>z \leq 564,</m> so this is a better bound than the previous one.
+      Since <m>z = 10 x_1 + 15 x_2 + 12 x_3 \leq \frac{27}{2} x_1 + \frac{31}{2} x_2 + \frac{31}{2} x_3 \leq 553.5  </m>, we can conclude that <m>z \leq 553.5,</m> so this is a better bound than the previous one.
     </p>
 
     <exercise>
       <statement>
         <p>
           Find another bound for <m>z</m>.
-          Can you beat $564?  You can take a single inequality and multiply through a constant or take a linear combination like the above example.
+          Can you beat $816?  How about $553.50?  You can take a single inequality and multiply through a constant or take a linear combination like the above example.
         </p>
       </statement>
     </exercise>
 
     <p>
-      If we consider any linear combination of the three inequalities, then let <m>y_1, y_2</m> and <m>y_3</m> be the arbitrary constants.
-      Then we can write three inequalities in <xref ref="eq-toymaker-lop"/> as
+      We arbitrarily picked some values to multiply the three constraints by to try to develop a bound.
+      Instead, if we use the variables <m>y_1, y_2</m> and <m>y_3</m> as factors, let's see what happens.
+      That is
     </p>
 
     <p>
-      <me>
+      <men xml:id="eq-dual-linear-comb">
         \begin{aligned}y_1 (6x_1 + 5x_2 + 4x_3) \leq 183 y_1 \\ y_2 (3x_1 + 6x_2 + 7x_3) \leq 204 y_2 \\ y_3 (45x_1 + 75x_2 + 90x_3) \leq 2655 y_3 \\ \end{aligned}
-      </me>
-    </p>
-
-    <p>
-      where it is important to note that <m>y_1, y_2, y_3</m> must all be nonnegative for the inequalities to hold.
-    </p>
-
-    <p>
-      We can then start with objective function <m>z</m> and set up some cascading inequalities as follows:
-    </p>
-
-    <p>
-      <men xml:id="eq-toymaker-cascade">
-        \begin{aligned} z \amp = 10 x_1 + 15 x_2 + 12 x_3 \\ \amp \geq  y_1 (6x_1 + 5x_2 + 4x_3) \\ \amp +  y_2 (3x_1 + 6x_2 + 7x_3) \\ \amp +  y_3 (45x_1 + 75x_2 + 90x_3) \\ \amp = x_1 (6 y_1 + 3 y_2 + 45 y_3)  \\ \amp + x_2 (5 y_1 + 6 y_2 + 75 y_3) \\ \amp + x_3 (4 y_1 + 7 y_2 + 90 y_3 ) \\ \amp \geq 183 y_1 + 204 y_2 + 2655 y_3 \end{aligned}
       </men>
     </p>
 
     <p>
-      where recall that the first inequality is that we wish to write the objective as a linear combination of existing inequalities, similar to the specific examples above.
-      In the bottom inequality in <xref ref="eq-toymaker-cascade"/>, since <m>x_1, x_2, x_3 \geq 0</m>, the coefficients of <m>x_1, x_2, x_3</m> must satisfy the inequalities based on the objective function (top line):
+      If we sum the left hand sides of these, to get
     </p>
 
     <p>
+      <men xml:id="eq-ex-dual-inequality-01">
+        \begin{aligned}
+         B \amp = (6x_1 + 5x_2 + 4x_3) y_1 + (3x_1 + 6x_2 + 7x_3) y_2 + (45 x_1 + 75 x_2 + 90 x_3) y_3 \\
+        \amp =  (6y_1 + 3y_2 + 45y_3) x_1 + (5y_1 + 6y_2 + 75y_3) x_2 + (4y_1 + 7y_2 + 90 y_3) x_3 \\   \end{aligned}
+      </men>
+    </p>
+<p>
+  where the terms have been rearranged to be factors of <m>x_1, x_2</m> and <m>x_3</m>.  From the the terms in <xref ref="eq-dual-linear-comb"/>, we have
+</p>
+<p>
+  <men xml:id="eq-ex-dual-inequality-02">
+    B \leq 183 y_1 + 204 y_2 + 2655 y_3
+  </men>
+</p>
+<p>
+  and we defined <m>w</m> to be the right hand side of this inequality.  Also, because <m>B</m> is also an upper bound on <m>z</m>, we have
+</p>
+<p><men xml:id="eq-ex-dual-inequality-03">
+  z = 10x_1 + 15x_2 + 12 x_3 \leq B </men>
+</p>
+<p>
+  Combining <xref ref="eq-ex-dual-inequality-01"/> and <xref ref="eq-ex-dual-inequality-03"/>, the result is
+</p>
+
+    <p>
       <me>
-        \begin{aligned} 6 y_1 + 3 y_2 + 45 y_3 \geq 10, \\ 5 y_1 + 6 y_2 + 75 y_3 \geq 15, \\ 4 y_1 + 7 y_2 + 90 y_3 \geq 12.
-        \end{aligned}
+        \begin{aligned} z \amp = 10 x_1 + 15 x_2 + 12 x_3 \\ \amp \leq (6y_1 + 3y_2 + 45y_3) x_1 + (5y_1 + 6y_2 + 75y_3) x_2 + (4y_1 + 7y_2 + 90 y_3) x_3 \end{aligned}
       </me>
     </p>
 
     <p>
-      If we define <m>w = 183 x_1 + 204 x_2 + 2655 x_3</m>, then we can determine the smallest bound for <m>z</m>, if we minimize <m>w</m>.
+      and since all variables are nonnegative, the coefficients of <m>x_1, x_2</m> and <m>x_3</m> satisfy:
+    </p>
+
+    <p>
+      <md>
+        <mrow> 6y_1 + 3 y_2 + 45 y_3 \amp \geq 10, </mrow>
+        <mrow> 5y_1 + 6y_2 + 75 y_3 \amp  \geq 15, </mrow>
+        <mrow>4y_1 + 7y_2 + 90 y_3 \amp \geq 12,</mrow>
+      </md>
+    </p>
+
+    <p>
+      If we define <m>w = 183 y_1 + 204 y_2 + 2655 y_3</m>, then we can determine the smallest bound for <m>z</m>, if we minimize <m>w</m>.
       Specifically, we can define the problem
     </p>
 
@@ -159,7 +183,7 @@
       <statement>
         <p>
           <me>
-            \begin{aligned} \text{Minimize} \amp \amp w = 183 x_1 + 204 x_2 + 2655 x_3, \amp \\ \text{subject to} \amp \amp 6 y_1 + 3 y_2 + 45 y_3 \amp \geq 12, \\ \amp \amp 5 y_1 + 6 y_2 + 75 y_3 \amp \geq 15, \\ \amp \amp 4 y_1 + 7 y_2 + 90 y_3 \amp \geq 12, \\ \text{and} \amp \amp y_1, y_2, y_3 \amp \geq 0.
+            \begin{aligned} \text{Minimize} \amp \amp w = 183 y_1 + 204 y_2 + 2655 y_3, \amp \\ \text{subject to} \amp \amp 6 y_1 + 3 y_2 + 45 y_3 \amp \geq 10, \\ \amp \amp 5 y_1 + 6 y_2 + 75 y_3 \amp \geq 15, \\ \amp \amp 4 y_1 + 7 y_2 + 90 y_3 \amp \geq 12, \\ \text{and} \amp \amp y_1, y_2, y_3 \amp \geq 0.
             \end{aligned}
           </me>
         </p>
@@ -169,6 +193,32 @@
     <p>
       This problem is called the <term>dual</term> of <xref ref="eq-toymaker-lop"/> and we will see in this section that there is an important relationship between a problem and its dual.
     </p>
+
+    <p>
+      We will see how the dual plays an important mathematical relationship to the original (primal) problem throughout the rest of this chapter, however, let's look at this example and interpret the new variables <m>y_1, y_2</m> and <m>y_3</m>.
+    </p>
+    <p>
+      First, note that <m>w</m> is the objective and it has the same units as <m>z</m> in the primal problem.  In the primal problem, the goal was to maximize the profit.  The unit of <m>w</m> is the same, but we are trying to minimize a cost.
+    </p>
+    <p>
+      Also recall that the coefficients of the dual objective are 183, 204 and 2655.  These represent the units of pine, units of birch and total hours of labor that are available.  The three <m>y</m> variables multiply these terms to give dollars so
+    </p>
+    <p>
+      <md>
+        <mrow> y_1 \amp = \text{profit/unit of birch} </mrow>
+        <mrow> y_2 \amp = \text{profit/unit of pine} </mrow>
+        <mrow> y_3 \amp = \text{profit/hour of labor}</mrow>
+      </md>
+    </p>
+
+    <p>
+      In this example, the terms are called the <term>marginal values</term> or <term>shadow prices</term>, which come from economics.  The value of <m>y_1</m> is the amount that the profit that can be earned for an extra unit of birch.  This is the same for <m>y_2</m> except for pine.  The value of <m>y_3</m> is the amount profit that could be made for an extra hour of labor.
+    </p>
+
+    <p>
+      Much more could be said about this and for certain problems, the analysis of this is helpful for businesses making decisions.
+    </p>
+
   </subsection>
 
 
@@ -176,7 +226,7 @@
     <title>Generalizing the Dual</title>
 
     <p>
-      Recall that in sect ??? we wrote an LOP in standard form as
+      Recall that in <xref ref="sect-lop-general"/> we wrote an LOP in standard form as
     </p>
 
 
@@ -196,14 +246,14 @@
     </p>
 
     <p>
-      <me>
-        \begin{aligned} \text{Maximize} \amp \amp z =  \boldsymbol{c}^{\intercal} \boldsymbol{x} \\ \text{subject to} \amp \amp A \boldsymbol{x} \leq \boldsymbol{b} \\ \text{and} \amp \amp \boldsymbol{x} \geq 0.
+      <men xml:id="eq-primal-matrix">
+        \begin{aligned} \text{Maximize} \amp \amp z =  \boldsymbol{c}^{\intercal} \boldsymbol{x}, \\ \text{subject to} \amp \amp A \boldsymbol{x} \leq \boldsymbol{b}, \\ \text{and} \amp \amp \boldsymbol{x} \geq 0.
         \end{aligned}
-      </me>
+      </men>
     </p>
 
     <p>
-      The dual of this problem can be written as
+      Notice that the coefficients of the variables throughout the dual problem are the same as the primal problem, but in different locations.
     </p>
 
 
@@ -212,7 +262,7 @@
 
       <p>
         <me>
-          \begin{aligned} \text{Minimize} \amp \amp w =  \sum_{i=1}^n b_i y_i \amp \\ \text{subject to} \amp \amp \sum_{i=1}^n a_{i,j} y_i \amp \geq c_i \qquad \text{for $1 \leq j \leq n$} \\ \text{and} \amp \amp y_i \amp \geq 0, \qquad \text{for $1 \leq i \leq m$} \end{aligned}
+          \begin{aligned} \text{Minimize} \amp \amp w =  \sum_{i=1}^n b_i y_i, \amp \\ \text{subject to} \amp \amp \sum_{i=1}^n a_{j,i} y_i \amp \geq c_i \qquad \text{for $1 \leq j \leq n$,} \\ \text{and} \amp \amp y_i \amp \geq 0, \qquad \text{for $1 \leq i \leq m$.} \end{aligned}
         </me>
       </p>
     </problem>
@@ -222,10 +272,10 @@
     </p>
 
     <p>
-      <me>
-        \begin{aligned} \text{Minimize} \amp \amp w =  \boldsymbol{b}^{\intercal} \boldsymbol{y} \\ \text{subject to} \amp \amp A^{\intercal} \boldsymbol{y} \geq \boldsymbol{c} \\ \text{and} \amp \amp \boldsymbol{y} \geq 0.
+      <men xml:id="eq-dual-matrix">
+        \begin{aligned} \text{Minimize} \amp \amp w =  \boldsymbol{b}^{\intercal} \boldsymbol{y}, \\ \text{subject to} \amp \amp A^{\intercal} \boldsymbol{y} \geq \boldsymbol{c}, \\ \text{and} \amp \amp \boldsymbol{y} \geq 0.
         \end{aligned}
-      </me>
+      </men>
     </p>
 
     <exercise>
@@ -242,7 +292,7 @@
 
         <p>
           <me>
-            \begin{aligned} \text{Minimize} \amp \amp w =  120 y_1 + 40 y_2 + 16 y_3 \amp \\ \text{subject to} \amp \amp  4y_1 + 2 y_2 \amp \geq 1 \\ \amp \amp  3y_1 + 2 y_2 + y_3 \amp \geq 3 \\ \text{and} \amp \amp y_1, y_2, y_3 \amp \geq 0, \end{aligned}
+            \begin{aligned} \text{Minimize} \amp \amp w =  120 y_1 + 40 y_2 + 16 y_3 \amp \\ \text{subject to} \amp \amp  4y_1 + 2 y_2 \amp \geq 1, \\ \amp \amp  3y_1 + 2 y_2 + y_3 \amp \geq 3, \\ \text{and} \amp \amp y_1, y_2, y_3 \amp \geq 0, \end{aligned}
           </me>
         </p>
 
@@ -262,7 +312,7 @@
 
         <p>
           <me>
-            \begin{array}{r} 1 \mapsto 4, \\ 2 \mapsto 5, \\ 5 \mapsto 1 \end{array} \qquad \left[\begin{array}{rrr|rrr|r} 2 \amp 0 \amp -2 \amp -2 \amp 2 \amp 0 \amp 0\\ 4 \amp 2 \amp 0 \amp -1 \amp 0 \amp 0 \amp 3\\ \hline 80 \amp 0 \amp 32 \amp 40 \amp 0 \amp 2 \amp -120\\ \end{array} \right]
+            \begin{array}{r} 1 \mapsto 4, \\ 2 \mapsto 5, \\ 5 \mapsto 1, \end{array} \qquad \left[\begin{array}{rrr|rrr|r} 2 \amp 0 \amp -2 \amp -2 \amp 2 \amp 0 \amp 0\\ 4 \amp 2 \amp 0 \amp -1 \amp 0 \amp 0 \amp 3\\ \hline 80 \amp 0 \amp 32 \amp 40 \amp 0 \amp 2 \amp -120\\ \end{array} \right]
           </me>
         </p>
 
@@ -272,8 +322,12 @@
 
         <p>
           <me>
-            \boldsymbol{y} = \frac{1}{2} \left[\begin{array}{rrr|rr} 0 \amp 3 \amp 0 \amp 0 \amp 0 \end{array}\right].
+            \boldsymbol{y} = \frac{1}{2} \left[\begin{array}{rrr|rr} 0 \amp 3 \amp 0 \amp 0 \amp 0 \end{array}\right],
           </me>
+        </p>
+
+        <p>
+          and the objective for this is <m>w=-z = 120</m>.
         </p>
       </solution>
     </exercise>
@@ -284,26 +338,33 @@
     <title>Weak Primal-Dual Theorem</title>
 
     <p>
-      A generalization of the inequalities in <xref ref="eq-toymaker-cascade"/> is the following.
+      In the specific problem that we defined the dual in this section in the inequalities in <xref ref="eq-ex-dual-inequality-01"/>, <xref ref="eq-ex-dual-inequality-02"/> and <xref ref="eq-ex-dual-inequality-03"/>.  Using the general primal and dual problems, we can set up the following inequalities:
     </p>
 
     <p>
-      <men xml:id="eq-objective-inequalities">
-        z = \boldsymbol{c}^{\intercal} \boldsymbol{x} \leq (A^{\intercal} \boldsymbol{y})^{\intercal} \boldsymbol{x} = \boldsymbol{y}^{\intercal} A \boldsymbol{x} \leq \boldsymbol{y}^{\intercal} \boldsymbol{b} = w
-      </men>
+      <md>
+        <mrow xml:id="eq-objective-inequality-01" number="yes"> z \; = \; \amp \boldsymbol{c}^{\intercal} \boldsymbol{x} </mrow>
+        <mrow xml:id="eq-objective-inequality-02" number="yes"> \; \leq \;\amp (A^{\intercal} \boldsymbol{y})^{\intercal} \boldsymbol{x}  </mrow>
+        <mrow xml:id="eq-objective-inequality-03" number="yes"> \; = \; \amp \boldsymbol{y}^{\intercal} A \boldsymbol{x} </mrow>
+        <mrow xml:id="eq-objective-inequality-04" number="yes"> \;\leq\; \amp \boldsymbol{y}^{\intercal} \boldsymbol{b} = w </mrow>
+      </md>
+    </p>
+
+
+    <p>
+      where the equality in <xref ref="eq-objective-inequality-01"/> arises from the objective function in <xref ref="eq-primal-matrix"/>.  The inequality in <xref ref="eq-objective-inequality-02"/> is a result of
+      the inequality in <xref ref="eq-dual-matrix"/>.
+      The equality in <xref ref="eq-objective-inequality-03"/> is
+      the property of transposes of matrices and the inequality in <xref ref="eq-objective-inequality-04"/> is the inequality constraint from the Primal problem in <xref ref="eq-primal-matrix"/>.  Finally the last equality is from the objective in <xref ref="eq-dual-matrix"/>.
     </p>
 
     <p>
-      where the first inequality arises from the Dual problem, the equality in the middle is a result of the property of transposes of matrices and the last inequality is from the Primal problem..
-    </p>
-
-    <p>
-      If we examine the inequalities in <xref ref="eq-objective-inequalities"/>, this is true for any <m>\boldsymbol{x}</m> and <m>\boldsymbol{y}</m> that satisfy the constraints in the primal and dual problems, respectively.
+      If we examine the inequalities in <xref ref="eq-objective-inequality-01"/>, this is true for any <m>\boldsymbol{x}</m> and <m>\boldsymbol{y}</m> that satisfy the constraints in the primal and dual problems, respectively.
       In short, <m>\boldsymbol{x}</m> and <m>\boldsymbol{y}</m> must be feasible points.
     </p>
 
     <p>
-      One of the results of <xref ref="eq-objective-inequalities"/> is the relationship
+      The results of this is summarized as the following.
     </p>
 
     <theorem xml:id="thm-weak-primal-dual">
@@ -324,62 +385,69 @@
 
       <proof>
         <p>
-          This is a direct result of the inequalities in <xref ref="eq-objective-inequalities"/>.
+          This is a direct result of the inequalities in <xref ref="eq-objective-inequality-01"/><ndash/><xref ref="eq-objective-inequality-04"/>.
         </p>
       </proof>
     </theorem>
 
     <p>
-      As an example, in <xref ref="sect-devel-dual"/>, some attempts to find a bound on the maximum profit from Luis the toymaker.
+      As an example, in <xref ref="sect-develop-dual"/>, some attempts to find a bound on the maximum profit from Luis the toymaker.
       For example, the first bound of $816 was found by taking the second constraint and multiplying it by 4, which is a feasible point in the dual problem.
       The second bound of $564 was found by taking a linear combination of the first two constraints.
-      The first bound is actually <m>\boldsymbol{y} = [0~4~0]^{\intercal}</m> and the second bound is <m>\boldsymbol{y} = [1~1~\frac{1}{15}]^{\intercal}</m>.
+      The first bound is actually <m>\boldsymbol{y} = [0~4~0]^{\intercal}</m> and the second bound is <m>\boldsymbol{y} = [\frac{3}{2}\;\;\frac{1}{2}\;\;\frac{1}{15}]^{\intercal}</m>.
     </p>
+
     <p>
-      The bounds can be calculated by using the objective function in the dual problem in <xref ref="prob-toymaker-dual"/>. For the first bound:
+      The bounds can be calculated by using the objective function in the dual problem in <xref ref="prob-toymaker-dual"/>.
+      For the first bound:
     </p>
+
     <p>
       <me>
         w = 183 \cdot 0 + 204 \cdot 4 + 2655 \cdot 0 = 816.
       </me>
     </p>
+
     <p>
       and for the second bound:
     </p>
+
     <p>
       <me>
-        w = 183 \cdot 1 + 204 \cdot 1 + 2655 \cdot \frac{1}{15} = 564.
+        w = 183 \cdot \frac{3}{2} + 204 \cdot \frac{1}{2} + 2655 \cdot \frac{1}{15} = 564.
       </me>
     </p>
+
     <exercise>
       <statement>
         <p>
           For these two bounds, show that the value of <m>\boldsymbol{y}</m> are feasible points in the dual problem.
         </p>
       </statement>
+
       <solution>
         <p>
           For the first bound, we have
         </p>
+
         <p>
           <me>
-            \begin{aligned} 6 \cdot 0 + 3 \cdot 4 + 45 \cdot 0 \amp \geq 12 \\
-            5 \cdot 0 + 6 \cdot 4 + 75 \cdot 0 \amp \geq 15 \\
-            4 \cdot 0 + 7 \cdot 4 + 90 \cdot 0 \amp \geq 12.
+            \begin{aligned} 6 \cdot 0 + 3 \cdot 4 + 45 \cdot 0 = 12 \amp \geq 12 \\ 5 \cdot 0 + 6 \cdot 4 + 75 \cdot 0 = 24 \amp \geq 15 \\ 4 \cdot 0 + 7 \cdot 4 + 90 \cdot 0 = 28 \amp \geq 12.
             \end{aligned}
           </me>
         </p>
+
         <p>
           and for the second bound, we have
         </p>
+
         <p>
           <me>
-            \begin{aligned} 6 \cdot 1 + 3 \cdot 1 + 45 \cdot \frac{1}{15} \amp = 6 + 3 + 3 = 12 \geq 12 \\
-            5 \cdot 1 + 6 \cdot 1 + 75 \cdot \frac{1}{15} \amp = 5 + 6 + 5 = 16 \geq 15 \\
-            4 \cdot 1 + 7 \cdot 1 + 90 \cdot \frac{1}{15} \amp = 4 + 7 + 6 = 17 \geq 12.
+            \begin{aligned} 6 \cdot \frac{3}{2} + 3 \cdot \frac{1}{2} + 45 \cdot \frac{1}{15} \amp = 9 + 1.5 + 3 = 13.5 \geq 12 \\
+            5 \cdot \frac{3}{2} + 6 \cdot \frac{1}{2} + 75 \cdot \frac{1}{15} \amp = 7.5 + 3 + 5 =  15.5 \geq 15 \\
+            4 \cdot \frac{3}{2} + 7 \cdot \frac{1}{2} + 90 \cdot \frac{1}{15} \amp = 6 + 3.5 + 6 = 15.5 \geq 12.
             \end{aligned}
           </me>
-
         </p>
       </solution>
     </exercise>

@@ -45,7 +45,7 @@
     </figure>
 
     <p>
-      She wishes to travel in a manner to minimize the total distance travelled and not travel through any town more than once.
+      She wishes to travel in a manner to minimize the total distance traveled and not travel through any town more than once.
     </p>
 
     <p>
@@ -198,7 +198,7 @@
 
 
   <subsection xml:id="sect-min-piecewise-linear">
-    <title>Minimizing Piecewise Linear Fucntions</title>
+    <title>Minimizing Piecewise Linear Functions</title>
 
     <p>
       Let's consider minimizing <m>f(x) = |2x-4|</m>, which has the graph:
@@ -252,7 +252,7 @@
     </p>
 
     <p>
-      and then as a simplex tableu as
+      and then as a simplex tableau as
     </p>
 
     <p>
@@ -443,7 +443,7 @@
       where the line (in red) is possible best fit line.
     </p>
     <p>
-      A common way to find the line is to minimize the error between the line and the data in a <em>least-squares</em> sense, in which the sum of squares of differenceces between the data and the line or
+      A common way to find the line is to minimize the error between the line and the data in a <em>least-squares</em> sense, in which the sum of squares of differences between the data and the line or
     </p>
     <p>
       <me>

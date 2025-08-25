@@ -50,7 +50,7 @@
 
     <p>
       When most mathematics students are asked about lines, the response is <m>y=mx+b</m>, the <term>slope-intercept form</term> of the line.
-      This is often presented in a precalculus class in which linear functions fall from this naturally.
+      This is often presented in a Precalculus class in which linear functions fall from this naturally.
       However, not all lines can be written in this form.
       The exception is vertical lines, like <m>x=1</m>.
     </p>
@@ -317,7 +317,7 @@
 
     <p>
       From <xref ref="tab-regions"/>, region 2 satisfies both inequalities.
-      Therfore this is the feasible set.
+      Therefore this is the feasible set.
     </p>
 
     <p>
@@ -326,7 +326,7 @@
     </p>
 
     <p>
-      <alert>Technique #2: Cross Out Regions</alert> Instead, we start with one region and then cross out the region not in the feasible set.  Each subsequent inquality, we repeat and the only region not crossed out is the feasible set.  Performing this technique with the same pair of equalities, we'll start with the inequality <m>3x+4y \leq 12</m>.  We've already seen this and will cross out the region in the northeast part.
+      <alert>Technique #2: Cross Out Regions</alert> Instead, we start with one region and then cross out the region not in the feasible set.  Each subsequent inequality, we repeat and the only region not crossed out is the feasible set.  Performing this technique with the same pair of equalities, we'll start with the inequality <m>3x+4y \leq 12</m>.  We've already seen this and will cross out the region in the northeast part.
     </p>
 
     <figure xml:id="fig-example-inequality-2">
@@ -711,7 +711,7 @@ draw(surface(pl6), surfacepen = material(gray+opacity(0.5)));
       To get a sense of this, the sets consisting of the interior of the following objects are convex:
     </p>
 
-    <figure xml:id="fig-convex-objs">
+    <figure xml:id="fig-convex-objects">
       <caption>Examples of convex sets (interiors of circles and polygons).  Example line segments are shown within the figures.   </caption>
       <image width="75%">
         <shortdescription>
@@ -732,15 +732,15 @@ draw(surface(pl6), surfacepen = material(gray+opacity(0.5)));
     </figure>
 
     <p>
-      Although example line segments are shown drawn within the figures in <xref ref="fig-convex-objs"/>, recall that in order to be convex, all line segments need to be within the set, not just an example line segment.
+      Although example line segments are shown drawn within the figures in <xref ref="fig-convex-objects"/>, recall that in order to be convex, all line segments need to be within the set, not just an example line segment.
     </p>
 
     <p>
-      However, the interior of the objects in <xref ref="fig-nonconvex-objs"/> are not.
+      However, the interior of the objects in <xref ref="fig-non-convex-objects"/> are not.
       A line is shown in blue with point endpoints that are in the set, but the are parts of the line that are not in the set.
     </p>
 
-    <figure xml:id="fig-nonconvex-objs">
+    <figure xml:id="fig-non-convex-objects">
       <caption>The interior of these shapes are not convex.  Example line segments are drawn which have points that are outside the shape (sets). </caption>
       <image width="75%">
         <shortdescription>
@@ -809,7 +809,7 @@ draw(surface(pl6), surfacepen = material(gray+opacity(0.5)));
       This showed that the linear inequality in <m>\mathbb{R}^2</m> is convex, however this is true in any dimension.
     </p>
 
-    <lemma xml:id="lem-lin-ineq-Rn">
+    <lemma xml:id="lem-lin-inequality-Rn">
       <statement>
         <p>
           Let <m>\boldsymbol{x} = (x_1, x_2, \ldots, x_n)</m> and <m>S = \{ \boldsymbol{x} \; | \; a_1 x_1 + a_2 x_2 + \cdots a_n x_n \leq c \}</m> for <m>a_1, a_2, \ldots, a_n, c</m> constants.

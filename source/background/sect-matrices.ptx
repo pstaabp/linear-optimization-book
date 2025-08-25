@@ -438,7 +438,7 @@
 
         <statement>
           <p>
-            If a linear system (<m>A</m>) is changed into a second linear system (<m>B</m>) by one of the elemenatary row operations then linear systems (<m>A</m>) and (<m>B</m>) have the same set of solutions.
+            If a linear system (<m>A</m>) is changed into a second linear system (<m>B</m>) by one of the elementary row operations then linear systems (<m>A</m>) and (<m>B</m>) have the same set of solutions.
           </p>
         </statement>
 
@@ -823,7 +823,7 @@
         </p>
 
         <p>
-          Lastly, we will make row 3, column 3 a 1 and then use this to eliminate the rest of the 3rd colun with
+          Lastly, we will make row 3, column 3 a 1 and then use this to eliminate the rest of the 3rd column with
         </p>
 
         <p>
@@ -838,7 +838,7 @@
       </solution>
     </example>
 
-    <exercise xml:id="ex-solve-traffice">
+    <exercise xml:id="ex-solve-traffic">
       <statement>
         <p>
           Put the linear system from <xref ref="eq-traffic" /> in a augmented coefficient matrix and use row operations to put the matrix in reduced row-echelon form.
@@ -900,7 +900,7 @@
 
     <p>
       The technique of getting a 1 somewhere in a column and 0's elsewhere is known as performing a <term>matrix pivot</term>.
-      In fact, this is what was done in <xref ref="ex-solve-lin-sys" /> and is the standard step in performing Gauss-Jordan Elimination in the goal to get a matrix in reduced row-echlon form.
+      In fact, this is what was done in <xref ref="ex-solve-lin-sys" /> and is the standard step in performing Gauss-Jordan Elimination in the goal to get a matrix in reduced row-echelon form.
     </p>
 
     <p>
@@ -951,7 +951,7 @@
       </fn>
     </p>
 
-    <algorithm xml:id="alg-fract-free-pivot">
+    <algorithm xml:id="alg-fraction-free-pivot">
       <title>Fraction Free Pivot</title>
 
       <statement>
@@ -1006,13 +1006,13 @@
     <example>
       <statement>
         <p>
-          Solve <xref ref="eq-row-ops1" /> using <xref ref="alg-fract-free-pivot" />.
+          Solve <xref ref="eq-row-ops1" /> using <xref ref="alg-fraction-free-pivot" />.
         </p>
       </statement>
 
       <solution>
         <p>
-          The first step use the matrix pivot in <xref ref="alg-fract-free-pivot" /> to perform a matrix pivot on row 1, column 1:
+          The first step use the matrix pivot in <xref ref="alg-fraction-free-pivot" /> to perform a matrix pivot on row 1, column 1:
         </p>
 
         <p>
@@ -1114,7 +1114,7 @@
 
         <p>
           Note that we didn't really need to do any steps here since the form was correctly.
-          However, for consistancy between steps, we did this anyway.
+          However, for consistency between steps, we did this anyway.
         </p>
 
         <p>

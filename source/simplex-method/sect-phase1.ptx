@@ -496,7 +496,7 @@
 
     <p>
       The first step moved the basic variable from the origin to the point <m>x_1=15, x_2=0</m>, which is point <m>A</m>.
-      However, note that this is still infeasble.
+      However, note that this is still infeasible.
       From the plot you can see that the side to the right of <m>x_5=0</m> is infeasible.
       This can also be seen in <xref ref="eq-phaseI-lop1"/> in that the negative number in the left column corresponds to the basic variable <m>x_5</m>.
     </p>
