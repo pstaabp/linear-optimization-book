@@ -61,5 +61,5 @@
 <use data-text="8" xlink:href="#font_3_8" transform="matrix(9.962899,0,0,-9.963496,46.454858,43.226716)"/>
 <path transform="matrix(1.00003,0,0,-1.00009,57.7912,153.41364)" stroke-width=".3985" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#000000" d="M-28.3468 99.21382 198.42766-14.17339"/>
 <path transform="matrix(1.00003,0,0,-1.00009,57.7912,153.41364)" stroke-width=".3985" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#000000" d="M-28.3468-66.14304 226.77448 18.89302"/>
-<path transform="matrix(1.00003,0,0,-1.00009,57.7912,153.41364)" stroke-width=".3985" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#ff0000" d="M-28.3468-56.69362 141.73404 113.38724"/>
+<path transform="matrix(1.00003,0,0,-1.00009,57.7912,153.41364)" stroke-width=".79701" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#ff0000" d="M-28.3468-56.69362 141.73404 113.38724"/>
 </svg>
