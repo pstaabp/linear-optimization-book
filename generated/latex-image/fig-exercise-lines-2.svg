@@ -100,9 +100,9 @@
 <path transform="matrix(1.00008,0,0,-1.00005,128.66585,139.23131)" stroke-width=".79701" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#000000" d="M-119.67691 56.69362H155.11043"/>
 <path transform="matrix(-1.00008,-0,0,1.00005,8.580826,82.53486)" stroke-width=".79701" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#000000" d="M-2.55046 3.11095C-2.0845 1.24435-1.04614 .36295 0 0-1.04614-.36295-2.0845-1.24435-2.55046-3.11095"/>
 <path transform="matrix(1.00008,0,0,-1.00005,284.18724,82.53486)" stroke-width=".79701" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#000000" d="M-2.55046 3.11095C-2.0845 1.24435-1.04614 .36295 0 0-1.04614-.36295-2.0845-1.24435-2.55046-3.11095"/>
-<use data-text="y" xlink:href="#font_1_2" transform="matrix(9.963397,0,0,-9.963098,257.35716,84.77659)"/>
-<use data-text="=" xlink:href="#font_3_5" transform="matrix(9.963397,0,0,-9.963098,265.3668,84.77659)"/>
-<use data-text="4" xlink:href="#font_3_4" transform="matrix(9.963397,0,0,-9.963098,275.86824,84.77659)"/>
+<use data-text="y" xlink:href="#font_1_2" transform="matrix(9.963397,0,0,-9.963098,272.8314,76.8782)"/>
+<use data-text="=" xlink:href="#font_3_5" transform="matrix(9.963397,0,0,-9.963098,280.84104,76.8782)"/>
+<use data-text="4" xlink:href="#font_3_4" transform="matrix(9.963397,0,0,-9.963098,291.34248,76.8782)"/>
 <path transform="matrix(1.00008,0,0,-1.00005,128.66585,139.23131)" stroke-width=".79701" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="#000000" d="M-27.68369 131.84296 176.50443-4.28232"/>
 <path transform="matrix(-.83208659,-.5546977,-.5547143,.8320615,100.64837,7.160736)" stroke-width=".79701" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#000000" d="M-2.55046 3.11095C-2.0845 1.24435-1.04614 .36295 0 0-1.04614-.36295-2.0845-1.24435-2.55046-3.11095"/>
 <path transform="matrix(.83208659,.5546977,.5547143,-.8320615,305.516,143.7349)" stroke-width=".79701" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#000000" d="M-2.55046 3.11095C-2.0845 1.24435-1.04614 .36295 0 0-1.04614-.36295-2.0845-1.24435-2.55046-3.11095"/>
