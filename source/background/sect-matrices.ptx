@@ -962,7 +962,11 @@
 
         <p>
           Let <m>a_{i,j}</m> be the coefficient of a <m>m \times n</m> matrix (and an integer).
-          Then
+          If <m>a_{i,j} \lt 0</m>, then perform:
+          <me>
+            - R_i \to R_i.
+          </me>
+          Then the following row operations
         </p>
 
         <p>
@@ -973,14 +977,8 @@
 
         <p>
           will eliminate column <m>j</m>.
-          If in addition, the pivot is desired to be positive, then also apply the step
         </p>
 
-        <p>
-          <me>
-            - R_i \to R_i
-          </me>
-        </p>
 
         <p>
           Lastly, let <m>d</m> be the positive integer that is the <m>(i,j)</m> entry.

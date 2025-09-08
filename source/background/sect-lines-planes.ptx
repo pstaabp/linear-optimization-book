@@ -173,7 +173,7 @@
               \foreach \y in {-8,-7,...,-1,1,2,...,8}
                 \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
               \draw[<->,thick] (3,-8)--(3,8) node [above] {$x=3$};
-              \draw[<->,thick] (-8.5,4)--(11,4) node [ left] {$y=4$};
+              \draw[<->,thick] (-8.5,4)--(11,4) node [above] {$y=4$};
               \draw[<->,thick] (-2,{(24-2*(-2))/3}) -- (12.5,{(24-2*(12.5))/3}) node [pos = 0, left] {$-3x+4y=24$};
               \draw[<->,thick] (-8,{(12+3*(-8))/4}) -- (8,{(12+3*(8))/4}) node [pos=0, below right] {$2x+3y=24$};
           \end{tikzpicture}
@@ -192,11 +192,11 @@
     <p>
       Related to lines is that of linear inequalities.
       Consider the inequality <m>3x+ 4y \leq 12</m> and let <m>S</m> be the set of all points that satisfy the inequality.
-      The line <m> 3x+4y=12</m> cuts the <m>xy</m>-plane into two regions and in this case, the line is included in the set <m>S</m> along with the side of the line containing the origin.
+      The line <m> 3x+4y=12</m> cuts the <m>xy</m>-plane into two regions and in this case, the line is included in the set <m>S</m>.
     </p>
 
     <p>
-      So which side of the line satisfies the inequality? Since every point that is not on the line either satisfies the inequality or not, we can pick any point to determine this.
+      Which side of the line satisfies the inequality? Since every point that is not on the line either satisfies the inequality or not, we can pick any point to determine this.
       For example in the line <m>3x+4y=12</m> above, an easy point to pick is <m>(0,0)</m> and since <m>3(0)+4(0) \leq 12</m> is true, then the side of the line containing the origin is in the set.
       The following is plot:
     </p>
@@ -308,7 +308,7 @@
 
         <row>
           <cell>4</cell>
-          <cell>(2,2)</cell>
+          <cell>(3,2)</cell>
           <cell>false</cell>
           <cell>false</cell>
         </row>
@@ -317,7 +317,7 @@
 
     <p>
       From <xref ref="tab-regions"/>, region 2 satisfies both inequalities.
-      Therefore this is the feasible set.
+      Therefore this is the feasible set together with the lines that are the boundary of region 2.
     </p>
 
     <p>
@@ -548,7 +548,7 @@
     </figure>
 
     <p>
-      The feasible set is the interior of the polygon shown and therefore is bounded.
+      The feasible set is the interior of the polygon together with its boundary and appears to be bounded.
       In contrast, the feasible set in <xref ref="fig-feasible-set-unbounded"/> is not a polygon and the feasible set extends without bound.
       The definition below is more general for a feasible set in any dimension.
     </p>
@@ -560,7 +560,7 @@
     <definition xml:id="def-ball">
       <statement>
         <p>
-          A <term>ball</term> centered at the origin is the set points
+          A <term>ball</term> in <m>\mathbb{R}^n</m> centered at the origin is the set points
         </p>
 
         <p>
@@ -584,6 +584,7 @@
       <statement>
         <p>
           A feasible set, <m>F</m> in <m>\mathbb{R}^n</m> is <term>bounded</term>, if there exists a ball centered at the origin, <m>B</m> such that <m>F \subset B</m>.
+          If no ball exists, the set <m>F</m> is <term>unbounded</term>.
         </p>
       </statement>
     </definition>
