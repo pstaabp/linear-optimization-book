@@ -238,7 +238,7 @@
     </p>
 
     <p>
-      <alert>Technique 1: Graph the lines and Pick</alert>.   First, let's plot the two lines (ignoring the inequality) <m>y=x+1</m> and <m>3x+4y=12</m>.  The first line is in slope-intercept form and the second was plotted above.  A plot with both graphs is
+      <alert>Technique 1: Graph and Choose</alert>.   First, let's plot the two lines (ignoring the inequality) <m>y=x+1</m> and <m>3x+4y=12</m>.  The first line is in slope-intercept form and the second was plotted above.  A plot with both graphs is
     </p>
 
     <figure xml:id="fig-example-two-lines">
@@ -326,7 +326,7 @@
     </p>
 
     <p>
-      <alert>Technique #2: Cross Out Regions</alert> Instead, we start with one region and then cross out the region not in the feasible set.  Each subsequent inequality, we repeat and the only region not crossed out is the feasible set.  Performing this technique with the same pair of equalities, we'll start with the inequality <m>3x+4y \leq 12</m>.  We've already seen this and will cross out the region in the northeast part.
+      <alert>Technique #2: Cross Out Regions</alert> Instead, we start with one line and then cross out the region not in the feasible set.  Each subsequent inequality, we repeat.  After all inequalities are examined, the region (if one exists) that is not crossed out is the feasible set.  Performing this technique with the same pair of equalities, we'll start with the inequality <m>3x+4y \leq 12</m>.  We've already seen this and will cross out the region in the northeast part.
     </p>
 
     <figure xml:id="fig-example-inequality-2">
@@ -494,7 +494,7 @@
 
     <p>
       Another feature of feasible sets is that of being bounded.
-      For feasible sets in the plane, a feasible set that is a polygon (or technically the interior of a polygon), is bounded.
+      For feasible sets in the plane, a feasible set that is a polygon (interior as well as its boundary), is bounded.
       For example, in <xref ref="sect-geometry"/>, we will see the feasible set <m>F</m> be set defined by
     </p>
 
@@ -701,8 +701,11 @@ draw(surface(pl6), surfacepen = material(gray+opacity(0.5)));
 
       <p>
         <me>
-          L = \{ \boldsymbol{x} t + \boldsymbol{y} (1-t) \; | \; t \in [0,1]\}.
+          L = \{ \boldsymbol{x} (1-t) + \boldsymbol{y}t \; | \; t \in [0,1]\}.
         </me>
+      </p>
+      <p>
+        As <m>t</m> moves from 0 to 1, a point on <m>L</m> moves from <m>\boldsymbol{x}</m> to <m>\boldsymbol{y}</m>.
       </p>
     </note>
 
@@ -737,8 +740,8 @@ draw(surface(pl6), surfacepen = material(gray+opacity(0.5)));
     </p>
 
     <p>
-      However, the interior of the objects in <xref ref="fig-non-convex-objects"/> are not.
-      A line is shown in blue with point endpoints that are in the set, but the are parts of the line that are not in the set.
+      Some examples of sets that are not convex are shown in <xref ref="fig-non-convex-objects"/>.
+      A line is shown in blue with point endpoints that are in the set, but the are parts of the line that are not in the set.  Recall that a set that is not convex just needs a single line segment with endpoints in the set and some part of the line segment passes outside the set.
     </p>
 
     <figure xml:id="fig-non-convex-objects">
@@ -783,7 +786,7 @@ draw(surface(pl6), surfacepen = material(gray+opacity(0.5)));
 
         <p>
           <me>
-            x(t) = x_1 t + (1-t) x_2 \qquad y(t) = y_1 t + (1-t) y_2.
+            x(t) = x_1 (1-t) +  x_2 t \qquad y(t) = y_1 (1-t) +  y_2 t.
           </me>
         </p>
 
@@ -794,14 +797,14 @@ draw(surface(pl6), surfacepen = material(gray+opacity(0.5)));
 
         <p>
           <md>
-            <mrow>a (x_1 t + (1-t) x_2) + b(y_1 t + (1-t)y_2) \amp = t (a x_1 + b y_1) + (1-t) (a x_2 + b y_2) </mrow>
-            <mrow> \amp \leq tc + (1-t) c </mrow>
-            <mrow> \amp = tc+c-ct = c</mrow>
+            <mrow>a (x_1 (1-t) + x_2 t) + b(y_1 (1-t) + y_2 t) \amp =  (a x_1 + b y_1) (1-t) + (a x_2 + b y_2)  t</mrow>
+            <mrow> \amp \leq (1-t) c + t c </mrow>
+            <mrow> \amp = c-tc+ct = c</mrow>
           </md>
         </p>
 
         <p>
-          And since the both points <m>(x_1,y_1)</m> and <m>(x_2, y_2)</m> are in <m>S</m>, then <m>a (x_1 t + (1-t) x_2) + b(y_1 t + (1-t)y_2) \leq c</m>, the line segment is in <m>S</m>, therefore the set is convex.
+          And since the both points <m>(x_1,y_1)</m> and <m>(x_2, y_2)</m> are in <m>S</m>, then <m>a (x_1 (1-t) +  x_2 t) + b(y_1 (1-t) + y_2 t) \leq c</m>, the line segment is in <m>S</m>, therefore the set is convex.
         </p>
       </proof>
     </lemma>

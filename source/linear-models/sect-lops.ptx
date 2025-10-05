@@ -60,7 +60,7 @@
 
             <li>
               <p>
-                A set of nonnegative constraints on the variables.
+                A set of nonnegative constraints on all of the variables.
               </p>
             </li>
           </ul>

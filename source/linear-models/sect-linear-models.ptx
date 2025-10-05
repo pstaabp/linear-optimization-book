@@ -848,11 +848,15 @@
         The idea is that you have a knapsack (backpack) with limited capacity and you want to include as much as possible, whether that is volume, weight or some other measure (like scientific value).
       </p>
 
+      <p>
+        The next problem is interesting in that it asks about where to place items (in this case in a city).  At first glance this doesn't seem to be a linear optimization problem.
+      </p>
+
       <problem xml:id="prob-mailbox">
         <title>The Mailbox Problem</title>
         <statement>
           <p>
-            Consider a city that is 4 blocks by 6 blocks in a grid as shown below
+            Gridburg is 4 blocks by 6 blocks in a grid as shown below:
           </p>
           <figure xml:id="fig-gridburg">
             <caption></caption>
@@ -868,7 +872,7 @@
             </image>
           </figure>
           <p>
-            The postal chief wants to arrange mailboxes such that anywhere in the city, one does not need to walk any more than one block to reach a mailbox.  Where should the mailboxes be placed to minimize the number of mailboxes.<fn>This problem is a nod to Glenn Hurlbert, whose book <em>Linear Optimization: a Handbook</em> motivated this work.  The book had a number of problems in <em>Gridburg</em> a town on a grid like above.</fn>
+            The postal chief wants to arrange mailboxes such that anywhere in the city, one does not need to walk any more than two blocks to reach a mailbox.  If it is required that mailboxes be placed at intersections, where should the mailboxes be placed to minimize the number of mailboxes.<fn>This problem is a nod to Glenn Hurlbert, whose book <em>Linear Optimization: a Handbook</em> motivated this work.  The book had a number of problems in <em>Gridburg</em> a town on a grid like above.</fn>
           </p>
         </statement>
       </problem>
@@ -939,6 +943,10 @@
       <p>
         The first inequality is the column sum for every <m>j</m>, the second is the row sum for every <m>i</m>.
         The third and fourth are the diagonals that run from bottom left to upper right on the chessboard and the fifth and sixth are the upper left to lower right.
+      </p>
+
+      <p>
+        The Mailbox Problem in <xref ref="prob-mailbox"/> can be set up in a similar manner to that of the <m>n</m>-queens problem because we can write the variables as a binary variables of each intersection.  A one would indicate the presence of a mailbox and zero would not.  The constraints would be that the total number of mailboxes within two blocks of every intersection is at least 2.
       </p>
     </subsubsection>
   </subsection>
