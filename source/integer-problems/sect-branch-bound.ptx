@@ -365,10 +365,11 @@
   <subsection>
     <title>Systematic Branch and Bound Algorithm</title>
 
+
     <p>
       The key to this method is the <alert>splitting step</alert>, in which the feasible set on variable <m>i</m> is split into two pieces.
       Problem <m>PA</m> will be <m>P</m> with the additional constraint <m>x_i \leq \lfloor \hat{x}_i \rfloor</m>.
-      Problem <m>PB</m> will have the same constratints as <m>P</m> with the additional one <m> x_i \geq \lceil \hat{x}_i \rceil</m>.
+      Problem <m>PB</m> will have the same constraints as <m>P</m> with the additional one <m> x_i \geq \lceil \hat{x}_i \rceil</m>.
     </p>
 
     <p>
@@ -381,27 +382,30 @@
         <li>
           <p>
             Solve <m>P</m> using the simplex method.
-            If the optimal point is integral, stop, this is a solution.
+            If the optimal point is integral, stop, this is a possible solution.
           </p>
         </li>
 
         <li>
           <p>
-            Let <m>i=1</m>.
-            If the solution to <m>x_i</m> is not integral, call it <m>\hat{x}_i</m>.
-            Perform the splitting step and solve each one.
+            If the solution to <m>P</m> is not integral, let <m>x_i</m> be the smallest indexed non-integer solution.  Perform the splitting step and solve both <m>PA</m> and <m>PB</m>.
           </p>
         </li>
 
         <li>
           <p>
-            Repeat step #2 for the rest of the original variables.
+            If <m>PA</m> has an integer solution, note it's objective value.  If not repeat step #2.
           </p>
         </li>
 
         <li>
           <p>
-            This is now one level ...
+            If <m>PB</m> has an integer solution, note it's objective value.  If not repeat step #2.
+          </p>
+        </li>
+        <li>
+          <p>
+            Once all branches have resulted in integer solutions, is feasible or has an objective value smaller than the objective of a integer solution.  Select the largest integer for the solution.
           </p>
         </li>
       </ol>
@@ -608,7 +612,7 @@
         </p>
 
         <p>
-          and from the 3rd row, therre is no positive ratio of last column to parameter coefficients, so this tableau is infeasible.
+          and from the 3rd row, there is no positive ratio of last column to parameter coefficients, so this tableau is infeasible.
         </p>
 
         <p>
