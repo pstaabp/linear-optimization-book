@@ -1,0 +1,11 @@
+<chapter xml:id="ch-other-topics" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Other Topics in Linear Optimization</title>
+
+  <introduction>
+    <p>
+      Say some things here.
+    </p>
+  </introduction>
+
+  <xi:include href="./sect-uniqueness.ptx" />
+</chapter>

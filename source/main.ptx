@@ -18,6 +18,7 @@
     <xi:include href="./dual/ch-dual-problems.ptx" />
     <xi:include href="./general-lops/ch-general-lops.ptx" />
     <xi:include href="./matrix-formulation/ch-matrix-formulation.ptx" />
+    <xi:include href="./other-topics/ch-other-topics.ptx" />
     <!-- Include backmatter -->
     <xi:include href="./backmatter.ptx" />
   </book>

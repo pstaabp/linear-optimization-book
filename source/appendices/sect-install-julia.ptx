@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sect-getting-started-julia">
+  <title>Getting Started with Julia</title>
+
+  <introduction>
+    <p>
+      This appendix shows how to get started with using Julia.
+      The recommended way is first to install julia as described in <xref ref="sect-installing-julia"/>.
+      Then follow the steps in <xref ref="sect-installing-vscode"/> to install Visual Studio Code, an open-source text editor.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="sect-installing-julia">
+    <title>Downloading and Installing Julia</title>
+
+    <p>
+      At the top of <url href="https://www.julialang.org">the main Julia website</url>, click the green Download button, taking you to the downloads page.
+      At the top of this page, you will get a single line to copy paste into Terminal (MacOS or Linux) or PowerShell in Windows.
+      This will install a nice tool called <c>juliaup</c> which is a program that can update julia.
+      Note that all of the commands were run on a Mac (with a M1 chip) in fall 2025.
+      If you run these commands on a different platform at a different time, your results may vary a bit, including the versions that are out at the time.
+    </p>
+
+    <p>
+      Running the MacOS version results in
+    </p>
+
+    <figure xml:id="fig-juliaup-install">
+      <caption>Installing Juliaup</caption>
+      <image source="images/getting-started/juliaup-install.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      continuing with the default installation, hit yes and hopefully you see:
+    </p>
+
+    <p>
+      <cd>
+      <cline>Now installing Juliaup</cline>
+      <cline>Checking for new Julia versions</cline>
+      <cline>Installing Julia 1.12.0+0.aarch64.apple.darwin14</cline>
+      <cline>Checking standard library </cline>
+      <cline>notarization.............................................................done. </cline>
+      <cline>Configured the default Julia version to be 'release'.</cline>
+      <cline>Julia was successfully installed on your system.</cline>
+      <cline></cline>
+      <cline>Depending on which shell you are using, run one of the following</cline>
+      <cline>commands to reload the PATH environment variable:</cline>
+      <cline></cline>
+      <cline>  . /Users/XXXXX/.zshrc</cline>
+      </cd>
+    </p>
+
+    <p>
+      although the default version might be different.
+      There may be instructions to ensure that your system path is set up correctly.
+      Follow the details at the end of the installation process before continuing.
+      Each environment may be a bit different and the install script should detect it correctly and give you the right answers.
+    </p>
+
+    <p>
+      You can open the julia REPL (explain in detail below) by typing <c>julia</c> on the command line of Terminal or PowerShell.
+      You should see something like the following.
+    </p>
+
+    <figure xml:id="fig-repl">
+      <caption>Julia running in a terminal window</caption>
+      <image source="images/getting-started/REPL01.png">
+        <shortdescription>
+          Julia running in a terminal window
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Try <c>2+2</c> and hit ENTER.
+      You should see 4 and you're off and running.
+      Although this is way to run julia, it generally isn't the way most people use it and the next section will show this.
+      Also, the <c>juliaup</c> tool is a powerful way of managing more than one julia version or upgrading your current one.
+      See <xref ref="subsect-juliaup"/> for more information.
+    </p>
+  </subsection>
+
+
+  <subsection >
+    <title>Installing the IJulia package</title>
+
+    <p>
+      Managing packages will be discussed in depth in <xref ref="sect-julia-packages"/>, but one is needed before we do the next step.
+      Open the REPL by typing <c>julia</c> in a Terminal (on the Mac) or PowerShell (on a window machine).
+      Enter the following two lines:<fn></fn>
+    </p>
+
+    <p>
+      <cd>
+      <cline>using Pkg</cline>
+      <cline>Pkg.add("IJulia")</cline>
+      </cd>
+    </p>
+
+    <p>
+      This package allows an interactive (that's the "I") julia session to be established.
+      If there were no errors, you can exit out of Julia at this point with CTRL-D.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="sect-installing-vscode">
+    <title>Installing Visual Studio Code</title>
+
+    <p>
+      A nice environment to run Julia in an interactive manner is Visual Studio Code, often shortened to VScode.
+      If you haven't installed the <c>IJulia</c> package described in the section above, that should be done before installing VScode.
+    </p>
+
+    <p>
+      Visual Studio Code is an open-source text editor/integrated development environment (IDE) that has capability of handling many different languages.
+      The download and install is quite simple in that you should visit <url href="https://code.visualstudio.com">the VScode website</url>, click the <em>Download</em> button and install the standard way for your platform.
+      Opening the app, you should see something that looks like
+    </p>
+
+    <figure xml:id="fig-vscode">
+      <caption></caption>
+      <image source="images/getting-started/vscode.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      and it wouldn't hurt to go through the <em>Learn the Fundamentals</em> tutorial off the welcome page.
+    </p>
+
+    <p>
+      Since VSCode works with files on your local computer, it is fundamental to have a folder that VScode works from.
+      You should have or create a folder that is a project.
+      If you don't have one currently, use the Finder (MacOS) or Explorer (Windows) to create one inside your <c>Documents</c> folder called <c>My Project</c>.
+      Next, in VScode, go to <em>File</em>, <em>Add Folder to Workspace...</em> and navigate to the folder you just made.
+      You will be asked if you trust this folder.
+    </p>
+
+    <p>
+      Although you can use VScode to access the REPL or write files written in Julia, it's most powerful and flexible by running a notebook file.
+      To do this there are two ways to start a file:
+    </p>
+
+    <p>
+      <ol>
+        <li>
+          <p>
+            Open a new document (<em>File</em>, then <em>New File...</em>).
+            Then save it somewhere ending with <c>.ipynb</c> for example <c>test.ipynb</c>.
+            You should see a file that looks like
+          </p>
+
+          <image source="images/getting-started/ipynb.png">
+            <shortdescription>
+              A test.ipynb file.
+            </shortdescription>
+          </image>
+        </li>
+
+        <li>
+          <p>
+            Another way to start a file is to click on the top left sidebar button that looks like two file icons.
+            Create a new file inside the project by selecting the directory that you want it to go in.
+            (If nothing is selected it will go in the top-level).
+            Hover over the name of the project and click the icon that looks like a file with a +.
+            It will make a new file which you should name like <c>test.ipynb</c>.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      Next, in the upper right corner, you should see "Select Kernel".
+      In this case, select the Julia 1.12 kernel if you installed that.
+      If not, select one that was installed.
+    </p>
+
+    <p>
+      In the cell, enter <c>2+2</c> or some simple calculation.
+      Click the triangle (play button) or hit SHIFT-ENTER and this will evaluate the cell.
+      You should see the following:
+    </p>
+
+    <figure xml:id="fig-vscode-simple">
+      <caption></caption>
+      <image source="images/getting-started/notebook-start.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+  </subsection>
+
+
+  <subsection>
+    <title>Installing a VScode Extension</title>
+
+    <p>
+      VScode takes on other functionality with extensions.
+      To install a new extension click the four boxes (with the upper right one askew) and there is a box at the top for <em>Search Extensions</em>.
+      Enter <c>julia</c> here as shown:
+    </p>
+
+    <figure xml:id="fig-vscode-extensions">
+      <caption></caption>
+      <image width="50%" source="images/getting-started/vscode-extensions.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      Clicking on that opens an informational panel in VScode and toward the top, click <em>Install</em> and you will then have some additional support for Julia.
+    </p>
+
+    <p>
+      Repeat this for <em>Jupyter</em> which will also VScode to run Jupyter notebooks, which is how we are going to interact with Julia most of the time.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Running Julia code inside VScode</title>
+
+    <p>
+      When you create a new jupyter notebook (those with a <c>.ipynb</c> suffix), you are making a julia interactive notebook.
+      In short, this file format mixes text and code together and is quite easy to use and share with others.
+    </p>
+
+    <p>
+      If you have the notebook file that you made above, we'll keep working on that or you can make a new file (make sure it's suffix is <c>.ipynb</c>).
+    </p>
+
+    <p>
+      In an empty cell enter <c>a=3</c>, hit SHIFT-ENTER and then in a blank cell, enter <c>b=4</c> and then SHIFT-ENTER.
+      In yet another blank cell, enter <c>a+b</c> and you should see <c>7</c>.
+      Visually, this should look (this is in dark mode) like:
+    </p>
+
+    <figure xml:id="fig-vscode-first-steps">
+      <caption></caption>
+      <image source="images/getting-started/first-steps.png">
+        <shortdescription>
+          (for accessibility)
+        </shortdescription>
+      </image>
+    </figure>
+
+    <p>
+      A few things to note about a julia notebook in VScode:
+      <ul>
+        <li>
+          <p>
+            Each cell can have either a single or multiple lines of code.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            The output from the cell is visually below the cell.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            If there are multiple lines of code in a single cell, only the last command is echoed out.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            You can run (or rerun a cell) with either the triangle play button or if you are inside the cell or it is selected SHIFT-ENTER on the keyboard.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Notice that each cell has a number in [ ].
+            This is the order that the cells were evaluated and can help with troubleshooting.
+            The green check indicates that the cell has been run successfully.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            You can evaluate cells in different order and go back and rerun cells.
+            Try switching the top cell to <c>a=9</c>, re-evaluate it, then re-evaluate the bottom cell and the output should be 13.
+          </p>
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      There are also many things that can be done with the notebook.
+    </p>
+
+    <p>
+      <ul>
+        <li>
+          <p>
+            To create a new cell, you can hover the mouse above and below cells and get a few buttons pop up.
+          </p>
+
+          <image source="images/getting-started/add-cell.png">
+            <shortdescription>
+              (for accessibility)
+            </shortdescription>
+          </image>
+
+          <p>
+            <ul>
+              <li>
+                <p>
+                  The <c>+ Code</c> button adds a new cell that has code style, where the code language corresponds to the current kernel, which we selected when we first opened the file.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  The <c>+ Markdown</c> will make a Markdown cell.
+                  This is very useful for entering text, mathematics or other code that you don't want to run.
+                  This will be explain below.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  The <c>Generate</c> button will open a AI chat window to ask a question (generally to Co-pilot).
+                </p>
+              </li>
+            </ul>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            If you highlight a cell (note: don't click inside the cell, but on the outside), you'll see the left side highlighted in blue:
+          </p>
+
+          <image source="images/getting-started/highlight-cell.png">
+            <shortdescription>
+              (for accessibility)
+            </shortdescription>
+          </image>
+
+          <p>
+            At this point, there are options on the upper right to shift.
+            These are:
+          </p>
+
+          <p>
+            <ul>
+              <li>
+                <p>
+                  Triangle with up arrow: run all cells above (but not including) this cell
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Triangle with down arrow: run all cells below (and including) this cell.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  triple dots: lots of options.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  trash can: delete this cell.
+                </p>
+              </li>
+            </ul>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Once highlighted a cell can be dragged up and down as well.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            There are a number of keyboard shortcuts that can be done on a highlighted cell.
+            <url href="https://discourse.jupyter.org/t/most-useful-keyboard-shortcuts-for-notebook-lab/18113">This page</url> has quite a few helpful ones.
+            The page discusses jupyter notebook and jupyter lab (which is independent of VScode), but should work the same way.
+          </p>
+        </li>
+      </ul>
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Using the Julia REPL</title>
+
+    <introduction>
+      <p>
+        Although once you get everything set up, performing some actual work (mathematics) is easier to do in a jupyter notebook, there are times that the REPL can be helpful.
+        You can either open it up in Terminal (MacOS) or PowerShell (Windows), or directly in VScode.
+      </p>
+    </introduction>
+
+    <subsubsection>
+      <title>Opening a Julia REPL in VScode</title>
+
+      <p>
+        The <em>Julia REPL</em> is where you enter single julia statements.
+        A <url href="https://en.wikipedia.org/wiki/Read–eval–print_loop" visual="wikipedia">REPL</url> is short for Read-Eval-Print-Loop and is often a interpretative shell where you can enter commands in some language.
+        To get started, click on the REPL in VScode, either go to <em>Terminal</em>, <em>new Terminal</em> or <c>CTRL-`</c> or <c>CMD-J</c>.
+        This starts up julia and you should see:
+      </p>
+
+      <figure xml:id="fig-repl-startup">
+        <caption>REPL inside of VScode</caption>
+        <image source="images/getting-started/REPL01.png">
+          <shortdescription>
+            REPL inside of VScode
+          </shortdescription>
+        </image>
+      </figure>
+
+      <p>
+        Notice that it's ready for you to enter something with the <c>julia&gt;</c> prompt.
+      </p>
+
+      <p>
+        We will enter a few commands to get started.
+        All julia commands throughout the book will be written in a <c>monospace font</c> and it is a good idea to type along at the same time.
+      </p>
+
+      <p>
+        Enter <c>a=2</c> at one prompt and <c>b=3</c> at another prompt.
+        You will see the response of 2 and 3 as well.
+        Now enter <c>a+b</c> in a prompt and you should see the result 5.
+      </p>
+      <!--
+      <p>
+        Later in this chapter we do a simple plot, but need to load a package first.
+        Type <c>]</c> at a prompt and the julia prompt will turn into <c>(@1.11) pkg&gt;</c> which is the package manager mode.
+        First, type <c>up</c> to update all packages.
+        You will need to authenticate first.
+        Your default browser will automatically open and you will need to login.
+        After you authenticate, the browser will say that it was successful and you can close that tab.
+        Return to Atom and you should see that julia is updating some packages.
+        This may take a minute or so.
+      </p>
+      --> <!--
+      <p>
+        Next, we will install the <em>Plots</em> package.
+        At the <c>(@1.11) pkg&gt;</c> prompt, type <c>add Plots</c>.
+        Julia will need to add a lot of other packages, but you won't need to worry about this.
+        We will use this in the next section.
+        We will also learn much more about packages in <xref ref="sect-julia-packages"/>.
+      </p>
+
+      <p>
+        To exit the package manager mode, enter CONTROL-C.
+        You will leave this mode and return to julia prompt.
+      </p>
+      -->
+    </subsubsection>
+
+    <subsubsection>
+      <title>Opening a REPL in Terminal or PowerShell</title>
+
+      <p>
+        Alternatively, if you just want julia running and don't need the full VScode environment, use Terminal (on MacOS) or PowerShell (on windows).
+        Generally search for these programs to open them or find the icon.
+      </p>
+
+      <p>
+        Once Terminal or PowerShell is open, type <c>julia</c> and this should look the same as above.
+        Try the same commands as in the previous section.
+      </p>
+    </subsubsection>
+  </subsection>
+  <!--
+  <section>
+    <title>using the <c>Repl.it</c> website</title>
+
+    <introduction>
+      <p>
+        To get started immediately with julia, we can use the <url href="https://repl.it" visual="repl.it">http://repl.it</url> website.
+        Navigate to that in a browser and set yourself up with an account to get started.
+        You will answer a number of questions including languages that you are interested in.
+        At the end, you can click the big blue button in the top right corner <c>+ new repl</c> to get a playground.
+        Select \text{julia} for the language.
+        You should get something that looks like:
+      </p>
+
+      <figure xml:id="fig-repl-it">
+        <caption>Screenshot of Repl.it</caption>
+        <image source="images/getting-started/repl.it.png">
+          <shortdescription>
+            Screenshot of Repl.it
+          </shortdescription>
+        </image>
+      </figure>
+
+      <p>
+        The idea with the website is that you can have files (for julia files, they end in <c>.jl</c>) which are listed on the left side.
+        The middle is the current file being edited (and by default this is called <c>main.jl</c>) and then the REPL which has either output from the run file or by entering commands is on the right side.
+      </p>
+
+      <p>
+        Try entered <c>2+2</c> in the right side and hitting ENTER.
+        You'll see 4 and this means that everything seems to be working.
+      </p>
+    </introduction>
+
+
+    <subsection>
+      <title>Limitations of <c>Repl.it</c></title>
+
+      <p>
+        Although <c>Repl.it</c> is nice when starting out, there's a number of limitations:
+      </p>
+
+      <p>
+        <ul>
+          <li>
+            <p>
+              Since it is a website, you must have internet access.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Also, since it is a website, there is latency, that is it may appear that commands and actions don't happen right away.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              It doesn't appear to use the latest version of julia (or probably any language).
+              When you're starting out, this isn't that important, but you may be trying to find a feature that was newly released that isn't on <c>Repl.it</c>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Many of the advanced features of julia don't work quite including the parallel processing and GPU features.
+            </p>
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        In short, if you are just starting in julia or trying it out, it's a good way to start, but I would download your own version of it as soon as you can.
+      </p>
+    </subsection>
+  </section>
+  --> <!--
+  <section>
+    <title>Downloading and running Jupyter</title>
+
+    <introduction>
+      <p>
+        A Jupyter<fn>Jupyter stands for <em>Ju</em>lia, <em>Pyt</em>hon and <em>R</em>, three languages that run inside these notebooks, although there are plenty of others.</fn> notebook is a way to run julia within a webpage interface and is quite easy, but powerful to use.
+      </p>
+
+      <p>
+        It's not trivial to install, but once there are a couple of hurdles, it should be smooth.
+        In short, you need to start with a python version on your machine.
+      </p>
+    </introduction>
+
+
+    <subsection>
+      <title>Installing Jupyter on Mac</title>
+
+      <introduction>
+        <p>
+          There are a few things that you'll need to get a Jupyter browser: 1) a python interpreter and some packages and 2) the <c>IJulia</c> package for julia.
+        </p>
+      </introduction>
+
+      <subsubsection>
+        <title>Installing Python</title>
+
+        <p>
+          Although python is currently available on MacOS, it is an old version.
+          There are a number of ways to get python, but I will use <c>homebrew</c> do to this.
+        </p>
+
+        <p>
+          <ol>
+            <li>
+              <p>
+                Install Homebrew from \url{https://brew.sh}.
+                Open the Terminal and then enter:
+              </p>
+
+              <p>
+                <cd>
+                <cline>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"</cline>
+                </cd>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Install python by entering in a terminal:
+              </p>
+
+              <p>
+                <cd>
+                <cline>brew install python</cline>
+                </cd>
+              </p>
+
+              <p>
+                There are a number of related packages needed as well, but after a few minutes you should have python installed.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Install jupyter and jupyter lab:
+              </p>
+
+              <p>
+                <cd> pip3 install jupyterlab </cd>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </subsubsection>
+
+      <subsubsection>
+        <title>Installing IJulia</title>
+
+        <p>
+          <c>IJulia</c> is a julia package for interaction.  It is installed like all other packages and details are in <xref ref="sect-julia-packages"/>, however you can do
+          <cd>
+          <cline>using Pkg</cline>
+          <cline>Pkg.add("IJulia")</cline>
+          </cd>
+        </p>
+      </subsubsection>
+
+      <subsubsection>
+        <title>Running Jupyter</title>
+
+        <p>
+          Lastly, to run <c>jupyter</c>, in a terminal, enter
+        </p>
+
+        <p>
+          <cd>
+          <cline>jupyter lab</cline>
+          </cd>
+        </p>
+
+        <p>
+          and that should automatically open your default browser and start Jupyter in the current directory.
+          If all works well, you should see:
+        </p>
+
+        <figure xml:id="fig-jupyter">
+          <caption>Jupyter</caption>
+          <image source="images/getting-started/jupyter.png">
+            <shortdescription>
+              jupyter
+            </shortdescription>
+          </image>
+        </figure>
+      </subsubsection>
+    </subsection>
+  </section>
+
+  <section>
+    <title>Using Jupyter</title>
+
+    <p>
+      Jupyter looks and acts like a web app.
+      There is a menu bar at the top, a tool bar on the left side, a sidebar on the left part of the page and the main screen (which starts with a launcher).
+    </p>
+  </section>
+  -->
+  <subsection xml:id="sect-kernel">
+    <title>The kernel</title>
+
+    <introduction>
+      <p>
+        With the discussion about running Julia in this chapter, there are two main ways that we have discussed passing commands to Julia: using the REPL and using a jupyter notebook in VScode.
+      </p>
+
+      <p>
+        In many ways, julia is a program like any other that you run on your computer, however because of the nature of it parsing statements and then giving output, you have to think about it a bit differently.
+        When you start julia, we often will say that you are starting the kernel, which is a basic state which you can feed variables and statements to julia and get output.
+        In both the REPL and a jupyter notebook, there are statements sent to a program (the kernel) and there is a response.
+      </p>
+
+      <p>
+        The REPL is actually a simple interface to the kernel in which the commands and output appear on consecutive lines of the window.
+        In contrast, the jupyter notebook separates the input into cells and the output below each cell.
+        As we well see, the output can also contain plots and scrollable tables in a jupyter notebook.
+      </p>
+
+      <p>
+        The kernel stores variables, functions and modules in memory and accessing the variables with commands will, in short, answer the questions you're interested in solving.
+        The kernel doesn't have a way of removing variables, functions or modules, whereas often we will need to do so.
+        The best way is to restart the kernel, which basically means to shut down julia and restart.
+        It depends on how this you run julia.
+      </p>
+    </introduction>
+
+    <subsubsection>
+      <title>Restarting the Kernel in the julia REPL</title>
+
+      <p>
+        This is probably the simplest.
+        If you opened julia by launching the app by double-clicking an icon, just close the window and you stop the program.
+        Note: you lose everything that you have done, which is another reason why I don't use this often.
+        Then restart by reopening julia.
+      </p>
+
+      <p>
+        If you started julia from a terminal or PowerShell, quit julia using CTRL-D.
+        Then restart julia with the command <c>julia</c>.
+      </p>
+    </subsubsection>
+
+    <subsubsection>
+      <title>Restarting the Kernel in VScode</title>
+
+      <p>
+        To restart the kernel in VScode click the <em>Restart</em> button at the top of the document.
+        Unfortunately there is not indication that anything happens, but reevaluating a cell should indicate that it has been restarted.
+        Note that the cells are numbers and should restart at 1.
+      </p>
+    </subsubsection>
+  </subsection>
+
+
+  <subsection xml:id="subsect-juliaup">
+    <title>More juliaup features</title>
+
+    <introduction>
+      <p>
+        We used the problem <c>juliaup</c> install julia on a machine.
+        Short for  <q>julia update</q>, it is a script that helps you install and update julia.
+        We can check what version of julia is running with <c>juliaup status</c> and after the install as above, we get:<fn>Recall that this section of the text was updated in Fall of 2025.
+        If you are reading this at a later date, your install version may differ.</fn>
+      </p>
+
+      <p>
+        <cd>
+        <cline> Default  Channel  Version                          Update </cline>
+        <cline>-----------------------------------------------------------</cline>
+        <cline>   *    release  1.12.0+0.aarch64.apple.darwin14         </cline>
+        </cd>
+      </p>
+
+      <p>
+        This shows all of the channels/versions that are installed and the * shows that the release channel (official current version).
+        As is common with software that manages versions, there are different <em>channels</em> available for julia.
+        We saw above that by default we installed the <em>release</em> channel.
+        This one is that julia developers feel is the current release.
+      </p>
+
+      <p>
+        There are a few other channels that can be installed:
+      </p>
+
+      <p>
+        <dl>
+        <li>
+          <title>beta</title>
+
+          <p>
+            This channel is the version of julia that is almost ready to be released.
+            It is often used for developers to test their packages or other users to test new features of a version.
+          </p>
+        </li>
+
+        <li>
+          <title>lts</title>
+
+          <p>
+            For users that need a very stable version of julia, the lts or long-term support channel is useful.
+            This version will often be quite stable and only get bugfixes over it's lifetime.
+          </p>
+        </li>
+
+        <li>
+          <title>nightly</title>
+
+          <p>
+            For users that want the bleeding edge, then the <c>nightly</c> channel will provide a version of julia with all new code checked in the previous day.
+          </p>
+        </li>
+
+        <li>
+          <title>1.x or 1.x.x</title>
+
+          <p>
+            You can also grab a particular version, say 1.11 or 1.10.7 of julia this way.
+          </p>
+        </li>
+        </dl>
+      </p>
+    </introduction>
+
+    <subsubsection>
+      <title>Adding another Channel</title>
+
+      <p>
+        Let's add one more channel to see how things work.
+        Perhaps we feel that 1.12 is a little buggy and we want to install 1.11.
+        Then we can do:
+      </p>
+
+      <p>
+        <cd>
+        <cline>juliaup add 1.11</cline>
+        </cd>
+      </p>
+
+      <p>
+        and you should see that 1.11 is being downloaded.
+        Once finished, checking the status with <c>juliaup status</c> results in
+      </p>
+
+      <p>
+        <cd>
+        <cline> Default  Channel  Version                              Update </cline>
+        <cline>---------------------------------------------------------------</cline>
+        <cline>          1.11     1.11.7+0.aarch64.apple.darwin14         </cline>
+        <cline>   *      release  1.12.0+0.aarch64.apple.darwin14              </cline>
+        </cd>
+      </p>
+
+      <p>
+        and this shows that there is now a 1.11 channel and the release channel is still default.
+        Note that there is no update.
+        If there was, you would see what version was available.
+        There are many other versions and channels available.
+        If you want to include the beta channel to see what's coming out next.
+        If you enter <c>juliaup add beta</c> and check the status then
+      </p>
+
+      <p>
+        <cd>
+        <cline> Default  Channel  Version                              Update </cline>
+        <cline>---------------------------------------------------------------</cline>
+        <cline>          1.11     1.11.7+0.aarch64.apple.darwin14         </cline>
+        <cline>          beta     1.12.0+0.aarch64.apple.darwin14 </cline>
+        <cline>   *      release  1.12.0+0.aarch64.apple.darwin14              </cline>
+        </cd>
+      </p>
+
+      <p>
+        And noticed that both <c>beta</c> and <c>release</c> are both using the same version<mdash/>this is common.
+      </p>
+
+      <exercise>
+        <statement>
+          <p>
+            Install the <c>lts</c> channel of julia.
+            What version is current for lts?
+          </p>
+        </statement>
+      </exercise>
+    </subsubsection>
+
+    <subsubsection>
+      <title>Updating Channels</title>
+
+      <p>
+        If you enter <c>juliaup status</c> and get something like:
+      </p>
+
+      <p>
+        <cd>
+        <cline> Default  Channel  Version                          Update                                              </cline>
+        <cline>--------------------------------------------------------------------------------------------------------</cline>
+        <cline>          1.11     1.11.7+0.aarch64.apple.darwin14                                                      </cline>
+        <cline>          beta     1.12.0+0.aarch64.apple.darwin14  Update to 1.12.1+0.aarch64.apple.darwin14 available </cline>
+        <cline>       *  release  1.12.0+0.aarch64.apple.darwin14  Update to 1.12.1+0.aarch64.apple.darwin14 available </cline>
+        </cd>
+      </p>
+
+      <p>
+        Where notice that there is something in the update column then that channel can be updated.
+        If this is the case, then <c>juliaup update</c> will update any channel to the current version in that channel.
+        The output will download and do some checking.
+        Here's some possible output:
+      </p>
+
+      <p>
+        <cd>
+        <cline>Checking for new Julia versions</cline>
+        <cline>Updating channel release</cline>
+        <cline>Installing Julia 1.12.1+0.aarch64.apple.darwin14</cline>
+        <cline>Checking standard library notarization.................................................</cline>
+        <cline>Precompiling packages  ╺━━━━━━━━━━</cline>
+        <cline>Precompiling SuiteSparse finished.</cline>
+        <cline>  1 dependency successfully precompiled in 2 seconds</cline>
+        <cline>............done.</cline>
+        <cline>Updating channel beta</cline>
+        <cline>Removed Julia 1.12.0+0.aarch64.apple.darwin14</cline>
+        </cd>
+      </p>
+
+      <p>
+        This took about 1 minute to do on a fast internet connection.
+        If you enter <c>juliaup status</c> the result is now:
+      </p>
+
+      <p>
+        <cd>
+        <cline> Default  Channel  Version                          Update </cline>
+        <cline>-----------------------------------------------------------</cline>
+        <cline>          1.11     1.11.7+0.aarch64.apple.darwin14         </cline>
+        <cline>          beta     1.12.1+0.aarch64.apple.darwin14         </cline>
+        <cline>       *  release  1.12.1+0.aarch64.apple.darwin14</cline>
+        </cd>
+      </p>
+
+      <p>
+        And notice in this example, that both the beta and release channels are now at version 1.12.1.
+      </p>
+    </subsubsection>
+
+    <subsubsection>
+      <title>Running a particular version of Julia</title>
+
+      <p>
+        If we run julia, as shown above, then we should get the 1.12 version.
+        Remember to use CTRL-D to get out of it.
+        If instead, we want to switch to the 1.11 version, then <c>juliaup default 1.11</c>.
+        After doing this, entering <c>julia</c> should show:
+      </p>
+
+      <figure xml:id="fig-repl2">
+        <caption>Julia running in a terminal window</caption>
+        <image source="images/getting-started/REPL02.png">
+          <shortdescription>
+            Julia running in a terminal window
+          </shortdescription>
+        </image>
+      </figure>
+
+      <p>
+        There is an alternative to running a julia REPL without switching the default version in <c>juliaup</c> and that is to pass the version to julia.
+      </p>
+
+      <p>
+        <cd>
+        <cline>julia +1.11</cline>
+        </cd>
+      </p>
+
+      <p>
+        will give a REPL running 1.11 as well.<fn>The feature of running more than one julia version is perhaps most helpful for developers of packages so they can be able to test their code in different versions of julia.
+        However, I sometimes am interested in new features and jump on beta versions to play with these features.
+        </fn>
+      </p>
+
+      <p>
+        There are other features of juliaup.
+        Entering <c>juliaup --help</c> gives quite a list of the options.
+      </p>
+    </subsubsection>
+  </subsection>
+</section>

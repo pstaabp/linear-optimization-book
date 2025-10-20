@@ -1,0 +1,158 @@
+<section xml:id="sect-uniqueness">
+  <title>Uniqueness of LOP Optimal Solutions</title>
+
+  <introduction>
+    <p>
+      Throughout this text, we have generally been interested in a solution to a problem.
+      However, there are times if we would like the solution to be unique or if it isn't unique, can we find other solutions.
+    </p>
+
+    <p>
+      Let's return to one of the first example we saw in this text in <xref ref="prob-lop1"/>.
+      The simplex method was developed and used to solve this in <xref ref="sect-tableau"/> and the final simplex tableau was listed in <xref ref="eq-tableau-LOP1-step4"/>, but reproduced here:
+      <me>
+        \left[\begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40\\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      The key to knowing that this is an optimal solution comes from the objective row:
+      <me>
+        \begin{aligned} x_4 + x_5 + z \amp = 56  \amp \amp \text{or} \amp z \amp =  56 - x_4 -x_5 \end{aligned}
+      </me>
+      and if either <m>x_4</m> or <m>x_5</m> is brought into the basis, then the value of the variables increases and the objective is decreased.
+      From this we can conclude that the solution
+      <me>
+        \boldsymbol{x} = \left[ \begin{array}{rr|rrr} 8 \amp 16 \amp 40 \amp 0 \amp 0 \end{array}\right]
+      </me>
+      is optimal and unique.
+    </p>
+
+    <p>
+      ADD some INFO RELATED TO THE DUAL.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Linear Optimization Problems with non-unique solutions</title>
+
+    <p>
+      Consider a seemingly minor change to <xref ref="prob-lop1"/>:
+    </p>
+
+
+    <problem xml:id="prob-lop1-revisit">
+      <statement>
+        <p>
+          <me>
+            \begin{aligned} \text{Maximize} \amp\amp z = 2x_1 + 4x_2,\amp \\ \text{subject to}\amp\amp 4x_1 + 3x_2 \amp \leq 120, \\ \amp \amp x_1 + 2x_2 \amp \leq 40, \\ \amp \amp x_2 \amp \leq 16, \\ \text{and} \amp \amp x_1, x_2 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+      </statement>
+    </problem>
+
+    <p>
+      If we solve this using the simplex method, the final tableau is
+      <me>
+        \left[\begin{array}{rr|rrrr|r} 5 \amp 0 \amp 2 \amp -3 \amp 0 \amp 0 \amp 120\\ 0 \amp 5 \amp -1 \amp 4 \amp 0 \amp 0 \amp 40\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40\\ \hline 0 \amp 0 \amp 0 \amp 10 \amp 0 \amp 5 \amp 400\\ \end{array} \right]
+      </me>
+    </p>
+
+    <p>
+      which has the solution:
+      <me>
+        \begin{aligned} \boldsymbol{x} \amp = \frac{1}{5}\left[ \begin{array}{rr|rrr} 120 \amp 40 \amp 0 \amp 0 \amp 40 \end{array}\right] \\ \amp  = \left[ \begin{array}{rr|rrr} 24 \amp 8 \amp 0 \amp 0 \amp 8\end{array}\right] \end{aligned}
+      </me>
+      and <m>z= 400/5 = 80</m>
+    </p>
+
+    <p>
+      This is an optimal solution because writing the objective as <m>z = 400 - 10x_4</m> shows that increasing <m>x_4</m> would decrease the objective.
+    </p>
+
+    <p>
+      But wait.
+      Looking at the objective, it does not depend on <m>x_3</m>, the other parameter.
+      So if we bring that into the basis, and removing <m>x_5</m> for the same reason we do in phase II, we get the following tableau:
+    </p>
+
+    <p>
+      <me>
+        \left[\begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40\\ \hline 0 \amp 0 \amp 0 \amp 2 \amp 0 \amp 1 \amp 80\\ \end{array} \right]
+      </me>
+      with the basic solution:
+      <me>
+        \boldsymbol{x} = \left[ \begin{array}{rr|rrr} 8 \amp 16 \amp  40 \amp 0 \amp 0 \end{array}\right]
+      </me>
+      and the objective is still <m>z=80</m>.
+    </p>
+
+    <p>
+      So it seems like we have two solutions that are optimal.
+      Are there just two solutions?  Let's take a look at the feasible set again.
+    </p>
+
+    <figure xml:id="fig-lop-1-revisit">
+      <caption>A plot of a feasible set of <xref ref="prob-lop1-revisit"/>
+      together with level sets of the objective function <m>z=2x_1+4x_2</m>.
+      </caption>
+      <image width="65%">
+        <latex-image>
+          <![CDATA[
+            \begin{tikzpicture}[scale=0.2]
+            \fill[lightgray] (0,0)--(30,0) -- (24,8) -- (8,16) -- (0,16) -- cycle;
+            \draw [->] (-2,0) -- (45,0) node [above right] {$x_2=0$};
+            \foreach \x in {5,10,...,30} \draw (\x,3pt) -- (\x,-3pt) node [below] {\x};
+            \draw [->] (0,-2) -- (0,32) node [above right] {$x_1=0$};
+            \foreach \y in {5,10,...,30} \draw (3pt,\y) -- (-3pt,\y) node [left] {\y};
+            \draw[<->,thick] (10, {(120-4*(10))/3}) -- (32, {(120-4*(32))/3})
+              node[pos=0, left]{$x_3=0$};
+            \draw[<->,thick] (-5, {(40-1*(-5))/2}) -- (45, {(40-1*(45))/2})
+              node[pos=0.75, above right] {$x_4=0$};
+            \draw[<->,thick] (-5,16) -- (45,16)
+              node [pos = 0.6, above]{$x_5=0$};
+            \foreach \s in {70,75,...,90}
+              \draw[<->] (-2, {(\s - 2*(-2))/4}) -- (40, {(\s-2*(40))/4});
+          \end{tikzpicture}
+          ]]>
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      There are 5 level sets plotted above and the middle one is when <m>z=80</m>, the optimal value found above.
+      In this case, the value of the objective along the upper right edge of the feasible set is always the same.
+      That is the objective value is the same for all values on the line segment between <m>(8,16)</m> and <m>(24,8)</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          Find other points along the line segment between <m>(8,16)</m> and <m>(24,8)</m> and show that the objective value is equal along there.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          Other points on this edge include <m>(10,15)</m>, <m>(14,13)</m> and <m>(20,10)</m>.
+          The value of the objective for each of these is 80.
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+
+
+  <subsection>
+    <title>Solutions of the 4-queens Problem</title>
+
+    <p>
+      In section ???, we
+    </p>
+
+    <p>
+      When <m>n=4</m>, the
+    </p>
+  </subsection>
+</section>

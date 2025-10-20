@@ -264,13 +264,13 @@
   </subsection>
 
 
-  <subsection xml:id="sect-julia-packages">
+  <subsection xml:id="subsect-julia-packages">
     <title>Packages in Julia</title>
 
     <p>
       Julia uses packages/modules for additional functionality.
       Some modules are built-in to Julia, like <c>LinearAlgebra</c>, which has a lot of additional matrix functions.
-      Other modules need to be downloaded.
+      Other modules need to be downloaded.  Further details are shown in <xref ref="sect-julia-packages"/>.
     </p>
 
     <p>
@@ -315,9 +315,5 @@
       </cd>
     </p>
 
-    <p>
-      If you want to find all permutations of a vector, then there is a <c>permutations</c> function that is in a package.
-      But if we try
-    </p>
   </subsection>
 </section>

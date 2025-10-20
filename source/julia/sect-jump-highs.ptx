@@ -1,5 +1,5 @@
 <section xml:id="sect-package-lop">
-  <title>Julia Packages for LOPs</title>
+  <title>Solving Linear Optimization Problems using Julia</title>
 
   <objectives>
     <ul>
@@ -20,7 +20,7 @@
   <introduction>
     <p>
       Before continuing, make sure you have some grasp of the Julia language as in <xref ref="sect-intro-julia"/><ndash/><xref ref="sect-julia-linear-algebra"/> especially the proper syntax.
-      Additionally, you should know how to install packages described in APPENDIX ???
+      Additionally, you should know how to install packages described in <xref ref="sect-julia-packages"/>.
     </p>
 
     <p>
@@ -329,7 +329,7 @@ m = Model(HiGHS.Optimizer)
           <code>
         set_silent(m2)
         optimize!(m2)
-        assert_is_solved_and_feasible(m2)
+        is_solved_and_feasible(m2)
           </code>
         </program>
 
@@ -456,7 +456,7 @@ m = Model(HiGHS.Optimizer)
 
     <program language="julia">
       <code>
-        assert_is_solved_and_feasible(m4)
+        solution_summary(m4)
       </code>
     </program>
 
@@ -466,8 +466,6 @@ m = Model(HiGHS.Optimizer)
 
     <p>
       <cd>
-      <cline>The model was not solved correctly. Here is the output of `solution_summary` to help debug why this happened:</cline>
-      <cline></cline>
       <cline>solution_summary(; result = 1, verbose = false)</cline>
       <cline>├ solver_name          : HiGHS</cline>
       <cline>├ Termination</cline>
@@ -482,27 +480,16 @@ m = Model(HiGHS.Optimizer)
       <cline>│ ├ dual_objective_value : 7.08065e+01</cline>
       <cline>│ └ relative_gap         : 7.00000e+01</cline>
       <cline>└ Work counters</cline>
-      <cline>  ├ solve_time (sec)   : 3.10550e-03</cline>
+      <cline>  ├ solve_time (sec)   : 2.45887e-03</cline>
       <cline>  ├ simplex_iterations : 2</cline>
       <cline>  ├ barrier_iterations : 0</cline>
       <cline>  └ node_count         : -1</cline>
-      <cline></cline>
-      <cline></cline>
-      <cline>Stacktrace:</cline>
-      <cline> [1] error(s::String)</cline>
-      <cline>   @ Base ./error.jl:44</cline>
-      <cline> [2] #assert_is_solved_and_feasible#102</cline>
-      <cline>   @ ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1008 [inlined]</cline>
-      <cline> [3] assert_is_solved_and_feasible(model::Model)</cline>
-      <cline>   @ JuMP ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1002</cline>
-      <cline> [4] top-level scope</cline>
-      <cline>   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_XXXX=.jl:3</cline>
       </cd>
     </p>
 
     <p>
       This shows that the model was not solved correctly and the termination status is <c>DUAL_INFEASIBLE</c>.
-      We will discuss the details of Dual Problems, however, at this point, you can translate this <c>DUAL_INFEASIBLE</c> to mean that the problem is unbounded.
+      We will discuss the details of Dual Problems, however, at this point, you can translate this <c>DUAL_INFEASIBLE</c> to mean that the problem is <alert>unbounded</alert>.
     </p>
 
     <exercise>
@@ -538,9 +525,9 @@ m = Model(HiGHS.Optimizer)
 
         <program language="julia">
           <code>
-    set_silent(m5)
-optimize!(m5)
-is_solved_and_feasible(m5)
+            set_silent(m5)
+            optimize!(m5)
+            is_solved_and_feasible(m5)
           </code>
         </program>
 
@@ -552,7 +539,7 @@ is_solved_and_feasible(m5)
 
         <program language="julia">
           <code>
-    assert_is_solved_and_feasible(m5)
+    solution_summary(m5)
           </code>
         </program>
 
@@ -562,7 +549,6 @@ is_solved_and_feasible(m5)
 
         <p>
           <cd>
-          <cline>The model was not solved correctly. Here is the output of `solution_summary` to help debug why this happened:</cline>
           <cline></cline>
           <cline>solution_summary(; result = 1, verbose = false)</cline>
           <cline>├ solver_name          : HiGHS</cline>
@@ -582,21 +568,12 @@ is_solved_and_feasible(m5)
           <cline>  ├ simplex_iterations : 2</cline>
           <cline>  ├ barrier_iterations : 0</cline>
           <cline>  └ node_count         : -1</cline>
-          <cline></cline>
-          <cline></cline>
-          <cline>Stacktrace:</cline>
-          <cline> [1] error(s::String)</cline>
-          <cline>   @ Base ./error.jl:44</cline>
-          <cline> [2] #assert_is_solved_and_feasible#102</cline>
-          <cline>   @ ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1008 [inlined]</cline>
-          <cline> [3] assert_is_solved_and_feasible(model::Model)</cline>
-          <cline>   @ JuMP ~/.julia/packages/JuMP/LKjRR/src/optimizer_interface.jl:1002</cline>
-          <cline> [4] top-level scope</cline>
-          <cline>   @ ~/code/linear-optimization-book/julia/jl_notebook_cell_XXXX==.jl:1</cline>
           </cd>
         </p>
+
         <p>
-          However, note that the <c>termination_status</c> is <c>INFEASIBLE</c>.  This is because the problem is infeasible.
+          However, note that the <c>termination_status</c> is <c>INFEASIBLE</c>.
+          This is because the problem is <alert>infeasible</alert>.
         </p>
       </solution>
     </exercise>

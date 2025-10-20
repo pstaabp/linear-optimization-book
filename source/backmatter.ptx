@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- This file contains all of the "backmatter" material -->
-<!-- In comments, we show examples of how to have hints to divisional -->
-<!-- exercises appear in a section, and then their -->
-<!-- solutions in the next. Then there is an appendix -->
-<!-- with all notation generated, and finally the index. -->
+<!-- This file contains all of the "backmatter" material --> <!-- In comments, we show examples of how to have hints to divisional --> <!-- exercises appear in a section, and then their --> <!-- solutions in the next. Then there is an appendix --> <!-- with all notation generated, and finally the index. -->
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="backmatter">
   <title>Backmatter</title>
 
-  <!-- <solutions divisional="hint"> <title>Selected Hints</title> </solutions> -->
+  <!--
+  <solutions divisional="hint">
+    <title>Selected Hints</title>
 
-  <!-- <solutions divisional="solution"> <title>Selected Solutions</title> </solutions> -->
+  </solutions>
+  --> <!--
+  <solutions divisional="solution">
+    <title>Selected Solutions</title>
 
-  <!-- <appendix> <title>List of Symbols</title> <notation-list/> </appendix> -->
+  </solutions>
+  --> <!--
+  <appendix>
+    <title>List of Symbols</title>
 
-  <!-- <index> <title>Index</title> <index-list/> </index> -->
+    <notation-list/>
+  </appendix>
+  --> <!--
+  <index>
+    <title>Index</title>
 
- <appendix>
- <xi:include href="./appendices/ch-install-julia.ptx" />
- <xi:include href="./appendices/ch-julia-packages.ptx" />
- </appendix>
+    <index-list/>
+  </index>
+  -->
+  <appendix>
+    <title> Getting Started with Julia </title>
 
+    <introduction>
+      <p>
+        These sections show how to get up and running using Julia.
+      </p>
+    </introduction>
+
+    <xi:include href="./appendices/sect-install-julia.ptx" />
+    <xi:include href="./appendices/sect-julia-packages.ptx" />
+  </appendix>
 
   <colophon>
-    <p> This book was authored in <pretext />. </p>
+    <p>
+      This book was authored in <pretext />.
+    </p>
   </colophon>
 </backmatter>
-

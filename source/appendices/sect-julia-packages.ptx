@@ -1,0 +1,517 @@
+<section xml:id="sect-julia-packages">
+  <title>Managing Packages in Julia</title>
+
+  <introduction>
+    <p>
+      As with many software packages, additional functionality is available in other libraries or packages.
+      If you take a look at <url href="https://juliapackages.com" visual="https://juliapackages.com">https://juliapackages.com</url> you can search through what is available.
+      For example, relevant to this course is <em>JuMP</em>, which is useful for solving linear optimization problems (and others).
+      Clicking on any of the package names will give additional information about the package including documentation (hopefully).
+    </p>
+
+    <p>
+      If you don't have a package installed and try to use it, like:
+    </p>
+
+    <p>
+      <cd>
+      <cline>using Primes</cline>
+      </cd>
+    </p>
+
+    <p>
+      you will get an error that it isn't installed<mdash/>unless you actually installed it previously.
+      If you are in the REPL, then it may ask you to install the package.
+      Hit <c>y</c>.
+      (Note: this is a 1.12 version feature and does not currently work as a jupyter notebook that you have in vscode).
+    </p>
+
+    <p>
+      If you are in a jupyter notebook, entering the following two lines in a cell and evaluating (running) the cell, will also work.
+    </p>
+
+    <p>
+      <cd>
+      <cline>using Pkg</cline>
+      <cline>Pkg.add("Primes")</cline>
+      </cd>
+    </p>
+
+    <p>
+      and after fetching the package, rerunning
+    </p>
+
+    <p>
+      <cd>
+      <cline>using Primes</cline>
+      </cd>
+    </p>
+
+    <p>
+      should no longer give an error.
+      Then, for example, try
+    </p>
+
+    <p>
+      <cd>
+      <cline>isprime(17)</cline>
+      </cd>
+    </p>
+
+    <p>
+      which returns <c>true</c> because 17 is a prime number.<fn> The function <c>isprime</c> is actually nondeterministic function that determines if a number is true and you can find out more information at <url href="https://github.com/JuliaMath/Primes.jl" >the Primes package documentation.</url> This demonstrates 4 commands including <c>isprime</c> and <c>factor</c> which returns all prime factors (and the order).</fn>
+    </p>
+
+    <p>
+      A few other packages that will be helpful in this course are: <dl>
+      <li>
+        <title><c>IJulia</c></title>
+
+        <p>
+          This provides the browser interface to Julia.
+          You should already have this installed.
+        </p>
+      </li>
+
+      <li>
+        <title><c>JuMP</c></title>
+
+        <p>
+          This package is an interface for finding extrema of functions with constraints.
+        </p>
+      </li>
+
+      <li>
+        <title><c>HiGHS</c></title>
+
+        <p>
+          This provides functionality for solving linear problems with JuMP.
+        </p>
+      </li>
+
+      <li>
+        <title><c>CairoMakie</c> and <c>Makie</c></title>
+
+        <p>
+          These are  plotting packages for Julia.
+        </p>
+      </li>
+    </dl>
+  </p>
+</introduction>
+
+
+<subsection>
+  <title>Managing Packages in Julia</title>
+
+  <p>
+    Although we can use the <c>Pkg</c> package to handle packages, this section will use the terminal REPL to handle any non-standard packages.
+    Additional documentation on this is given in <url href="Julia's\%20package\%20manager\%20help\%20pages" visual="julialang.org"> https://docs.julialang.org/en/latest/stdlib/Pkg/</url> First, open up a terminal version of julia (either in the Terminal, PowerShell or vscode).<fn>For this, it is assumed that you have version 1.12 installed and are using it for the default version.
+    The rest of this should work identically with other versions.
+    </fn>  See <xref ref="sect-getting-started-julia"/> for help in this.
+    You will get:
+  </p>
+
+  <p>
+    <cd>
+    <cline>               _</cline>
+    <cline>   _       _ _(_)_     |  Documentation: https://docs.julialang.org</cline>
+    <cline>  (_)     | (_) (_)    |</cline>
+    <cline>   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.</cline>
+    <cline>  | | | | | | |/ _` |  |</cline>
+    <cline>  | | |_| | | | (_| |  |  Version 1.12.0 (2025-10-07)</cline>
+    <cline> _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release</cline>
+    <cline>|__/                   |</cline>
+    </cd>
+  </p>
+
+  <p>
+    or similar and then
+  </p>
+
+  <p>
+    <cd>
+    <cline>julia&gt;</cline>
+    </cd>
+  </p>
+
+  <p>
+    which means we're ready to handle julia commands.
+    If we type <c>]</c>, then the prompt turns into:
+  </p>
+
+  <p>
+    <cd>
+    <cline>(v1.12) pkg&gt;</cline>
+    </cd>
+  </p>
+
+  <p>
+    where the 1.12 will be the version of julia that you are running.
+    There are a number of commands that we will cover here:
+  </p>
+
+  <p>
+    <ul>
+      <li>
+        <p>
+          add
+        </p>
+      </li>
+
+      <li>
+        <p>
+          remove (rm)
+        </p>
+      </li>
+
+      <li>
+        <p>
+          develop (dev)
+        </p>
+      </li>
+
+      <li>
+        <p>
+          status (st)
+        </p>
+      </li>
+
+      <li>
+        <p>
+          update (up)
+        </p>
+      </li>
+
+      <li>
+        <p>
+          test
+        </p>
+      </li>
+
+      <li>
+        <p>
+          build
+        </p>
+      </li>
+
+      <li>
+        <p>
+          precompile
+        </p>
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    and the commands in parentheses are the shortcut.
+  </p>
+</subsection>
+
+
+<subsection>
+  <title>Adding a package</title>
+
+  <p>
+    In the package command line, type <c>add</c> <em>package name</em> to add the package.
+    For example, to add the <c>JuMP</c> package:
+  </p>
+
+  <p>
+    <cd>
+    <cline>add JuMP</cline>
+    </cd>
+  </p>
+
+  <p>
+    and it is not installed, you will get something like:
+  </p>
+
+  <p>
+    <cd>
+    <cline>Updating registry at `~/.julia/registries/General.toml`</cline>
+    <cline>   Resolving package versions...</cline>
+    <cline>    Updating `~/.julia/environments/v1.11/Project.toml`</cline>
+    <cline>  [4076af6c] + JuMP v1.29.1</cline>
+    <cline>    Updating `~/.julia/environments/v1.11/Manifest.toml`</cline>
+    <cline>  [6e4b80f9] + BenchmarkTools v1.6.2</cline>
+    <cline>  [523fee87] + CodecBzip2 v0.8.5</cline>
+    <cline>  [944b1d66] + CodecZlib v0.7.8</cline>
+    <cline>  [bbf7d656] + CommonSubexpressions v0.3.1</cline>
+    <cline>  [34da2185] + Compat v4.18.1</cline>
+    <cline>  [864edb3b] + DataStructures v0.19.1</cline>
+    <cline>  [163ba53b] + DiffResults v1.1.0</cline>
+    <cline>  [b552c78f] + DiffRules v1.15.1</cline>
+    <cline>  [ffbed154] + DocStringExtensions v0.9.5</cline>
+    <cline>  [f6369f11] + ForwardDiff v1.2.2</cline>
+    <cline>  [92d709cd] + IrrationalConstants v0.2.6</cline>
+    <cline>  [0f8b85d8] + JSON3 v1.14.3</cline>
+    <cline>  [4076af6c] + JuMP v1.29.1</cline>
+    <cline>  [2ab3a3ac] + LogExpFunctions v0.3.29</cline>
+    <cline>  [1914dd2f] + MacroTools v0.5.16</cline>
+    <cline>  [b8f27783] + MathOptInterface v1.45.0</cline>
+    <cline>  [d8a4904e] + MutableArithmetics v1.6.6</cline>
+    <cline>  [77ba4419] + NaNMath v1.1.3</cline>
+    <cline>  [bac558e1] + OrderedCollections v1.8.1</cline>
+    <cline>  [276daf66] + SpecialFunctions v2.6.1</cline>
+    <cline>  [1e83bf80] + StaticArraysCore v1.4.3</cline>
+    <cline>  [10745b16] + Statistics v1.11.1</cline>
+    <cline>  [856f2bd8] + StructTypes v1.11.0</cline>
+    <cline>  [3bb67fe8] + TranscodingStreams v0.11.3</cline>
+    <cline>  [6e34b625] + Bzip2_jll v1.0.9+0</cline>
+    <cline>  [efe28fd5] + OpenSpecFun_jll v0.5.6+0</cline>
+    <cline>  [37e2e46d] + LinearAlgebra v1.11.0</cline>
+    <cline>  [9abbd945] + Profile v1.11.0</cline>
+    <cline>  [9e88b42a] + Serialization v1.11.0</cline>
+    <cline>  [2f01184e] + SparseArrays v1.11.0</cline>
+    <cline>  [8dfed614] + Test v1.11.0</cline>
+    <cline>  [e66e0078] + CompilerSupportLibraries_jll v1.1.1+0</cline>
+    <cline>  [4536629a] + OpenBLAS_jll v0.3.27+1</cline>
+    <cline>  [05823500] + OpenLibm_jll v0.8.5+0</cline>
+    <cline>  [bea87d4a] + SuiteSparse_jll v7.7.0+0</cline>
+    <cline>  [8e850b90] + libblastrampoline_jll v5.11.0+0</cline>
+    <cline>Precompiling project...</cline>
+    <cline>  28 dependencies successfully precompiled in 46 seconds. 46 already precompiled.</cline>
+    </cd>
+  </p>
+
+  <p>
+    A few things to note:
+  </p>
+
+  <p>
+    <ul>
+      <li>
+        <p>
+          This is a long list of additional packages that <c>JuMP</c> needs to run and the version that <c>JuMP</c> uses for this version.  This is long because <c>JuMP</c> is a pretty complicated package.  Note that when installing the <c>Primes</c> package that we did above, there was only one other package needed to be installed with <c>Primes</c>.
+        </p>
+      </li>
+      <li>
+        <p>
+          You results will vary depending on version numbers available and what subpackages (like <c>LinearAlgebra</c> or <c>ForwardDiff</c>) are needed for the current version of the package you want to load.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The line after the 2nd <c>Updating</c> line is the package (and version) that you are installing.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          All of the lines after the 3rd <c>Updating</c> line is all of the packages that this depends on.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The + sign means that the package is being added.
+        </p>
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    If you want to add multiple packages at the same time, say packages A, B and C, type <c>add A B C</c>.
+    You can also add particular versions of a package (often for testing or to avoid a bug).
+    For example, if you want version 0.3.0 of <c>ForwardDiff</c> type:
+  </p>
+
+  <p>
+    <cd> add ForwardDiff@0.3.0 </cd>
+  </p>
+
+  <p>
+    You will then get info on the dependencies on that version.
+  </p>
+</subsection>
+
+
+<subsection>
+  <title>Package Status</title>
+
+  <p>
+    The <c>status</c> command (or <c>st</c>) will just list all of the main packages installed.
+    For example,
+  </p>
+
+  <p>
+    <cd>
+    <cline>(@v1.12) pkg&gt; st</cline>
+    <cline>Status `~/.julia/environments/v1.12/Project.toml`</cline>
+    <cline>  [87dc4568] HiGHS v1.19.3</cline>
+    <cline>  [7073ff75] IJulia v1.31.0</cline>
+    <cline>  [4076af6c] JuMP v1.29.1</cline>
+    <cline>  [b8f27783] MathOptInterface v1.45.0</cline>
+    <cline>  [27ebfcd6] Primes v0.5.7</cline>
+    <cline>  [37e2e46d] LinearAlgebra v1.12.0</cline>
+    </cd>
+  </p>
+
+  <p>
+    and note that these are just the packages added by the <c>add</c> command, not all of the dependencies.
+    If you want all of the dependencies as well, type <c>st --manifest</c> and I get a huge list of packages.
+  </p>
+
+  <p>
+    If you run <c>st</c> then you may also get information that some packages have updates.
+    If this is true, you can run the update command as shown next.
+  </p>
+</subsection>
+
+
+<subsection>
+  <title>Removing a Package</title>
+
+  <p>
+    You can remove a package by typing <c>remove</c> or <c>rm</c> then the package name.
+    If I want to remove the <c>ForwardDiff</c> package, then
+  </p>
+
+  <p>
+    <cd>
+    <cline>remove ForwardDiff</cline>
+    </cd>
+  </p>
+
+  <p>
+    we get the following:
+  </p>
+
+  <p>
+    <cd>
+    <cline>Updating `~/.julia/environments/v1.0/Project.toml` </cline>
+    <cline>[f6369f11] - ForwardDiff v0.3.0 </cline>
+    <cline>Updating `~/.julia/environments/v1.0/Manifest.toml` </cline>
+    <cline>[49dc2e85] - Calculus v0.4.1 </cline>
+    <cline>[c5cfe0b6] - DiffBase v0.2.0 </cline>
+    <cline>[f6369f11] - ForwardDiff v0.3.0 </cline>
+    <cline>[77ba4419] - NaNMath v0.3.2 </cline>
+    </cd>
+  </p>
+
+  <p>
+    Note:
+  </p>
+
+  <p>
+    <ul>
+      <li>
+        <p>
+          The <c>rm</c> command removes the package from the list of available packages, but doesn't remove them from your harddrive.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          If you want to see everything installed, navigate to the <c>/.julia/packages</c> directory, which is where they are stored.  I have gone into this directory to delete package when troubleshooting.
+        </p>
+      </li>
+    </ul>
+  </p>
+</subsection>
+
+
+<subsection>
+  <title>Updating packages</title>
+
+  <p>
+    If you type <c>update</c> or <c>up</c> you will update all of the installed packages (and dependencies).
+    For example:
+  </p>
+
+  <p>
+    <cd>
+    <cline>Updating `~/.julia/environments/v1.0/Project.toml` </cline>
+    <cline>[7073ff75] ↑ IJulia v1.11.1 ⇒ v1.12.0 </cline>
+    <cline>Updating `~/.julia/environments/v1.0/Manifest.toml` </cline>
+    <cline>[7073ff75] ↑ IJulia v1.11.1 ⇒ v1.12.0 </cline>
+    <cline>[b85f4697] ↑ SoftGlobalScope v1.0.5 ⇒ v1.0.7 </cline>
+    <cline>[5e66a065] ↑ TableShowUtils v0.1.1 ⇒ v0.2.0 </cline>
+    </cd>
+  </p>
+
+  <p>
+    and all updates will be with an ↑.
+    If you only want to update a single package, type the name after <c>update</c>.
+  </p>
+</subsection>
+
+
+<subsection>
+  <title>Building Packages</title>
+
+  <p>
+    Generally a package is built after it is installed.
+    Building a package might include running code (or unpacking files) after it is installed.
+    Sometimes if things get wonky, rebuilding is a good thing to do.
+  </p>
+
+  <p>
+    <cd>
+    <cline>build</cline>
+    </cd>
+  </p>
+
+  <p>
+    or if you only want say <c>IJulia</c> built,
+  </p>
+
+  <p>
+    <cd> build IJulia </cd>
+  </p>
+</subsection>
+
+
+<subsection>
+  <title>Precompiling packages</title>
+
+  <p>
+    When a package is used, often it requests to be compiled.
+    For example, when <c>using Primes</c>, then following is shown:
+  </p>
+
+  <p>
+    <cd>
+    <cline>[ Info: Precompiling Primes [27ebfcd6-29c5-5fa9-bf4b-fb8fc14df3ae]</cline>
+    </cd>
+  </p>
+
+  <p>
+    and basically some code is compiled beforehand, generally to speed up code.
+    You can precompile all code with
+  </p>
+
+  <p>
+    <cd>
+    <cline>precompile</cline>
+    </cd>
+  </p>
+
+  <p>
+    and it may take a while, but you won't have to wait, when you load the package with the <c>using</c> command.
+    This is generally not needed anymore and is done automatically.
+  </p>
+</subsection>
+
+
+<subsection>
+  <title>Testing a Packages</title>
+
+  <p>
+    To test a package, say the <c>ForwardDiff</c> package, then
+  </p>
+
+  <p>
+    <cd>
+    <cline>test ForwardDiff</cline>
+    </cd>
+  </p>
+
+  <p>
+    It list all of the dependencies first, and then runs a number of tests (and we will show how to write tests soon) and timing information.
+    After a while, it finishes successfully.
+  </p>
+</subsection>
+</section>

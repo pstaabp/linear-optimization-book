@@ -11,18 +11,21 @@
     </ul>
   </objectives>
 
-
   <introduction>
     <p>
       How to solve the integer problems using the cutting planes and branch-and-bound techniques in Julia.
     </p>
 
     <p>
-      In <xref ref="sect-intro-ilops"/>, we saw <xref ref="prob-ilop2"/>. We solved this two different ways. The first involved cutting planes to trim the feasible set without eliminating integer solutions and the second was branch and bound, which successfully split the feasible set into pieces by eliminating non-integer solutions.
+      In <xref ref="sect-intro-ilops"/>, we saw <xref ref="prob-ilop2"/>.
+      We solved this two different ways.
+      The first involved cutting planes to trim the feasible set without eliminating integer solutions and the second was branch and bound, which successfully split the feasible set into pieces by eliminating non-integer solutions.
     </p>
 
     <p>
-      These were quite complex but important to understand how they work. However, when solving problems using software, we don't need the details. As in the previous section, we will solve this using the <c>JuMP</c> and <c>HiGHS</c> packages of Julia.
+      These were quite complex but important to understand how they work.
+      However, when solving problems using software, we don't need the details.
+      As in the previous section, we will solve this using the <c>JuMP</c> and <c>HiGHS</c> packages of Julia.
     </p>
   </introduction>
 
@@ -31,7 +34,9 @@
     <title>Solving Integer Problems with Julia</title>
 
     <p>
-      Setting up an integer problem to solve with <c>JuMP</c> and <c>HiGHS</c> is very similar to non-integer problems. The big differences is by adding the <c>Int</c> argument to the <c>@variable</c> macro. <xref ref="prob-ilop2"/> can be written as
+      Setting up an integer problem to solve with <c>JuMP</c> and <c>HiGHS</c> is very similar to non-integer problems.
+      The big differences is by adding the <c>Int</c> argument to the <c>@variable</c> macro.
+      <xref ref="prob-ilop2"/> can be written as
     </p>
 
 
@@ -48,7 +53,8 @@
     </program>
 
     <p>
-      and note that when defining variables on lines 2 and 3, that we add <c>Int</c> to the end indicating that the variables are integers. This returns
+      and note that when defining variables on lines 2 and 3, that we add <c>Int</c> to the end indicating that the variables are integers.
+      This returns
     </p>
 
     <p>
@@ -78,7 +84,8 @@
     </program>
 
     <p>
-      which returns <c>true</c> so we have an optimal feasible solution.  Then finally, we can find the values and the objective with
+      which returns <c>true</c> so we have an optimal feasible solution.
+      Then finally, we can find the values and the objective with
     </p>
 
 
@@ -116,7 +123,8 @@
     <exercise>
       <statement>
         <p>
-          Solve the ILOP defined in <xref ref="ex-branch-bound-1"/> using the <c>JuMP</c> and <c>HiGHS</c> packages in Julia.  You can use the code above as a template.
+          Solve the ILOP defined in <xref ref="ex-branch-bound-1"/> using the <c>JuMP</c> and <c>HiGHS</c> packages in Julia.
+          You can use the code above as a template.
         </p>
       </statement>
     </exercise>
@@ -127,59 +135,123 @@
     <title>Solving Binary LOPs using Julia</title>
 
     <p>
-      Another common constraint on Linear Optimization problems is that variables may take on either 0 or 1. For example, the <m>n</m>-queens problem in <xref ref="prob-n-queens"/> is such an example.
+      Another common constraint on Linear Optimization problems is that variables may take on either 0 or 1.
+      For example, the <m>n</m>-queens problem in <xref ref="prob-n-queens"/> is such an example.
     </p>
 
     <p>
-      In <xref ref="prob-n-queens-form"/>, the problem is written in mathematical form. First, if we look at this for <m>n=4</m>, the problem is a bit more reasonable.
+      In <xref ref="prob-n-queens-form"/>, the problem is written in mathematical form.
+      First, if we look at this for <m>n=4</m>, the problem is a bit more reasonable.
     </p>
 
     <p>
-      First, the variable <m>x_{i,j}</m> will be a binary variable that will take on the value 1 if there is a queen on the <m>i</m>th row and <m>j</m>th column.  To create the variables in Julia, we first create a model, then the variables, which we can do in bulk as the following:
+      First, the variable <m>x_{i,j}</m> will be a binary variable that will take on the value 1 if there is a queen on the <m>i</m>th row and <m>j</m>th column.
+      To create the variables in Julia, we first create a model, then the variables, which we can do in bulk as the following:
     </p>
 
 
     <program language="julia">
       <code>
         m2 = Model(HiGHS.Optimizer)
-        @variable(m2, x[1:4,1:4], Bin)
+        n = 4
+        @variable(m2, x[1:n,1:n], Bin)
       </code>
     </program>
 
     <p>
-      where the last term in the <c>@variable</c> macro shows the variable is binary. Also, note that this make a array variable that will match the size of the board.
+      where the last term in the <c>@variable</c> macro shows the variable is binary.
+      Also, note that this make a array variable that will match the size of the board.
     </p>
 
     <p>
-      The constraints in the problem can be encoded in Julia with
+      There are a number of ways to do set up the constraints including typing all of the constraints out.
+      However, the following is a nice way to do this in a very general way.
+      First, let's do the row and column sums with the <c>mapslices</c> command.
+      Consider <c>mapslices(sum, x, dims = [1])</c>, which returns:
+    </p>
+
+    <p>
+      <cd>
+      <cline>1×4 Matrix{AffExpr}:</cline>
+      <cline>   x[1,1] + x[2,1] + x[3,1] + x[4,1]  …  x[1,4] + x[2,4] + x[3,4] + x[4,4]</cline>
+      </cd>
+    </p>
+
+    <p>
+      Note that this is a row matrix.
+      We then bound each of these by 1 with the following.
     </p>
 
 
     <program language="julia" line-numbers="yes">
       <code>
-      for j=1:4
-        @constraint(m2, sum(x[:,j]) ≤  1)
-      end
-      for i=1:4
-        @constraint(m2, sum(x[i,:]) ≤ 1)
-      end
-      for k=0:2
-        @constraint(m2, sum( [ x[i,i+k] for i=1:4-k]) ≤ 1)
-      end
-      for k=1:2
-        @constraint(m2, sum( [ x[i+k,i] for i=1:4-k]) ≤ 1)
-      end
-      for k=0:2
-        @constraint(m2, sum( [ x[i, 5-k-i] for i=1:4-k]) ≤ 1)
-      end
-      for k=1:2
-        @constraint(m2, sum( [ x[i, 5+k-i] for i=1+k:4]) ≤ 1)
-      end
+        @constraint(m2, c1, mapslices(sum, x, dims = [1]) .&lt;= ones(1,n))
+        @constraint(m2, c2, mapslices(sum, x, dims = [2]) .&lt;= ones(n,1))
       </code>
     </program>
 
     <p>
-      The constraints on lines 1-6 are the column and row sums respectively.  The constraints on lines 7-12 are the diagonal constraints along northwest to southeast diagonals and lines 13-18 are along the northeast to southwest diagonals.
+      where the second line above is the column sums (note that the difference is the <c>dims = [2]</c>).
+    </p>
+
+    <p>
+      To get the diagonal constraints, we will use the <c>diagm</c> function, which produce a diagonal matrix.
+      Consider <c>diagm(1 =&gt; ones(3))</c> which returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>4×4 Matrix{Float64}:</cline>
+      <cline>0.0  1.0  0.0  0.0</cline>
+      <cline>0.0  0.0  1.0  0.0</cline>
+      <cline>0.0  0.0  0.0  1.0</cline>
+      <cline>0.0  0.0  0.0  0.0</cline>
+      </cd>
+    </p>
+
+    <p>
+      and this will give us the diagonal constraint.
+      The form of the <c>diagm</c> function uses the argument of the form <c>i = &gt; v</c>, where <c>i</c> is an integer that shows how far from the main diagronal the vector <c>v</c> should exist.
+      If the integer is positive, then the diagonal will be on the upper right part of the matrix and negative values on the lower left.
+      If we multiply this by <c>x</c> with   <c>diagm(1 =&gt; ones(3)).*x</c>, the result is
+    </p>
+
+    <p>
+      <cd>
+      <cline>4×4 Matrix{AffExpr}:</cline>
+      <cline>0  x[1,2]  0       0</cline>
+      <cline>0  0       x[2,3]  0</cline>
+      <cline>0  0       0       x[3,4]</cline>
+      <cline>0  0       0       0</cline>
+      </cd>
+    </p>
+
+    <p>
+      And if this is summed, then we get the sum of the off diagonals.
+      That is <c>sum(diagm(1 =&gt; ones(3)).*x)</c> returns
+      <me>
+        x_{1,2} + x_{2,3} + x_{3,4}
+      </me>
+    </p>
+
+    <p>
+      The diagonal constraints can be built with the following lines.
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+      P = Matrix(I,n,n)[n:-1:1, :]
+      @constraint(m2, c3, [sum(diagm(i= &gt; ones(n-abs(i))).*x) for i=-(n-2):(n-2)] .&lt;= ones(2n-3))
+      @constraint(m2, c4, [sum(P*diagm(i= &gt; ones(n-abs(i))).*x) for i=-(n-2):(n-2)] .&lt;= ones(2n-3))
+      </code>
+    </program>
+
+    <p>
+      where the first line is a permutation matrix that will flip all of the rows of a matrix upon right multiplication.
+      The structure <c>[.
+      for i= -(n-2):(n-2)]</c> is called a comprehension and builds a vector.
+      See <xref ref="sect-julia-vector-arrays"/> for more examples.
     </p>
 
     <p>
@@ -194,7 +266,27 @@
     </program>
 
     <p>
-      and the 3rd argument sums over all elements of <c>x</c>.  Again, not necessary, but a good double check to do a <c>print(m2)</c> which will print out the LOP as
+      and the 3rd argument sums over all elements of <c>x</c>.
+      If we put all of these commands in the same cell, then
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        m2 = Model(HiGHS.Optimizer)
+        n = 4
+        P = Matrix(I,n,n)[n:-1:1, :]
+        @variable(m2, x[1:n,1:n], Bin)
+        @constraint(m2, c1, mapslices(sum, x, dims = [1]) .&lt;= ones(1,n))
+        @constraint(m2, c2, mapslices(sum, x, dims = [2]) .&lt;= ones(n,1))
+        @constraint(m2, c3, [sum(diagm(i=&gt;ones(n-abs(i))).*x) for i=-(n-2):(n-2)] .&lt;= ones(2n-3))
+        @constraint(m2, c4, [sum(P*diagm(i=&gt;ones(n-abs(i))).*x) for i=-(n-2):(n-2)] .&lt;= ones(2n-3))
+        @objective(m2, Max, sum([x[i,j] for i=1:n, j=1:n]))
+      </code>
+    </program>
+
+    <p>
+      Again, not necessary, but a good double check to do a <c>print(m2)</c> which will print out the LOP as
     </p>
 
 
@@ -257,7 +349,8 @@ Subject to
     </program>
 
     <p>
-      and again, since <c>true</c> is returned that we have a feasible optimal solution.  We can use the following shortcut (called broadcasting) to output the values with
+      and again, since <c>true</c> is returned that we have a feasible optimal solution.
+      We can use the following shortcut (called broadcasting) to output the values with
     </p>
 
 
@@ -268,7 +361,8 @@ Subject to
     </program>
 
     <p>
-      where recall that the <c>.</c> does broadcasting, that is, the function <c>value</c> is applied to all elements of <c>x</c> term by term.  This returns
+      where recall that the <c>.</c> does broadcasting, that is, the function <c>value</c> is applied to all elements of <c>x</c> term by term.
+      This returns
     </p>
 
     <p>
@@ -282,7 +376,8 @@ Subject to
     </p>
 
     <p>
-      Although we can read the solution from this, it seems odd that this is not an integer matrix. We can round this with <c>round.(Int, value.(x))</c> which returns
+      Although we can read the solution from this, it seems odd that this is not an integer matrix.
+      We can round this with <c>round.(Int, value.(x))</c> which returns
     </p>
 
     <p>
@@ -296,7 +391,8 @@ Subject to
     </p>
 
     <p>
-      which will show the locations of the queens. On a 4 by 4 chessboard, this would look like:
+      which will show the locations of the queens.
+      On a 4 by 4 chessboard, this would look like:
     </p>
 
     <figure xml:id="fig-4by4-chessboard-queen">
@@ -319,14 +415,15 @@ Subject to
     </figure>
 
     <p>
-      And in <xref ref="fig-4by4-chessboard-queen"/>, one can see that no queen can attack another one in a single move.  Note that in general you get a single solution to a LOP when solving either via the simplex method or using software tools.  There is another solution to this problem in which the board above can be flipped either vertically or horizontally.  The software will not generate this other solution.
+      And in <xref ref="fig-4by4-chessboard-queen"/>, one can see that no queen can attack another one in a single move.
+      Note that in general you get a single solution to a LOP when solving either via the simplex method or using software tools.
+      There is another solution to this problem in which the board above can be flipped either vertically or horizontally.
+      The software will not generate this other solution.
     </p>
 
     <p>
       This problem can be scaled up to larger chessboards by careful adjusting the constraints above.
     </p>
-
-
   </subsection>
 
 
@@ -334,7 +431,8 @@ Subject to
     <title>Does the 3-queens problem have a solution?</title>
 
     <p>
-      It's probably not too hard to see that if you have a 3 by 3 chess board, that you cannot get 3 queens on the board. Play with it for a few minutes and you'll probably see this.
+      It's probably not too hard to see that if you have a 3 by 3 chess board, that you cannot get 3 queens on the board.
+      Play with it for a few minutes and you'll probably see this.
     </p>
 
     <p>
@@ -409,7 +507,8 @@ Subject to
     </program>
 
     <p>
-      so <c>true</c> is returned.  You might think that this won't have a solution, however, it seems to and if we print out the solution with
+      so <c>true</c> is returned.
+      You might think that this won't have a solution, however, it seems to and if we print out the solution with
     </p>
 
 
@@ -431,8 +530,19 @@ Subject to
       <cline> 0  0  1</cline>
       </cd>
     </p>
+
     <p>
-      This shows that the optimal solution has 2 queens on the board.  Recall that the goal is to maximize the objective function with the given constraints.  This means that putting a queen on an edge and an opposite corner is the largest number of queens allowed.  You probably noticed this if you played with it a bit.
+      This shows that the optimal solution has 2 queens on the board.
+      Recall that the goal is to maximize the objective function with the given constraints.
+      This means that putting a queen on an edge and an opposite corner is the largest number of queens allowed.
+      You probably noticed this if you played with it a bit.
     </p>
+    <exercise>
+      <statement>
+        <p>
+          Update the code shown above to solve for the 5-queens problem.
+        </p>
+      </statement>
+    </exercise>
   </subsection>
 </section>
