@@ -1,11 +1,11 @@
 <section xml:id="sect-ilop-julia">
-  <title>Cutting Planes and Branch and Bound with Julia</title>
+  <title>Solving Integer LOPS with Julia</title>
 
   <objectives>
     <ul>
       <li>
         <p>
-          Understand how to solve integer problems using the cutting planes and branch-and-bound techniques in Julia.
+          Understand how to solve integer linear optimization problems using Julia.
         </p>
       </li>
     </ul>
@@ -13,12 +13,11 @@
 
   <introduction>
     <p>
-      How to solve the integer problems using the cutting planes and branch-and-bound techniques in Julia.
+      In this chapter, we will look at how to solve Integer Linear Optimization Problems (ILOPs) and Binary Linear Optimization Problems (BLOPs) using Julia.
     </p>
 
     <p>
-      In <xref ref="sect-intro-ilops"/>, we saw <xref ref="prob-ilop2"/>.
-      We solved this two different ways.
+      We solved <xref ref="prob-ilop2"/> in <xref ref="sect-intro-ilops"/> two different ways.
       The first involved cutting planes to trim the feasible set without eliminating integer solutions and the second was branch and bound, which successfully split the feasible set into pieces by eliminating non-integer solutions.
     </p>
 
@@ -35,7 +34,6 @@
 
     <p>
       Setting up an integer problem to solve with <c>JuMP</c> and <c>HiGHS</c> is very similar to non-integer problems.
-      The big differences is by adding the <c>Int</c> argument to the <c>@variable</c> macro.
       <xref ref="prob-ilop2"/> can be written as
     </p>
 
@@ -75,7 +73,7 @@
     </p>
 
 
-    <program language="julia">
+    <program language="julia" line-numbers="yes">
       <code>
         set_silent(m)
         optimize!(m)
@@ -271,19 +269,25 @@
     </p>
 
 
-    <program language="julia" line-numbers="yes">
-      <code>
+
+    <listing xml:id="lst-4-queens-julia" >
+      <title>Code for the 4-queens problem in Julia</title>
+
+      <caption></caption>
+      <program language="julia" line-numbers="yes">
+        <code>
         m2 = Model(HiGHS.Optimizer)
         n = 4
-        P = Matrix(I,n,n)[n:-1:1, :]
+        P = [ i+j == n+1 ? 1 : 0 for i=1:n, j=1:n]
         @variable(m2, x[1:n,1:n], Bin)
         @constraint(m2, c1, mapslices(sum, x, dims = [1]) .&lt;= ones(1,n))
         @constraint(m2, c2, mapslices(sum, x, dims = [2]) .&lt;= ones(n,1))
         @constraint(m2, c3, [sum(diagm(i=&gt;ones(n-abs(i))).*x) for i=-(n-2):(n-2)] .&lt;= ones(2n-3))
         @constraint(m2, c4, [sum(P*diagm(i=&gt;ones(n-abs(i))).*x) for i=-(n-2):(n-2)] .&lt;= ones(2n-3))
         @objective(m2, Max, sum([x[i,j] for i=1:n, j=1:n]))
-      </code>
-    </program>
+        </code>
+      </program>
+    </listing>
 
     <p>
       Again, not necessary, but a good double check to do a <c>print(m2)</c> which will print out the LOP as
@@ -332,7 +336,7 @@ Subject to
     </program>
 
     <p>
-      and if you careful look at all of the constraints that they are all that there is at most one queen (sum of the <c>x</c> values along each row, column and diagonal), that all of the constraints are there.
+      and if carefully look at all of the constraints that they are all that there is at most one queen (sum of the <c>x</c> values along each row, column and diagonal), that all of the constraints are there.
     </p>
 
     <p>
@@ -537,6 +541,7 @@ Subject to
       This means that putting a queen on an edge and an opposite corner is the largest number of queens allowed.
       You probably noticed this if you played with it a bit.
     </p>
+
     <exercise>
       <statement>
         <p>

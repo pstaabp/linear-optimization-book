@@ -17,7 +17,12 @@
 
       <li>
         <p>
-          Understand the certificate for the primal problem.
+          Understand the set of lemmas relating the dual and primal problems.
+        </p>
+      </li>
+      <li>
+        <p>
+          Understand the proof of the Strong Duality Theorem.
         </p>
       </li>
     </ul>
@@ -28,10 +33,10 @@
   </p>
 
   <p>
-    <me>
+    <men xml:id="eq-ex-primal-lop">
       \begin{aligned} \text{Maximize} \amp\amp z = 3x_1 + 4x_2 + 7 x_3, \amp  \\ \text{such that}\amp\amp x_1 + 2x_2 + 3x_3 \amp \leq 12, \\ \amp\amp 4x_1 + 3x_2 + 2x_3 \amp  \leq 18, \\ \text{and}\amp\amp x_1, x_2, x_3 \amp \geq 0.
       \end{aligned}
-    </me>
+    </men>
   </p>
 
   <p>
@@ -49,9 +54,9 @@
   </p>
 
   <p>
-    <me>
+    <men xml:id="eq-ex-primal-lop-final">
       \begin{array}{r} 1 \mapsto 5, \\ 2 \mapsto 4, \\ 3 \mapsto 2, \end{array} \qquad \left[\begin{array}{rrr|rrr|r} 0 \amp 5 \amp 10 \amp 4 \amp -1 \amp 0 \amp 30\\ 10 \amp 5 \amp 0 \amp -2 \amp 3 \amp 0 \amp 30\\ \hline 0 \amp 10 \amp 0 \amp 22 \amp 2 \amp 10 \amp 300\\ \end{array} \right].
-    </me>
+    </men>
   </p>
 
   <p>
@@ -73,10 +78,10 @@
   </p>
 
   <p>
-    <me>
+    <men xml:id="ex-lop-dual">
       \begin{aligned} \text{Minimize} \amp\amp w  = 12y_1 +18 y_2 \amp\\ \text{such that} \amp\amp y_1 + 4y_2 \amp\geq 3, \\ \amp\amp2y_1 + 3y_2 \amp \geq 4, \\ \amp\amp 3y_1 + 2y_2 \amp \geq 7, \\ \text{and} \amp\amp y_1, y_2, \amp \geq 0.
       \end{aligned}
-    </me>
+    </men>
   </p>
 
   <p>
@@ -108,6 +113,7 @@
     <me>
       \boldsymbol{y}^{\star} = \frac{1}{10} \left[\begin{array}{rr|rrr} 22 \amp 2 \amp 0 \amp 10 \amp 0 \end{array} \right]^{\intercal}.
     </me>
+    with <m>w^{\star} = 300/10 = 30</m>.
   </p>
 
   <p>
@@ -178,7 +184,7 @@
   </p>
 
   <p>
-    We will then call the optimal values of <m>\boldsymbol{y}</m> the <term>certificate</term> for the primal problem.
+    We will then call the optimal values of <m>\boldsymbol{y}</m> the <term>certificate</term> for the primal problem.  The last statement above is the <em>strong-duality theorem</em> the crux of this section.
   </p>
 
   <lemma xml:id="lem-dual-nonnegative">
@@ -204,13 +210,13 @@
 
       <p>
         <men xml:id="eq-lemma-obj-row">
-          z = \sum_{j=1}^n c_j x_j = \biggl(z^{\star} - \sum_{i=1}^m b_i y_i^{\star} \biggr) + \sum_{j=1}^n \biggl(\sum_{i=1}^m a_{ij} y^{\star} - y_{m+j}^{\star} \biggr) x_j.
+          z = \sum_{j=1}^n c_j x_j = \biggl(z^{\star} - \sum_{i=1}^m b_i y_i^{\star} \biggr) + \sum_{j=1}^n \biggl(\sum_{i=1}^m a_{ij} y^{\star}_i - y_{m+j}^{\star} \biggr) x_j.
         </men>
       </p>
 
       <p>
         where <m>z^{\star}</m> is the optimal value of <m>z</m> of the Primal LOP and the <m>y^{\star}</m>'s.
-        The values of <m>x_j</m> can be any value.
+        The values of <m>x_j</m> can be any nonnegative value.
       </p>
     </statement>
 
@@ -242,7 +248,7 @@
 
       <p>
         <me>
-          x_{n+i} = b_{i} - \sum_{j=1}^{n} a_{ij}x_{j}
+          x_{n+i} = b_{i} - \sum_{j=1}^{n} a_{ij}x_{j} \qquad \text{for $i=1,2,\ldots,m$}
         </me>
       </p>
 
@@ -262,7 +268,7 @@
 
       <p>
         <me>
-          \sum_{j=1}^{n} c_{j} x_{j} = \biggl( z^{\star}-\sum_{i=1}^{m} b_{i} y_{i}^{\star}\biggr) + \sum_{j=1}^{n} \biggl( \sum_{i=1}^{m} a_{ij}y^{\star} - y_{m+j}^{\star}\biggr) x_{j}.
+          \sum_{j=1}^{n} c_{j} x_{j} = \biggl( z^{\star}-\sum_{i=1}^{m} b_{i} y_{i}^{\star}\biggr) + \sum_{j=1}^{n} \biggl( \sum_{i=1}^{m} a_{ij}y^{\star}_i - y_{m+j}^{\star}\biggr) x_{j}.
         </me>
       </p>
     </proof>
@@ -284,7 +290,7 @@
 
     <proof>
       <p>
-        Let <m>x_j=0</m> in <xref ref="lem-obj-row"/>.
+        Let <m>x_j=0</m> in <xref ref="eq-lemma-obj-row"/> in <xref ref="lem-obj-row"/>.
       </p>
     </proof>
   </corollary>
@@ -313,7 +319,7 @@
   <corollary xml:id="cor-cj-geq">
     <statement>
       <p>
-        From above, show that
+        Show that
       </p>
 
       <p>
@@ -323,7 +329,7 @@
       </p>
 
       <p>
-        and then conclude that
+        and
       </p>
 
       <p>

@@ -1,0 +1,262 @@
+<section xml:id="sect-dual-problems-julia">
+  <title>Solving Dual Problems with Julia</title>
+
+  <objectives>
+    <ul>
+      <li>
+        <p>
+          Formulate and solve dual problems using Julia
+        </p>
+      </li>
+      <li>
+        <p>
+          Extract basis information from solutions using Julia
+        </p>
+      </li>
+    </ul>
+  </objectives>
+
+
+  <introduction>
+    <p>
+      In <xref ref="sect-primal-dual"/>, one main takeaway was the fact that solving the primal problem also gives us a solution to the dual problem.
+      Here, we will see how to explicitly formulate and solve dual problems using Julia.
+    </p>
+
+    <p>
+      First, let's examine LOP in <xref ref="eq-ex-primal-lop"/> using Julia.
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+    m = Model(HiGHS.Optimizer)
+    @variable(m, x₁ ≥ 0)
+    @variable(m, x₂ ≥ 0)
+    @variable(m, x₃ ≥ 0)
+    @objective(m, Max, 3x₁ + 4x₂ + 7x₃)
+    @constraint(m, c1, x₁ + 2x₂ + 3x₃ ≤ 12)
+    @constraint(m, c2, 4x₁ + 3x₂ + 2x₃ ≤ 18)
+    print(m)
+      </code>
+    </program>
+
+    <p>
+      And as we will see below, including the terms <c>c1</c> and <c>c2</c> in the constraints is important.
+      The result of this is the LOP as expected.
+    </p>
+
+    <p>
+      <cd>
+      <cline>Max 3 x₁ + 4 x₂ + 7 x₃</cline>
+      <cline>Subject to</cline>
+      <cline> x₁ + 2 x₂ + 3 x₃ ≤ 12</cline>
+      <cline> 4 x₁ + 3 x₂ + 2 x₃ ≤ 18</cline>
+      <cline> x₁ ≥ 0</cline>
+      <cline> x₂ ≥ 0</cline>
+      <cline> x₃ ≥ 0</cline>
+      </cd>
+    </p>
+
+    <p>
+      And then solving this with the following:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+    set_silent(m)
+    optimize!(m)
+    is_solved_and_feasible(m)
+      </code>
+    </program>
+
+    <p>
+      The results is <c>true</c> and finding the optimal values of the variables and objective with:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+      value(x₁), value(x₂), value(x₃)
+      </code>
+    </program>
+
+    <p>
+      results in <m>(3.0, 0.0, 3.0)</m>, and for the objective use <c>objective_value(m)</c> which results in <m>30.0</m>.
+    </p>
+
+    <p>
+      As we saw in <xref ref="sect-primal-dual"/>, the solution to the dual is in the objective row of the optimal tableau.
+      However, it doesn't appear that we have the tableau.
+      Let's first solve the dual problem from <xref ref="ex-lop-dual"/> explicitly with the following:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+    md = Model(HiGHS.Optimizer)
+    @variable(md, y₁ ≥ 0)
+    @variable(md, y₂ ≥ 0)
+    @objective(md, Min, 12y₁ + 18y₂)
+    @constraint(md, cd1, y₁ + 4y₂ ≥ 3)
+    @constraint(md, cd2, 2y₁ + 3y₂ ≥ 4)
+    @constraint(md, cd3, 3y₁ + 2y₂ ≥ 7)
+    print(md)
+      </code>
+    </program>
+
+    <p>
+      and the result is
+    </p>
+
+    <p>
+      <cd>
+      <cline>Min 12 y₁ + 18 y₂</cline>
+      <cline>Subject to</cline>
+      <cline> y₁ + 4 y₂ ≥ 3</cline>
+      <cline> 2 y₁ + 3 y₂ ≥ 4</cline>
+      <cline> 3 y₁ + 2 y₂ ≥ 7</cline>
+      <cline> y₁ ≥ 0</cline>
+      <cline> y₂ ≥ 0</cline>
+      </cd>
+    </p>
+
+    <p>
+      And then solving this with the following:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+    set_silent(md)
+    optimize!(md)
+    is_solved_and_feasible(md)
+      </code>
+    </program>
+
+    <p>
+      The results is <c>true</c> and finding the optimal values of the variables and objective with:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+      value(y₁), value(y₂)
+      </code>
+    </program>
+
+    <p>
+      results in <m>(2.1999999999999997, 0.2)</m>, and for the objective use <c>objective_value(md)</c> which results in <m>30.0</m>, which is the same value as that of the primal problem.
+      (Yes, the strong duality theorem comes through.)
+    </p>
+
+    <p>
+      It seems unnecessary to have to solve the dual problem in light of the work in <xref ref="sect-primal-dual"/> and its true that we don't need to.
+      If instead, we enter the following code:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+      dual(c1),dual(c2)
+      </code>
+    </program>
+
+    <p>
+      The result is <c>(-2.2, -0.19999999999999973)</c>.
+      The <c>dual</c> function returns the value of the slack variable coefficients in the objective function written in dictionary form.
+      That is, returning to the final tableau in <xref ref="eq-ex-primal-lop-final"/>, the objective row can be written as
+    </p>
+
+    <p>
+      <me>
+        \begin{aligned} 10 z \amp = 300 - 10 x_2 - 22x_4 - 2x_5 \amp\amp \\ \amp\amp\amp\text{or} \\ z \amp = 30 - x_2 - \frac{22}{10} x_4 - \frac{2}{10} x_5 \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      The values of the dual variables using Julia results in the coefficients of the slack variables that correspond to the two constraints and in fact the result of the <c>dual</c> command is the negative of the values of the dual variables found directly.
+    </p>
+
+    <p>
+      You may notice that <c>dual</c> gave the coefficients of <m>x_4</m> and <m>x_5</m>, but not <m>x_2</m>.
+      We need a little more work for that.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Finding a basis using Julia</title>
+
+    <p>
+      The primal and dual example that we saw above showed that we can solve the primal problem and get the values of the dual problem.
+      However, another useful part of the solution that we have seen over the first few chapters of this book is the basis of the solution.<fn>The basis will also play a significant role in determining uniqueness of solutions.</fn>
+    </p>
+
+    <p>
+      Although the basis is important in the simplex method, often packages like <c>HiGHS</c> may not use the simplex tableau as we have in this book.
+      We provide a possible alternative in <xref ref="ch-matrix-form"/>.
+      However, with some work, we can get the basis out of the solution using <c>JuMP</c> and <c>HiGHS</c>.
+    </p>
+
+    <p>
+      The following code will show which of the original variables are basic:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        [
+            xi =&gt; get_attribute(xi, MOI.VariableBasisStatus()) for
+            xi in all_variables(m)
+        ]
+      </code>
+    </program>
+
+    <p>
+      and for the Primal problem above (this is the <c>m</c> model),  this results in
+    </p>
+
+    <p>
+      <cd>
+      <cline>3-element Vector{Pair{VariableRef, MathOptInterface.BasisStatusCode}}:</cline>
+      <cline>x₁ =&gt; MathOptInterface.BASIC</cline>
+      <cline>x₂ =&gt; MathOptInterface.NONBASIC_AT_LOWER</cline>
+      <cline>x₃ =&gt; MathOptInterface.BASIC</cline>
+      </cd>
+    </p>
+
+    <p>
+      which shows that <m>x_1</m> and <m>x_3</m> are basic and <m>x_2</m> is non-basic.
+      (WHAT DOES NONBASIC_AT_LOWER mean?)
+    </p>
+
+    <p>
+      Similarly, we can get the basis status of the constraints, which correspond to the dual variables, with the following code:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        map(c-&gt; name(c) =&gt; MOI.get(m, MOI.ConstraintBasisStatus(), c),
+          all_constraints(m, include_variable_in_set_constraints = false))
+      </code>
+    </program>
+
+    <p>
+      which returns:
+    </p>
+
+    <p>
+      <cd>
+      <cline>2-element Vector{Pair{String, MathOptInterface.BasisStatusCode}}:</cline>
+      <cline>"c1" =&gt; MathOptInterface.NONBASIC</cline>
+      <cline>"c2" =&gt; MathOptInterface.NONBASIC</cline>
+      </cd>
+    </p>
+    <p>
+      Indicating that both constraints are non-basic.
+    </p>
+  </subsection>
+</section>

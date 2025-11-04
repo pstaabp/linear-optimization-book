@@ -4,11 +4,11 @@
   <introduction>
     <p>
       Throughout this text, we have generally been interested in a solution to a problem.
-      However, there are times if we would like the solution to be unique or if it isn't unique, can we find other solutions.
+      However, there are times if we would like the solution to be unique or if it isn't unique,  if we can find other solutions.
     </p>
 
     <p>
-      Let's return to one of the first example we saw in this text in <xref ref="prob-lop1"/>.
+      Let's return to one of the first examples we saw in this text in <xref ref="prob-lop1"/>.
       The simplex method was developed and used to solve this in <xref ref="sect-tableau"/> and the final simplex tableau was listed in <xref ref="eq-tableau-LOP1-step4"/>, but reproduced here:
       <me>
         \left[\begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40\\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56\\ \end{array} \right]
@@ -26,10 +26,6 @@
         \boldsymbol{x} = \left[ \begin{array}{rr|rrr} 8 \amp 16 \amp 40 \amp 0 \amp 0 \end{array}\right]
       </me>
       is optimal and unique.
-    </p>
-
-    <p>
-      ADD some INFO RELATED TO THE DUAL.
     </p>
   </introduction>
 
@@ -145,14 +141,108 @@
 
 
   <subsection>
-    <title>Solutions of the 4-queens Problem</title>
+    <title>Determining Uniqueness using Julia</title>
 
     <p>
-      In section ???, we
+      If we solve <xref ref="prob-lop1-revisit"/> using Julia with the following code:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        m = Model(HiGHS.Optimizer)
+        @variable(m, x₁ ≥ 0)
+        @variable(m, x₂ ≥ 0)
+        @objective(m, Max, 2x₁+4x₂)
+        @constraint(m, c1, 4x₁+3x₂ ≤ 120)
+        @constraint(m, c2, x₁+2x₂ ≤ 40)
+        @constraint(m, c3, x₂ ≤ 16)
+        print(m)
+      </code>
+    </program>
+
+    <p>
+      and then problem is correctly output.
+      Then to solve it with:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        set_silent(m)
+        optimize!(m)
+        is_solved_and_feasible(m)
+      </code>
+    </program>
+
+    <p>
+      which returns <c>true</c>, indicating that the problem was solved and is feasible.
+      To get the optimal values of the variables and objective, we use:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        value(x₁), value(x₂), objective_value(m)
+      </code>
+    </program>
+
+    <p>
+      resulting in <m>(8.0,16.0,80.0)</m>.
     </p>
 
     <p>
-      When <m>n=4</m>, the
+      To determine if the solution is unique, let's look at the dual_solution or
+    </p>
+  </subsection>
+
+
+  <subsection >
+    <title>Uniqueness in ILOPs</title>
+
+    <p>
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Solutions of the 4-queens Problem</title>
+
+    <p>
+      In <xref ref="sect-binary-lops"/>, the <m>n</m>-queens problem was formulated as an integer linear optimization problem.
+      We examine the uniqueness of its solutions here.
+    </p>
+
+    <p>
+      When <m>n=4</m>, running the code in <xref ref="lst-4-queens-julia"/> results in the solution
+      <cd>
+      <cline>4×4 Matrix{Int64}:</cline>
+      <cline>  0  0  1  0</cline>
+      <cline>  1  0  0  0</cline>
+      <cline>  0  0  0  1</cline>
+      <cline>  0  1  0  0</cline>
+      </cd>
+    </p>
+
+    <p>
+      As we saw above, using the dual to determine how to find other solutions is not possible here, since all dual variables are zero.
+      Instead, we will use a method of using a new objective that is a small random perturbation of the original objective.
+    </p>
+
+    <p>
+      If we replace the objective in the code in <xref ref="lst-4-queens-julia"/> with
+      <cd>
+      <cline>@objective(m2, Max, sum([rand(0.99:0.001:1.01)*x[i,j] for i=1:n, j=1:n]))</cline>
+      </cd>
+      and rerun the model.
+      It may result in the same solution, but it may  result in a different solution, such as
+      <cd>
+      <cline>4×4 Matrix{Int64}:</cline>
+      <cline> 0  1  0  0</cline>
+      <cline> 0  0  0  1</cline>
+      <cline> 1  0  0  0</cline>
+      <cline> 0  0  1  0</cline>
+      </cd>
     </p>
   </subsection>
 </section>

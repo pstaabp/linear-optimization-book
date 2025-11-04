@@ -79,6 +79,8 @@
   </p>
 
   <theorem xml:id="thm-primal-feasible-dual-feasible">
+    <title>Complementary Slackness Theorem</title>
+
     <statement>
       <p>
         Let <m>\boldsymbol{x}'</m> be <m>P</m>-feasible.
@@ -94,99 +96,110 @@
   </theorem>
 
   <example>
-    <title>Workout 4.4.4</title>
+    <introduction>
+      <p>
+        Note: if this is exactly workout 4.4.4, needs to be updated.
+      </p>
 
-    <p>
-      Note: if this is exactly workout 4.4.4, needs to be updated.
-    </p>
+      <p>
+        Consider the Primal LOP:
+      </p>
 
-    <p>
-      Consider the Primal LOP:
-    </p>
+      <p>
+        <me>
+          \begin{aligned}\text{Maximize} \amp  \amp z = 3x_{1} + 4x_{2} -1 x_{3} -5x_{4} +8 x_{5}, \amp \\ \text{s.t.} \amp  \amp 2x_{1} -x_{2} + 3x_{3}  + 6x_{5} \amp \leq 36, \\ \amp  \amp 3x_{1} -5x_{2} + x_{3} -3 x_4 + 2x_5 \amp \leq -40, \\ \amp  \amp -4x_{1} + 3x_{2}  - 4x_{4} + 6 x_5 \amp \leq 24, \\ \text{and} \amp  \amp x_{1}, x_{2}, x_{3}, x_{4}, x_{5} \geq 0.\end{aligned}
+        </me>
+      </p>
+    </introduction>
 
-    <p>
-      <me>
-        \begin{aligned}\text{Maximize} \amp  \amp z = 5x_{1} + 8x_{2} + 15 x_{3} + 20x_{4} + 13 x_{5}, \amp \\ \text{s.t.} \amp  \amp x_{1} + 2x_{2} + 3x_{3} + 4x_{4} + 5x_{5} \amp \leq 17, \\ \amp  \amp -x_{1} + 3x_{3} - x_{5} \amp \leq 3, \\ \amp  \amp 3x_{1} + 2x_{2} + x_{3} - x_{4} \amp \leq 15, \\ \text{and} \amp  \amp x_{1}, x_{2}, x_{3}, x_{4}, x_{5} \geq 0.\end{aligned}
-      </me>
-    </p>
 
-    <p>
-      <ol>
-        <li>
-          <p>
-            Show that <m>\boldsymbol{x}'=(2,0,1,3,0)^{\intercal}</m> is optimal.
-          </p>
+    <task>
+      <statement>
+        <p>
+          Show that <m>\boldsymbol{x}'=\begin{bmatrix}66 \amp 96 \amp 0 \amp 0 \amp 0 \end{bmatrix}^{\intercal}</m> is optimal.
+        </p>
+      </statement>
 
-          <p>
-            Using <xref ref="thm-primal-feasible-dual-feasible"/>, since <m>x_{1} &gt; 0</m>, <m>x_{3} &gt; 0</m> and <m>x_{4} &gt; 0</m>, then
-          </p>
+      <solution>
+        <p>
+          Using <xref ref="thm-primal-feasible-dual-feasible"/>, since <m>x_{1} &gt; 0</m>, <m>x_{2} &gt; 0</m>, then
+        </p>
 
-          <p>
-            <me>
-              \begin{aligned}y_{1}-y_{2}+3y_{3} \amp = 5, \\ 3y_{1}+3y_{2}+y_{3} \amp = 15, \\ 4y_{1} - y_{3} \amp = 20.\end{aligned}
-            </me>
-          </p>
+        <p>
+          <men xml:id="eq-cst-ex1">
+            \begin{aligned} 2 y_1' + 3y_2' -4y_3' \amp = 5, \\ -y_1' -5y_2' + 3y_3' \amp = 4, \end{aligned}
+          </men>
+        </p>
 
-          <p>
-            and since when <m>\boldsymbol{x}'=(2,0,1,3,0)^{\intercal}</m>
-          </p>
+        <p>
+          Also, when <m>\boldsymbol{x}'=\begin{bmatrix}66 \amp 96 \amp 0 \amp 0 \amp 0 \end{bmatrix}^{\intercal}</m>
+          <me>
+            \begin{aligned} 2x_{1} -x_{2} + 3x_{3}  + 6x_{5}  \amp = 36 \\ 3x_{1} -5x_{2} - x_{3} + x_4 - 2x_5 \amp = -282  \lt -40 \\ -4x_{1} + 3x_{2} + x_{3} - 4x_{4} + 6 x_5 \amp = 24 \end{aligned}
+          </me>
+          and since the second inequality satisfies the second part of the CST, then <m>y_{2}' = 0</m>.
+          Setting this in <xref ref="eq-cst-ex1"/> and solving  results in <m>y_{1}'= 25/2</m> and <m>y_{3}'=11/2</m> or
+          <men xml:id="eq-cst-ex1-y">
+            \boldsymbol{y} = \frac{1}{2} \begin{bmatrix} 25 \amp 0 \amp 11 \end{bmatrix}^{\intercal}
+          </men>
+        </p>
 
-          <p>
-            <me>
-              \begin{aligned}x'_{1} + 2x'_{2} + 3x'_{3} + 4x'_{4} + 5x'_{5} \amp = 17, \\ -x'_{1} + 3x'_{3} - x'_{5} \amp = 1 &#x3C; 3, \\ 3x'_{1} + 2x'_{2} + x'_{3} - x'_{4} \amp = 4&#x3C; 15, \\\end{aligned}
-            </me>
-          </p>
+        <p>
+          Recall that for a point <m>\boldsymbol{y}'</m> to be <m>D</m>-feasible, that <m>A^{\intercal} \boldsymbol{y}' \geq c</m> and using the point in <xref ref="eq-cst-ex1-y"/>
+          <me>
+            A^{\intercal} \boldsymbol{y}' = \begin{bmatrix} 2 \amp 3 \amp -4 \\ -1 \amp -5 \amp 3 \\ 3 \amp -1 \amp 1 \\ 0 \amp 1 \amp 4 \\ 6 \amp -2 \amp 6 \end{bmatrix} \begin{bmatrix} 25/2 \\ 0 \\ 11/2 \end{bmatrix} = \begin{bmatrix} 3 \\ 4 \\ 43 \\ 22\\ 108 \end{bmatrix}
+          </me>
+          And this vector is <m>\geq \boldsymbol{c}</m>, therefore <m>\boldsymbol{x}'</m> is optimal
+        </p>
+      </solution>
+    </task>
 
-          <p>
-            this implies that <m>y_{2}=0</m> and <m>y_{3}=0</m>.
-            and thus <m>y_{1}=5</m> and <m>\boldsymbol{y}=(5,0,0)^{\intercal}</m> satisfies all the constraints of the dual, so <m>\boldsymbol{x}=(2,0,1,3,0)^{\intercal}</m> is optimal.
-          </p>
-        </li>
 
-        <li>
-          <p>
-            Show that <m>\boldsymbol{x}'=(0,7,1,0,0)^{\intercal}</m> is not optimal.
-          </p>
+    <task>
+      <statement>
+        <p>
+          Show that <m>\boldsymbol{x}'=(0,7,1,0,0)^{\intercal}</m> is not optimal.
+        </p>
+      </statement>
 
-          <p>
-            From <xref ref="thm-primal-feasible-dual-feasible"/>, we get that in order to be optimal,
-          </p>
+      <solution>
+        <p>
+          From <xref ref="thm-primal-feasible-dual-feasible"/>, we get that in order to be optimal,
+        </p>
 
-          <p>
-            <me>
-              \begin{aligned}\text{since $x_{2}' &gt; 0$} \amp  \amp 2y_{1}+2y_{3} \amp = 8, \\ \text{since $x_{3}' &gt; 0$} \amp  \amp 3y_{1}+3y_{2}+y_{3} \amp = 15, \\\end{aligned}
-            </me>
-          </p>
+        <p>
+          <me>
+            \begin{aligned}\text{since $x_{2}' &gt; 0$} \amp  \amp 2y_{1}+2y_{3} \amp = 8, \\ \text{since $x_{3}' &gt; 0$} \amp  \amp 3y_{1}+3y_{2}+y_{3} \amp = 15, \\\end{aligned}
+          </me>
+        </p>
 
-          <p>
-            and all equations are satisfied, implying that <m>x_{6} =0, x_{7}=0, x_{8}=0</m>, thus <m>\boldsymbol{x}=(0,7,1,0,0~|~0,0,0)^{\intercal}</m> thus in order to be optimal, <m>\boldsymbol{y}=(+,+,+~|~+,0,0,+,+)</m>.
-          </p>
+        <p>
+          and all equations are satisfied, implying that <m>x_{6} =0, x_{7}=0, x_{8}=0</m>, thus <m>\boldsymbol{x}=(0,7,1,0,0~|~0,0,0)^{\intercal}</m> thus in order to be optimal, <m>\boldsymbol{y}=(+,+,+~|~+,0,0,+,+)</m>.
+        </p>
 
-          <p>
-            The solution to the equation above is:
-          </p>
+        <p>
+          The solution to the equation above is:
+        </p>
 
-          <p>
-            <me>
-              \begin{aligned}y_{1} \amp = 4-t, \\ y_{2} \amp =(3+2t)/3, \\ y_{3} \amp = t.\end{aligned}
-            </me>
-          </p>
+        <p>
+          <me>
+            \begin{aligned}y_{1} \amp = 4-t, \\ y_{2} \amp =(3+2t)/3, \\ y_{3} \amp = t.\end{aligned}
+          </me>
+        </p>
 
-          <p>
-            for all values of <m>t</m>, however substituting these into the 1st, 4th, and 5th equations of the dual problem
-          </p>
+        <p>
+          for all values of <m>t</m>, however substituting these into the 1st, 4th, and 5th equations of the dual problem
+        </p>
 
-          <p>
-            <me>
-              \begin{aligned}y_{1} - y_{2} + y_{3} \amp = (4-t)-(3+2t)/3+t = 3-2t/3 \geq 5 \\ 4y_{1} -y_{3} \amp = (4-t)-t = 4-2t \geq 20, \\ 5y_{1}-y_{2} \amp = 5(4-t)-(3+2t)/3 = 19-17t/3 \geq 13.\end{aligned}
-            </me>
-          </p>
+        <p>
+          <me>
+            \begin{aligned}y_{1} - y_{2} + y_{3} \amp = (4-t)-(3+2t)/3+t = 3-2t/3 \geq 5 \\ 4y_{1} -y_{3} \amp = (4-t)-t = 4-2t \geq 20, \\ 5y_{1}-y_{2} \amp = 5(4-t)-(3+2t)/3 = 19-17t/3 \geq 13.\end{aligned}
+          </me>
+        </p>
 
-          <p>
-            Note from the fact that <m>y_{3}=t\geq0</m>, that the first constraint above is not satisfied, so this is not <m>D</m>-feasible.
-          </p>
-        </li>
-      </ol>
-    </p>
+        <p>
+          Note from the fact that <m>y_{3}=t\geq0</m>, that the first constraint above is not satisfied, so this is not <m>D</m>-feasible.
+        </p>
+      </solution>
+    </task>
   </example>
 </section>

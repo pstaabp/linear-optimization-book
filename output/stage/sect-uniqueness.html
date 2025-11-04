@@ -101,14 +101,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '7.9.14';
+eBookConfig.runestone_version = '7.9.17';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.cc8d78735f870736.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.29d986501a531379.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<script src="_static/prefix-runtime.3ea59cc2563cc8e9.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.29d986501a531379.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.557d81b04b3ec0e4.css">
 <script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
@@ -328,7 +328,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="sect-ilop-julia.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Cutting Planes and Branch and Bound with Julia</span></a></div>
+<div class="toc-title-box"><a href="sect-ilop-julia.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Solving Integer LOPS with Julia</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop" class="internal"><span class="codenumber">5.5.1</span> <span class="title">Solving Integer Problems with Julia</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-binary-lops" class="internal"><span class="codenumber">5.5.2</span> <span class="title">Solving Binary LOPs using Julia</span></a></div></li>
@@ -349,7 +349,11 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-primal-dual.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Primal-Dual Relationships</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-dual-certificates.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Finding Optimal Certificates</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-dual-problems-julia.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Solving Dual Problems with Julia</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#sect-dual-problems-julia-4" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Finding a basis using Julia</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-dual-certificates.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Finding Optimal Certificates</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-chapter">
@@ -405,7 +409,9 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sect-uniqueness.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Uniqueness of LOP Optimal Solutions</span></a></div>
 <ul class="structural toc-item-list active">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-3" class="internal"><span class="codenumber">9.1.1</span> <span class="title">Linear Optimization Problems with non-unique solutions</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-4" class="internal"><span class="codenumber">9.1.2</span> <span class="title">Solutions of the 4-queens Problem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-4" class="internal"><span class="codenumber">9.1.2</span> <span class="title">Determining Uniqueness using Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-5" class="internal"><span class="codenumber">9.1.3</span> <span class="title">Uniqueness in ILOPs</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-6" class="internal"><span class="codenumber">9.1.4</span> <span class="title">Solutions of the 4-queens Problem</span></a></div></li>
 </ul>
 </li></ul>
 </li>
@@ -469,10 +475,10 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sect-uniqueness"><h2 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Uniqueness of LOP Optimal Solutions</span>
 </h2>
-<section class="introduction" id="sect-uniqueness-2"><div class="para" id="sect-uniqueness-2-1">Throughout this text, we have generally been interested in a solution to a problem. However, there are times if we would like the solution to be unique or if it isn’t unique, can we find other solutions.<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<section class="introduction" id="sect-uniqueness-2"><div class="para" id="sect-uniqueness-2-1">Throughout this text, we have generally been interested in a solution to a problem. However, there are times if we would like the solution to be unique or if it isn’t unique,  if we can find other solutions.<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-uniqueness-2-2">
-<div class="para">Let’s return to one of the first example we saw in this text in <a href="sect-lops.html#prob-lop1" class="xref" data-knowl="./knowl/xref/prob-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 2.2.2">Problem 2.2.2</a>. The simplex method was developed and used to solve this in <a href="sect-tableau.html" class="internal" title="Section 3.2: Tableaus and the Simplex Method">Section 3.2</a> and the final simplex tableau was listed in <a href="sect-tableau.html#eq-tableau-LOP1-step4" class="xref" data-knowl="./knowl/xref/eq-tableau-LOP1-step4.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 3.2.5">(3.2.5)</a>, but reproduced here:</div>
+<div class="para">Let’s return to one of the first examples we saw in this text in <a href="sect-lops.html#prob-lop1" class="xref" data-knowl="./knowl/xref/prob-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 2.2.2">Problem 2.2.2</a>. The simplex method was developed and used to solve this in <a href="sect-tableau.html" class="internal" title="Section 3.2: Tableaus and the Simplex Method">Section 3.2</a> and the final simplex tableau was listed in <a href="sect-tableau.html#eq-tableau-LOP1-step4" class="xref" data-knowl="./knowl/xref/eq-tableau-LOP1-step4.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 3.2.5">(3.2.5)</a>, but reproduced here:</div>
 <div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/prob-lop1.html ./knowl/xref/sect-tableau.html ./knowl/xref/eq-tableau-LOP1-step4.html">
 \begin{equation*}
 \left[\begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40\\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56\\ \end{array} \right]
@@ -495,8 +501,6 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="para">is optimal and unique.</div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sect-uniqueness-2-4">ADD some INFO RELATED TO THE DUAL.<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></section><section class="subsection" id="sect-uniqueness-3"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.1.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Linear Optimization Problems with non-unique solutions</span>
 </h3>
@@ -568,13 +572,68 @@ eBookConfig.enable_chatcodes =  false;
 <div class="autopermalink" data-description="Solution 9.1.3.1"><a href="#sect-uniqueness-3-12-2" title="Copy heading and permalink for Solution 9.1.3.1" aria-label="Copy heading and permalink for Solution 9.1.3.1">🔗</a></div>
 </div></details></div>
 <div class="autopermalink" data-description="Checkpoint 9.1.3"><a href="#sect-uniqueness-3-12" title="Copy heading and permalink for Checkpoint 9.1.3" aria-label="Copy heading and permalink for Checkpoint 9.1.3">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 9.1.1: Linear Optimization Problems with non-unique solutions"><a href="#sect-uniqueness-3" title="Copy heading and permalink for Subsection 9.1.1: Linear Optimization Problems with non-unique solutions" aria-label="Copy heading and permalink for Subsection 9.1.1: Linear Optimization Problems with non-unique solutions">🔗</a></div></section><section class="subsection" id="sect-uniqueness-4"><h3 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solutions of the 4-queens Problem</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Determining Uniqueness using Julia</span>
 </h3>
-<div class="para" id="sect-uniqueness-4-2">In section ???, we<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-uniqueness-4-2">If we solve <a href="sect-uniqueness.html#prob-lop1-revisit" class="xref" data-knowl="./knowl/xref/prob-lop1-revisit.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 9.1.1">Problem 9.1.1</a> using Julia with the following code:<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-uniqueness-4-3">When <span class="process-math">\(n=4\text{,}\)</span> the<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-4-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="code-box"><pre class="program clipboardable line-numbers"><code class="language-none">m = Model(HiGHS.Optimizer)
+@variable(m, x₁ ≥ 0)
+@variable(m, x₂ ≥ 0)
+@objective(m, Max, 2x₁+4x₂)
+@constraint(m, c1, 4x₁+3x₂ ≤ 120)
+@constraint(m, c2, x₁+2x₂ ≤ 40)
+@constraint(m, c3, x₂ ≤ 16)
+print(m)
+</code></pre></div>
+<div class="para" id="sect-uniqueness-4-4">and then problem is correctly output. Then to solve it with:<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-4-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Subsection 9.1.2: Solutions of the 4-queens Problem"><a href="#sect-uniqueness-4" title="Copy heading and permalink for Subsection 9.1.2: Solutions of the 4-queens Problem" aria-label="Copy heading and permalink for Subsection 9.1.2: Solutions of the 4-queens Problem">🔗</a></div></section><div class="autopermalink" data-description="Section 9.1: Uniqueness of LOP Optimal Solutions"><a href="#sect-uniqueness" title="Copy heading and permalink for Section 9.1: Uniqueness of LOP Optimal Solutions" aria-label="Copy heading and permalink for Section 9.1: Uniqueness of LOP Optimal Solutions">🔗</a></div></section></div>
+<div class="code-box"><pre class="program clipboardable line-numbers"><code class="language-none">set_silent(m)
+optimize!(m)
+is_solved_and_feasible(m)
+</code></pre></div>
+<div class="para" id="sect-uniqueness-4-6">which returns <code class="code-inline tex2jax_ignore">true</code>, indicating that the problem was solved and is feasible. To get the optimal values of the variables and objective, we use:<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-4-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable line-numbers"><code class="language-none">value(x₁), value(x₂), objective_value(m)
+</code></pre></div>
+<div class="para" id="sect-uniqueness-4-8">resulting in <span class="process-math">\((8.0,16.0,80.0)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-4-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-uniqueness-4-9">To determine if the solution is unique, let’s look at the dual_solution or<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-4-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 9.1.2: Determining Uniqueness using Julia"><a href="#sect-uniqueness-4" title="Copy heading and permalink for Subsection 9.1.2: Determining Uniqueness using Julia" aria-label="Copy heading and permalink for Subsection 9.1.2: Determining Uniqueness using Julia">🔗</a></div></section><section class="subsection" id="sect-uniqueness-5"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.1.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Uniqueness in ILOPs</span>
+</h3>
+<div class="para" id="sect-uniqueness-5-2"><div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div></div>
+<div class="autopermalink" data-description="Subsection 9.1.3: Uniqueness in ILOPs"><a href="#sect-uniqueness-5" title="Copy heading and permalink for Subsection 9.1.3: Uniqueness in ILOPs" aria-label="Copy heading and permalink for Subsection 9.1.3: Uniqueness in ILOPs">🔗</a></div></section><section class="subsection" id="sect-uniqueness-6"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.1.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solutions of the 4-queens Problem</span>
+</h3>
+<div class="para" id="sect-uniqueness-6-2">In <a href="sect-ilop-julia.html#sect-binary-lops" class="internal" title="Subsection 5.5.2: Solving Binary LOPs using Julia">Subsection 5.5.2</a>, the <span class="process-math">\(n\)</span>-queens problem was formulated as an integer linear optimization problem. We examine the uniqueness of its solutions here.<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-uniqueness-6-3">
+<div class="para">When <span class="process-math">\(n=4\text{,}\)</span> running the code in <a href="sect-ilop-julia.html#lst-4-queens-julia" class="xref" data-knowl="./knowl/xref/lst-4-queens-julia.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 5.5.2: Code for the 4-queens problem in Julia">Listing 5.5.2</a> results in the solution</div>
+<pre class="code-display tex2jax_ignore clipboardable">4×4 Matrix{Int64}:
+  0  0  1  0
+  1  0  0  0
+  0  0  0  1
+  0  1  0  0
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-6-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-uniqueness-6-4">As we saw above, using the dual to determine how to find other solutions is not possible here, since all dual variables are zero. Instead, we will use a method of using a new objective that is a small random perturbation of the original objective.<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-6-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-uniqueness-6-5">
+<div class="para">If we replace the objective in the code in <a href="sect-ilop-julia.html#lst-4-queens-julia" class="xref" data-knowl="./knowl/xref/lst-4-queens-julia.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 5.5.2: Code for the 4-queens problem in Julia">Listing 5.5.2</a> with</div>
+<pre class="code-display tex2jax_ignore clipboardable">@objective(m2, Max, sum([rand(0.99:0.001:1.01)*x[i,j] for i=1:n, j=1:n]))
+</pre>
+<div class="para">and rerun the model. It may result in the same solution, but it may  result in a different solution, such as</div>
+<pre class="code-display tex2jax_ignore clipboardable">4×4 Matrix{Int64}:
+ 0  1  0  0
+ 0  0  0  1
+ 1  0  0  0
+ 0  0  1  0
+</pre>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-uniqueness-6-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 9.1.4: Solutions of the 4-queens Problem"><a href="#sect-uniqueness-6" title="Copy heading and permalink for Subsection 9.1.4: Solutions of the 4-queens Problem" aria-label="Copy heading and permalink for Subsection 9.1.4: Solutions of the 4-queens Problem">🔗</a></div></section><div class="autopermalink" data-description="Section 9.1: Uniqueness of LOP Optimal Solutions"><a href="#sect-uniqueness" title="Copy heading and permalink for Section 9.1: Uniqueness of LOP Optimal Solutions" aria-label="Copy heading and permalink for Section 9.1: Uniqueness of LOP Optimal Solutions">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="ch-other-topics.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="backmatter.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

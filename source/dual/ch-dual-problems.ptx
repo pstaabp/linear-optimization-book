@@ -8,5 +8,6 @@ In this chapter, we introduce a dual problem, which is related to the original (
 </introduction>
 <xi:include href="sect-intro-dual.ptx" />
 <xi:include href="sect-primal-dual-relationships.ptx" />
+<xi:include href="sect-dual-problems-julia.ptx" />
 <xi:include href="sect-dual-certificates.ptx" />
 </chapter>

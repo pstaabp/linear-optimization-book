@@ -235,7 +235,7 @@
 
       <p>
         <me>
-          \begin{aligned} \text{Maximize} \amp \amp z =  \sum_{j=1}^n c_j x_j \amp \\ \text{subject to} \amp \amp \sum_{j=1}^n a_{i,j} x_j \amp \leq b_j \qquad \text{for $1 \leq i \leq m$} \\ \text{and} \amp \amp x_j \amp \geq 0, \qquad \text{for $1 \leq j \leq n$} \end{aligned}
+          \begin{aligned} \text{Maximize} \amp \amp z =  \sum_{j=1}^n c_j x_j \amp \\ \text{subject to} \amp \amp \sum_{j=1}^n a_{ij} x_j \amp \leq b_j \qquad \text{for $1 \leq i \leq m$} \\ \text{and} \amp \amp x_j \amp \geq 0, \qquad \text{for $1 \leq j \leq n$} \end{aligned}
         </me>
       </p>
     </problem>
@@ -247,7 +247,7 @@
 
     <p>
       <men xml:id="eq-primal-matrix">
-        \begin{aligned} \text{Maximize} \amp \amp z =  \boldsymbol{c}^{\intercal} \boldsymbol{x}, \\ \text{subject to} \amp \amp A \boldsymbol{x} \leq \boldsymbol{b}, \\ \text{and} \amp \amp \boldsymbol{x} \geq 0.
+        \begin{aligned} \text{Maximize} \amp \amp z =  \boldsymbol{c}^{\intercal} \boldsymbol{x}, \\ \text{subject to} \amp \amp A \boldsymbol{x} \leq \boldsymbol{b}, \amp \amp \text{and}\qquad \amp \boldsymbol{x} \geq 0.
         \end{aligned}
       </men>
     </p>
@@ -262,7 +262,7 @@
 
       <p>
         <me>
-          \begin{aligned} \text{Minimize} \amp \amp w =  \sum_{i=1}^n b_i y_i, \amp \\ \text{subject to} \amp \amp \sum_{i=1}^n a_{j,i} y_i \amp \geq c_i \qquad \text{for $1 \leq j \leq n$,} \\ \text{and} \amp \amp y_i \amp \geq 0, \qquad \text{for $1 \leq i \leq m$.} \end{aligned}
+          \begin{aligned} \text{Minimize} \amp \amp w =  \sum_{i=1}^n b_i y_i, \amp \\ \text{subject to} \amp \amp \sum_{i=1}^n a_{ij} y_i \amp \geq c_i \qquad \text{for $1 \leq j \leq n$,} \\ \text{and} \amp \amp y_i \amp \geq 0, \qquad \text{for $1 \leq i \leq m$.} \end{aligned}
         </me>
       </p>
     </problem>
@@ -273,7 +273,7 @@
 
     <p>
       <men xml:id="eq-dual-matrix">
-        \begin{aligned} \text{Minimize} \amp \amp w =  \boldsymbol{b}^{\intercal} \boldsymbol{y}, \\ \text{subject to} \amp \amp A^{\intercal} \boldsymbol{y} \geq \boldsymbol{c}, \\ \text{and} \amp \amp \boldsymbol{y} \geq 0.
+        \begin{aligned} \text{Minimize} \amp \amp w =  \boldsymbol{b}^{\intercal} \boldsymbol{y}, \\ \text{subject to} \amp \amp A^{\intercal} \boldsymbol{y} \geq \boldsymbol{c}, \amp \amp \text{and}\qquad \amp \boldsymbol{y} \geq 0.
         \end{aligned}
       </men>
     </p>
@@ -346,7 +346,8 @@
         <mrow xml:id="eq-objective-inequality-01" number="yes"> z \; = \; \amp \boldsymbol{c}^{\intercal} \boldsymbol{x} </mrow>
         <mrow xml:id="eq-objective-inequality-02" number="yes"> \; \leq \;\amp (A^{\intercal} \boldsymbol{y})^{\intercal} \boldsymbol{x}  </mrow>
         <mrow xml:id="eq-objective-inequality-03" number="yes"> \; = \; \amp \boldsymbol{y}^{\intercal} A \boldsymbol{x} </mrow>
-        <mrow xml:id="eq-objective-inequality-04" number="yes"> \;\leq\; \amp \boldsymbol{y}^{\intercal} \boldsymbol{b} = w </mrow>
+        <mrow xml:id="eq-objective-inequality-04" number="yes"> \;\leq\; \amp \boldsymbol{y}^{\intercal} \boldsymbol{b} </mrow>
+        <mrow xml:id="eq-objective-inequality-05" number="yes"> \;= \; \amp \boldsymbol{b}^{\intercal} \boldsymbol{y} = w </mrow>
       </md>
     </p>
 
@@ -355,7 +356,7 @@
       where the equality in <xref ref="eq-objective-inequality-01"/> arises from the objective function in <xref ref="eq-primal-matrix"/>.  The inequality in <xref ref="eq-objective-inequality-02"/> is a result of
       the inequality in <xref ref="eq-dual-matrix"/>.
       The equality in <xref ref="eq-objective-inequality-03"/> is
-      the property of transposes of matrices and the inequality in <xref ref="eq-objective-inequality-04"/> is the inequality constraint from the Primal problem in <xref ref="eq-primal-matrix"/>.  Finally the last equality is from the objective in <xref ref="eq-dual-matrix"/>.
+      the property of transposes of matrices and the inequality in <xref ref="eq-objective-inequality-04"/> is the inequality constraint from the Primal problem in <xref ref="eq-primal-matrix"/>.  Finally the last step in <xref ref="eq-objective-inequality-05"/> is because each of the right hand sides of the last two equations are scalars and thus the transposes can be interchanged.  Then the term <m>\boldsymbol{b}^{\intercal} \boldsymbol{y}</m> is the definition of the objective in <xref ref="eq-dual-matrix"/>.
     </p>
 
     <p>
@@ -385,7 +386,7 @@
 
       <proof>
         <p>
-          This is a direct result of the inequalities in <xref ref="eq-objective-inequality-01"/><ndash/><xref ref="eq-objective-inequality-04"/>.
+          This is a direct result of the inequalities in <xref ref="eq-objective-inequality-01"/><ndash/><xref ref="eq-objective-inequality-05"/>.
         </p>
       </proof>
     </theorem>
