@@ -209,7 +209,7 @@
 
     <p>
       and this will give us the diagonal constraint.
-      The form of the <c>diagm</c> function uses the argument of the form <c>i = &gt; v</c>, where <c>i</c> is an integer that shows how far from the main diagronal the vector <c>v</c> should exist.
+      The form of the <c>diagm</c> function uses the argument of the form <c>i = &gt; v</c>, where <c>i</c> is an integer that shows how far from the main diagonal the vector <c>v</c> should exist.
       If the integer is positive, then the diagonal will be on the upper right part of the matrix and negative values on the lower left.
       If we multiply this by <c>x</c> with   <c>diagm(1 =&gt; ones(3)).*x</c>, the result is
     </p>
