@@ -101,14 +101,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '7.9.17';
+eBookConfig.runestone_version = '7.9.18';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.3ea59cc2563cc8e9.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.29d986501a531379.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<script src="_static/prefix-runtime.cefb0224014f3333.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.c50cdcad467c8d3e.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.557d81b04b3ec0e4.css">
 <script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
@@ -273,7 +273,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sect-cutting-planes.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Cutting Planes</span></a></div>
 <ul class="structural toc-item-list active">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sect-finding-cutting-planes" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Finding Cutting Planes</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sub-sect-gomory" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Gomory’s Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sect-gomory" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Gomory’s Method</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -335,6 +335,14 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop-julia-6" class="internal"><span class="codenumber">5.5.3</span> <span class="title">Does the 3-queens problem have a solution?</span></a></div></li>
 </ul>
 </li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-simplex-tableau-julia.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Using the SimplexTableau package in Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-simplex-tableau-julia.html#subsec-st-julia-entering-tableaus" class="internal"><span class="codenumber">5.6.1</span> <span class="title">Entering Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-simplex-tableau-julia.html#subsec-pivot-julia" class="internal"><span class="codenumber">5.6.2</span> <span class="title">Pivoting with the SimplexTableau Package</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-simplex-tableau-julia.html#sect-simplex-tableau-julia-5" class="internal"><span class="codenumber">5.6.3</span> <span class="title">Phase I and Phase II using SimplexTableau in Julia</span></a></div></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-item toc-chapter">
@@ -351,7 +359,11 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-primal-dual.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Primal-Dual Relationships</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sect-dual-problems-julia.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Solving Dual Problems with Julia</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#sect-dual-problems-julia-4" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Finding a basis using Julia</span></a></div></li></ul>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#sect-dual-values-julia" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Finding Dual Values and Certificates using Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#subsec-dual-values-julia-reg" class="internal"><span class="codenumber">6.3.2</span> <span class="title">Dual Values of Regular Variables in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#sect-dual-problems-julia-6" class="internal"><span class="codenumber">6.3.3</span> <span class="title">Finding a basis using Julia</span></a></div></li>
+</ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-dual-certificates.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Finding Optimal Certificates</span></a></div></li>
 </ul>
@@ -405,15 +417,23 @@ eBookConfig.enable_chatcodes =  false;
 </li>
 <li class="toc-item toc-chapter">
 <div class="toc-title-box"><a href="ch-other-topics.html" class="internal"><span class="codenumber">9</span> <span class="title">Other Topics in Linear Optimization</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sect-uniqueness.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Uniqueness of LOP Optimal Solutions</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-3" class="internal"><span class="codenumber">9.1.1</span> <span class="title">Linear Optimization Problems with non-unique solutions</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-4" class="internal"><span class="codenumber">9.1.2</span> <span class="title">Determining Uniqueness using Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#subsect-lop-non-unique" class="internal"><span class="codenumber">9.1.1</span> <span class="title">Linear Optimization Problems with non-unique solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#subsect-uniqueness-julia" class="internal"><span class="codenumber">9.1.2</span> <span class="title">Determining Uniqueness using Julia</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-5" class="internal"><span class="codenumber">9.1.3</span> <span class="title">Uniqueness in ILOPs</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-6" class="internal"><span class="codenumber">9.1.4</span> <span class="title">Solutions of the 4-queens Problem</span></a></div></li>
 </ul>
-</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-additional-solutions.html" class="internal"><span class="codenumber">9.2</span> <span class="title">Additional Optimal Solutions of LOPs using Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-additional-solutions.html#subsect-random-objective" class="internal"><span class="codenumber">9.2.1</span> <span class="title">Using Random coefficients to find additional solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-additional-solutions.html#sect-additional-solutions-4" class="internal"><span class="codenumber">9.2.2</span> <span class="title">Solutions of the 4-queens Problem</span></a></div></li>
+</ul>
+</li>
+</ul>
 </li>
 <li class="toc-item toc-backmatter">
 <div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
@@ -584,7 +604,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="para" id="sect-finding-cutting-planes-16">and notice that the third line of <a href="sect-cutting-planes.html#eq-gomory-ex-1" class="xref" data-knowl="./knowl/xref/eq-gomory-ex-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 4.2.3">(4.2.3)</a> is the new constraint, <span class="process-math">\(4x_1 + 5x_2 \leq 26\text{,}\)</span> which is the cutting plane found above in which the variables are returned to the original <span class="process-math">\(x_1\)</span> and <span class="process-math">\(x_2\text{.}\)</span> If we graph all three constraints:<div class="autopermalink" data-description="Paragraph"><a href="#sect-finding-cutting-planes-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="figure figure-like" id="fig-gomory-ex-1"><div class="image-box" style="width: 75%; margin-left: 12.5%; margin-right: 12.5%;"><img src="generated/latex-image/fig-gomory-ex-1-2.svg" role="img" class="contained" alt=""></div>
-<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The feasible set from <a href="sect-intro-ilops.html#prob-ilop2" class="xref" data-knowl="./knowl/xref/prob-ilop2.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 4.1.3">Problem 4.1.3</a> together with the constraints <span class="process-math">\(4x_1+5x_2 \leq 26\)</span> as found above.  Note that the cutting plane <span class="process-math">\(x_5=0\)</span> (a heavy blue line) has trimmed away part of the feasible set, but not an integer solution.<div class="autopermalink" data-description="Figure 4.2.2"><a href="#fig-gomory-ex-1" title="Copy heading and permalink for Figure 4.2.2" aria-label="Copy heading and permalink for Figure 4.2.2">🔗</a></div></figcaption></figure><div class="para" id="sect-finding-cutting-planes-18">where the linear constraints are labelled by their slack variables. Notice that it appears that the <span class="process-math">\(x_5\)</span> line has cut off some the feasible set leaving the integer points. Perhaps this cutting plane is enough to solve the ILOP<details class="ptx-footnote" aria-live="polite" id="sect-finding-cutting-planes-18-2"><summary class="ptx-footnote__number" title="Footnote 4.2.1"><sup> 1 </sup></summary><div class="ptx-footnote__contents" id="sect-finding-cutting-planes-18-2">However, an astute eye notices that the likely optimal vertex is left and above the known solution of <span class="process-math">\((4,2)\text{.}\)</span>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The feasible set from <a href="sect-intro-ilops.html#prob-ilop2" class="xref" data-knowl="./knowl/xref/prob-ilop2.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 4.1.3">Problem 4.1.3</a> together with the constraints <span class="process-math">\(4x_1+5x_2 \leq 26\)</span> as found above. Note that the cutting plane <span class="process-math">\(x_5=0\)</span> (a heavy blue line) has trimmed away part of the feasible set, but not an integer solution.<div class="autopermalink" data-description="Figure 4.2.2"><a href="#fig-gomory-ex-1" title="Copy heading and permalink for Figure 4.2.2" aria-label="Copy heading and permalink for Figure 4.2.2">🔗</a></div></figcaption></figure><div class="para" id="sect-finding-cutting-planes-18">where the linear constraints are labelled by their slack variables. Notice that it appears that the <span class="process-math">\(x_5\)</span> line has cut off some the feasible set leaving the integer points. Perhaps this cutting plane is enough to solve the ILOP<details class="ptx-footnote" aria-live="polite" id="sect-finding-cutting-planes-18-2"><summary class="ptx-footnote__number" title="Footnote 4.2.1"><sup> 1 </sup></summary><div class="ptx-footnote__contents" id="sect-finding-cutting-planes-18-2">However, an astute eye notices that the likely optimal vertex is left and above the known solution of <span class="process-math">\((4,2)\text{.}\)</span>
 </div></details> Returning to <a href="sect-cutting-planes.html#eq-gomory-ex-1" class="xref" data-knowl="./knowl/xref/eq-gomory-ex-1.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 4.2.3">(4.2.3)</a>, we use phase I to perform the matrix pivot about row 3, column 3 to get<div class="autopermalink" data-description="Paragraph"><a href="#sect-finding-cutting-planes-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-finding-cutting-planes-19">
@@ -625,7 +645,7 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-finding-cutting-planes-25" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-finding-cutting-planes-26">and the left must be negative or <span class="process-math">\(-x_{4} \leq -1\text{.}\)</span> This logic is similar to above in which a integer solution must be a multiple of 4 on the left side, so similar on the right.  Since <span class="process-math">\(x_4 \geq 0\text{,}\)</span> this means the right side can be no larger than zero. Introduce this into the tableau with a new slack variable <span class="process-math">\(4x_6\text{,}\)</span> where the 4 is the pivot constant as seen in the rest of the tableau.<div class="autopermalink" data-description="Paragraph"><a href="#sect-finding-cutting-planes-26" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-finding-cutting-planes-26">and the left must be negative or <span class="process-math">\(-x_{4} \leq -1\text{.}\)</span> This logic is similar to above in which a integer solution must be a multiple of 4 on the left side, so similar on the right. Since <span class="process-math">\(x_4 \geq 0\text{,}\)</span> this means the right side can be no larger than zero. Introduce this into the tableau with a new slack variable <span class="process-math">\(4x_6\text{,}\)</span> where the 4 is the pivot constant as seen in the rest of the tableau.<div class="autopermalink" data-description="Paragraph"><a href="#sect-finding-cutting-planes-26" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-finding-cutting-planes-27">
 <div class="displaymath process-math" id="eq-gomory-ex-3">
@@ -668,754 +688,510 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-finding-cutting-planes-35" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-finding-cutting-planes-36">with objective value of <span class="process-math">\(z=26\)</span> which is now integral, so this is the optimal solution to <a href="sect-intro-ilops.html#prob-ilop1" class="xref" data-knowl="./knowl/xref/prob-ilop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 4.1.2: Integer LOP">Problem 4.1.2</a>.  This also has the same solution as the geometric argument in <a href="sect-intro-ilops.html" class="internal" title="Section 4.1: Introduction to Integer Linear Optimization Problems">Section 4.1</a><div class="autopermalink" data-description="Paragraph"><a href="#sect-finding-cutting-planes-36" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-finding-cutting-planes-36">with objective value of <span class="process-math">\(z=26\)</span> which is now integral, so this is the optimal solution to <a href="sect-intro-ilops.html#prob-ilop1" class="xref" data-knowl="./knowl/xref/prob-ilop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 4.1.2: Integer LOP">Problem 4.1.2</a>. This also has the same solution as the geometric argument in <a href="sect-intro-ilops.html" class="internal" title="Section 4.1: Introduction to Integer Linear Optimization Problems">Section 4.1</a><div class="autopermalink" data-description="Paragraph"><a href="#sect-finding-cutting-planes-36" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Subsection 4.2.1: Finding Cutting Planes"><a href="#sect-finding-cutting-planes" title="Copy heading and permalink for Subsection 4.2.1: Finding Cutting Planes" aria-label="Copy heading and permalink for Subsection 4.2.1: Finding Cutting Planes">🔗</a></div></section><section class="subsection" id="sub-sect-gomory"><h3 class="heading hide-type">
+<div class="autopermalink" data-description="Subsection 4.2.1: Finding Cutting Planes"><a href="#sect-finding-cutting-planes" title="Copy heading and permalink for Subsection 4.2.1: Finding Cutting Planes" aria-label="Copy heading and permalink for Subsection 4.2.1: Finding Cutting Planes">🔗</a></div></section><section class="subsection" id="sect-gomory"><h3 class="heading hide-type">
 <span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Gomory’s Method</span>
 </h3>
-<div class="para logical" id="sub-sect-gomory-2">
+<div class="para logical" id="sect-gomory-2">
 <div class="para">The techniques in <a href="sect-cutting-planes.html#sect-finding-cutting-planes" class="internal" title="Subsection 4.2.1: Finding Cutting Planes">Subsection 4.2.1</a> is formalized into what is called <dfn class="terminology">Gomory’s Method</dfn>.</div>
-<ol class="decimal" id="sub-sect-gomory-2-3">
-<li id="sub-sect-gomory-2-3-1">
-<div class="para" id="sub-sect-gomory-2-3-1-1">Set up the LOP and solve using the Simplex method.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-2-3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<ol class="decimal" id="sect-gomory-2-3">
+<li id="sect-gomory-2-3-1">
+<div class="para" id="sect-gomory-2-3-1-1">Set up the LOP and solve using the Simplex method.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-2-3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 1"><a href="#sub-sect-gomory-2-3-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+<div class="autopermalink" data-description="Item 1"><a href="#sect-gomory-2-3-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
-<li id="sub-sect-gomory-2-3-2">
-<div class="para" id="sub-sect-gomory-2-3-2-1">If the solution is all integers, stop!! You have the solution.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-2-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="sect-gomory-2-3-2">
+<div class="para" id="sect-gomory-2-3-2-1">If the solution is all integers, stop!! You have the solution.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-2-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 2"><a href="#sub-sect-gomory-2-3-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+<div class="autopermalink" data-description="Item 2"><a href="#sect-gomory-2-3-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
-<li id="sub-sect-gomory-2-3-3">
-<div class="para" id="sub-sect-gomory-2-3-3-1">If not, select the row with largest <span class="process-math">\(b_{i} \mod d\text{,}\)</span> where <span class="process-math">\(b_{i}\)</span> is the element in the last column and <span class="process-math">\(d\)</span> is value of the basic variable.  This is row <span class="process-math">\(i\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-2-3-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="sect-gomory-2-3-3">
+<div class="para" id="sect-gomory-2-3-3-1">If not, select the row with largest <span class="process-math">\(b_{i} \mod d\text{,}\)</span> where <span class="process-math">\(b_{i}\)</span> is the element in the last column and <span class="process-math">\(d\)</span> is value of the basic variable. This is row <span class="process-math">\(i\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-2-3-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 3"><a href="#sub-sect-gomory-2-3-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+<div class="autopermalink" data-description="Item 3"><a href="#sect-gomory-2-3-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
-<li id="sub-sect-gomory-2-3-4">
-<div class="para" id="sub-sect-gomory-2-3-4-1">Determine a new inequality by rewriting the row <span class="process-math">\(i\)</span> in step 3 by putting multiples of <span class="process-math">\(d\)</span> on the left hand side and the remainders on the right (making sure each term is negative). Insert this new constraint into the tableau.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-2-3-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="sect-gomory-2-3-4">
+<div class="para" id="sect-gomory-2-3-4-1">Determine a new inequality by rewriting the row <span class="process-math">\(i\)</span> in step 3 by putting multiples of <span class="process-math">\(d\)</span> on the left hand side and the remainders on the right (making sure each term is negative). Insert this new constraint into the tableau.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-2-3-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 4"><a href="#sub-sect-gomory-2-3-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+<div class="autopermalink" data-description="Item 4"><a href="#sect-gomory-2-3-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
-<li id="sub-sect-gomory-2-3-5">
-<div class="para" id="sub-sect-gomory-2-3-5-1">Solve the tableau using simplex method.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-2-3-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="sect-gomory-2-3-5">
+<div class="para" id="sect-gomory-2-3-5-1">Solve the tableau using simplex method.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-2-3-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 5"><a href="#sub-sect-gomory-2-3-5" title="Copy heading and permalink for Item 5" aria-label="Copy heading and permalink for Item 5">🔗</a></div>
+<div class="autopermalink" data-description="Item 5"><a href="#sect-gomory-2-3-5" title="Copy heading and permalink for Item 5" aria-label="Copy heading and permalink for Item 5">🔗</a></div>
 </li>
-<li id="sub-sect-gomory-2-3-6">
-<div class="para" id="sub-sect-gomory-2-3-6-1">Goto step 2.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-2-3-6-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<li id="sect-gomory-2-3-6">
+<div class="para" id="sect-gomory-2-3-6-1">Goto step 2.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-2-3-6-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 6"><a href="#sub-sect-gomory-2-3-6" title="Copy heading and permalink for Item 6" aria-label="Copy heading and permalink for Item 6">🔗</a></div>
+<div class="autopermalink" data-description="Item 6"><a href="#sect-gomory-2-3-6" title="Copy heading and permalink for Item 6" aria-label="Copy heading and permalink for Item 6">🔗</a></div>
 </li>
 </ol>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-3">Let’s see this in action again with another example.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-3">Let’s see this in action again with another example.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<details id="sub-sect-gomory-4" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<details id="sect-gomory-4" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
 <span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h4></summary><article class="problem example-like knowl__content"><div class="para" id="sub-sect-gomory-4-1-1">Use Gomory’s method to solve the following:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="para logical" id="sub-sect-gomory-4-1-2">
+</h4></summary><article class="problem example-like knowl__content"><div class="para" id="sect-gomory-4-1-1">Use Gomory’s method to solve the following:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="sect-gomory-4-1-2">
 <div class="displaymath process-math">
 \begin{equation*}
 \begin{aligned} \text{Max.} \amp\amp z  = 3x_1 +6x_2, \amp \\ \text{such that} \amp\amp x_1 + 7 x_2 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 \amp \leq 65, \\ \amp\amp x_1, x_2 \amp \in \mathbb{N}_0 \end{aligned}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sub-sect-gomory-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="sub-sect-gomory-4-2-1">First, the initial tableau for this problem is<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="solutions"><details id="sect-gomory-4-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sect-gomory-4-2-1">First, the initial tableau for this problem is<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-2">
+<div class="para logical" id="sect-gomory-4-2-2">
 <div class="displaymath process-math">
 \begin{equation*}
 \left[\begin{array}{rr|rrrr|r} 1 \amp 7 \amp 1 \amp 0 \amp 0 \amp 0 \amp 53\\ 5 \amp 5 \amp 0 \amp 1 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\ \hline -3 \amp -6 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-3">and now perform the simplex method:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-3">and now perform the simplex method:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-4">
-<div class="displaymath process-math" id="sub-sect-gomory-4-2-4-1">
+<div class="para logical" id="sect-gomory-4-2-4">
+<div class="displaymath process-math" id="sect-gomory-4-2-4-1">
 \begin{align*}
 1 \mapsto 5\qquad \amp \left[\begin{array}{rr|rrrr|r} 0 \amp 56 \amp 8 \amp 0 \amp -1 \amp 0 \amp 359\\ 0 \amp 40 \amp 0 \amp 8 \amp -5 \amp 0 \amp 83\\ 8 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\ \hline 0 \amp -48 \amp 0 \amp 0 \amp 3 \amp 8 \amp 195\\ \end{array} \right] \\
 2 \mapsto 4 \qquad \amp \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 40 \amp -56 \amp 30 \amp 0 \amp 1214\\ 0 \amp 40 \amp 0 \amp 8 \amp -5 \amp 0 \amp 83\\ 40 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 325\\ \hline 0 \amp 0 \amp 0 \amp 48 \amp -15 \amp 40 \amp 1473\\ \end{array} \right]\\
 5 \mapsto 3, \qquad\amp \left[\begin{array}{rr|rrrr|r} 0 \amp 0 \amp 40 \amp -56 \amp 30 \amp 0 \amp 1214\\ 0 \amp 30 \amp 5 \amp -1 \amp 0 \amp 0 \amp 214\\ 30 \amp 0 \amp -5 \amp 7 \amp 0 \amp 0 \amp 92\\ \hline 0 \amp 0 \amp 15 \amp 15 \amp 0 \amp 30 \amp 1560\\ \end{array} \right]
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-5">which now has an optimal solution, however it is not integral. Now, we will add another constraint. We find <span class="process-math">\(b_{i} \mod d\text{,}\)</span> where <span class="process-math">\(d=30\)</span> and the top row has the largest value or 14. So we write down the top line and rearrange it to get a multiple of 30 of all terms on the left and ensure that the other variables have negative coefficients:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-5">which now has an optimal solution, however it is not integral. Now, we will add another constraint. We find <span class="process-math">\(b_{i} \mod d\text{,}\)</span> where <span class="process-math">\(d=30\)</span> and the top row has the largest value or 14. So we write down the top line and rearrange it to get a multiple of 30 of all terms on the left and ensure that the other variables have negative coefficients:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-6">
-<div class="displaymath process-math" id="sub-sect-gomory-4-2-6-1">
+<div class="para logical" id="sect-gomory-4-2-6">
+<div class="displaymath process-math" id="sect-gomory-4-2-6-1">
 \begin{align*}
 40 x_3-56 x_4 + 30 x_5 \amp = 1214 \\
 30 x_5 -56x_4 -4 x_4 + 30 x_3 - 1200 \amp = 14 - 4x_4 - 10 x_3 \\
 30 (x_5 - 2x_4 -x_3 -40) \amp = 14 - 4 x_4 - 10 x_3 \amp 
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-7">So the new constraint is <span class="process-math">\(14 - 4 x_{4} - 10 x_{3} \leq 0\)</span> or <span class="process-math">\(-4 x_{4} -10x_{3} \leq -14\)</span> and making it an equation with a slack variable (or <span class="process-math">\(d\)</span> times this new variable)<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-7">So the new constraint is <span class="process-math">\(14 - 4 x_{4} - 10 x_{3} \leq 0\)</span> or <span class="process-math">\(-4 x_{4} -10x_{3} \leq -14\)</span> and making it an equation with a slack variable (or <span class="process-math">\(d\)</span> times this new variable)<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-8">
+<div class="para logical" id="sect-gomory-4-2-8">
 <div class="displaymath process-math">
 \begin{equation*}
 -5 x_3 - 2x_4 + 30 x_6 = -7
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-9">Now introduce this into the above tableau<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-9">Now introduce this into the above tableau<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-10">
+<div class="para logical" id="sect-gomory-4-2-10">
 <div class="displaymath process-math">
 \begin{equation*}
 \left[\begin{array}{rr|rrrrr|r} 0 \amp 0 \amp 40 \amp -56 \amp 30 \amp 0 \amp 0 \amp 1214\\ 0 \amp 30 \amp 5 \amp -1 \amp 0 \amp 0 \amp 0 \amp 214\\ 30 \amp 0 \amp -5 \amp 7 \amp 0 \amp 0 \amp 0 \amp 92\\ 0 \amp 0 \amp -5 \amp -2 \amp 0 \amp 30 \amp 0 \amp -7\\ \hline 0 \amp 0 \amp 15 \amp 15 \amp 0 \amp 0 \amp 30 \amp 1560\\ \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-11">and again perform the simplex method:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-11">and again perform the simplex method:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-12">
+<div class="para logical" id="sect-gomory-4-2-12">
 <div class="displaymath process-math">
 \begin{equation*}
 3 \mapsto 6, \qquad \left[\begin{array}{rr|rrrrr|r} 0 \amp 0 \amp 0 \amp -24 \amp 10 \amp 80 \amp 0 \amp 386\\ 0 \amp 10 \amp 0 \amp -1 \amp 0 \amp 10 \amp 0 \amp 69\\ 10 \amp 0 \amp 0 \amp 3 \amp 0 \amp -10 \amp 0 \amp 33\\ 0 \amp 0 \amp 10 \amp 4 \amp 0 \amp -60 \amp 0 \amp 14\\ \hline 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 30 \amp 10 \amp 513\\ \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-13">And this still does not have an integral solution, so we repeat another set of steps of Gomory’s method. We take the largest <span class="process-math">\(b_i \mod 10\)</span> and this occurs in the 2nd row, therefore:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-13">And this still does not have an integral solution, so we repeat another set of steps of Gomory’s method. We take the largest <span class="process-math">\(b_i \mod 10\)</span> and this occurs in the 2nd row, therefore:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-14">
-<div class="displaymath process-math" id="sub-sect-gomory-4-2-14-1">
+<div class="para logical" id="sect-gomory-4-2-14">
+<div class="displaymath process-math" id="sect-gomory-4-2-14-1">
 \begin{align*}
 10x_2 - x_4 + 10x_6 \amp = 69 \\
 10 (x_2 + x_6 - x_4-6)  \amp = 9 - 9x_4 
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-15">and this new inequality is <span class="process-math">\(9-9x_4 \leq 0\)</span> or <span class="process-math">\(-9x_4 \leq -9\text{.}\)</span> Note that we can cancel the <span class="process-math">\(9\)</span> on either side, but let’s leave it. Introducing a slack variable results in the new equation<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-15">and this new inequality is <span class="process-math">\(9-9x_4 \leq 0\)</span> or <span class="process-math">\(-9x_4 \leq -9\text{.}\)</span> Note that we can cancel the <span class="process-math">\(9\)</span> on either side, but let’s leave it. Introducing a slack variable results in the new equation<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-16">
+<div class="para logical" id="sect-gomory-4-2-16">
 <div class="displaymath process-math">
 \begin{equation*}
 -9x_4 + 10 x_7 = -9
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-17">and introduce this into the tableau results in<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-17">and introduce this into the tableau results in<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-18">
+<div class="para logical" id="sect-gomory-4-2-18">
 <div class="displaymath process-math">
 \begin{equation*}
 \left[\begin{array}{rr|rrrrrr|r} 0 \amp 0 \amp 0 \amp -24 \amp 10 \amp 80 \amp 0 \amp 0 \amp 386\\ 0 \amp 10 \amp 0 \amp -1 \amp 0 \amp 10 \amp 0 \amp 0 \amp 69\\ 10 \amp 0 \amp 0 \amp 3 \amp 0 \amp -10 \amp 0 \amp 0 \amp 33\\ 0 \amp 0 \amp 10 \amp 4 \amp 0 \amp -60 \amp 0 \amp 0 \amp 14\\ 0 \amp 0 \amp 0 \amp -9 \amp 0 \amp 0 \amp 10 \amp 0 \amp -9\\ \hline 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 30 \amp 0 \amp 10 \amp 513\\ \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-19">and performing the simplex method:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-19">and performing the simplex method:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-20">
+<div class="para logical" id="sect-gomory-4-2-20">
 <div class="displaymath process-math">
 \begin{equation*}
 4 \mapsto 8, \qquad \left[\begin{array}{rr|rrrrrr|r} 0 \amp 0 \amp 0 \amp 0 \amp 18 \amp 144 \amp -48 \amp 0 \amp 738\\ 0 \amp 18 \amp 0 \amp 0 \amp 0 \amp 18 \amp -2 \amp 0 \amp 126\\ 18 \amp 0 \amp 0 \amp 0 \amp 0 \amp -18 \amp 6 \amp 0 \amp 54\\ 0 \amp 0 \amp 18 \amp 0 \amp 0 \amp -108 \amp 8 \amp 0 \amp 18\\ 0 \amp 0 \amp 0 \amp 18 \amp 0 \amp 0 \amp -20 \amp 0 \amp 18\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 54 \amp 6 \amp 18 \amp 918\\ \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-20" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-20" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-21">The basic solution to this is<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-21" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-21">The basic solution to this is<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-21" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-4-2-22">
-<div class="displaymath process-math" id="sub-sect-gomory-4-2-22-1">
+<div class="para logical" id="sect-gomory-4-2-22">
+<div class="displaymath process-math" id="sect-gomory-4-2-22-1">
 \begin{align*}
 \boldsymbol{x} \amp = \frac{1}{18}  \left[\begin{array}{rr|rrrrrr} 54 \amp 126 \amp 18 \amp 18 \amp 738 \amp 0 \amp 0 \end{array}\right]^{\intercal} \\
 \amp =  \left[\begin{array}{rr|rrrrrr} 3 \amp 7 \amp 1 \amp 1 \amp 41 \amp 0 \amp 0 \end{array}\right]^{\intercal} 
 \end{align*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-22" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-22" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-4-2-23">And this is now a integral solution, so this is the optimal solution to the ILOP.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-4-2-23" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-4-2-23">And this is now a integral solution, so this is the optimal solution to the ILOP.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-4-2-23" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Solution 4.2.4.1"><a href="#sub-sect-gomory-4-2" title="Copy heading and permalink for Solution 4.2.4.1" aria-label="Copy heading and permalink for Solution 4.2.4.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.4.1"><a href="#sect-gomory-4-2" title="Copy heading and permalink for Solution 4.2.4.1" aria-label="Copy heading and permalink for Solution 4.2.4.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Problem 4.2.4"><a href="#sub-sect-gomory-4" title="Copy heading and permalink for Problem 4.2.4" aria-label="Copy heading and permalink for Problem 4.2.4">🔗</a></div></article></details><div class="para" id="sub-sect-gomory-5">The two problems we solved in this section only have 2 variables.  This is nice in terms of plotting the feasible set, however let’s look at another problem with more variables.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Problem 4.2.4"><a href="#sect-gomory-4" title="Copy heading and permalink for Problem 4.2.4" aria-label="Copy heading and permalink for Problem 4.2.4">🔗</a></div></article></details><div class="para" id="sect-gomory-5">The two problems we solved in this section only have 2 variables. This is nice in terms of plotting the feasible set, however let’s look at another problem with more variables.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <details id="ex-ilop-3vars" class="problem example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
 <span class="type">Problem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h4></summary><article class="problem example-like knowl__content"><div class="para logical" id="ex-ilop-3vars-1-1">
 <div class="displaymath process-math">
 \begin{equation*}
-\begin{aligned} \text{Max.} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 5 x_1 + 5 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}. \end{aligned}
+\begin{aligned} \text{Max.} \amp\amp z = 3x_1 +6x_2 + 5 x_3, \amp\\ \text{such that} \amp\amp x_1 + 7 x_2 + 3x_3 \amp \leq 53, \\ \amp\amp 4 x_1 + 4 x_2 \amp \leq 51, \\ \amp\amp 8 x_1 + 4x_3 \amp \leq 65, \\ \text{and} \amp\amp x_1, x_2, x_3 \amp \in \mathbb{N}_{0}.
+\end{aligned}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#ex-ilop-3vars-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Problem 4.2.5"><a href="#ex-ilop-3vars" title="Copy heading and permalink for Problem 4.2.5" aria-label="Copy heading and permalink for Problem 4.2.5">🔗</a></div></article></details><details id="sub-sect-gomory-7" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<div class="autopermalink" data-description="Problem 4.2.5"><a href="#ex-ilop-3vars" title="Copy heading and permalink for Problem 4.2.5" aria-label="Copy heading and permalink for Problem 4.2.5">🔗</a></div></article></details><details id="sect-gomory-7" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h4></summary><article class="exercise exercise-like knowl__content"><div class="para" id="sub-sect-gomory-7-1-1">Solve the ILOP in <a href="sect-cutting-planes.html#ex-ilop-3vars" class="xref" data-knowl="./knowl/xref/ex-ilop-3vars.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 4.2.5">Problem 4.2.5</a> using Gomory’s method.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</h4></summary><article class="exercise exercise-like knowl__content"><div class="para" id="sect-gomory-7-1-1">Solve the ILOP in <a href="sect-cutting-planes.html#ex-ilop-3vars" class="xref" data-knowl="./knowl/xref/ex-ilop-3vars.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 4.2.5">Problem 4.2.5</a> using Gomory’s method.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="solutions"><details id="sub-sect-gomory-7-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
-<div class="para" id="sub-sect-gomory-7-2-1">First set up the initial tableau:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="solutions"><details id="sect-gomory-7-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="sect-gomory-7-2-1">First set up the initial tableau:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-7-2-2">
+<div class="para logical" id="sect-gomory-7-2-2">
 <div class="displaymath process-math">
 \begin{equation*}
-\left[\begin{array}{rrr|rrrr|r}
-1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 53\\
-4 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 51\\
-8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\ \hline
--3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\
+\left[\begin{array}{rrr|rrrr|r} 1 \amp 7 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 53\\ 4 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 51\\ 8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\ \hline -3 \amp -6 \amp -5 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-3">perform standard phase II pivots, <span class="process-math">\(1 \mapsto 6, 2 \mapsto 5, 3 \mapsto 4, 5 \mapsto 1\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-4">
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|rrrr|r} 56 \amp 0 \amp 28 \amp 0 \amp 0 \amp 7 \amp 0 \amp 455\\ -20 \amp 28 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp 17\\ 192 \amp 0 \amp 0 \amp -16 \amp 28 \amp 12 \amp 0 \amp 1360\\ \hline 76 \amp 0 \amp 0 \amp 24 \amp 0 \amp 17 \amp 28 \amp 2377\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-5">THE REST OF THIS NEEDS TO BE REDONE!!!!!<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-6">To find a cutting plane, find the right column mod 28 and the largest one is in the 2nd row. We write down the equation:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-7">
+<div class="displaymath process-math">
+\begin{equation*}
+-20 x_1 + 28 x_2 + 4 x_4 - 3 x_6 = 17
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-8">The goal is now to make the left side a multiple of 28 (the slack variable coefficient) and to accomplish this, put parameters on the right side with  coefficients that are negative and not less than <span class="process-math">\(-28\text{.}\)</span> This is done by adding/subtracting appropriate multiples of terms.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-9">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} -20x_1 - 8x_1 + 28 x_2 - 3x_6 -25 x_6 \amp = 17 - 8x_1 - 4x_4 - 25 x_6 \\ 28 (-x_1 + x_2 - x_6) \amp = 17 - 8x_1 - 4x_4 - 25 x_6 \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-10">and the new constraint is the right hand side needs to be 0 at most or<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-11">
+<div class="displaymath process-math">
+\begin{equation*}
+-8x_1 -4x_4 -25 x_6 \leq -17
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-12">Add a slack variable to this in the form <span class="process-math">\(28x_7\)</span> to this constraint:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-13">
+<div class="displaymath process-math">
+\begin{equation*}
+-8x_1 -4x_4 -25 x_6 +28 x_7 =  -17
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-14">Add this to the tableau to get:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-15">
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|rrrrr|r} 56 \amp 0 \amp 28 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 455\\ -20 \amp 28 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp 0 \amp 17\\ 192 \amp 0 \amp 0 \amp -16 \amp 28 \amp 12 \amp 0 \amp 0 \amp 1360\\ -8 \amp 0 \amp 0 \amp -4 \amp 0 \amp -25 \amp 28 \amp 0 \amp -17\\ \hline 76 \amp 0 \amp 0 \amp 24 \amp 0 \amp 17 \amp 0 \amp 28 \amp 2377\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-16">This is infeasible and the pivot <span class="process-math">\(1 \mapsto 7\)</span> makes it feasible. Then the follow phase II pivots solve this LOP:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-17">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{array}{r} 4 \mapsto 2, \\ 6 \mapsto 1, \\ 2 \mapsto 4 \end{array} \qquad \left[\begin{array}{rrr|rrrrr|r} 48 \amp 0 \amp 25 \amp -1 \amp 0 \amp 0 \amp 7 \amp 0 \amp 402\\ -17 \amp 25 \amp 0 \amp 4 \amp 0 \amp 0 \amp -3 \amp 0 \amp 17\\ 168 \amp 0 \amp 0 \amp -16 \amp 25 \amp 0 \amp 12 \amp 0 \amp 1207\\ 8 \amp 0 \amp 0 \amp 4 \amp 0 \amp 25 \amp -28 \amp 0 \amp 17\\ \hline 63 \amp 0 \amp 0 \amp 19 \amp 0 \amp 0 \amp 17 \amp 25 \amp 2112\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-18">This is optimal, but is not integral, so perform another step of Gomory’s method. Take the right column mod 25 and the largest value is rows 2 or 4. Since we always break a tie with a smaller index, we’ll take row 2 and write down the equation:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-19">
+<div class="displaymath process-math">
+\begin{equation*}
+-17 x_1 + 25 x_2 + 4 x_4 - 3 x_7 = 17
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-20">And again, we manipulate this equation to get the left side to be a multiple of the slack variable coefficient (25) with the parameter coefficients negative.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-20" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-21">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} -17 x_1 -8x_1 + 25 x_2 - 3 x_7 -22x_7 = 17 - 8x_1 - 4x_4 - 22x_7 \\ 25(-x_1 + x_2 - x_7) \amp = 17 - 8 x_1 - 4 x_4 - 22 x_7 \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-21" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-22">The new constraint is that the right hand side is bounded above by 0 or<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-22" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-23">
+<div class="displaymath process-math">
+\begin{equation*}
+- 8 x_1 - 4 x_4 - 22 x_7\leq -17
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-23" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-24">which including a slack variable <span class="process-math">\(25 x_8\)</span> results in<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-24" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-25">
+<div class="displaymath process-math">
+\begin{equation*}
+- 8 x_1 - 4 x_4 - 22 x_7 + 25x_8 = -17
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-25" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-26">resulting in the tableau:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-26" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-27">
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|rrrrrr|r} 48 \amp 0 \amp 25 \amp -1 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 402\\ -17 \amp 25 \amp 0 \amp 4 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 17\\ 168 \amp 0 \amp 0 \amp -16 \amp 25 \amp 0 \amp 12 \amp 0 \amp 0 \amp 1207\\ 8 \amp 0 \amp 0 \amp 4 \amp 0 \amp 25 \amp -28 \amp 0 \amp 0 \amp 17\\ -8 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0 \amp -22 \amp 25 \amp 0 \amp -17\\ \hline 63 \amp 0 \amp 0 \amp 19 \amp 0 \amp 0 \amp 17 \amp 0 \amp 25 \amp 2112\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-27" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-28">The pivot <span class="process-math">\(1 \mapsto 8\)</span> will make this tableau feasible and then one gets the following phase II pivots and resulting tableau<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-28" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-29">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{array}{r} 4 \mapsto 2, \\ 7 \mapsto 1, \\ 2 \mapsto 4, \end{array} \qquad \left[\begin{array}{rrr|rrrrrr|r} 40 \amp 0 \amp 22 \amp -2 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp 349\\ -14 \amp 22 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 17\\ 144 \amp 0 \amp 0 \amp -16 \amp 22 \amp 0 \amp 0 \amp 12 \amp 0 \amp 1054\\ 16 \amp 0 \amp 0 \amp 8 \amp 0 \amp 22 \amp 0 \amp -28 \amp 0 \amp 34\\ 8 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 22 \amp -25 \amp 0 \amp 17\\ \hline 50 \amp 0 \amp 0 \amp 14 \amp 0 \amp 0 \amp 0 \amp 17 \amp 22 \amp 1847\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-29" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-30">The basic solution of this tableau is not integral, so we perform another step. Take the right column mod 22 and the largest value is in the 3rd row. This row can be written as<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-30" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-31">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} 144 x_1 -16x_4 + 22x_5 + 12 x_8 \amp = 1054 \\ 144 x_1 - 12x_1 - 16x_4 - 6x_4 + 22 x_5 - 47\cdot 22 \amp =  20 - 12x_1 - 6x_4 - 12 x_8 \\ 22 (6 x_1 - x_4 + x_5 - 47) \amp = 20 - 12x_1 - 6x_4 - 12 x_8 \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-31" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-32">Again, the new constraint is that the left side needs to be bounded above by 0 or<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-32" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-33">
+<div class="displaymath process-math">
+\begin{equation*}
+20 - 8x_1 - 6x_4 - 12 x_8 \leq 0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-33" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-34">Adding <span class="process-math">\(-8x_1 - 6x_4 - 12 x_7 + 22x_{9} = -20 \)</span> to the tableau results in<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-34" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-35">
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|rrrrrrr|r} 40 \amp 0 \amp 22 \amp -2 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 349\\ -14 \amp 22 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 17\\ 144 \amp 0 \amp 0 \amp -16 \amp 22 \amp 0 \amp 0 \amp 12 \amp 0 \amp 0 \amp 1054\\ 16 \amp 0 \amp 0 \amp 8 \amp 0 \amp 22 \amp 0 \amp -28 \amp 0 \amp 0 \amp 34\\ 8 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 22 \amp -25 \amp 0 \amp 0 \amp 17\\ -12 \amp 0 \amp 0 \amp -6 \amp 0 \amp 0 \amp -12 \amp 0 \amp 22 \amp 0 \amp -20\\ \hline 50 \amp 0 \amp 0 \amp 14 \amp 0 \amp 0 \amp 0 \amp 17 \amp 0 \amp 22 \amp 1847\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-35" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-36">This is not feasible (as is true after every added constraint). First, <span class="process-math">\(1 \mapsto 9\)</span> will make the above feasible and then the following will give a optimal tableau:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-36" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-37">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{array}{r} 4 \mapsto 1, \\ 8 \mapsto 4, \end{array}  \qquad \left[\begin{array}{rrr|rrrrrrr|r} 18 \amp 0 \amp 12 \amp -3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp 184\\ -6 \amp 12 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 12\\ 72 \amp 0 \amp 0 \amp -12 \amp 12 \amp 0 \amp 0 \amp 0 \amp 12 \amp 0 \amp 564\\ 24 \amp 0 \amp 0 \amp 12 \amp 0 \amp 12 \amp 0 \amp 0 \amp -28 \amp 0 \amp 44\\ 18 \amp 0 \amp 0 \amp 9 \amp 0 \amp 0 \amp 12 \amp 0 \amp -25 \amp 0 \amp 32\\ 12 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 0 \amp 12 \amp -22 \amp 0 \amp 20\\ \hline 18 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 17 \amp 12 \amp 992\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-37" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-38">This tableau’s basic solution is not integral, so we add another constraint. In this case, take the right column mod 12 and find the largest. Rows 4, 5 and 6 all have the same value of 8, so we take row 4 and write down the equation:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-38" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-39">
+<div class="displaymath process-math">
+\begin{equation*}
+\begin{aligned} 24 x_1 + 12x_4 + 12 x_6 - 28 x_9 \amp 44 \\
+24 x_1 + 12 x_4 + 12 x_6 - 28 x_9 - 8 x_9 - 36 \amp =  8 -8 x_9 \\
+12 (2x_1 + x_4 + x_6 - 3x_9) \amp = 8 - 8 x_9 \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-39" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-40">So we add the constraint: <span class="process-math">\(8 - 8x_9 \leq 0\)</span> or <span class="process-math">\(- 8x_9 + 12x_{10} = -8\)</span> to the tableau to get:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-40" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-41">
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrr|rrrrrrrr|r} 18 \amp 0 \amp 12 \amp -3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 184\\ -6 \amp 12 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 12\\ 72 \amp 0 \amp 0 \amp -12 \amp 12 \amp 0 \amp 0 \amp 0 \amp 12 \amp 0 \amp 0 \amp 564\\ 24 \amp 0 \amp 0 \amp 12 \amp 0 \amp 12 \amp 0 \amp 0 \amp -28 \amp 0 \amp 0 \amp 44\\ 18 \amp 0 \amp 0 \amp 9 \amp 0 \amp 0 \amp 12 \amp 0 \amp -25 \amp 0 \amp 0 \amp 32\\ 12 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 0 \amp 12 \amp -22 \amp 0 \amp 0 \amp 20\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -8 \amp 12 \amp 0 \amp -8\\ \hline 18 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 17 \amp 0 \amp 12 \amp 992\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-41" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-gomory-7-2-42">and then since this is in phase I, perform a pivot<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-42" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-gomory-7-2-43">
+<div class="displaymath process-math">
+\begin{equation*}
+9 \mapsto 10, \qquad \left[\begin{array}{rrr|rrrrrrrr|r}
+12 \amp 0 \amp 8 \amp -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp 118\\
+-4 \amp 8 \amp 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 10\\
+48 \amp 0 \amp 0 \amp -8 \amp 8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12 \amp 0 \amp 368\\
+16 \amp 0 \amp 0 \amp 8 \amp 0 \amp 8 \amp 0 \amp 0 \amp 0 \amp -28 \amp 0 \amp 48\\
+12 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 8 \amp 0 \amp 0 \amp -25 \amp 0 \amp 38\\
+8 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 8 \amp 0 \amp -22 \amp 0 \amp 28\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 8 \amp -12 \amp 0 \amp 8\\ \hline
+12 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 17 \amp 8 \amp 650\\
 \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-43" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-7-2-3">perform standard phase II pivots:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-7-2-44">This is optimal, but this is still not integral. Let’s try another step. Finding the last column modulo 8, the largest value is in rows 1 and 5. As is standard, with a tie, we’ll use the smaller indexed one or row 1, which can be written:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-44" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-7-2-4">
+<div class="para logical" id="sect-gomory-7-2-45">
 <div class="displaymath process-math">
 \begin{equation*}
-\begin{array}{r} 1 \mapsto 6, \\ 2 \mapsto 5, \\ 3 \mapsto 4, \\ 5 \mapsto 1, \end{array}
-\qquad \left[\begin{array}{rrr|rrrr|r}
-56 \amp 0 \amp 28 \amp 0 \amp 0 \amp 7 \amp 0 \amp 455\\
--20 \amp 28 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp 17\\
-240 \amp 0 \amp 0 \amp -20 \amp 28 \amp 15 \amp 0 \amp 1343\\ \hline
-76 \amp 0 \amp 0 \amp 24 \amp 0 \amp 17 \amp 28 \amp 2377\\
-\end{array} \right]
+\begin{aligned} 12 x_1 + 8 x_3 - 2x_4 + 7x_{10} \amp = 118 \\ 12 x_1 - 4x_1 + 8 x_3 -2x_4 - 6x_4 -112 \amp = 6 - 4x_1 - 6x_4 - 7x_{10} \\
+8(x_1 + x_3 - x_4 - 14) \amp = 6 - 4x_1 - 6x_4 - 7x_{10} \end{aligned}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-45" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-7-2-5">To find a cutting plane, find the right column mod 28 and the largest one is in the 3rd row.  We write down the equation:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-7-2-46">and the new constraint is that the right side is bounded above by 0, which is <span class="process-math">\(6 - 4x_1 -6x_4-7x_{10} \leq 0\)</span> which can be written with a slack variable as <span class="process-math">\(-4x_1-6x_4-7x_{11} + 8x_{12} = -6\text{.}\)</span> Adding this to the tableau is<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-46" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-7-2-6">
-<div class="displaymath process-math">
-\begin{equation*}
-240 x_1 - 20 x_4 + 28x_5 +15 x_6 = 1343
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-7">The goal is now to make the left side a multiple of 28 (the slack variable coefficient) and to accomplish this, put parameters on the right side with  coefficients that are negative and not less than <span class="process-math">\(-28\text{.}\)</span>  This is done by adding/subtracting appropriate multiples of terms. For example, subtract <span class="process-math">\(1316\)</span> as well as <span class="process-math">\(16x_1, 8x_4\)</span> and <span class="process-math">\(15x_6\)</span> from both sides to get:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-8">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{aligned}
-224 x_1 -28 x_4 - 28 x_5 -1316 \amp =  27 - 16 x_1 - 8x_4 - 15 x_6 \\
-28 (8x_1 - x_4 -x_5 - 47) \amp = 27 - 16x_1 -8x_4 -16x_6
-\end{aligned}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-9">and the new constraint is the right hand side needs to be 0 at most or<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-10">
-<div class="displaymath process-math">
-\begin{equation*}
--16x_1 -8x_4 - 15 x_6 \leq -27
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-11">Add a slack variable to this in the form <span class="process-math">\(28x_7\)</span> to this constraint:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-12">
-<div class="displaymath process-math">
-\begin{equation*}
--16x_1-8x_4-15x_6 + 28 x_7 = -27
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-13">Add this to the tableau to get:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-14">
-<div class="displaymath process-math">
-\begin{equation*}
-\left[\begin{array}{rrr|rrrrr|r}
-56 \amp 0 \amp 28 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 455\\
--20 \amp 28 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp 0 \amp 17\\
-240 \amp 0 \amp 0 \amp -20 \amp 28 \amp 15 \amp 0 \amp 0 \amp 1343\\
--16 \amp 0 \amp 0 \amp -8 \amp 0 \amp -15 \amp 28 \amp 0 \amp -27\\ \hline
-76 \amp 0 \amp 0 \amp 24 \amp 0 \amp 17 \amp 0 \amp 28 \amp 2377\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-15">This is infeasible and the pivot <span class="process-math">\(1 \mapsto 7\)</span> makes it feasible.  Then the follow phase II pivots solve this LOP:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-16">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{array}{r} 4 \mapsto 1, \\ 6 \mapsto 4, \end{array}
-\qquad
-\left[\begin{array}{rrr|rrrrr|r}
-26 \amp 0 \amp 15 \amp -2 \amp 0 \amp 0 \amp 7 \amp 0 \amp 237\\
--9 \amp 15 \amp 0 \amp 3 \amp 0 \amp 0 \amp -3 \amp 0 \amp 12\\
-120 \amp 0 \amp 0 \amp -15 \amp 15 \amp 0 \amp 15 \amp 0 \amp 705\\
-16 \amp 0 \amp 0 \amp 8 \amp 0 \amp 15 \amp -28 \amp 0 \amp 27\\ \hline
-31 \amp 0 \amp 0 \amp 8 \amp 0 \amp 0 \amp 17 \amp 15 \amp 1257\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-17">This is optimal, but is not integral, so perform another step of Gomory’s method.  Take the right column mod 15 and the largest value is rows 1, 2 or 4.  We’ll take row 1 and write down the equation:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-18">
-<div class="displaymath process-math">
-\begin{equation*}
-26 x_1 + 15 x_3 - 2x_4 + 7 x_7 =237  \\
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-19">And again, we manipulate this equation to get the left side to be a multiple of the slack variable coefficient (15) with the parameter coefficients negative.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-20">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{aligned}
-15 x_1 + 15 x_3 - 15x_4  -225 \amp =12 - 11x_1 - 13x_4 - 7 x_7 \\
-15 (x_1 + x_3 -x_4 -15) \amp = 12 - 11x_1 -13 x_4 -7 x_7
-\end{aligned}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-20" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-21">The new constraint is that the right hand side is bounded above by 0 or<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-21" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-22">
-<div class="displaymath process-math">
-\begin{equation*}
--11 x_1 - 13 x_4 - 7 x_7 \leq -12
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-22" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-23">which including a slack variable <span class="process-math">\(15 x_8\)</span> results in<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-23" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-24">
-<div class="displaymath process-math">
-\begin{equation*}
--11 x_1 - 13 x_4 - 7 x_7  + 15 x_ 8 = -12
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-24" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-25">resulting in the tableau:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-25" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-26">
-<div class="displaymath process-math">
-\begin{equation*}
-\left[\begin{array}{rrr|rrrrrr|r}
-26 \amp 0 \amp 15 \amp -2 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 237\\
--9 \amp 15 \amp 0 \amp 3 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 12\\
-120 \amp 0 \amp 0 \amp -15 \amp 15 \amp 0 \amp 15 \amp 0 \amp 0 \amp 705\\
-16 \amp 0 \amp 0 \amp 8 \amp 0 \amp 15 \amp -28 \amp 0 \amp 0 \amp 27\\
--11 \amp 0 \amp 0 \amp -13 \amp 0 \amp 0 \amp -7 \amp 15 \amp 0 \amp -12\\ \hline
-31 \amp 0 \amp 0 \amp 8 \amp 0 \amp 0 \amp 17 \amp 0 \amp 15 \amp 1257\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-26" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-27">The pivot <span class="process-math">\(1 \mapsto 8\)</span> will make this tableau feasible and then one gets the following phase II pivots and resulting tableau<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-27" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-28">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{array}{r} 4 \mapsto 1, \end{array} \qquad
-\left[\begin{array}{rrr|rrrrrr|r}
-24 \amp 0 \amp 13 \amp 0 \amp 0 \amp 0 \amp 7 \amp -2 \amp 0 \amp 207\\
--10 \amp 13 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 3 \amp 0 \amp 8\\
-115 \amp 0 \amp 0 \amp 0 \amp 13 \amp 0 \amp 20 \amp -15 \amp 0 \amp 623\\
-8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 13 \amp -28 \amp 8 \amp 0 \amp 17\\
-11 \amp 0 \amp 0 \amp 13 \amp 0 \amp 0 \amp 7 \amp -15 \amp 0 \amp 12\\ \hline
-21 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp 8 \amp 13 \amp 1083\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-28" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-29">The basic solution of this tableau is not integral, so we perform another step.  Take the right column mod 13 and the largest value is in the 1st, 3rd  and 5th rows.  We’ll use the first row for the new constraint.  This row can be written as<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-29" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-30">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{aligned}
-24 x_1 -13 x_3 + 7x_7 -2 x_8 \amp = 207  \\
-13 x_1 -13 x_3  -13 x_8 -195 \amp = 12 -11 x_1 - 7 x_7 - 11 x_8 \\
-13(x_1 - x_3 - x_8) \amp = 12 -11 x_1 -7x_7 -11x_8
-\end{aligned}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-30" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-31">Again, the new constraint is that the left side needs to be bounded above by 0 or<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-31" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-32">
-<div class="displaymath process-math">
-\begin{equation*}
-12 -11 x_1 -7x_7 -11x_8 \leq 0.
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-32" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-33">Adding this to the tableau results in<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-33" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-34">
-<div class="displaymath process-math">
-\begin{equation*}
-\left[\begin{array}{rrr|rrrrrrr|r}
-24 \amp 0 \amp 13 \amp 0 \amp 0 \amp 0 \amp 7 \amp -2 \amp 0 \amp 0 \amp 207\\
--10 \amp 13 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 3 \amp 0 \amp 0 \amp 8\\
-115 \amp 0 \amp 0 \amp 0 \amp 13 \amp 0 \amp 20 \amp -15 \amp 0 \amp 0 \amp 623\\
-8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 13 \amp -28 \amp 8 \amp 0 \amp 0 \amp 17\\
-11 \amp 0 \amp 0 \amp 13 \amp 0 \amp 0 \amp 7 \amp -15 \amp 0 \amp 0 \amp 12\\
--11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp -11 \amp 13 \amp 0 \amp -12\\ \hline
-21 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp 8 \amp 0 \amp 13 \amp 1083\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-34" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-35">This is not feasible (as is true after every added constraint).  First, <span class="process-math">\(1 \mapsto 9\)</span> will make the above feasible and then the following will give a optimal tableau:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-35" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-36">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{array}{r} 7 \mapsto 1, \\ 8 \mapsto 7, \end{array}  \qquad
-\left[\begin{array}{rrr|rrrrrrr|r}
-22 \amp 0 \amp 11 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp -2 \amp 0 \amp 177\\
--11 \amp 11 \amp 0 \amp 0 \amp 0 \amp 0 \amp -5 \amp 0 \amp 3 \amp 0 \amp 4\\
-110 \amp 0 \amp 0 \amp 0 \amp 11 \amp 0 \amp 25 \amp 0 \amp -15 \amp 0 \amp 541\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp -28 \amp 0 \amp 8 \amp 0 \amp 7\\
-22 \amp 0 \amp 0 \amp 11 \amp 0 \amp 0 \amp 14 \amp 0 \amp -15 \amp 0 \amp 24\\
-11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 11 \amp -13 \amp 0 \amp 12\\ \hline
-11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 8 \amp 11 \amp 909\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-36" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-37">This tableau’s basic solution is not integral, so we add another constraint.  In this case, take the right column mod 11 and find the largest. The largest value is in row 4 which we write:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-37" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-38">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{aligned}
-11 x_6 - 28 x_7 + 8 x_9 \amp = 7 \\
-11 x_6 - 33 x_7 \amp  = 7 - 5 x_7 - 8 x_9 \\
-11 (x_6 - 3 x_7) \amp = 7 - 5x_7 -8 x_9
-\end{aligned}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-38" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-39">So we add the constraint: <span class="process-math">\(7-5x_7-8x_9 \leq 0\)</span> to the tableau to get:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-39" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-40">
-<div class="displaymath process-math">
-\begin{equation*}
-\left[\begin{array}{rrr|rrrrrrrr|r}
-22 \amp 0 \amp 11 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp -2 \amp 0 \amp 0 \amp 177\\
--11 \amp 11 \amp 0 \amp 0 \amp 0 \amp 0 \amp -5 \amp 0 \amp 3 \amp 0 \amp 0 \amp 4\\
-110 \amp 0 \amp 0 \amp 0 \amp 11 \amp 0 \amp 25 \amp 0 \amp -15 \amp 0 \amp 0 \amp 541\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp -28 \amp 0 \amp 8 \amp 0 \amp 0 \amp 7\\
-22 \amp 0 \amp 0 \amp 11 \amp 0 \amp 0 \amp 14 \amp 0 \amp -15 \amp 0 \amp 0 \amp 24\\
-11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 11 \amp -13 \amp 0 \amp 0 \amp 12\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -5 \amp 0 \amp -8 \amp 11 \amp 0 \amp -7\\ \hline
-11 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 8 \amp 0 \amp 11 \amp 909\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-40" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-41">and then since this is in phase I, perform a pivot<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-41" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-42">
-<div class="displaymath process-math">
-\begin{equation*}
-7 \mapsto 10, \qquad \left[\begin{array}{rrr|rrrrrrrr|r}
-10 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -6 \amp 7 \amp 0 \amp 76\\
--5 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp -5 \amp 0 \amp 5\\
-50 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp -25 \amp 25 \amp 0 \amp 230\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 24 \amp -28 \amp 0 \amp 21\\
-10 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp -17 \amp 14 \amp 0 \amp 2\\
-5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp -11 \amp 7 \amp 0 \amp 1\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 8 \amp -11 \amp 0 \amp 7\\ \hline
-5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 5 \amp 410\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-42" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-43">This is optimal, but this is still not integral.  Let’s try another step.  Finding the last column modulo 5, the largest value is in rows 5 and 7.  As is standard, with a tie, we’ll use the smaller indexed one or row 5, which can be written:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-43" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-44">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{aligned}
-10 x_1 + 5 x_4 -17 x_9 + 14 x_{10}  \amp = 2 \\
-10 x_1 + 5 x_4 -20 x_9 + 10 x_{10} \amp = 2 - 3x_9 - 4x_{10} \\
-5(2x_1 + x_4 - 4 x_9 + 2 x_{10}) \amp = 2 - 3x_9 - 4x_{10}
-\end{aligned}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-44" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-45">and the new constraint is that the right side is bounded above by 0, which is<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-45" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-46">
-<div class="displaymath process-math">
-\begin{equation*}
-2 - 3x_9 -4x_{10} \leq 0
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-46" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-47">and adding a slack variable can result in<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-47" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-48">
-<div class="displaymath process-math">
-\begin{equation*}
--3x_9 -4x_{10} + 5x_{11} = -2
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-48" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-49">Adding this to the tableau is<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-49" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-50">
+<div class="para logical" id="sect-gomory-7-2-47">
 <div class="displaymath process-math">
 \begin{equation*}
 \left[\begin{array}{rrr|rrrrrrrrr|r}
-10 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -6 \amp 7 \amp 0 \amp 0 \amp 76\\
--5 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp -5 \amp 0 \amp 0 \amp 5\\
-50 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp -25 \amp 25 \amp 0 \amp 0 \amp 230\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 24 \amp -28 \amp 0 \amp 0 \amp 21\\
-10 \amp 0 \amp 0 \amp 5 \amp 0 \amp 0 \amp 0 \amp 0 \amp -17 \amp 14 \amp 0 \amp 0 \amp 2\\
-5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp -11 \amp 7 \amp 0 \amp 0 \amp 1\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 8 \amp -11 \amp 0 \amp 0 \amp 7\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp -4 \amp 5 \amp 0 \amp -2\\ \hline
-5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 5 \amp 410\\
+12 \amp 0 \amp 8 \amp -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp 0 \amp 0 \amp 118\\
+-4 \amp 8 \amp 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 10\\
+48 \amp 0 \amp 0 \amp -8 \amp 8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12 \amp 0 \amp 0 \amp 368\\
+16 \amp 0 \amp 0 \amp 8 \amp 0 \amp 8 \amp 0 \amp 0 \amp 0 \amp -28 \amp 0 \amp 0 \amp 48\\
+12 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 8 \amp 0 \amp 0 \amp -25 \amp 0 \amp 0 \amp 38\\
+8 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 8 \amp 0 \amp -22 \amp 0 \amp 0 \amp 28\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 8 \amp -12 \amp 0 \amp 0 \amp 8\\
+-4 \amp 0 \amp 0 \amp -6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 8 \amp 0 \amp -6\\ \hline
+12 \amp 0 \amp 0 \amp 2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 17 \amp 0 \amp 8 \amp 650\\
 \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-50" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-47" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-7-2-51">Note that the last row is not feasible, so perform a pivot to make it feasible:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-51" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-7-2-48">Note that the last row is not feasible, so perform a pivot to make it feasible:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-48" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-7-2-52">
+<div class="para logical" id="sect-gomory-7-2-49">
 <div class="displaymath process-math">
 \begin{equation*}
-9 \mapsto 11 \qquad \left[\begin{array}{rrr|rrrrrrrrr|r}
-6 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 9 \amp -6 \amp 0 \amp 48\\
--3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 5 \amp 0 \amp 1\\
-30 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 35 \amp -25 \amp 0 \amp 148\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp -36 \amp 24 \amp 0 \amp 3\\
-6 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 22 \amp -17 \amp 0 \amp 8\\
-3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 13 \amp -11 \amp 0 \amp 5\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -13 \amp 8 \amp 0 \amp 1\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 4 \amp -5 \amp 0 \amp 2\\ \hline
-3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 3 \amp 246\\
+1 \mapsto 11 \left[\begin{array}{rrr|rrrrrrrrr|r}
+0 \amp 0 \amp 4 \amp -10 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 12 \amp 0 \amp 50\\
+0 \amp 4 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 2 \amp -4 \amp 0 \amp 8\\
+0 \amp 0 \amp 0 \amp -40 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp -36 \amp 48 \amp 0 \amp 148\\
+0 \amp 0 \amp 0 \amp -8 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp -28 \amp 16 \amp 0 \amp 12\\
+0 \amp 0 \amp 0 \amp -6 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp -23 \amp 12 \amp 0 \amp 10\\
+0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -18 \amp 8 \amp 0 \amp 8\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp -6 \amp 0 \amp 0 \amp 4\\
+4 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp -8 \amp 0 \amp 6\\ \hline
+0 \amp 0 \amp 0 \amp -8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2 \amp 12 \amp 4 \amp 316\\
 \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-52" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-49" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-7-2-53">And this is both feasible and optimal, but not integral.  If we take the last column modulo 3, the largest value is in rows 5, 6 and 8, and if we write down the equation of row 5:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-53" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-7-2-50">And then the following phase II pivots result in the optimal tableau:<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-50" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-7-2-54">
+<div class="para logical" id="sect-gomory-7-2-51">
 <div class="displaymath process-math">
 \begin{equation*}
-\begin{aligned}
-6 x_1 + 3x_4 +22 x_{10}-17x_{11} \amp = 8 \\
-6x_1 + 3x_4 +21 x_{10} -18x_{11}-6          \amp  = 2 - x_{10} - x_{11} \\
-3(2x_1+x_4+7x_{10}-2x_{11}-2) \amp = 2 - x_{10}-x_{11}
-\end{aligned}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-54" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-55">And the new constraint is the right side less than or equal to 0.  Adding a slack variable results in<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-55" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-56">
-<div class="displaymath process-math">
-\begin{equation*}
--x_{10}-x_{11}+3x_{12} = -2
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-56" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-57">and adding it to the tableau is<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-57" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-58">
-<div class="displaymath process-math">
-\begin{equation*}
-\left[\begin{array}{rrr|rrrrrrrrrr|r}
-6 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 9 \amp -6 \amp 0 \amp 0 \amp 48\\
--3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 5 \amp 0 \amp 0 \amp 1\\
-30 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 35 \amp -25 \amp 0 \amp 0 \amp 148\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp -36 \amp 24 \amp 0 \amp 0 \amp 3\\
-6 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 22 \amp -17 \amp 0 \amp 0 \amp 8\\
-3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 13 \amp -11 \amp 0 \amp 0 \amp 5\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -13 \amp 8 \amp 0 \amp 0 \amp 1\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 4 \amp -5 \amp 0 \amp 0 \amp 2\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp -1 \amp 3 \amp 0 \amp -2\\ \hline
-3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 3 \amp 246\\
+4 \mapsto 1 \left[\begin{array}{rrr|rrrrrrrrr|r}
+10 \amp 0 \amp 6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp -2 \amp 0 \amp 90\\
+-4 \amp 6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 2 \amp 0 \amp 6\\
+40 \amp 0 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 16 \amp -8 \amp 0 \amp 282\\
+8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 0 \amp -28 \amp 8 \amp 0 \amp 30\\
+6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp -24 \amp 6 \amp 0 \amp 24\\
+4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6 \amp 0 \amp -20 \amp 4 \amp 0 \amp 18\\
+0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 6 \amp -9 \amp 0 \amp 0 \amp 6\\
+4 \amp 0 \amp 0 \amp 6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 7 \amp -8 \amp 0 \amp 6\\ \hline
+8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp 2 \amp 6 \amp 486\\
 \end{array} \right]
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-58" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-51" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-7-2-59">This is infeasible, so use the following pivots<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-59" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-7-2-52">results in an optimal and integral tableau. The basic variable for this is<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-52" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-7-2-60">
+<div class="para logical" id="sect-gomory-7-2-53">
 <div class="displaymath process-math">
 \begin{equation*}
-\begin{array}{r} 10 \mapsto 12, \\ 11 \mapsto 2, \end{array} \qquad
-\left[\begin{array}{rrr|rrrrrrrrrr|r}
-3 \amp 5 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 65\\
--1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp -7 \amp 0 \amp 5\\
-20 \amp 20 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 204\\
-20 \amp -20 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0\\
--5 \amp 13 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 17\\
--4 \amp 8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 12\\
-7 \amp -7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 1\\
--3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp -5 \amp 0 \amp 7\\
-1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -5 \amp 0 \amp 3\\ \hline
-3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 4 \amp 325\\
-\end{array} \right]
+\begin{aligned} \boldsymbol{x} \amp = \frac{1}{6} \left[\begin{array}{rrr|rrrrrrrrrrr} 0 \amp 6 \amp 90 \amp 6 \amp 282 \amp 30 \amp 24 \amp 18 \amp 6 \amp 0 \amp 0 \end{array}\right] \\ \amp = \left[\begin{array}{rrr|rrrrrrrrrrr} 0 \amp 1 \amp 15 \amp 1 \amp 47 \amp 5 \amp 4 \amp 3 \amp 1 \amp 0 \amp 0 \end{array}\right] \end{aligned}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-60" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-53" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sub-sect-gomory-7-2-61">And now this is optimal, but still not integral, so we perform another step.  Again taking the last column mod 4, shows that the largest value is in rows 8 and 9 and we will select row 8 which can be written as:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-61" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-gomory-7-2-54">and in the original variables, <span class="process-math">\(x_1 = 0, x_2 = 1\)</span> and <span class="process-math">\(x_3=15\text{.}\)</span> The objective value is 81.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-7-2-54" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sub-sect-gomory-7-2-62">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{aligned}
-x_1 - x_2 + 4x_{10}- 5x_{12} \amp = 3 \\
--4x_2 + 4x_{10} - 8x_{12} \amp = 3 - x_1 -3x_2 - 3x_{12} \\
-4(-x_2+x_{10}-2x_{12}) \amp = 3 - x_1 -3x_2 - 3x_{12}
-\end{aligned}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-62" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-63">and we bound the left hand side to be <span class="process-math">\(\leq 0\text{.}\)</span>  This results in a new constraint and adding a slack variable:<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-63" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-64">
-<div class="displaymath process-math">
-\begin{equation*}
--x_1 -3x_2-3x_{12} +4x_{13} = -3
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-64" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-65">and adding to the simplex tableau results in<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-65" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-66">
-<div class="displaymath process-math">
-\begin{equation*}
-\left[\begin{array}{rrr|rrrrrrrrrrr|r}
-3 \amp 5 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 65\\
--1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp -7 \amp 0 \amp 0 \amp 5\\
-20 \amp 20 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 204\\
-20 \amp -20 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0 \amp 0\\
--5 \amp 13 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 17\\
--4 \amp 8 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp -4 \amp 0 \amp 0 \amp 12\\
-7 \amp -7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 1\\
--3 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp 0 \amp -5 \amp 0 \amp 0 \amp 7\\
-1 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -5 \amp 0 \amp 0 \amp 3\\
--1 \amp -3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 4 \amp 0 \amp -3\\ \hline
-3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 4 \amp 325\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-66" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-67">and this is infeasible, but the pivots <span class="process-math">\(1 \mapsto 13, 2 \mapsto 6\)</span> makes it feasible, but results in<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-67" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-68">
-<div class="displaymath process-math">
-\begin{equation*}
-\left[\begin{array}{rrr|rrrrrrrrrrr|r}
-0 \amp 0 \amp 20 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -24 \amp 40 \amp 0 \amp 295\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 20 \amp -36 \amp 0 \amp 0 \amp 25\\
-0 \amp 0 \amp 0 \amp 0 \amp 20 \amp -10 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -140 \amp 200 \amp 0 \amp 870\\
-0 \amp 20 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 16 \amp -20 \amp 0 \amp 15\\
-0 \amp 0 \amp 0 \amp 20 \amp 0 \amp 7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -52 \amp 40 \amp 0 \amp 55\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 5 \amp 0 \amp 20 \amp 0 \amp 0 \amp 0 \amp -40 \amp 20 \amp 0 \amp 45\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 20 \amp 0 \amp 0 \amp 0 \amp 0 \amp -8 \amp 0 \amp 0 \amp 5\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 20 \amp 0 \amp 0 \amp -28 \amp 0 \amp 0 \amp 35\\
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -1 \amp 0 \amp 0 \amp 0 \amp 20 \amp 0 \amp -24 \amp 0 \amp 0 \amp 15\\
-20 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12 \amp -20 \amp 0 \amp 15\\ \hline
-0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12 \amp 20 \amp 20 \amp 1610\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-68" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-69">although this isn’t optimal, but<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-69" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-70">
-<div class="displaymath process-math">
-\begin{equation*}
-6 \mapsto 1 \qquad
-\left[\begin{array}{rrr|rrrrrrrrrrr|r}
-1 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 5 \amp 0 \amp 45\\
--1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp -6 \amp 1 \amp 0 \amp 3\\
-10 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -15 \amp 20 \amp 0 \amp 138\\
-1 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp -4 \amp 0 \amp 3\\
--7 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -12 \amp 13 \amp 0 \amp 3\\
--5 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp -9 \amp 8 \amp 0 \amp 3\\
-7 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp -7 \amp 0 \amp 6\\
--3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -6 \amp 3 \amp 0 \amp 3\\
-1 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp -3 \amp -1 \amp 0 \amp 3\\
-20 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 12 \amp -20 \amp 0 \amp 15\\ \hline
-2 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 1 \amp 3 \amp 243\\
-\end{array} \right]
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-70" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-71">results in an optimal and integral tableau. The basic variable for this is<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-71" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sub-sect-gomory-7-2-72">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{aligned}
-\boldsymbol{x} \amp = \frac{1}{3}
-\left[\begin{array}{rrr|rrrrrrrrrrr}
-0 \amp 3 \amp 45 \amp 3 \amp 138 \amp 15 \amp 6 \amp 3 \amp 3 \amp 3 \amp 3 \amp 0 \amp 0
-\end{array}\right] \\
-\amp = \left[\begin{array}{rrr|rrrrrrrrrrr}
-0 \amp 1 \amp 15 \amp 1 \amp 46 \amp 6 \amp 2 \amp 1 \amp 1 \amp 1 \amp 1 \amp 0 \amp 0
-\end{array}\right]
-\end{aligned}
-\end{equation*}
-</div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-72" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sub-sect-gomory-7-2-73">and in the original variables, <span class="process-math">\(x_1 = 0, x_2 = 1\)</span> and <span class="process-math">\(x_3=15\text{.}\)</span>  The objective value is 81.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-7-2-73" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" data-description="Solution 4.2.6.1"><a href="#sub-sect-gomory-7-2" title="Copy heading and permalink for Solution 4.2.6.1" aria-label="Copy heading and permalink for Solution 4.2.6.1">🔗</a></div>
+<div class="autopermalink" data-description="Solution 4.2.6.1"><a href="#sect-gomory-7-2" title="Copy heading and permalink for Solution 4.2.6.1" aria-label="Copy heading and permalink for Solution 4.2.6.1">🔗</a></div>
 </div></details></div>
-<div class="autopermalink" data-description="Checkpoint 4.2.6"><a href="#sub-sect-gomory-7" title="Copy heading and permalink for Checkpoint 4.2.6" aria-label="Copy heading and permalink for Checkpoint 4.2.6">🔗</a></div></article></details><div class="para" id="sub-sect-gomory-8">This exercise showed how to apply Gomory’s method to a problem with more than two original variables. It also shows that often this takes many steps to reach an integer solution.  Although it can be done “by hand”, this is done with software.  See <a href="ch-lop-julia.html" class="internal" title="Chapter 5: Solving Linear Optimization Problems using Software">Chapter 5</a> and more specifically <a href="sect-ilop-julia.html" class="internal" title="Section 5.5: Solving Integer LOPS with Julia">Section 5.5</a> for information of how to use the Julia language to solve these problems.<div class="autopermalink" data-description="Paragraph"><a href="#sub-sect-gomory-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Checkpoint 4.2.6"><a href="#sect-gomory-7" title="Copy heading and permalink for Checkpoint 4.2.6" aria-label="Copy heading and permalink for Checkpoint 4.2.6">🔗</a></div></article></details><div class="para" id="sect-gomory-8">This exercise showed how to apply Gomory’s method to a problem with more than two original variables. It also shows that often this takes many steps to reach an integer solution. Although it can be done “by hand”, this is done with software. See <a href="ch-lop-julia.html" class="internal" title="Chapter 5: Solving Linear Optimization Problems using Software">Chapter 5</a> and more specifically <a href="sect-ilop-julia.html" class="internal" title="Section 5.5: Solving Integer LOPS with Julia">Section 5.5</a> for information of how to use the Julia language to solve these problems.<div class="autopermalink" data-description="Paragraph"><a href="#sect-gomory-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Subsection 4.2.2: Gomory’s Method"><a href="#sub-sect-gomory" title="Copy heading and permalink for Subsection 4.2.2: Gomory’s Method" aria-label="Copy heading and permalink for Subsection 4.2.2: Gomory’s Method">🔗</a></div></section><div class="autopermalink" data-description="Section 4.2: Cutting Planes"><a href="#sect-cutting-planes" title="Copy heading and permalink for Section 4.2: Cutting Planes" aria-label="Copy heading and permalink for Section 4.2: Cutting Planes">🔗</a></div></section></div>
+<div class="autopermalink" data-description="Subsection 4.2.2: Gomory’s Method"><a href="#sect-gomory" title="Copy heading and permalink for Subsection 4.2.2: Gomory’s Method" aria-label="Copy heading and permalink for Subsection 4.2.2: Gomory’s Method">🔗</a></div></section><div class="autopermalink" data-description="Section 4.2: Cutting Planes"><a href="#sect-cutting-planes" title="Copy heading and permalink for Section 4.2: Cutting Planes" aria-label="Copy heading and permalink for Section 4.2: Cutting Planes">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sect-intro-ilops.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sect-branch-bound.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

@@ -8,6 +8,7 @@
           Formulate and solve dual problems using Julia
         </p>
       </li>
+
       <li>
         <p>
           Extract basis information from solutions using Julia
@@ -16,13 +17,14 @@
     </ul>
   </objectives>
 
-
   <introduction>
     <p>
       In <xref ref="sect-primal-dual"/>, one main takeaway was the fact that solving the primal problem also gives us a solution to the dual problem.
       Here, we will see how to explicitly formulate and solve dual problems using Julia.
     </p>
-
+  </introduction>
+  <subsection xml:id="sect-dual-values-julia">
+    <title>Finding Dual Values and Certificates using Julia</title>
     <p>
       First, let's examine LOP in <xref ref="eq-ex-primal-lop"/> using Julia.
     </p>
@@ -50,8 +52,8 @@
       <cd>
       <cline>Max 3 x₁ + 4 x₂ + 7 x₃</cline>
       <cline>Subject to</cline>
-      <cline> x₁ + 2 x₂ + 3 x₃ ≤ 12</cline>
-      <cline> 4 x₁ + 3 x₂ + 2 x₃ ≤ 18</cline>
+      <cline> c1 : x₁ + 2 x₂ + 3 x₃ ≤ 12</cline>
+      <cline> c2 : 4 x₁ + 3 x₂ + 2 x₃ ≤ 18</cline>
       <cline> x₁ ≥ 0</cline>
       <cline> x₂ ≥ 0</cline>
       <cline> x₃ ≥ 0</cline>
@@ -87,6 +89,10 @@
     </p>
 
     <p>
+      Since we have also used constants <c>c1</c> and <c>c2</c> in the constraints, we can now get the values of these as well with <c>value(c1)</c> and <c>value(c2)</c>.  These return <c>12.0</c> and <c>18.0</c> respectively.  These are the values of the left-hand sides of the constraints at optimality also since they equal the right-hand sides, the slack variables for each of these are 0.0.
+    </p>
+
+    <p>
       As we saw in <xref ref="sect-primal-dual"/>, the solution to the dual is in the objective row of the optimal tableau.
       However, it doesn't appear that we have the tableau.
       Let's first solve the dual problem from <xref ref="ex-lop-dual"/> explicitly with the following:
@@ -95,14 +101,14 @@
 
     <program language="julia" line-numbers="yes">
       <code>
-    md = Model(HiGHS.Optimizer)
-    @variable(md, y₁ ≥ 0)
-    @variable(md, y₂ ≥ 0)
-    @objective(md, Min, 12y₁ + 18y₂)
-    @constraint(md, cd1, y₁ + 4y₂ ≥ 3)
-    @constraint(md, cd2, 2y₁ + 3y₂ ≥ 4)
-    @constraint(md, cd3, 3y₁ + 2y₂ ≥ 7)
-    print(md)
+        md = Model(HiGHS.Optimizer)
+        @variable(md, y₁ ≥ 0)
+        @variable(md, y₂ ≥ 0)
+        @objective(md, Min, 12y₁ + 18y₂)
+        @constraint(md, c1, y₁ + 4y₂ ≥ 3)
+        @constraint(md, c2, 2y₁ + 3y₂ ≥ 4)
+        @constraint(md, c3, 3y₁ + 2y₂ ≥ 7)
+        print(md)
       </code>
     </program>
 
@@ -114,9 +120,9 @@
       <cd>
       <cline>Min 12 y₁ + 18 y₂</cline>
       <cline>Subject to</cline>
-      <cline> y₁ + 4 y₂ ≥ 3</cline>
-      <cline> 2 y₁ + 3 y₂ ≥ 4</cline>
-      <cline> 3 y₁ + 2 y₂ ≥ 7</cline>
+      <cline> c1 : y₁ + 4 y₂ ≥ 3</cline>
+      <cline> c2 : 2 y₁ + 3 y₂ ≥ 4</cline>
+      <cline> c3 : 3 y₁ + 2 y₂ ≥ 7</cline>
       <cline> y₁ ≥ 0</cline>
       <cline> y₂ ≥ 0</cline>
       </cd>
@@ -148,11 +154,11 @@
 
     <p>
       results in <m>(2.1999999999999997, 0.2)</m>, and for the objective use <c>objective_value(md)</c> which results in <m>30.0</m>, which is the same value as that of the primal problem.
-      (Yes, the strong duality theorem comes through.)
+      (Yes, the strong duality theorem comes through.)  Again, we can find the values of the constraints with <c>value(c1)</c>, <c>value(c2)</c>, and <c>value(c3)</c>, which return <c>3.0</c>, <c>5.0</c>, and <c>7.0</c> respectively.  Since the first and third values are the same as the right-hand sides, the slack variables for these constraints are 0.0, while the second constraint has a slack variable value of 1.0.
     </p>
 
     <p>
-      It seems unnecessary to have to solve the dual problem in light of the work in <xref ref="sect-primal-dual"/> and its true that we don't need to.
+      It seems unnecessary to have to solved the dual problem in light of the work in <xref ref="sect-primal-dual"/> and its true that we don't need to.
       If instead, we enter the following code:
     </p>
 
@@ -183,7 +189,25 @@
       You may notice that <c>dual</c> gave the coefficients of <m>x_4</m> and <m>x_5</m>, but not <m>x_2</m>.
       We need a little more work for that.
     </p>
-  </introduction>
+  </subsection>
+
+  <subsection xml:id="subsec-dual-values-julia-reg">
+    <title>Dual Values of Regular Variables in Julia</title>
+
+    <p>
+      The dual values of the regular variables (those that are not slack or surplus variables) can also be found using Julia.
+      These correspond to the constraints in the dual problem.
+      To find these, we can use the following code:
+    </p>
+    <program language="julia" line-numbers="yes">
+      <code>
+        reduced_cost(x₁), reduced_cost(x₂), reduced_cost(x₃)
+      </code>
+      </program>
+      <p>
+      which results in <c>(-0.0, -1.0, -0.0)</c>.  This is again the negative of the dual variable values for the three constraints in the dual problem.  These provide the certificate of optimality for the primal problem as we saw in <xref ref="sect-primal-dual"/> in terms of the objective row of the final tableau (to the left of the vertical line).
+      </p>
+  </subsection>
 
 
   <subsection>
@@ -228,8 +252,7 @@
     </p>
 
     <p>
-      which shows that <m>x_1</m> and <m>x_3</m> are basic and <m>x_2</m> is non-basic.
-      (WHAT DOES NONBASIC_AT_LOWER mean?)
+      which shows that <m>x_1</m> and <m>x_3</m> are basic and <m>x_2</m> is non-basic.  The <c>NONBASIC_AT_LOWER</c> indicates that the variable is basic and is at its lower bound of zero.
     </p>
 
     <p>
@@ -239,8 +262,8 @@
 
     <program language="julia" line-numbers="yes">
       <code>
-        map(c-&gt; name(c) =&gt; MOI.get(m, MOI.ConstraintBasisStatus(), c),
-          all_constraints(m, include_variable_in_set_constraints = false))
+        [ name(c) =&gt; MOI.get(m, MOI.ConstraintBasisStatus(), c)
+         for c in all_constraints(m, include_variable_in_set_constraints = false)]
       </code>
     </program>
 
@@ -251,10 +274,11 @@
     <p>
       <cd>
       <cline>2-element Vector{Pair{String, MathOptInterface.BasisStatusCode}}:</cline>
-      <cline>"c1" =&gt; MathOptInterface.NONBASIC</cline>
-      <cline>"c2" =&gt; MathOptInterface.NONBASIC</cline>
+      <cline>"x₄" =&gt; MathOptInterface.NONBASIC</cline>
+      <cline>"x₅" =&gt; MathOptInterface.NONBASIC</cline>
       </cd>
     </p>
+
     <p>
       Indicating that both constraints are non-basic.
     </p>

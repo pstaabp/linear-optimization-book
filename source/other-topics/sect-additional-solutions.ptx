@@ -1,0 +1,161 @@
+<section xml:id="sect-additional-solutions">
+  <title>Additional Optimal Solutions of LOPs using Julia</title>
+
+  <introduction>
+    <p>
+      In <xref ref="sect-uniqueness"/>, we explored the concept of uniqueness of optimal solutions in linear optimization problems (LOPs).
+      We saw that some LOPs can have multiple optimal solutions.
+      In this section, we will delve deeper into the topic by examining additional examples and methods for identifying and characterizing these multiple optimal solutions.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="subsect-random-objective">
+    <title>Using Random coefficients to find additional solutions</title>
+
+    <p>
+      Based on a paper (REF?), one method to find additional optimal solutions is to modify the objective function slightly by adding small random perturbations to the coefficients.
+      By altering the objective function in this way, different solution may arise over others.
+      If done multiple times, this method can help identify a variety of optimal solutions for the original problem.
+    </p>
+
+    <p>
+      As we saw in <xref ref="subsect-uniqueness-julia"/>, the solution to <xref ref="prob-lop1-revisit"/> was found using Julia.
+      However, since the technique that Julia uses is deterministic, it will always return the same solution.
+      But we know from <xref ref="subsect-lop-non-unique"/>, that we found two optimal solutions to this problem.
+    </p>
+
+    <p>
+      In short, what we are going to do is to modify the objective function in the Julia code by adding small random values to the coefficients of the objective function, and then resolve the problem multiple times to see if we can find different optimal solutions.
+      Here's the original <c>JuMP</c> model:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        m = Model(HiGHS.Optimizer)
+        @variable(m, x₁ ≥ 0)
+        @variable(m, x₂ ≥ 0)
+        @objective(m, Max, 2x₁+4x₂)
+        @constraint(m, c1, 4x₁+3x₂ ≤ 120)
+        @constraint(m, c2, x₁+2x₂ ≤ 40)
+        @constraint(m, c3, x₂ ≤ 16)
+        print(m)
+      </code>
+    </program>
+
+    <p>
+      We will replace the objective function with the following:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        @objective(m, Max, (2 + rand(-0.01:0.001:0.01))*x₁ + (4 + rand(-0.01:0.001:0.01))*x₂)
+      </code>
+    </program>
+
+    <p>
+      and the rerun the model with
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        set_silent(m)
+        optimize!(m)
+        is_solved_and_feasible(m)
+      </code>
+    </program>
+
+    <p>
+      and again printing out the solution with
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+          value.(x₁), value.(x₂), objective_value(m)
+      </code>
+    </program>
+
+    <p>
+      results in
+      <cd>
+      <cline>(23.999999999999996, 8.000000000000005, 80.08800000000001)</cline>
+      </cd>
+    </p>
+
+    <p>
+      The point was close to one of the solutions found in <xref ref="subsect-lop-non-unique"/>.  The small difference is most likely round-off error, common to using numerical techniques.<fn>The lack of round-off error being introduced is one of the reasons for using integer tableaus throughout the book. However, when solving large problems, using integers is impractical. </fn> Note, however, that the objective value is not 80 and the value of 80.088 is not a round-off error.  This is due to the fact that we used a different objective value.
+    </p>
+    <p>
+      Once we have a point, like <m>(24,8)</m>, we should use the original objective function and note that this is <m>z=80</m>.
+    </p>
+    <p>
+      You should run the code above again (starting with the cell that has the line <c>m = Model(HiGHS.Optimzer)</c>) and see if there is a different solution.  If you get the same point as above, try again.  After a few tried, I got the result:
+      <cd>
+        <cline>(8.0, 16.0, 79.848)</cline>
+      </cd>
+      and this was the other solution we found earlier.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Solutions of the 4-queens Problem</title>
+
+    <p>
+      In <xref ref="sect-binary-lops"/>, the <m>n</m>-queens problem was formulated as an integer linear optimization problem.
+      We examine the uniqueness of its solutions here.
+    </p>
+
+    <p>
+      When <m>n=4</m>, running the code in <xref ref="lst-4-queens-julia"/> results in the solution
+      <cd>
+      <cline>4×4 Matrix{Int64}:</cline>
+      <cline>  0  0  1  0</cline>
+      <cline>  1  0  0  0</cline>
+      <cline>  0  0  0  1</cline>
+      <cline>  0  1  0  0</cline>
+      </cd>
+    </p>
+
+    <p>
+      As we saw above, using the dual to determine how to find other solutions is not possible here, since all dual variables are zero.
+      Instead, we will use a method of using a new objective that is a small random perturbation of the original objective.
+    </p>
+
+    <p>
+      If we replace the objective in the code in <xref ref="lst-4-queens-julia"/> with
+      <cd>
+      <cline>@objective(m2, Max, sum([rand(0.99:0.001:1.01)*x[i,j] for i=1:n, j=1:n]))</cline>
+      </cd>
+      and rerun the model.
+      It may result in the same solution, but it may  result in a different solution, such as
+      <cd>
+      <cline>4×4 Matrix{Int64}:</cline>
+      <cline> 0  1  0  0</cline>
+      <cline> 0  0  0  1</cline>
+      <cline> 1  0  0  0</cline>
+      <cline> 0  0  1  0</cline>
+      </cd>
+    </p>
+    <p>
+      These are the only two solutions to the 4-queens problem.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          Find other solutions to the 5-queens problem.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If the code above is updated with the 2nd line of <xref ref="lst-4-queens-julia"/> replaced with <c>n = 5</c>
+        </p>
+      </solution>
+    </exercise>
+  </subsection>
+</section>

@@ -8,4 +8,5 @@
   </introduction>
 
   <xi:include href="./sect-uniqueness.ptx" />
+  <xi:include href="./sect-additional-solutions.ptx" />
 </chapter>

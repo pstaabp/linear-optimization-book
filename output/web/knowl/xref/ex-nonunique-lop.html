@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: salem                          *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="exercise exercise-like"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.1.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h4>
+<div class="introduction"><div class="para logical">
+<div class="para">Consider the Linear Optimization Problem</div>
+<div class="displaymath process-math">
+\begin{equation}
+\begin{aligned} \text{Maximize} \amp\amp z = 2x_1 + 4x_2 + 2x_3 + 4x_4, \amp \\ \text{subject to} \amp\amp x_1 + 2x_2 + x_3 + 2x_4 \amp \leq 10, \\ \amp\amp 3x_1 + x_2 \phantom{+ x_3 + x_4} \amp \leq 9, \\ \amp \amp \phantom{x_1 + x_2 +} x_3 + x_4 \amp \leq 4, \\ \text{and} \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+\end{aligned}\tag{9.1.1}
+\end{equation}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<article class="task exercise-like"><h5 class="heading"><span class="codenumber">(a)</span></h5>
+<div class="para">Using the simplex tableau, find an optimal solution.<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">The LOP above has the following initial tableau</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrrr|rrrr|r} 1 \amp 2 \amp 1 \amp 2 \amp 1 \amp 0 \amp 0 \amp 0 \amp 10\\ 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 9\\ 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 4\\ \hline -2 \amp -4 \amp -2 \amp -4 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">and performing the pivots <span class="process-math">\(1 \mapsto 6, 2 \mapsto 5, 3 \mapsto 7\)</span> results in the tableau</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\left[\begin{array}{rrrr|rrrr|r} 0 \amp 5 \amp 0 \amp 3 \amp 3 \amp -1 \amp -3 \amp 0 \amp 9\\ 5 \amp 0 \amp 0 \amp -1 \amp -1 \amp 2 \amp 1 \amp 0 \amp 12\\ 0 \amp 0 \amp 5 \amp 5 \amp 0 \amp 0 \amp 5 \amp 0 \amp 20\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 10 \amp 0 \amp 0 \amp 5 \amp 100\\ \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-2-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">The solution to this is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{x} = \frac{1}{5} \left[ \begin{array}{rrrr|rrr} 12 \amp 9 \amp 20 \amp 0 \amp 0  \amp 0 \amp 0 \end{array}\right]
+\end{equation*}
+</div>
+<div class="para">with <span class="process-math">\(z=120/5=20\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-2-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 9.1.4.a.1"><a href="#ex-nonunique-lop-2-2" title="Copy heading and permalink for Solution 9.1.4.a.1" aria-label="Copy heading and permalink for Solution 9.1.4.a.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Task 9.1.4.a"><a href="#ex-nonunique-lop-2" title="Copy heading and permalink for Task 9.1.4.a" aria-label="Copy heading and permalink for Task 9.1.4.a">🔗</a></div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(b)</span></h5>
+<div class="para">Determine if the LOP has a unique optimal solution or not:<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para">Notice that for the objective row, the coefficient for the nonbasic variables  <span class="process-math">\(x_4\)</span> and <span class="process-math">\(x_6\)</span> are zero and will not change the objective value. Thus, the optimal solution is not unique.<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 9.1.4.b.1"><a href="#ex-nonunique-lop-3-2" title="Copy heading and permalink for Solution 9.1.4.b.1" aria-label="Copy heading and permalink for Solution 9.1.4.b.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Task 9.1.4.b"><a href="#ex-nonunique-lop-3" title="Copy heading and permalink for Task 9.1.4.b" aria-label="Copy heading and permalink for Task 9.1.4.b">🔗</a></div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(c)</span></h5>
+<div class="para">If the solution is not unique, find one or more solutions.<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical">
+<div class="para">Since the dual value of <span class="process-math">\(x_4\)</span> is 0, we pivot to bring it into the basis or <span class="process-math">\(4 \mapsto 2\text{.}\)</span> The resulting solution is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{x} = \frac{1}{3} \left[ \begin{array}{rrrr|rrr} 9 \amp 0 \amp 3 \amp 9 \amp 0  \amp 0 \amp 0 \end{array}\right]
+\end{equation*}
+</div>
+<div class="para">with <span class="process-math">\(z=60/3=20\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Since the dual value of <span class="process-math">\(x_6\)</span> is also 0, we can pivot to bring it into the basis or <span class="process-math">\(6 \mapsto 3\text{.}\)</span> The resulting solution is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\boldsymbol{x} = \left[ \begin{array}{rrrr|rrr} 2 \amp 0 \amp 0 \amp 4 \amp 0  \amp 3 \amp 0 \end{array}\right]
+\end{equation*}
+</div>
+<div class="para">with <span class="process-math">\(z=20\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-nonunique-lop-4-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 9.1.4.c.1"><a href="#ex-nonunique-lop-4-2" title="Copy heading and permalink for Solution 9.1.4.c.1" aria-label="Copy heading and permalink for Solution 9.1.4.c.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Task 9.1.4.c"><a href="#ex-nonunique-lop-4" title="Copy heading and permalink for Task 9.1.4.c" aria-label="Copy heading and permalink for Task 9.1.4.c">🔗</a></div></article><div class="autopermalink" data-description="Checkpoint 9.1.4"><a href="#ex-nonunique-lop" title="Copy heading and permalink for Checkpoint 9.1.4" aria-label="Copy heading and permalink for Checkpoint 9.1.4">🔗</a></div></article><span class="incontext"><a class="internal" href="sect-uniqueness.html#ex-nonunique-lop">in-context</a></span>
+</body>
+</html>

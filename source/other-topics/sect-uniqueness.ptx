@@ -30,7 +30,7 @@
   </introduction>
 
 
-  <subsection>
+  <subsection xml:id="subsect-lop-non-unique">
     <title>Linear Optimization Problems with non-unique solutions</title>
 
     <p>
@@ -137,10 +137,104 @@
         </p>
       </solution>
     </exercise>
+
+    <p>
+      The following exercise explores this further.
+    </p>
+
+    <exercise xml:id="ex-nonunique-lop">
+      <introduction>
+        <p>
+          Consider the Linear Optimization Problem
+          <men xml:id="eq-lop-non-unique">
+            \begin{aligned} \text{Maximize} \amp\amp z = 2x_1 + 4x_2 + 2x_3 + 4x_4, \amp \\ \text{subject to} \amp\amp x_1 + 2x_2 + x_3 + 2x_4 \amp \leq 10, \\ \amp\amp 3x_1 + x_2 \phantom{+ x_3 + x_4} \amp \leq 9, \\ \amp \amp \phantom{x_1 + x_2 +} x_3 + x_4 \amp \leq 4, \\ \text{and} \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+            \end{aligned}
+          </men>
+        </p>
+      </introduction>
+
+
+      <task>
+        <statement>
+          <p>
+            Using the simplex tableau, find an optimal solution.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            The LOP above has the following initial tableau
+            <me>
+              \left[\begin{array}{rrrr|rrrr|r} 1 \amp 2 \amp 1 \amp 2 \amp 1 \amp 0 \amp 0 \amp 0 \amp 10\\ 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 9\\ 0 \amp 0 \amp 1 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 4\\ \hline -2 \amp -4 \amp -2 \amp -4 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0\\ \end{array} \right]
+            </me>
+          </p>
+
+          <p>
+            and performing the pivots <m>1 \mapsto 6, 2 \mapsto 5, 3 \mapsto 7</m> results in the tableau
+            <me>
+              \left[\begin{array}{rrrr|rrrr|r} 0 \amp 5 \amp 0 \amp 3 \amp 3 \amp -1 \amp -3 \amp 0 \amp 9\\ 5 \amp 0 \amp 0 \amp -1 \amp -1 \amp 2 \amp 1 \amp 0 \amp 12\\ 0 \amp 0 \amp 5 \amp 5 \amp 0 \amp 0 \amp 5 \amp 0 \amp 20\\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 10 \amp 0 \amp 0 \amp 5 \amp 100\\ \end{array} \right]
+            </me>
+          </p>
+
+          <p>
+            The solution to this is
+            <me>
+              \boldsymbol{x} = \frac{1}{5} \left[ \begin{array}{rrrr|rrr} 12 \amp 9 \amp 20 \amp 0 \amp 0  \amp 0 \amp 0 \end{array}\right]
+            </me>
+            with <m>z=120/5=20</m>.
+          </p>
+        </solution>
+      </task>
+
+
+      <task>
+        <statement>
+          <p>
+            Determine if the LOP has a unique optimal solution or not:
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            Notice that for the objective row, the coefficient for the nonbasic variables  <m>x_4</m> and <m>x_6</m> are zero and will not change the objective value.
+            Thus, the optimal solution is not unique.
+          </p>
+        </solution>
+      </task>
+
+
+      <task>
+        <statement>
+          <p>
+            If the solution is not unique, find one or more solutions.
+          </p>
+        </statement>
+
+        <solution>
+          <p>
+            Since the dual value of <m>x_4</m> is 0, we pivot to bring it into the basis or <m>4 \mapsto 2</m>.
+            The resulting solution is
+            <me>
+              \boldsymbol{x} = \frac{1}{3} \left[ \begin{array}{rrrr|rrr} 9 \amp 0 \amp 3 \amp 9 \amp 0  \amp 0 \amp 0 \end{array}\right]
+            </me>
+            with <m>z=60/3=20</m>.
+          </p>
+
+          <p>
+            Since the dual value of <m>x_6</m> is also 0, we can pivot to bring it into the basis or <m>6 \mapsto 3</m>.
+            The resulting solution is
+            <me>
+              \boldsymbol{x} = \left[ \begin{array}{rrrr|rrr} 2 \amp 0 \amp 0 \amp 4 \amp 0  \amp 3 \amp 0 \end{array}\right]
+            </me>
+            with <m>z=20</m>.
+          </p>
+        </solution>
+      </task>
+    </exercise>
   </subsection>
 
 
-  <subsection>
+  <subsection xml:id="subsect-uniqueness-julia">
     <title>Determining Uniqueness using Julia</title>
 
     <p>
@@ -162,8 +256,7 @@
     </program>
 
     <p>
-      and then problem is correctly output.
-      Then to solve it with:
+      To solve the problem, we use:
     </p>
 
 
@@ -192,8 +285,184 @@
     </p>
 
     <p>
-      To determine if the solution is unique, let's look at the dual_solution or
+      To determine if the solution is unique, let's look at the objective row.
+      The dual variables corresponding to the variables can be found with:
     </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        map(var -&gt; name(var) =&gt; reduced_cost(var), all_variables(m))
+      </code>
+    </program>
+
+    <p>
+      which returns
+      <cd>
+      <cline>2-element Vector{Pair{String, Float64}}:</cline>
+      <cline> "x₁" =&gt; -0.0</cline>
+      <cline> "x₂" =&gt; -0.0</cline>
+      </cd>
+    </p>
+
+    <p>
+      and the dual variables corresponding to the constraints can be found with:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        map(var-&gt;name(var) =&gt; shadow_price(var), all_constraints(m, include_variable_in_set_constraints = false))
+      </code>
+    </program>
+
+    <p>
+      and this returns
+    </p>
+
+    <p>
+      <cd>
+      <cline>3-element Vector{Pair{String, Float64}}:</cline>
+      <cline>"c1" =&gt; 0.0</cline>
+      <cline>"c2" =&gt; -2.0</cline>
+      <cline>"c3" =&gt; -0.0</cline>
+      </cd>
+    </p>
+
+    <p>
+      and notice that this is objective row of the final tableau above, however, the signs are reversed and they are shuffled a bit.
+      We can figure out which variable has which dual variable by separating the variables and the constraints.
+      The values of objective row of the variables can be found with
+    </p>
+
+    <p>
+      Recall that we called the bottom row of the final tableau, <m>\boldsymbol{c}^{\intercal}</m> and then using this notation
+      <me>
+        \boldsymbol{c}^{\intercal} = \left[\begin{array}{cc|ccc} 0 \amp 0 \amp 0 \amp 2 \amp 0 \end{array}\right]
+      </me>
+      which is the same as when we did the tableau above.
+      This is great except that we don't know which variables are basis and nonbasic.
+      Fortunately, Julia can tell use these as well.
+      For the regular variables, executing
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        [ xi =&gt; get_attribute(xi, MOI.VariableBasisStatus()) for xi in all_variables(m) ]
+      </code>
+    </program>
+
+    <p>
+      returns
+      <cd>
+      <cline>2-element Vector{Pair{VariableRef, MathOptInterface.BasisStatusCode}}:</cline>
+      <cline> x₁ =&gt; MathOptInterface.BASIC</cline>
+      <cline> x₂ =&gt; MathOptInterface.BASIC</cline>
+      </cd>
+      indicating that both of the original variables are basic.
+      For the constraints, evaluate
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        map(c-&gt; name(c) =&gt; MOI.get(m, MOI.ConstraintBasisStatus(), c), all_constraints(m, include_variable_in_set_constraints = false))
+      </code>
+    </program>
+
+    <p>
+      which returns
+      <cd>
+      <cline>3-element Vector{Pair{String, MathOptInterface.BasisStatusCode}}:</cline>
+      <cline>"c1" =&gt; MathOptInterface.BASIC</cline>
+      <cline>"c2" =&gt; MathOptInterface.NONBASIC</cline>
+      <cline>"c3" =&gt; MathOptInterface.NONBASIC</cline>
+      </cd>
+    </p>
+
+    <p>
+      Thus, <c>x₁, x₂, c1</c> are basic and <c>c2, c3</c> are nonbasic, or using the set notation from earlier in the next <m>\beta = \{1,2,3\}</m> and <m>\pi=\{4,5\}</m>.
+      Again, this is the same as using the tableau above.
+    </p>
+
+    <p>
+      In terms of uniqueness, the key part to look at is any dual variable that is 0 for a nonbasic variable.
+      This occurs for <c>c3</c> indicating that 1) this solution is not unique and 2) pivoting to bring <c>c3</c> (or <m>x_5</m> using previous notation) into the basis will result in another optimal solution to this LOP.
+    </p>
+
+    <p>
+      Unfortunately, using the Julia packages we have, we cannot pivot to a new solution, so in the next section we show how to find additional solutions.
+      The following exercise repeats <xref ref="ex-nonunique-lop"/> with Julia.
+    </p>
+
+    <exercise xml:id="ex-nonunique-lop-julia">
+      <statement>
+        <p>
+          Consider the LOP
+          <me>
+            \begin{aligned} \text{Maximize} \amp\amp z = 2x_1 + 4x_2 + 3x_3 + 4x_4, \amp \\ \text{subject to} \amp\amp x_1 + 2x_2 + x_3 + 2x_4 \amp \leq 10, \\ \amp\amp 3x_1 + x_2 \phantom{+ x_3 + x_4} \amp \leq 9, \\ \amp\amp  \phantom{x_1 + x_2 +} x_3 + x_4 \amp \leq 4, \\ \text{and} \amp \amp x_1, x_2, x_3, x_4 \amp \geq 0.
+            \end{aligned}
+          </me>
+        </p>
+
+        <p>
+          Use Julia to determine if the optimal solution is unique or not.
+        </p>
+      </statement>
+
+      <solution>
+        <p>
+          First, we set up the model in Julia:
+        </p>
+
+
+        <program language="julia" line-numbers="yes">
+          <code>
+            m3 = Model(HiGHS.Optimizer)
+            @variable(m3, x₁ ≥ 0)
+            @variable(m3, x₂ ≥ 0)
+            @variable(m3, x₃ ≥ 0)
+            @variable(m3, x₄ ≥ 0)
+            @objective(m3, Max, 2x₁ + 4x₂ + 3x₃ + 4x₄)
+            @constraint(m3, c1, x₁ + 2x₂ + x₃ + 2x₄ ≤ 10)
+            @constraint(m3, c2, 3x₁ + x₂ ≤ 9)
+            @constraint(m3, c3, x₃ + x₄ ≤ 4)
+            print(m3)
+          </code>
+        </program>
+
+        <p>
+          which echos out the expected model.
+          If we solve the model with:
+        </p>
+
+
+        <program language="julia" line-numbers="yes">
+          <code>
+        set_silent(m3)
+        optimize!(m3)
+        is_solved_and_feasible(m3)
+          </code>
+        </program>
+
+        <p>
+          and this returns <c>true</c>, indicating the solution is found.
+          The solution is
+        </p>
+
+
+        <program language="julia" line-numbers="yes">
+          <code>
+        value(x₁), value(x₂), value(x₃), value(x₄), objective_value(m3)
+          </code>
+        </program>
+
+        <p>
+          which results in <m>(0.0, 3.0, 4.0, 0.0, 24.0)</m> and interestingly, this is not one of the solutions found in <xref ref="ex-nonunique-lop"/>.
+        </p>
+      </solution>
+    </exercise>
   </subsection>
 
 
@@ -201,48 +470,56 @@
     <title>Uniqueness in ILOPs</title>
 
     <p>
-    </p>
-  </subsection>
-
-
-  <subsection>
-    <title>Solutions of the 4-queens Problem</title>
-
-    <p>
-      In <xref ref="sect-binary-lops"/>, the <m>n</m>-queens problem was formulated as an integer linear optimization problem.
-      We examine the uniqueness of its solutions here.
+      Consider the integer linear optimization problem (ILOP)
+      <me>
+        \begin{aligned} \text{Maximize} \amp\amp z = x_1 + x_2, \amp \\ \text{subject to} \amp\amp 17x_1 + 16x_2 \amp \leq 175, \\ \amp\amp 4x_1 + 2x_2 \amp \leq 31, \\ \amp \amp 3x_1 + 11x_2 \amp \leq 82, \\ \text{and} \amp \amp x_1, x_2 \amp \in \mathbb{N}_0  \end{aligned}
+      </me>
     </p>
 
     <p>
-      When <m>n=4</m>, running the code in <xref ref="lst-4-queens-julia"/> results in the solution
-      <cd>
-      <cline>4×4 Matrix{Int64}:</cline>
-      <cline>  0  0  1  0</cline>
-      <cline>  1  0  0  0</cline>
-      <cline>  0  0  0  1</cline>
-      <cline>  0  1  0  0</cline>
-      </cd>
+      Solving this using Gomory's method in <xref ref="sect-cutting-planes"/> will result in the following simplex tableau in the end:
     </p>
 
     <p>
-      As we saw above, using the dual to determine how to find other solutions is not possible here, since all dual variables are zero.
-      Instead, we will use a method of using a new objective that is a small random perturbation of the original objective.
+      <me>
+        \left[ \begin{array}{rr|rrrrrrrrrrrr|r} 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp -3 \amp 0 \amp 15\\ 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 3 \amp 0 \amp 15\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -17 \amp 3 \amp 0 \amp 27\\ 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -13 \amp -3 \amp 0 \amp 30\\ 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -35 \amp 24 \amp 0 \amp 36\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp -40 \amp 21 \amp 0 \amp 45\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp -11 \amp 0 \amp 0 \amp 18\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -3 \amp 0 \amp 3\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -9 \amp 3 \amp 0 \amp 9\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp -4 \amp 0 \amp 0 \amp 3\\ 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp -6 \amp 0 \amp 3 \\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 3 \amp 30 \end{array}\right]
+      </me>
     </p>
 
     <p>
-      If we replace the objective in the code in <xref ref="lst-4-queens-julia"/> with
-      <cd>
-      <cline>@objective(m2, Max, sum([rand(0.99:0.001:1.01)*x[i,j] for i=1:n, j=1:n]))</cline>
-      </cd>
-      and rerun the model.
-      It may result in the same solution, but it may  result in a different solution, such as
-      <cd>
-      <cline>4×4 Matrix{Int64}:</cline>
-      <cline> 0  1  0  0</cline>
-      <cline> 0  0  0  1</cline>
-      <cline> 1  0  0  0</cline>
-      <cline> 0  0  1  0</cline>
-      </cd>
+      This shows that the optimal solution to the ILOP is <m>(x_1, x_2) = (5,5 )</m> with objective value <m>z=10</m>.
+      As pointed out above, the key to determining if this solution is unique is to look at the objective row.
+      The nonbasic variable <m>x_{13}</m> has a zero coefficient in the objective row, indicating that bringing this variable into the basis will not change the objective value.
+    </p>
+
+    <p>
+      If we perform the pivot <m>13 \mapsto 5</m>, we get the tableau
+      <me>
+        \left[ \begin{array}{rr|rrrrrrrrrrrr|r} 0 \amp 24 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 156\\ 24 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 11 \amp 0 \amp 0 \amp 84\\ 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 24 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -101 \amp 0 \amp 0 \amp 180\\ 0 \amp 0 \amp 24 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -139 \amp 0 \amp 0 \amp 276\\ 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -35 \amp 24 \amp 0 \amp 36\\ 0 \amp 0 \amp 0 \amp 0 \amp -21 \amp 0 \amp 0 \amp 24 \amp 0 \amp 0 \amp 0 \amp -75 \amp 0 \amp 0 \amp 108\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 24 \amp 0 \amp 0 \amp 0 \amp 0 \amp -88 \amp 0 \amp 0 \amp 144\\ 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 24 \amp 0 \amp -35 \amp 0 \amp 0 \amp 60\\ 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 0 \amp 0 \amp 24 \amp 0 \amp 0 \amp -37 \amp 0 \amp 0 \amp 36\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 24 \amp -32 \amp 0 \amp 0 \amp 24\\ 0 \amp 0 \amp 0 \amp 24 \amp 6 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -38 \amp 0 \amp 0 \amp 96 \\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 8 \amp 0 \amp 24 \amp 240 \end{array}\right]
+      </me>
+    </p>
+
+    <p>
+      which has the basic solution <m>(x_1, x_2) = (7/2,13/2)</m> with objective value <m>z=10</m> and this is not an integer solution.
+      If we perform Gomory's method another time, we will reach the tableau:
+    </p>
+
+    <p>
+      <me>
+        \left[ \begin{array}{rr|rrrrrrrrrrrrr|r} 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -3 \amp 0 \amp 3 \amp 0 \amp 18\\ 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 4 \amp 0 \amp -3 \amp 0 \amp 12\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -10 \amp 0 \amp -3 \amp 0 \amp 24\\ 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -20 \amp 0 \amp 3 \amp 0 \amp 33\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -7 \amp 3 \amp 3 \amp 0 \amp 3\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 9 \amp 0 \amp -21 \amp 0 \amp 24\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp -11 \amp 0 \amp 0 \amp 0 \amp 18\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp -7 \amp 0 \amp 3 \amp 0 \amp 6\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp -2 \amp 0 \amp -3 \amp 0 \amp 6\\ 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp -4 \amp 0 \amp 0 \amp 0 \amp 3\\ 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp -10 \amp 0 \amp 6 \amp 0 \amp 9\\ 0 \amp 0 \amp 0 \amp 0 \amp 3 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 21 \amp 0 \amp -24 \amp 0 \amp 12 \\ \hline 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \amp 0 \amp 3 \amp 30 \end{array}\right]
+      </me>
+    </p>
+    <p>
+      The basic solution is now <m>(x_1, x_2) = (6,4)</m> with objective value <m>z=10</m>, so this is another optimal solution.
+    </p>
+
+    <p>
+      Gomory's method doesn't guarantee that other solutions will be found.
+      In this case, there was a cutting plane that was parallel to the objective function, which is why both solutions were found.
+    </p>
+
+    <p>
+      In <xref ref="sect-additional-solutions"/>, we will use Julia to find other solutions.
     </p>
   </subsection>
 </section>

@@ -1,0 +1,224 @@
+<section xml:id="sect-simplex-tableau-julia">
+  <title>Using the SimplexTableau package in Julia</title>
+
+  <introduction>
+    <p>
+      In <xref ref="sect-tableau"/>, we introduced the Simplex Tableau method for solving linear optimization problems.
+      In this section, we will see how to implement the Simplex Tableau method using the SimplexTableau package in Julia.
+    </p>
+
+    <p>
+      To get started, you will need to install the <c>SimplexTableau</c> package.
+      This is a package written by Dr.
+      Peter Staab, the author of this book.
+      The format of the package is similar to that of the textbook, so it should be easy to follow along.
+      Download the <url href="">package</url> and place the file in a folder where you intend to work.
+      Then, in Julia, you can include the package using the following command:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+      include("SimplexTableau.jl")
+      using .SimplexTableau
+      </code>
+    </program>
+  </introduction>
+
+
+  <subsection xml:id="subsec-st-julia-entering-tableaus">
+    <title>Entering Tableaus</title>
+
+    <p>
+      We first start by entering a tableau.
+      For example, let's look at <xref ref="prob-lop1"/> which is put into a tableau in <xref ref="sect-tableau"/>.
+      Enter the code below to create the tableau in Julia:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+    t = Tableau([4 3 1 0 0 0 120
+         1 2 0 1 0 0 40
+         0 1 0 0 1 0 16;
+        -1 -3 0 0 0 1 0])
+      </code>
+    </program>
+
+    <p>
+      The result is the following:
+      <me>
+        \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 4 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 120\\ 1 \amp 2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 40\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16 \\ \hline -1 \amp -3 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \end{array}\right] \\ ~ \amp \\ d \amp = 1 \qquad \pi = \{1, 2\} \qquad \beta = \{3, 4, 5\} \end{aligned}
+      </me>
+      which clearly shows the simplex tableau, but also the value <m>d</m>, the basic variable, the basis <m>\beta</m> and non-basis <m>\pi</m>.
+    </p>
+
+    <p>
+      Alternatively, if one defines the LOP in matrix form, such as
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        A = [4 3; 1 2; 0 1]
+        b = [120; 40; 16]
+        c= [1; 3]
+      </code>
+    </program>
+
+    <p>
+      Then create the tableau with
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        Tableau(A, b, c)
+      </code>
+    </program>
+
+    <p>
+      And that results in the same tableau.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="subsec-pivot-julia">
+    <title>Pivoting with the SimplexTableau Package</title>
+
+    <p>
+      The most-used step in the Simplex method is that of a pivot.
+      The <c>pivot</c> command in the SimplexTableau package allows you to perform a pivot operation in a fraction-free way that we had always done in the book.
+      For the pivot we use the form <c>i =&gt; j</c> where <c>i</c> is the entering variable and <c>j</c> is the leaving variable.
+    </p>
+
+    <p>
+      As an example, if we pivot to bring <m>x_1</m> into the basis and <m>x_3</m> leaves then,
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        t1 = pivot(t, 1 =&gt; 3)
+      </code>
+    </program>
+
+    <p>
+      results in
+      <me>
+        \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 4 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 120\\ 0 \amp 5 \amp -1 \amp 4 \amp 0 \amp 0 \amp 40\\ 0 \amp 4 \amp 0 \amp 0 \amp 4 \amp 0 \amp 64 \\ \hline 0 \amp -9 \amp 1 \amp 0 \amp 0 \amp 4 \amp 120 \end{array}\right] \\ ~ \amp \\ d \amp = 4 \qquad \pi = \{2, 3\} \qquad \beta = \{1, 4, 5\} \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      Notice that the basis <m>\beta</m> reflects the fact that <m>x_1</m> is now in the basis and <m>x_3</m> has left.
+      Let's do the next step with
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        t2 = pivot(t1, 2 =&gt; 4)
+      </code>
+    </program>
+
+    <p>
+      resulting in
+      <me>
+        \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 5 \amp 0 \amp 2 \amp -3 \amp 0 \amp 0 \amp 120\\ 0 \amp 5 \amp -1 \amp 4 \amp 0 \amp 0 \amp 40\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40 \\ \hline 0 \amp 0 \amp -1 \amp 9 \amp 0 \amp 5 \amp 240 \end{array}\right] \\ ~ \amp \\ d \amp = 5 \qquad \pi = \{3, 4\} \qquad \beta = \{1, 2, 5\} \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      This is still not optimal, so one more step with <c>t3 = pivot(t2, 3 =&gt; 5)</c> results in
+      <me>
+        \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56 \end{array}\right] \\ ~ \amp \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      Note that all three of these steps can be combined with one step:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        pivot(t, [1 =&gt; 3, 2 =&gt; 4, 3 =&gt; 5])
+      </code>
+    </program>
+
+    <p>
+      and the result is the same as above.
+      Note: Although this can do multiple steps, this is often only when it is known what steps to do.
+      When performing phase I or phase II, decisions are needed at each step.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Phase I and Phase II using SimplexTableau in Julia</title>
+
+    <p>
+      The above steps are those used in both phase I and phase II of the simplex method.
+      The <c>phaseII</c> function can be used to perform phase II directly on a tableau that is already feasible.
+      For example, using the tableau <c>t</c> from above,
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        t_opt = phaseII(t)
+      </code>
+    </program>
+
+    <p>
+      returns
+      <me>
+        \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56 \end{array}\right] \\ ~ \amp \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \end{aligned}
+      </me>
+      which is the optimal tableau as found above with the individual pivot steps.
+      If we want to see the steps/pivots, we can add the optional argument <c>show_steps = true</c>:
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+        t_opt = phaseII(t, show_steps = true)
+      </code>
+    </program>
+
+    <p>
+      which results in
+      <me>
+        \begin{aligned} \text{Initial Tableau} \qquad \amp \left[ \begin{array}{rr|rrrr|r} 4 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 120\\ 1 \amp 2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 40\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16 \\ \hline -1 \amp -3 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \end{array}\right] \\ d \amp = 1 \qquad \pi = \{1, 2\} \qquad \beta = \{3, 4, 5\} \\ \text{pivots} \qquad \amp 1 \mapsto 3, 2 \mapsto 4, 3 \mapsto 5 \\ ~ \amp \\\text{Final Tableau} \qquad \amp \left[ \begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56 \end{array}\right] \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \\ \text{Completed} \qquad \amp true \\ \text{Message} \qquad \amp \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      A phase I example, is the following.
+      Consider the LOP in <xref ref="prob-infeasible1"/>.
+      This can be entered into a tableau in Julia as
+    </p>
+
+
+    <program language="julia" line-numbers="yes">
+      <code>
+         t1 = Tableau([-2 1; -2 -1; -1 -1],[6 ; -12; -8],[-3; -2])
+      </code>
+    </program>
+
+    <p>
+      and then can be solved with <c>phaseI(t1)</c>, which results in
+      <me>
+        \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 0 \amp 0 \amp 1 \amp -3 \amp 4 \amp 0 \amp 10\\ 1 \amp 0 \amp 0 \amp -1 \amp 1 \amp 0 \amp 4\\ 0 \amp 1 \amp 0 \amp 1 \amp -2 \amp 0 \amp 4 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp -20 \end{array}\right] \\ ~ \amp \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \end{aligned}
+      </me>
+    </p>
+
+    <p>
+      If the optional argument <c>show_steps = true</c> is added, then the steps of phase I are also shown.
+      <me>
+        \begin{aligned} \text{Initial Tableau} \qquad \amp \left[ \begin{array}{rr|rrrr|r} -2 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 6\\ -2 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp -12\\ -1 \amp -1 \amp 0 \amp 0 \amp 1 \amp 0 \amp -8 \\ \hline 3 \amp 2 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \end{array}\right] \\ d \amp = 1 \qquad \pi = \{1, 2\} \qquad \beta = \{3, 4, 5\} \\ \text{pivots} \qquad \amp 1 \mapsto 3, 2 \mapsto 3 \\ ~ \amp \\\text{Final Tableau} \qquad \amp \left[ \begin{array}{rr|rrrr|r} 0 \amp 0 \amp 1 \amp -3 \amp 4 \amp 0 \amp 10\\ 1 \amp 0 \amp 0 \amp -1 \amp 1 \amp 0 \amp 4\\ 0 \amp 1 \amp 0 \amp 1 \amp -2 \amp 0 \amp 4 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp -20 \end{array}\right] \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \\ \text{Completed} \qquad \amp true \\ \text{Message} \qquad \amp \end{aligned}
+      </me>
+    </p>
+  </subsection>
+</section>
