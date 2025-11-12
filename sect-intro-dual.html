@@ -101,14 +101,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '7.9.17';
+eBookConfig.runestone_version = '7.9.18';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.3ea59cc2563cc8e9.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.29d986501a531379.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<script src="_static/prefix-runtime.cefb0224014f3333.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.c50cdcad467c8d3e.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.557d81b04b3ec0e4.css">
 <script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
@@ -273,7 +273,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="sect-cutting-planes.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Cutting Planes</span></a></div>
 <ul class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sect-finding-cutting-planes" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Finding Cutting Planes</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sub-sect-gomory" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Gomory’s Method</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-cutting-planes.html#sect-gomory" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Gomory’s Method</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -335,6 +335,14 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-ilop-julia.html#sect-ilop-julia-6" class="internal"><span class="codenumber">5.5.3</span> <span class="title">Does the 3-queens problem have a solution?</span></a></div></li>
 </ul>
 </li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-simplex-tableau-julia.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Using the SimplexTableau package in Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-simplex-tableau-julia.html#subsec-st-julia-entering-tableaus" class="internal"><span class="codenumber">5.6.1</span> <span class="title">Entering Tableaus</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-simplex-tableau-julia.html#subsec-pivot-julia" class="internal"><span class="codenumber">5.6.2</span> <span class="title">Pivoting with the SimplexTableau Package</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-simplex-tableau-julia.html#sect-simplex-tableau-julia-5" class="internal"><span class="codenumber">5.6.3</span> <span class="title">Phase I and Phase II using SimplexTableau in Julia</span></a></div></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-item toc-chapter contains-active">
@@ -351,7 +359,11 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-primal-dual.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Primal-Dual Relationships</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sect-dual-problems-julia.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Solving Dual Problems with Julia</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#sect-dual-problems-julia-4" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Finding a basis using Julia</span></a></div></li></ul>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#sect-dual-values-julia" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Finding Dual Values and Certificates using Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#subsec-dual-values-julia-reg" class="internal"><span class="codenumber">6.3.2</span> <span class="title">Dual Values of Regular Variables in Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-dual-problems-julia.html#sect-dual-problems-julia-6" class="internal"><span class="codenumber">6.3.3</span> <span class="title">Finding a basis using Julia</span></a></div></li>
+</ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="sect-dual-certificates.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Finding Optimal Certificates</span></a></div></li>
 </ul>
@@ -405,15 +417,23 @@ eBookConfig.enable_chatcodes =  false;
 </li>
 <li class="toc-item toc-chapter">
 <div class="toc-title-box"><a href="ch-other-topics.html" class="internal"><span class="codenumber">9</span> <span class="title">Other Topics in Linear Optimization</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
 <div class="toc-title-box"><a href="sect-uniqueness.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Uniqueness of LOP Optimal Solutions</span></a></div>
 <ul class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-3" class="internal"><span class="codenumber">9.1.1</span> <span class="title">Linear Optimization Problems with non-unique solutions</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-4" class="internal"><span class="codenumber">9.1.2</span> <span class="title">Determining Uniqueness using Julia</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#subsect-lop-non-unique" class="internal"><span class="codenumber">9.1.1</span> <span class="title">Linear Optimization Problems with non-unique solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#subsect-uniqueness-julia" class="internal"><span class="codenumber">9.1.2</span> <span class="title">Determining Uniqueness using Julia</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-5" class="internal"><span class="codenumber">9.1.3</span> <span class="title">Uniqueness in ILOPs</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-uniqueness.html#sect-uniqueness-6" class="internal"><span class="codenumber">9.1.4</span> <span class="title">Solutions of the 4-queens Problem</span></a></div></li>
 </ul>
-</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sect-additional-solutions.html" class="internal"><span class="codenumber">9.2</span> <span class="title">Additional Optimal Solutions of LOPs using Julia</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-additional-solutions.html#subsect-random-objective" class="internal"><span class="codenumber">9.2.1</span> <span class="title">Using Random coefficients to find additional solutions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sect-additional-solutions.html#sect-additional-solutions-4" class="internal"><span class="codenumber">9.2.2</span> <span class="title">Solutions of the 4-queens Problem</span></a></div></li>
+</ul>
+</li>
+</ul>
 </li>
 <li class="toc-item toc-backmatter">
 <div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div>
