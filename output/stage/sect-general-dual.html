@@ -101,14 +101,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '7.9.19';
+eBookConfig.runestone_version = '7.10.0';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.5c6d23c3bf7decb7.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.296eb9cf978e3bdb.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<script src="_static/prefix-runtime.f91c1a4dc12163f2.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.fe35e59c546f8d19.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.557d81b04b3ec0e4.css">
 <script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
@@ -497,34 +497,105 @@ eBookConfig.enable_chatcodes =  false;
 </h2>
 <div class="para" id="sect-general-dual-2">Because of the equality constraints and the free variables, dual problems take on a different form.<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-general-dual-3">In <a href="ch-dual-problems.html" class="internal" title="Chapter 6: Dual Problems">Chapter 6</a>, we made an argument to develop a bound on the objective function resulting a dual problem.  In the case of general problems with equality constraints and free variables, we repeat these steps.  Let’s look at <a href="sect-general-form.html#prob-general-lop1" class="xref" data-knowl="./knowl/xref/prob-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 7.1.1">Problem 7.1.1</a>.  First, if we multiply the three constraints by <span class="process-math">\(y_1, y_2\)</span> and <span class="process-math">\(y_3\)</span> respectively, then<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-general-dual-3">In <a href="ch-dual-problems.html" class="internal" title="Chapter 6: Dual Problems">Chapter 6</a>, we made an argument to develop a bound on the objective function resulting a dual problem. In the case of general problems with equality constraints and free variables, we repeat these steps. Let’s look at <a href="sect-general-form.html#prob-general-lop1" class="xref" data-knowl="./knowl/xref/prob-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Problem 7.1.1">Problem 7.1.1</a>. Let’s start with the objective function and then apply steps to verify that the weak duality theorem works for this.<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-general-dual-4">
-<div class="displaymath process-math">
-\begin{equation*}
-\begin{aligned}
-y_1 (x_1 + x_2) \amp \leq 6 y_1, \\
-y_2 (2x_1-3x_2) \amp \leq 12 y_2, \\
-y_3 (-2x_1 + x_2) \amp = -2 y_3.
-\end{aligned}
-\end{equation*}
+<div class="displaymath process-math" id="sect-general-dual-4-1">
+\begin{align}
+z = \; \amp \;   5x_1 + 3x_2  \tag{7.3.1}\\
+\leq \; \amp \; (y_1 + 2y_2 -2y_3) x_1 + 3x_2 \tag{7.3.2}\\
+\leq \; \amp \; (y_1 + 2y_2 -2y_3) x_1 + (y_1 - 3y_2 + y_3)x_2 \tag{7.3.3}\\
+= \; \amp \; (x_1 + x_2) y_1 + (2x_1 -3x_2) y_2 + (-2x_1 + x_2)y_3\tag{7.3.4}\\
+\leq \; \amp \; 6y_1 + (2x_1 -3x_2) y_2 + (-2x_1 + x_2)y_3\tag{7.3.5}\\
+\leq \; \amp \; 6y_1 + 12 y_2 + (-2x_1 + x_2)y_3\tag{7.3.6}\\
+\leq \; \amp \; 6y_1 + 12 y_2 -2 y_3\tag{7.3.7}\\
+= \; \amp \; w \tag{7.3.8}
+\end{align}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-general-dual-5">The objective is written:<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-general-dual-5">To ensure that every step satisifies the <span class="process-math">\(\geq\)</span> inequality, then we need to be careful with some of the steps. For example, since <span class="process-math">\(x_1 \geq 0\text{,}\)</span> then <a href="sect-general-dual.html#sect-general-dual-4-1" class="xref" data-knowl="./knowl/xref/eq-gen-dual-02.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.3.2">(7.3.2)</a> would require that <span class="process-math">\(y_1 +2y_2 - 2y_3 \geq 5\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sect-general-dual-6">
-<div class="displaymath process-math">
+<div class="para" id="sect-general-dual-6">However for the step in <a href="sect-general-dual.html#sect-general-dual-4-1" class="xref" data-knowl="./knowl/xref/eq-gen-dual-03.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.3.3">(7.3.3)</a>, because <span class="process-math">\(x_2\)</span> is free, it is important that <span class="process-math">\(y_1 -3y_2 + y_3 = 3\text{.}\)</span> Because of the inequality in the first two constraints in <a href="sect-general-form.html#eq-general-lop1" class="xref" data-knowl="./knowl/xref/eq-general-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.1.1">(7.1.1)</a>, in order for the <span class="process-math">\(\leq\)</span> constraints in steps <a href="sect-general-dual.html#sect-general-dual-4-1" class="xref" data-knowl="./knowl/xref/eq-gen-dual-05.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.3.5">(7.3.5)</a> and <a href="sect-general-dual.html#sect-general-dual-4-1" class="xref" data-knowl="./knowl/xref/eq-gen-dual-06.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.3.6">(7.3.6)</a>, then it is important that <span class="process-math">\(y_1 \geq 0\)</span> and <span class="process-math">\(y_2 \geq 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-general-dual-7">However, if we look at step <a href="sect-general-dual.html#sect-general-dual-4-1" class="xref" data-knowl="./knowl/xref/eq-gen-dual-07.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.3.7">(7.3.7)</a>, since we have the equality constraint, <span class="process-math">\(-2x_1+x_2 = -2\text{,}\)</span> then <span class="process-math">\(y_3\)</span> can be a free variable. Putting this all together will result in the dual problem:<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-general-dual-8">
+<div class="displaymath process-math" id="eq-dual-lop1">
+\begin{equation}
+\begin{aligned} \text{Minimize} \amp \amp w = 6y_1 + 12y_2 - 2y_3, \amp \\ \amp \amp y_1 + 2y_2 -2y_3 \amp \geq 5, \\ \amp \amp y_1 -3 y_2 + y_3 \amp = 3, \\ \text{and} \amp \amp y_1, y_2 \geq 0.
+\end{aligned}\tag{7.3.9}
+\end{equation}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="sect-general-dual-9" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.3.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3></summary><article class="exercise exercise-like knowl__content"><div class="para" id="sect-general-dual-9-1-1">Solve <a href="sect-general-dual.html#eq-dual-lop1" class="xref" data-knowl="./knowl/xref/eq-dual-lop1.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.3.9">(7.3.9)</a> using Phase 0, I, II as needed.<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-9-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sect-general-dual-9-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sect-general-dual-9-2-1">
+<div class="para">First, we need to switch the inequality on the first inequality or <span class="process-math">\(-y_1 - 2y_2 + 2y_3 \leq -5\)</span> and then we let <span class="process-math">\(z = -w = -6y_1 - 12y_2 + 2y_3\text{.}\)</span> Adding only a slack variable to the inequality, the tableau can be written</div>
+<div class="displaymath process-math" id="sect-general-dual-9-2-1-3">
 \begin{equation*}
-\begin{aligned}
-z \amp = 5x_1 + 3x_2 \\
-\amp \leq (y_1 + 2y_2 - 2y_3) x_1 + 3x_2
-\end{aligned}
+\begin{aligned} \amp \phantom{xxxxxxxxxxi} f \\ \amp \left[\begin{array}{rrr|rr|r} -1 \amp -2 \amp 2 \amp 1 \amp 0 \amp -5\\ 1 \amp -3 \amp 1 \amp 0 \amp 0 \amp 3\\ \hline 6 \amp 12 \amp -2 \amp 0 \amp 1 \amp 0\\ \end{array} \right] \end{aligned}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-9-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Section 7.3: General Dual Problems"><a href="#sect-general-dual" title="Copy heading and permalink for Section 7.3: General Dual Problems" aria-label="Copy heading and permalink for Section 7.3: General Dual Problems">🔗</a></div></section></div>
+<div class="para logical" id="sect-general-dual-9-2-2">
+<div class="para">Since there is a free variable <span class="process-math">\(y_3\)</span> which is not in the basis, then we pivot to bring it into the basis. We’ll use the second line (the equation) to do this.</div>
+<div class="displaymath process-math" id="sect-general-dual-9-2-2-2">
+\begin{equation*}
+\begin{aligned} \amp \phantom{xxxxxxxxx} f \\ \text{piv}(2,3)\qquad \amp \left[\begin{array}{rrr|rr|r} -3 \amp 4 \amp 0 \amp 1 \amp 0 \amp -11\\ 1 \amp -3 \amp 1 \amp 0 \amp 0 \amp 3\\ \hline 8 \amp 6 \amp 0 \amp 0 \amp 1 \amp 6\\ \end{array} \right] \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-9-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-general-dual-9-2-3">
+<div class="para">This is now in phase I, so we pivot to make it feasible:</div>
+<div class="displaymath process-math" id="sect-general-dual-9-2-3-1">
+\begin{equation*}
+\begin{aligned} \amp \phantom{xxxxxxxi} f \\ 1 \mapsto 4\qquad \amp \left[\begin{array}{rrr|rr|r} 3 \amp -4 \amp 0 \amp -1 \amp 0 \amp 11\\ 0 \amp -5 \amp 3 \amp 1 \amp 0 \amp -2\\ \hline 0 \amp 50 \amp 0 \amp 8 \amp 3 \amp -70\\ \end{array} \right] \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-9-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-general-dual-9-2-4">
+<div class="para">This might seem like it is still in phase I, however, since <span class="process-math">\(x_3\)</span> is free, it can be negative, so we are done with phase I.  The solution to this is</div>
+<div class="displaymath process-math" id="eq-gen-dual-lop-final">
+\begin{equation}
+\begin{aligned}
+\boldsymbol{y} \amp = \frac{1}{3}\left[ \begin{array}{rrr|r} 11 \amp 0 \amp -2 \amp 0 \end{array}\right] \\
+\amp =\left[ \begin{array}{rrr|r} 11/3 \amp 0 \amp -2/3 \amp 0 \end{array}\right]
+\end{aligned}\tag{7.3.10}
+\end{equation}
+</div>
+<div class="para">with <span class="process-math">\(z = -70/3\)</span> so <span class="process-math">\(w = 70/3\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-9-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 7.3.1.1"><a href="#sect-general-dual-9-2" title="Copy heading and permalink for Solution 7.3.1.1" aria-label="Copy heading and permalink for Solution 7.3.1.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Checkpoint 7.3.1"><a href="#sect-general-dual-9" title="Copy heading and permalink for Checkpoint 7.3.1" aria-label="Copy heading and permalink for Checkpoint 7.3.1">🔗</a></div></article></details><details id="sect-general-dual-10" class="exercise exercise-like born-hidden-knowl"><summary class="knowl__link"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">7.3.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3></summary><article class="exercise exercise-like knowl__content"><div class="para" id="sect-general-dual-10-1-1">Compare the final tableau in <a href="sect-general-form.html#sect-tableau-phase0" class="internal" title="Subsection 7.1.3: Simplex Method: Phase 0">Subsection 7.1.3</a> in <a href="sect-general-form.html#eq-gen-lop1-final" class="xref" data-knowl="./knowl/xref/eq-gen-lop1-final.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.1.4">(7.1.4)</a> to the final tableau in <a href="sect-general-dual.html#eq-gen-dual-lop-final" class="xref" data-knowl="./knowl/xref/eq-gen-dual-lop-final.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.3.10">(7.3.10)</a>.  Do the dual solutions appear in the primal problem?<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-10-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="sect-general-dual-10-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="sect-general-dual-10-2-1">
+<div class="para">Notice that the objective row in <a href="sect-general-form.html#eq-gen-lop1-final" class="xref" data-knowl="./knowl/xref/eq-gen-lop1-final.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 7.1.4">(7.1.4)</a> is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/eq-gen-lop1-final.html" id="sect-general-dual-10-2-1-2">
+\begin{equation*}
+\frac{1}{3} \left[\begin{array}{rr|rr} 0 \amp 0 \amp 11 \amp 0 \end{array} \right]
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-10-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-general-dual-10-2-2">which corresponds to the first two values, <span class="process-math">\(y_1, y_2\)</span> of the dual solution.  Note that <span class="process-math">\(y_3\)</span> is a free variable, so doesn’t have a related slack variable.<div class="autopermalink" data-description="Paragraph"><a href="#sect-general-dual-10-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 7.3.2.1"><a href="#sect-general-dual-10-2" title="Copy heading and permalink for Solution 7.3.2.1" aria-label="Copy heading and permalink for Solution 7.3.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Checkpoint 7.3.2"><a href="#sect-general-dual-10" title="Copy heading and permalink for Checkpoint 7.3.2" aria-label="Copy heading and permalink for Checkpoint 7.3.2">🔗</a></div></article></details><div class="autopermalink" data-description="Section 7.3: General Dual Problems"><a href="#sect-general-dual" title="Copy heading and permalink for Section 7.3: General Dual Problems" aria-label="Copy heading and permalink for Section 7.3: General Dual Problems">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sect-phase-zero.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sect-general-applied.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

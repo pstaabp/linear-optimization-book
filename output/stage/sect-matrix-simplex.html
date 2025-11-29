@@ -101,14 +101,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '7.9.19';
+eBookConfig.runestone_version = '7.10.0';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.5c6d23c3bf7decb7.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.296eb9cf978e3bdb.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<script src="_static/prefix-runtime.f91c1a4dc12163f2.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.fe35e59c546f8d19.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.557d81b04b3ec0e4.css">
 <script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
@@ -502,49 +502,47 @@ eBookConfig.enable_chatcodes =  false;
 <div class="para logical" id="sect-matrix-simplex-2-3">
 <ol class="decimal" id="sect-matrix-simplex-2-3-1">
 <li id="sect-matrix-simplex-2-3-1-1">
-<div class="para" id="sect-matrix-simplex-2-3-1-1-1">Initially the basis for this problem is <span class="process-math">\(\beta=\{4,5,6,7\}\)</span> and <span class="process-math">\(\pi=\{1,2,3\}.\text{,}\)</span> therefore the first step is to find <span class="process-math">\(B\)</span> for this basis which are the 4th throw 7th columns of the simplex tableau or just the identity matrix. Therefore <span class="process-math">\(B=I\)</span> and also <span class="process-math">\(B'=I\)</span> and the basic solution is <span class="process-math">\(B'\boldsymbol{b}\text{,}\)</span> which is just <span class="process-math">\(\boldsymbol{b}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-1-1">Initially the basis for this problem is <span class="process-math">\(\beta=\{4,5,6,7\}\)</span> and <span class="process-math">\(\pi=\{1,2,3\}\text{,}\)</span> therefore the first step is to find <span class="process-math">\(B\)</span> for this basis which are the 4th through 7th columns of the simplex tableau or just the identity matrix. Therefore <span class="process-math">\(B=I\)</span> and also <span class="process-math">\(B'=I\)</span> and the basic solution is <span class="process-math">\(B'\boldsymbol{b}\text{,}\)</span> which is just <span class="process-math">\(\boldsymbol{b}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-1-2">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-1-2-1">
 \begin{equation*}
 B' \boldsymbol{b} = \begin{bmatrix} -85 \\ -70 \\ 250 \\ 180 \end{bmatrix}.
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-1-3">Also, note that the parameter columns (which are quite important in the simplex method) are in <span class="process-math">\(B'\Pi\)</span> which in the first step, just <span class="process-math">\(\Pi\)</span> which is<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-1-3">Also, note that the parameter columns (which are quite important in the simplex method) are in <span class="process-math">\(B'\Pi\text{.}\)</span> Since this is the first step, this matrix is  just <span class="process-math">\(\Pi\)</span> or<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-1-4">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-1-4-1">
 \begin{equation*}
 \Pi = \begin{bmatrix} -18 \amp -5 \amp -10 \\ -4 \amp -20 \amp -15 \\ 10 \amp 15 \amp 18 \\ 20 \amp 16 \amp 4 \end{bmatrix}.
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-1-5">Since the left column (which is <span class="process-math">\(B'\boldsymbol{b}\)</span>) has negatives in this, we need to use phase I. In this case, we find the most negative in this vector, which occurs in the first row. Note that the first row corresponds to <span class="process-math">\(x_4\text{,}\)</span> so this is the leaving variable.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="sect-matrix-simplex-2-3-1-1-6">To find the entering variable, find the largest negative in the first row of <span class="process-math">\(\Pi\text{.}\)</span> This occurs in the second row of <span class="process-math">\(\Pi\text{,}\)</span> which is the second variable in <span class="process-math">\(\pi\text{,}\)</span> so <span class="process-math">\(x_2\text{.}\)</span> We thus to a pivot <span class="process-math">\(2 \mapsto 4\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-1-5">The right column is  <span class="process-math">\(B'\boldsymbol{b}\)</span> has negatives, so the tableau is infeasible and we need to use phase I. In this case, we find the most negative in this vector, which occurs in the first row. The first row corresponds to the first element of <span class="process-math">\(\beta\text{,}\)</span> so this is the leaving variable. The leftmost negative in the first row of <span class="process-math">\(\Pi\)</span> corresponds to the smallest value in <span class="process-math">\(\pi\)</span> or <span class="process-math">\(x_1\text{,}\)</span> so this is the entering variable. We thus to a pivot <span class="process-math">\(1 \mapsto 4\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-1-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 1"><a href="#sect-matrix-simplex-2-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
 </li>
 <li id="sect-matrix-simplex-2-3-1-2">
-<div class="para" id="sect-matrix-simplex-2-3-1-2-1">There the new basis is <span class="process-math">\(\beta = \{2,5,6,7\}\)</span> and <span class="process-math">\(\pi=\{1,3,4\}\text{.}\)</span> This means that<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-2-1">There the new basis is <span class="process-math">\(\beta = \{1,5,6,7\}\)</span> and <span class="process-math">\(\pi=\{2,3,4\}\text{.}\)</span> This means that<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-2-2">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-2-2-1">
 \begin{equation*}
-B = \begin{bmatrix} -5 \amp 0 \amp 0 \amp 0 \\ -20 \amp 1 \amp 0 \amp 0 \\ 15 \amp 0 \amp 1 \amp 0 \\ 16 \amp 0 \amp 0 \amp 1 \end{bmatrix} \qquad \Pi = \begin{bmatrix} -18  \amp -10 \amp  1 \\ -4  \amp -15 \amp  0 \\ 10  \amp  18 \amp  0 \\ 20  \amp   4 \amp  0 \\ \end{bmatrix}
+B = \begin{bmatrix} -18 \amp 0 \amp 0 \amp 0 \\ -4 \amp 1 \amp 0 \amp 0 \\ 10 \amp 0 \amp 1 \amp 0 \\ 20 \amp 0 \amp 0 \amp 1\end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-2-3">We can the calculate the determinant of <span class="process-math">\(B\)</span> to be <span class="process-math">\(d_{\beta} = 5\)</span> (take the absolute value) and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-2-3">We can the calculate the determinant of <span class="process-math">\(B\)</span> to be <span class="process-math">\(d_{\beta} = 18\)</span> and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-2-4">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-2-4-1">
 \begin{equation*}
-B' = d_{\beta} B^{-1} = \begin{bmatrix} -1 \amp  0 \amp  0 \amp  0 \\ -20 \amp 5 \amp  0 \amp  0 \\ 15 \amp  0 \amp 5 \amp  0 \\ 16 \amp  0 \amp  0 \amp 5 \\ \end{bmatrix}
+B' = d_{\beta} B^{-1} = \begin{bmatrix} -1 \amp 0 \amp 0 \amp 0 \\ -4 \amp 18 \amp 0 \amp 0 \\ 10 \amp 0 \amp 18 \amp 0 \\ 20 \amp 0 \amp 0 \amp 18 \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -552,9 +550,9 @@ B' = d_{\beta} B^{-1} = \begin{bmatrix} -1 \amp  0 \amp  0 \amp  0 \\ -20 \amp 5
 <div class="para" id="sect-matrix-simplex-2-3-1-2-5">And then calculate<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-2-6">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-2-6-1">
 \begin{equation*}
-B' \boldsymbol{b} = \begin{bmatrix}   85 \\ 1350 \\  -25 \\ -460 \end{bmatrix}
+B' \boldsymbol{b} = \begin{bmatrix}   85 \\ -920 \\  3650 \\ 1540 \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -562,34 +560,34 @@ B' \boldsymbol{b} = \begin{bmatrix}   85 \\ 1350 \\  -25 \\ -460 \end{bmatrix}
 <div class="para" id="sect-matrix-simplex-2-3-1-2-7">This shows that the tableau is still infeasible and we continue with phase I. We need to find<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-2-8">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-2-8-1">
 \begin{equation*}
-B'\Pi = \begin{bmatrix} 18 \amp   10 \amp  -1 \\ 340 \amp  125 \amp -20 \\ -220 \amp  -60 \amp  15 \\ -188 \amp -140 \amp  16 \\ \end{bmatrix}
+B'\Pi = \begin{bmatrix} 5 \amp 10 \amp -1 \\ -340 \amp -230 \amp -4 \\ 220 \amp 224 \amp 10 \\ 188 \amp -128 \amp 20 \\ \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-2-9">The smallest (most negative) number in <span class="process-math">\(B' \boldsymbol{b}\)</span> is in the last row, so the leaving variable is the corresponding leaving variable is the last basis variable or <span class="process-math">\(x_7\text{.}\)</span> The entering variable will be the largest negative in the 4th row of <span class="process-math">\(B'\Pi\text{,}\)</span> which occurs in the 2nd column, so the entering variable is the second parameter or <span class="process-math">\(x_3\text{.}\)</span> We then perform a pivot <span class="process-math">\(3 \mapsto 7\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-2-9">The smallest (most negative) number in <span class="process-math">\(B' \boldsymbol{b}\)</span> is in the second row, so the leaving variable is second basis variable or <span class="process-math">\(x_5\text{.}\)</span> The entering variable will be the leftmost negative in the 2nd row of <span class="process-math">\(B'\Pi\text{,}\)</span> which occurs in the first column, so the entering variable is the first parameter or <span class="process-math">\(x_2\text{.}\)</span> We then perform a pivot <span class="process-math">\(2 \mapsto 5\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-2-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 2"><a href="#sect-matrix-simplex-2-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
 </li>
 <li id="sect-matrix-simplex-2-3-1-3">
-<div class="para" id="sect-matrix-simplex-2-3-1-3-1">The new basis will be <span class="process-math">\(\beta = \{2,3,5,6\}\)</span> and <span class="process-math">\(\pi=\{1,4,7\}\text{.}\)</span> Therefore the result is<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-3-1">The new basis will be <span class="process-math">\(\beta = \{1, 2, 6,7 \}\)</span> and <span class="process-math">\(\pi=\{3,4,5\}\text{.}\)</span> Therefore the result is<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-3-2">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-3-2-1">
 \begin{equation*}
-B = \begin{bmatrix} -5 \amp -10 \amp 0 \amp 0 \\ -20 \amp -15 \amp 1 \amp 0 \\ 15 \amp  18 \amp 0 \amp 1 \\ 16 \amp   4 \amp 0 \amp 0 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -18 \amp 1 \amp 0 \\ -4 \amp 0 \amp 0 \\ 10 \amp 0 \amp 0 \\ 20 \amp 0 \amp 1 \\ \end{bmatrix}
+B = \begin{bmatrix} -18 \amp -5 \amp 0 \amp 0 \\ -4 \amp -20 \amp 0 \amp 0 \\ 10 \amp 15 \amp 1 \amp 0 \\ 20 \amp 16 \amp 0 \amp 1 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -10 \amp 1 \amp 0 \\ -15 \amp 0 \amp 1 \\ 18 \amp 0 \amp 0 \\ 4 \amp 0 \amp 0 \\ \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-3-3">The determinant of <span class="process-math">\(B\)</span> is 140, so this is <span class="process-math">\(d_{\beta}\)</span> and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-3-3">The determinant of <span class="process-math">\(B\)</span> is 340, so this is <span class="process-math">\(d_{\beta}\)</span> and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-3-4">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-3-4-1">
 \begin{equation*}
-B' = d_{\beta} B^{-1} = \begin{bmatrix} 4 \amp   0 \amp   0 \amp  10 \\ -16 \amp   0 \amp   0 \amp  -5 \\ -160 \amp 140 \amp   0 \amp 125 \\ 228 \amp   0 \amp 140 \amp -60 \\ \end{bmatrix}
+B' = d_{\beta} B^{-1} = \begin{bmatrix} -20 \amp 5 \amp 0 \amp 0 \\ 4 \amp -18 \amp 0 \amp 0 \\ 140 \amp 220 \amp 340 \amp 0 \\ 336 \amp 188 \amp 0 \amp 340 \\ \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-3-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -597,9 +595,9 @@ B' = d_{\beta} B^{-1} = \begin{bmatrix} 4 \amp   0 \amp   0 \amp  10 \\ -16 \amp
 <div class="para" id="sect-matrix-simplex-2-3-1-3-5">and then<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-3-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-3-6">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-3-6-1">
 \begin{equation*}
-B' \boldsymbol{b} = \begin{bmatrix}  1460 \\  460 \\ 26300 \\  4820 \end{bmatrix}
+B' \boldsymbol{b} = \begin{bmatrix}  1350 \\  920 \\ 57700 \\  19480 \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-3-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -609,122 +607,121 @@ B' \boldsymbol{b} = \begin{bmatrix}  1460 \\  460 \\ 26300 \\  4820 \end{bmatrix
 <div class="autopermalink" data-description="Item 3"><a href="#sect-matrix-simplex-2-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
 </li>
 <li id="sect-matrix-simplex-2-3-1-4">
-<div class="para" id="sect-matrix-simplex-2-3-1-4-1">In phase II, using the simplex tableau, we need to examine the objective row. In the matrix formulation, we need the coefficient of the parameters in this row and this corresponds to <span class="process-math">\(\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal}\)</span> and this is calculated for this basis as<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-4-1">In phase II, using the simplex tableau, we need to examine the objective row. In the matrix formulation, we need the coefficient of the parameters in this row and this corresponds to <span class="process-math">\(\boldsymbol{c}_{\beta}^{\intercal}B'\Pi - d_{\beta}\boldsymbol{c}_{\pi}^{\intercal}\)</span> and this is calculated for this basis as<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-4-2">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-4-2-1">
 \begin{equation*}
-\begin{bmatrix} 12544 \amp  -1008  \amp 0 \end{bmatrix}
+\begin{bmatrix} -11200 \amp -656 \amp -448 \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-4-3">and since there are negatives in this row, it is not optimal. This also shows that the entering variable is the leftmost negative (only in this case) is the 2nd one, corresponding to the 2nd parameter or <span class="process-math">\(x_4\text{.}\)</span> To find the leaving variable, we need to examine<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-4-3">and since there are negatives in this row, it is not optimal. This also shows that the entering variable is the leftmost negative corresponding to the 1st parameter or <span class="process-math">\(x_3\text{.}\)</span> To find the leaving variable, we need to examine<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-4-4">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-4-4-1">
 \begin{equation*}
-B' \Pi = \begin{bmatrix} 128 \amp    4 \amp  10 \\ 188 \amp  -16 \amp  -5 \\ 4820 \amp -160 \amp 125 \\ -3904 \amp  228 \amp -60 \\ \end{bmatrix}
+B' \Pi = \begin{bmatrix} 125 \amp -20 \amp 5 \\ 230 \amp 4 \amp -18 \\ 1420 \amp 140 \amp 220 \\ -4820 \amp 336 \amp 188 \\ \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-4-5">and create <span class="process-math">\(\boldsymbol{b}\)</span>-ratios using the 2nd column of <span class="process-math">\(B' \boldsymbol{b}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-4-5">and create <span class="process-math">\(\boldsymbol{b}\)</span>-ratios using the 1st column of <span class="process-math">\(B' \Pi \)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-4-6">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-4-6-1">
 \begin{equation*}
-\begin{bmatrix} 1460/4 \\ 460/(-16) \\ 26300/(-160) \\ 4820/(228) \end{bmatrix} \approx \begin{bmatrix} 365 \\ -28.75 \\ -164.375 \\ 21.14 \end{bmatrix}
+\begin{bmatrix} 1350/125 \\ 920/230 \\ 5770/1420 \\ 19480/(-4820) \end{bmatrix} \approx \begin{bmatrix} 10.8 \\ 4.0 \\ 40.63 \\ -4.04 \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-4-7">The smallest ratio is in the 4th row, which corresponds to the 4th basis element or <span class="process-math">\(x_6\text{,}\)</span> so this is the leaving vector. Therefore we need to perform the pivot <span class="process-math">\(4 \mapsto 6\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-4-7">The smallest ratio is in the 2nd row, which corresponds to the 2nd basis element or <span class="process-math">\(x_2\text{,}\)</span> so this is the leaving vector. Therefore we need to perform the pivot <span class="process-math">\(3 \mapsto 2\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-4-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 4"><a href="#sect-matrix-simplex-2-3-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
 </li>
 <li id="sect-matrix-simplex-2-3-1-5">
-<div class="para" id="sect-matrix-simplex-2-3-1-5-1">We are still in phase II and after the pivot <span class="process-math">\(4 \mapsto 6\text{,}\)</span> the basis is now <span class="process-math">\(\beta = \{2,3,4,5\}\)</span> with <span class="process-math">\(\pi = \{1,6,7\}\text{.}\)</span> The corresponding matrices are<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para logical" id="sect-matrix-simplex-2-3-1-5-2">
-<div class="displaymath process-math">
+<div class="para logical" id="sect-matrix-simplex-2-3-1-5-1">
+<div class="para">We are still in phase II and after the pivot <span class="process-math">\(4 \mapsto 6\text{,}\)</span> the basis is now <span class="process-math">\(\beta = \{1,3,6,7\}\)</span> with <span class="process-math">\(\pi = \{2,4,5\}\text{.}\)</span> Then</div>
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-5-1-4">
 \begin{equation*}
-B = \begin{bmatrix} -5 \amp -10 \amp 1 \amp 0 \\ -20 \amp -15 \amp 0 \amp 1 \\ 15 \amp  18 \amp 0 \amp 0 \\ 16 \amp   4 \amp 0 \amp 0 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -18 \amp 0 \amp 0 \\ -4 \amp 0 \amp 0 \\ 10 \amp 1 \amp 0 \\ 20 \amp 0 \amp 1 \\ \end{bmatrix}
+B = \begin{bmatrix}-18 \amp -10 \amp 0 \amp 0 \\ -4 \amp -15 \amp 0 \amp 0 \\ 10 \amp 18 \amp 1 \amp 0 \\ 20 \amp 4 \amp 0 \amp 1 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -5 \amp 1 \amp 0 \\ -20 \amp 0 \amp 1 \\ 15 \amp 0 \amp 0 \\ 16 \amp 0 \amp 0 \\ \end{bmatrix}.
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-5-3">The determinant of <span class="process-math">\(B\)</span> is <span class="process-math">\(-228\text{,}\)</span> so <span class="process-math">\(d_{\beta} = 228\)</span> and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-5-2">The determinant of <span class="process-math">\(B\)</span> is <span class="process-math">\(230\text{,}\)</span> so <span class="process-math">\(d_{\beta} = 230\)</span> and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sect-matrix-simplex-2-3-1-5-4">
-<div class="displaymath process-math">
+<div class="para logical" id="sect-matrix-simplex-2-3-1-5-3">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-5-3-1">
 \begin{equation*}
-B' = d_{\beta} B^{-1} = \begin{bmatrix} 0 \amp   0 \amp  -4 \amp  18 \\ 0 \amp   0 \amp  16 \amp -15 \\ 228 \amp   0 \amp 140 \amp -60 \\ 0 \amp 228 \amp 160 \amp 135 \\ \end{bmatrix}
+B' = d_{\beta} B^{-1} = \begin{bmatrix} -15 \amp 10 \amp 0 \amp 0 \\ 4 \amp -18 \amp 0 \amp 0 \\ 78 \amp 224 \amp 230 \amp 0 \\ 284 \amp -128 \amp 0 \amp 230  \end{bmatrix}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-5-5">and then since we are in phase II, examine:<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-5-4">and then since we are in phase II, examine:<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sect-matrix-simplex-2-3-1-5-6">
-<div class="displaymath process-math">
+<div class="para logical" id="sect-matrix-simplex-2-3-1-5-5">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-5-5-1">
 \begin{equation*}
-\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal} = \begin{bmatrix} -7680 \amp 1008 \amp -432 \end{bmatrix}
+\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal} = \begin{bmatrix} 11200 \amp -312 \amp -896 \end{bmatrix}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-5-7">which shows that this basic solution is not optimal. We use the leftmost negative, which is the first parameter and corresponds to <span class="process-math">\(x_1\text{,}\)</span> so this is he entering variable. To decide the leaving, we need to find the <span class="process-math">\(\boldsymbol{b}\)</span>-ratios using:<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-5-6">which shows that this basic solution is not optimal. We use the second parameter and corresponds to <span class="process-math">\(x_4\text{,}\)</span> so this is he entering variable. To decide the leaving, we need to find the <span class="process-math">\(\boldsymbol{b}\)</span>-ratios using:<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sect-matrix-simplex-2-3-1-5-8">
-<div class="displaymath process-math">
+<div class="para logical" id="sect-matrix-simplex-2-3-1-5-7">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-5-7-1">
 \begin{equation*}
-B' \boldsymbol{b} = \begin{bmatrix} 2240 \\ 1300 \\ 4820 \\ 48340 \end{bmatrix}
+B' \boldsymbol{b} = \begin{bmatrix} 575 \\ 920 \\ 35190 \\ 26220 \end{bmatrix}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-5-9">and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-5-8">and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sect-matrix-simplex-2-3-1-5-10">
-<div class="displaymath process-math">
+<div class="para logical" id="sect-matrix-simplex-2-3-1-5-9">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-5-9-1">
 \begin{equation*}
-B'\Pi = \begin{bmatrix} 320 \amp  -4 \amp  18 \\ -140 \amp  16 \amp -15 \\ -3904 \amp 140 \amp -60 \\ 3388 \amp 160 \amp 135 \\ \end{bmatrix}
+B'\Pi = \begin{bmatrix} -125 \amp -15 \amp 10 \\ 340 \amp 4 \amp -18 \\ -1420 \amp 78 \amp 224 \\ 4820 \amp 284 \amp -128 \\ \end{bmatrix}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-5-11">and the <span class="process-math">\(\boldsymbol{b}\)</span>-ratios are found by dividing elements in <span class="process-math">\(B' \boldsymbol{b}\)</span> by the elements in the first column of <span class="process-math">\(B'\Pi\)</span> to get<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-5-10">and the <span class="process-math">\(\boldsymbol{b}\)</span>-ratios are found by dividing elements in <span class="process-math">\(B' \boldsymbol{b}\)</span> by the elements in the first column of <span class="process-math">\(B'\Pi\)</span> to get<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sect-matrix-simplex-2-3-1-5-12">
-<div class="displaymath process-math">
+<div class="para logical" id="sect-matrix-simplex-2-3-1-5-11">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-5-11-1">
 \begin{equation*}
-\begin{bmatrix} 2240/320 \\ 1300/(-140) \\ 4820/(-3904) \\ 48340/3388 \end{bmatrix} \approx \begin{bmatrix} 7 \\ -9.29 \\ -1.23 \\ 14.27 \end{bmatrix}
+\begin{bmatrix} 575/(-15) \\ 920/4 \\ 35190/78 \\ 26220/284 \end{bmatrix} \approx \begin{bmatrix}  -38.33 \\ 230.0 \\ 451.15 \\ 92.323  \end{bmatrix}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-5-13">and the smallest nonnegative ratio is in the first row. This corresponds to the first basis element or <span class="process-math">\(x_2\text{,}\)</span> so we perform the pivot <span class="process-math">\(1 \mapsto 2\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-5-12">and the smallest nonnegative ratio is in the fourth row. This corresponds to the fourth basis element or <span class="process-math">\(x_7\text{,}\)</span> so we perform the pivot <span class="process-math">\(4 \mapsto 7\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-5-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" data-description="Item 5"><a href="#sect-matrix-simplex-2-3-1-5" title="Copy heading and permalink for Item 5" aria-label="Copy heading and permalink for Item 5">🔗</a></div>
 </li>
 <li id="sect-matrix-simplex-2-3-1-6">
-<div class="para" id="sect-matrix-simplex-2-3-1-6-1">The pivot <span class="process-math">\(1 \mapsto 2\)</span> results in the basis <span class="process-math">\(\beta = \{1,3,4,5\}\)</span> with <span class="process-math">\(\pi=\{2,6,7\}\text{.}\)</span> The corresponding matrices are<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-6-1">The pivot <span class="process-math">\(4 \mapsto 7\)</span> results in the basis <span class="process-math">\(\beta = \{1,3,4,6\}\)</span> with <span class="process-math">\(\pi=\{2, 5,7\}\text{.}\)</span> The corresponding matrices are<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-6-2">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-6-2-1">
 \begin{equation*}
-B = \begin{bmatrix} -18 \amp -10 \amp 1 \amp 0 \\ -4 \amp -15 \amp 0 \amp 1 \\ 10 \amp  18 \amp 0 \amp 0 \\ 20 \amp   4 \amp 0 \amp 0 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -5 \amp 0 \amp 0 \\ -20 \amp 0 \amp 0 \\ 15 \amp 1 \amp 0 \\ 16 \amp 0 \amp 1 \\ \end{bmatrix}
+B = \begin{bmatrix} -18 \amp -5 \amp -10 \amp 0 \\ -4 \amp -20 \amp -15 \amp 0 \\ 10 \amp 15 \amp 18 \amp 1 \\ 20 \amp 16 \amp 4 \amp 0 \\ \end{bmatrix} \qquad \Pi = \begin{bmatrix} -5 \amp 0 \amp 0 \\ -20 \amp 1 \amp 0 \\ 15 \amp 0 \amp 0 \\ 16 \amp 0 \amp 1  \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-6-3">The determinant of <span class="process-math">\(B\)</span> is <span class="process-math">\(-320\text{,}\)</span> so <span class="process-math">\(d_{\beta}=320\)</span> and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-6-3">The determinant of <span class="process-math">\(B\)</span> is <span class="process-math">\(284\text{,}\)</span> so <span class="process-math">\(d_{\beta}=284\)</span> and<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-6-4">
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-6-4-1">
 \begin{equation*}
-B' = \begin{bmatrix} 0 \amp   0 \amp  -4 \amp  18 \\ 0 \amp   0 \amp  20 \amp -10 \\ 320 \amp   0 \amp 128 \amp 224 \\ 0 \amp 320 \amp 284 \amp -78 \end{bmatrix}
+B' = \begin{bmatrix} 0 \amp 4 \amp 0 \amp 15 \\ 284 \amp -128 \amp 0 \amp 230 \\ 0 \amp -20 \amp 0 \amp -4 \\ 0 \amp 320 \amp 284 \amp -78  \end{bmatrix}
 \end{equation*}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -732,44 +729,85 @@ B' = \begin{bmatrix} 0 \amp   0 \amp  -4 \amp  18 \\ 0 \amp   0 \amp  20 \amp -1
 <div class="para" id="sect-matrix-simplex-2-3-1-6-5">and since we are in phase II, we check:<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-6-6">
-<div class="displaymath process-math">
-\begin{equation*}
-\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal} = \begin{bmatrix} 7680 \amp 1280 \amp 0 \end{bmatrix}
-\end{equation*}
+<div class="displaymath process-math" id="eq-matrix-simplex-c-step6">
+\begin{equation}
+\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal} = \begin{bmatrix} 20368 \amp -1280 \amp 312 \end{bmatrix}\tag{8.3.1}
+\end{equation}
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-6-7">and note that there are no negatives in this vector, so this solution is optimal. The basic solution to this is <span class="process-math">\(B' \boldsymbol{b}\)</span> for the basic variables or<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-6-7">and note that there are still negatives in this vector, so this solution is not optimal. From <a href="sect-matrix-simplex.html#eq-matrix-simplex-c-step6" class="xref" data-knowl="./knowl/xref/eq-matrix-simplex-c-step6.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 8.3.1">(8.3.1)</a>, the leftmost negative is in the second position, so the entering variable is the second parameter or <span class="process-math">\(x_5\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="sect-matrix-simplex-2-3-1-6-8">
-<div class="displaymath process-math">
+<div class="para">With</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/eq-matrix-simplex-c-step6.html" id="sect-matrix-simplex-2-3-1-6-8-1">
 \begin{equation*}
-B' \boldsymbol{b} = \begin{bmatrix} 2240 \\ 3200 \\ 45120 \\ 34560 \end{bmatrix}
+\begin{aligned} B'\boldsymbol{b} \amp  = \begin{bmatrix} 2420 \\ 26220 \\ 680 \\ 34560 \end{bmatrix} \amp B'\Pi \amp = \begin{bmatrix} 160 \amp 4 \amp 15 \\ 4820 \amp -128 \amp 230 \\ 336 \amp -20 \amp -4 \\ -3388 \amp 320 \amp -78 \\ \end{bmatrix} \end{aligned}
 \end{equation*}
+</div>
+<div class="para">and since the leftmost negative in <a href="sect-matrix-simplex.html#eq-matrix-simplex-c-step6" class="xref" data-knowl="./knowl/xref/eq-matrix-simplex-c-step6.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 8.3.1">(8.3.1)</a> is in the 2nd column, so we use the second column of <span class="process-math">\(B'\Pi\)</span> to form <span class="process-math">\(\boldsymbol{b}\)</span>-ratios:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/eq-matrix-simplex-c-step6.html" id="sect-matrix-simplex-2-3-1-6-8-5">
+\begin{equation*}
+\begin{bmatrix} 2420 / 4 \\ 26220/(-128) \\ 680/(-20) \\ 34560/320 \end{bmatrix} \approx \begin{bmatrix} 605 \\ -204.84 \\ -34 \\ 108 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">and the smallest <span class="process-math">\(\boldsymbol{b}\)</span>-ratio is in the fourth position. This corresponds to the fourth basic variable or <span class="process-math">\(x_6\)</span> as the leaving variable. We next perform the pivot <span class="process-math">\(5 \mapsto 6\)</span>
 </div>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-6-9">and in terms of the original variables, the optimal solution is<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Item 6"><a href="#sect-matrix-simplex-2-3-1-6" title="Copy heading and permalink for Item 6" aria-label="Copy heading and permalink for Item 6">🔗</a></div>
+</li>
+<li id="sect-matrix-simplex-2-3-1-7">
+<div class="para logical" id="sect-matrix-simplex-2-3-1-7-1">
+<div class="para">The pivot <span class="process-math">\(5 \mapsto 6\)</span> results in <span class="process-math">\(\beta=\{1,3,4,5\}\)</span> and <span class="process-math">\(\pi=\{2,6,7\}\)</span> and the corresponding matrices are</div>
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-7-1-4">
+\begin{equation*}
+\begin{aligned} B \amp = \left[ \begin{array}{cccc} -18 \amp -10 \amp 1 \amp 0 \\ -4 \amp -15 \amp 0 \amp 1 \\ 10 \amp 18 \amp 0 \amp 0 \\ 20 \amp 4 \amp 0 \amp 0 \\ \end{array} \right] \amp \Pi =  \amp \left[ \begin{array}{ccc} -5 \amp 0 \amp 0 \\ -20 \amp 0 \amp 0 \\ 15 \amp 1 \amp 0 \\ 16 \amp 0 \amp 1 \\ \end{array} \right] \end{aligned}
+\end{equation*}
 </div>
-<div class="para logical" id="sect-matrix-simplex-2-3-1-6-10">
-<div class="displaymath process-math">
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-7-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-matrix-simplex-2-3-1-7-2">and the value of <span class="process-math">\(d_{\beta} = \det(B)=320\)</span> will be needed.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-7-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-matrix-simplex-2-3-1-7-3">
+<div class="para">Finally, the objective row</div>
+<div class="displaymath process-math" id="eq-matrix-simplex-c-step7">
+\begin{equation}
+\boldsymbol{c}_{\beta}^{\intercal}B^{-1}\Pi - \boldsymbol{c}_{\pi}^{\intercal} = \begin{bmatrix} 20368 \amp -1280 \amp 312 \end{bmatrix}\tag{8.3.2}
+\end{equation}
+</div>
+<div class="para">is free of negatives, so this is an optimal solution. The basic solution to this is <span class="process-math">\(B' \boldsymbol{b}\)</span> for the basic variables or</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-7-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-matrix-simplex-2-3-1-7-4">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-7-4-1">
+\begin{equation*}
+\boldsymbol{x}_{\beta} = \frac{1}{d_{\beta}} B' \boldsymbol{b} = \frac{1}{320} \begin{bmatrix} 2240 \\ 3200 \\ 45120 \\ 34560 \end{bmatrix}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-7-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-matrix-simplex-2-3-1-7-5">and in terms of the original variables, the optimal solution is<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-7-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-matrix-simplex-2-3-1-7-6">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-7-6-1">
 \begin{equation*}
 \begin{aligned} x_1 \amp = \frac{2240}{320} = 7 \\ x_2 \amp = 0 \\ x_3 \amp = \frac{3200}{320} = 10 \end{aligned}
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-7-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="sect-matrix-simplex-2-3-1-6-11">and the objective is found with<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="sect-matrix-simplex-2-3-1-7-7">and the objective is found with<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-7-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="sect-matrix-simplex-2-3-1-6-12">
-<div class="displaymath process-math">
+<div class="para logical" id="sect-matrix-simplex-2-3-1-7-8">
+<div class="displaymath process-math" id="sect-matrix-simplex-2-3-1-7-8-1">
 \begin{equation*}
 z = \frac{1}{d_{\beta}} \boldsymbol{c}^{\intercal}_{\beta} B' \boldsymbol{b} = \frac{320000}{320} = 1000
 \end{equation*}
 </div>
-<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-6-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3-1-7-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Item 6"><a href="#sect-matrix-simplex-2-3-1-6" title="Copy heading and permalink for Item 6" aria-label="Copy heading and permalink for Item 6">🔗</a></div>
+<div class="autopermalink" data-description="Item 7"><a href="#sect-matrix-simplex-2-3-1-7" title="Copy heading and permalink for Item 7" aria-label="Copy heading and permalink for Item 7">🔗</a></div>
 </li>
 </ol>
 <div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
@@ -778,7 +816,104 @@ z = \frac{1}{d_{\beta}} \boldsymbol{c}^{\intercal}_{\beta} B' \boldsymbol{b} = \
 </h3>
 <div class="para" id="sect-matrix-simplex-summary-2">This is now the steps of the simplex method if one is using the matrix formulation.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Subsection 8.3.1: The Matrix Simplex Method"><a href="#sect-matrix-simplex-summary" title="Copy heading and permalink for Subsection 8.3.1: The Matrix Simplex Method" aria-label="Copy heading and permalink for Subsection 8.3.1: The Matrix Simplex Method">🔗</a></div></section><div class="autopermalink" data-description="Section 8.3: Performing the Matrix Simplex Method"><a href="#sect-matrix-simplex" title="Copy heading and permalink for Section 8.3: Performing the Matrix Simplex Method" aria-label="Copy heading and permalink for Section 8.3: Performing the Matrix Simplex Method">🔗</a></div></section></div>
+<section class="paragraphs" id="sect-matrix-simplex-summary-3"><h4 class="heading"><span class="title">Setup.</span></h4>
+<div class="para" id="sect-matrix-simplex-summary-3-2">As before the system must be put in standard form and as above, we need the matrix of constraint coefficients <span class="process-math">\(A\text{,}\)</span> the right hand side <span class="process-math">\(\boldsymbol{b}\)</span> and the objective vector <span class="process-math">\(\boldsymbol{c}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-matrix-simplex-summary-3-3">
+<div class="para">If there are <span class="process-math">\(n\)</span> original variables with <span class="process-math">\(m\)</span> constraints, then to begin with</div>
+<div class="displaymath process-math" id="sect-matrix-simplex-summary-3-3-3">
+\begin{equation*}
+\begin{aligned} \beta \amp = \{n+1, n+2, \ldots, n+m\}  \amp \pi \amp = \{1, 2, \ldots, n\} \end{aligned}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-matrix-simplex-summary-3-4">Let <span class="process-math">\(S\)</span> be the matrix <span class="process-math">\([A \;\; I]\text{,}\)</span> then <span class="process-math">\(B\)</span> is the square matrix with the columns of <span class="process-math">\(S\)</span> taken from <span class="process-math">\(\beta\text{.}\)</span> The matrix <span class="process-math">\(\Pi\)</span> is the <span class="process-math">\(m \times n\)</span> matrix with the columns of <span class="process-math">\(S\)</span> taken from <span class="process-math">\(\pi\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-3-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sect-matrix-simplex-summary-3-5">Let <span class="process-math">\(d_{\beta} = |\det(B)|\)</span> and <span class="process-math">\(B' = d_{\beta} B^{-1}\text{,}\)</span> which will be a square integer matrix.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-3-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Setup"><a href="#sect-matrix-simplex-summary-3" title="Copy heading and permalink for Paragraphs: Setup" aria-label="Copy heading and permalink for Paragraphs: Setup">🔗</a></div></section><section class="paragraphs" id="sect-matrix-simplex-summary-4"><h4 class="heading"><span class="title">Phase I.</span></h4>
+<div class="para" id="sect-matrix-simplex-summary-4-2">Recall that this phase is to take a tableau that is infeasible and make it feasible.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-matrix-simplex-summary-4-3">
+<ol class="decimal" id="sect-matrix-simplex-summary-4-3-1">
+<li id="sect-matrix-simplex-summary-4-3-1-1">
+<div class="para" id="sect-matrix-simplex-summary-4-3-1-1-1">If <span class="process-math">\(B'\boldsymbol{b} \geq 0\)</span> then the matrix is feasible. Stop. Phase I is complete.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-4-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#sect-matrix-simplex-summary-4-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="sect-matrix-simplex-summary-4-3-1-2">
+<div class="para" id="sect-matrix-simplex-summary-4-3-1-2-1">Find the most negative number in <span class="process-math">\(B'\boldsymbol{b}\text{.}\)</span> The index of this corresponds to the leaving variable in <span class="process-math">\(\beta\text{.}\)</span> Call this index <span class="process-math">\(i\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-4-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#sect-matrix-simplex-summary-4-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="sect-matrix-simplex-summary-4-3-1-3">
+<div class="para" id="sect-matrix-simplex-summary-4-3-1-3-1">Examine the <span class="process-math">\(i\)</span>th row of <span class="process-math">\(B'\Pi\)</span> and find the leftmost negative number. The index of this corresponds to the entering variable in <span class="process-math">\(\pi\text{.}\)</span> Call this index <span class="process-math">\(j\text{.}\)</span> We will then perform the pivot <span class="process-math">\(\pi_j \mapsto \beta_i\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-4-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#sect-matrix-simplex-summary-4-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="sect-matrix-simplex-summary-4-3-1-4">
+<div class="para" id="sect-matrix-simplex-summary-4-3-1-4-1">Swap the <span class="process-math">\(i\)</span>th element of <span class="process-math">\(\beta\)</span> with the <span class="process-math">\(j\)</span>th element of <span class="process-math">\(\pi\)</span> and return to Step 1.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-4-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#sect-matrix-simplex-summary-4-3-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-4-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Phase I"><a href="#sect-matrix-simplex-summary-4" title="Copy heading and permalink for Paragraphs: Phase I" aria-label="Copy heading and permalink for Paragraphs: Phase I">🔗</a></div></section><section class="paragraphs" id="sect-matrix-simplex-summary-5"><h4 class="heading"><span class="title">Phase II.</span></h4>
+<div class="para" id="sect-matrix-simplex-summary-5-2">Recall that the purpose of this phase is take a feasible tableau and make it optimal.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-matrix-simplex-summary-5-3">
+<ol class="decimal" id="sect-matrix-simplex-summary-5-3-1">
+<li id="sect-matrix-simplex-summary-5-3-1-1">
+<div class="para" id="sect-matrix-simplex-summary-5-3-1-1-1">The non-basic variables in the objective row can be found with <span class="process-math">\(\boldsymbol{c}_{\beta}^{\intercal}B'\Pi - d_{\beta}\boldsymbol{c}_{\pi}^{\intercal} \text{.}\)</span>  If there are no negatives in this row, then the solution is optimal.  Stop. To to the Optimum Solution phase.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-5-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#sect-matrix-simplex-summary-5-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="sect-matrix-simplex-summary-5-3-1-2">
+<div class="para" id="sect-matrix-simplex-summary-5-3-1-2-1">Find the index of the leftmost negative of <span class="process-math">\(\boldsymbol{c}_{\beta}^{\intercal}B'\Pi - d_{\beta}\boldsymbol{c}_{\pi}^{\intercal} \text{.}\)</span>  Call this <span class="process-math">\(j\text{.}\)</span>  Form <span class="process-math">\(\boldsymbol{b}\)</span>-ratios using the quotient of <span class="process-math">\(B'\boldsymbol{b}\)</span> to the <span class="process-math">\(j\)</span>th column of <span class="process-math">\(B'\Pi\text{.}\)</span>  The entering variable will be <span class="process-math">\(\pi_j\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-5-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#sect-matrix-simplex-summary-5-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="sect-matrix-simplex-summary-5-3-1-3">
+<div class="para" id="sect-matrix-simplex-summary-5-3-1-3-1">Find the smallest nonnegative ratio from the <span class="process-math">\(\boldsymbol{b}\)</span>-ratios.  Call the index of this <span class="process-math">\(i\text{.}\)</span>  The entering variable will be <span class="process-math">\(\beta_i\)</span> and the pivot will be <span class="process-math">\(\pi_j \mapsto \beta_i\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-5-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#sect-matrix-simplex-summary-5-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="sect-matrix-simplex-summary-5-3-1-4">
+<div class="para" id="sect-matrix-simplex-summary-5-3-1-4-1">Swap the <span class="process-math">\(i\)</span>th element of <span class="process-math">\(\beta\)</span> with the <span class="process-math">\(j\)</span>th element of <span class="process-math">\(\pi\)</span> and return to Step 1.<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-5-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#sect-matrix-simplex-summary-5-3-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Phase II"><a href="#sect-matrix-simplex-summary-5" title="Copy heading and permalink for Paragraphs: Phase II" aria-label="Copy heading and permalink for Paragraphs: Phase II">🔗</a></div></section><section class="paragraphs" id="sect-matrix-simplex-summary-6"><h4 class="heading"><span class="title">Optimal Solution.</span></h4>
+<div class="para logical" id="sect-matrix-simplex-summary-6-2">
+<div class="para">Once the optimal solution has been found, the solution to the basic variable is</div>
+<div class="displaymath process-math" id="sect-matrix-simplex-summary-6-2-1">
+\begin{equation*}
+x_{\beta} = \frac{1}{d_{\beta}} B' \boldsymbol{b}
+\end{equation*}
+</div>
+<div class="para">and if the objective vlaue is</div>
+<div class="displaymath process-math" id="sect-matrix-simplex-summary-6-2-2">
+\begin{equation*}
+z = \frac{1}{d_{\beta}} \boldsymbol{c}_{\beta}^{\intercal} B' \boldsymbol{b}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="sect-matrix-simplex-summary-6-3">
+<div class="para">Lastly, if the dual solutions are needed then they are:</div>
+<div class="displaymath process-math" id="sect-matrix-simplex-summary-6-3-1">
+\begin{equation*}
+\boldsymbol{c}_{\beta}^{\intercal}B'\Pi - d_{\beta}\boldsymbol{c}_{\pi}^{\intercal}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#sect-matrix-simplex-summary-6-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Paragraphs: Optimal Solution"><a href="#sect-matrix-simplex-summary-6" title="Copy heading and permalink for Paragraphs: Optimal Solution" aria-label="Copy heading and permalink for Paragraphs: Optimal Solution">🔗</a></div></section><div class="autopermalink" data-description="Subsection 8.3.1: The Matrix Simplex Method"><a href="#sect-matrix-simplex-summary" title="Copy heading and permalink for Subsection 8.3.1: The Matrix Simplex Method" aria-label="Copy heading and permalink for Subsection 8.3.1: The Matrix Simplex Method">🔗</a></div></section><div class="autopermalink" data-description="Section 8.3: Performing the Matrix Simplex Method"><a href="#sect-matrix-simplex" title="Copy heading and permalink for Section 8.3: Performing the Matrix Simplex Method" aria-label="Copy heading and permalink for Section 8.3: Performing the Matrix Simplex Method">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="sect-lop-matrix-software.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="ch-other-topics.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

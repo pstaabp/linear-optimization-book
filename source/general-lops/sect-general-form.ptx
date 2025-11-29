@@ -340,9 +340,9 @@
     </p>
 
     <p>
-      <me>
+      <men xml:id="eq-gen-lop1-final">
         1 \mapsto 3, \qquad \left[\begin{array}{rr|rrr|r} 3 \amp 0 \amp 1 \amp 0 \amp 0 \amp 8\\ 0 \amp 0 \amp 4 \amp 3 \amp 0 \amp 50\\ 0 \amp 3 \amp 2 \amp 0 \amp 0 \amp 10\\ \hline 0 \amp 0 \amp 11 \amp 0 \amp 3 \amp 70\\ \end{array} \right]
-      </me>
+      </men>
     </p>
 
     <p>

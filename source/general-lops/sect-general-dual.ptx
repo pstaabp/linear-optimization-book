@@ -1,33 +1,111 @@
 <section xml:id="sect-general-dual">
-  <title>General Dual Problems</title>
+    <title>General Dual Problems</title>
 
-  <p>
-    Because of the equality constraints and the free variables, dual problems take on a different form.
-  </p>
+    <p>
+        Because of the equality constraints and the free variables, dual problems take on a different form.
+    </p>
 
-  <p>
-    In <xref ref="ch-dual-problems"/>, we made an argument to develop a bound on the objective function resulting a dual problem.  In the case of general problems with equality constraints and free variables, we repeat these steps.  Let's look at <xref ref="prob-general-lop1"/>.  First, if we multiply the three constraints by <m>y_1, y_2</m> and <m>y_3</m> respectively, then
-  </p>
+    <p>
+        In <xref ref="ch-dual-problems"/>, we made an argument to develop a bound on the objective function resulting a dual problem.
+        In the case of general problems with equality constraints and free variables, we repeat these steps.
+        Let's look at <xref ref="prob-general-lop1"/>.
+        Let's start with the objective function and then apply steps to verify that the weak duality theorem works for this.
+    </p>
 
-  <p>
-    <me>
-      \begin{aligned}
-y_1 (x_1 + x_2) \amp \leq 6 y_1, \\
-    y_2 (2x_1-3x_2) \amp \leq 12 y_2, \\
-    y_3 (-2x_1 + x_2) \amp = -2 y_3.
-      \end{aligned}
-    </me>
-  </p>
-   <p>
-    The objective is written:
-   </p>
-  <p>
-    <me>
-      \begin{aligned}
-      z \amp = 5x_1 + 3x_2 \\
-      \amp \leq (y_1 + 2y_2 - 2y_3) x_1 + 3x_2
-      \end{aligned}
-    </me>
+    <p>
+        <md>
+            <mrow xml:id="eq-gen-dual-01" number="yes">z = \; \amp \;   5x_1 + 3x_2  </mrow>
+            <mrow xml:id="eq-gen-dual-02" number="yes">  \leq \; \amp \; (y_1 + 2y_2 -2y_3) x_1 + 3x_2 </mrow>
+            <mrow xml:id="eq-gen-dual-03" number="yes">  \leq \; \amp \; (y_1 + 2y_2 -2y_3) x_1 + (y_1 - 3y_2 + y_3)x_2 </mrow>
+            <mrow xml:id="eq-gen-dual-04" number="yes">  = \; \amp \; (x_1 + x_2) y_1 + (2x_1 -3x_2) y_2 + (-2x_1 + x_2)y_3</mrow>
+            <mrow xml:id="eq-gen-dual-05" number="yes"> \leq \; \amp \; 6y_1 + (2x_1 -3x_2) y_2 + (-2x_1 + x_2)y_3</mrow>
+            <mrow xml:id="eq-gen-dual-06" number="yes"> \leq \; \amp \; 6y_1 + 12 y_2 + (-2x_1 + x_2)y_3</mrow>
+            <mrow xml:id="eq-gen-dual-07" number="yes"> \leq \; \amp \; 6y_1 + 12 y_2 -2 y_3</mrow>
+            <mrow xml:id="eq-gen-dual-08" number="yes"> = \; \amp \; w </mrow>
+        </md>
+    </p>
 
-  </p>
+    <p>
+        To ensure that every step satisifies the <m>\geq</m> inequality, then we need to be careful with some of the steps.
+        For example, since <m>x_1 \geq 0</m>, then <xref ref="eq-gen-dual-02"/> would require that <m>y_1 +2y_2 - 2y_3 \geq 5</m>.
+    </p>
+
+    <p>
+        However for the step in <xref ref="eq-gen-dual-03"/>, because <m>x_2</m> is free, it is important that <m>y_1 -3y_2 + y_3 = 3</m>.
+        Because of the inequality in the first two constraints in <xref ref="eq-general-lop1"/>, in order for the <m>\leq</m> constraints in steps <xref ref="eq-gen-dual-05"/> and <xref ref="eq-gen-dual-06"/>, then it is important that <m>y_1 \geq 0</m> and <m>y_2 \geq 0</m>.
+    </p>
+
+    <p>
+        However, if we look at step <xref ref="eq-gen-dual-07"/>, since we have the equality constraint, <m>-2x_1+x_2 = -2</m>, then <m>y_3</m> can be a free variable.
+        Putting this all together will result in the dual problem:
+    </p>
+
+    <p>
+        <men xml:id="eq-dual-lop1">
+            \begin{aligned} \text{Minimize} \amp \amp w = 6y_1 + 12y_2 - 2y_3, \amp \\ \amp \amp y_1 + 2y_2 -2y_3 \amp \geq 5, \\ \amp \amp y_1 -3 y_2 + y_3 \amp = 3, \\ \text{and} \amp \amp y_1, y_2 \geq 0.
+            \end{aligned}
+        </men>
+    </p>
+
+    <exercise>
+        <statement>
+            <p>
+                Solve <xref ref="eq-dual-lop1"/> using Phase 0, I, II as needed.
+            </p>
+        </statement>
+
+        <solution>
+            <p>
+                First, we need to switch the inequality on the first inequality or <m>-y_1 - 2y_2 + 2y_3 \leq -5</m> and then we let <m>z = -w = -6y_1 - 12y_2 + 2y_3</m>.
+                Adding only a slack variable to the inequality, the tableau can be written
+                <me>
+                    \begin{aligned} \amp \phantom{xxxxxxxxxxi} f \\ \amp \left[\begin{array}{rrr|rr|r} -1 \amp -2 \amp 2 \amp 1 \amp 0 \amp -5\\ 1 \amp -3 \amp 1 \amp 0 \amp 0 \amp 3\\ \hline 6 \amp 12 \amp -2 \amp 0 \amp 1 \amp 0\\ \end{array} \right] \end{aligned}
+                </me>
+            </p>
+
+            <p>
+                Since there is a free variable <m>y_3</m> which is not in the basis, then we pivot to bring it into the basis.
+                We'll use the second line (the equation) to do this.
+                <me>
+                    \begin{aligned} \amp \phantom{xxxxxxxxx} f \\ \text{piv}(2,3)\qquad \amp \left[\begin{array}{rrr|rr|r} -3 \amp 4 \amp 0 \amp 1 \amp 0 \amp -11\\ 1 \amp -3 \amp 1 \amp 0 \amp 0 \amp 3\\ \hline 8 \amp 6 \amp 0 \amp 0 \amp 1 \amp 6\\ \end{array} \right] \end{aligned}
+                </me>
+            </p>
+
+            <p>
+                This is now in phase I, so we pivot to make it feasible:
+                <me>
+                    \begin{aligned} \amp \phantom{xxxxxxxi} f \\ 1 \mapsto 4\qquad \amp \left[\begin{array}{rrr|rr|r} 3 \amp -4 \amp 0 \amp -1 \amp 0 \amp 11\\ 0 \amp -5 \amp 3 \amp 1 \amp 0 \amp -2\\ \hline 0 \amp 50 \amp 0 \amp 8 \amp 3 \amp -70\\ \end{array} \right] \end{aligned}
+                </me>
+            </p>
+            <p>
+              This might seem like it is still in phase I, however, since <m>x_3</m> is free, it can be negative, so we are done with phase I.  The solution to this is 
+              <men xml:id="eq-gen-dual-lop-final">
+                \begin{aligned}
+                \boldsymbol{y} \amp = \frac{1}{3}\left[ \begin{array}{rrr|r} 11 \amp 0 \amp -2 \amp 0 \end{array}\right] \\
+                \amp =\left[ \begin{array}{rrr|r} 11/3 \amp 0 \amp -2/3 \amp 0 \end{array}\right]
+                \end{aligned}
+              </men>
+              with <m>z = -70/3</m> so <m>w = 70/3</m>.
+            </p>
+        </solution>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Compare the final tableau in <xref ref="sect-tableau-phase0"/> in <xref ref="eq-gen-lop1-final"/> to the final tableau in <xref ref="eq-gen-dual-lop-final"/>.  Do the dual solutions appear in the primal problem?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Notice that the objective row in <xref ref="eq-gen-lop1-final"/> is 
+          <me>
+            \frac{1}{3} \left[\begin{array}{rr|rr} 0 \amp 0 \amp 11 \amp 0 \end{array} \right]
+          </me>
+        </p>
+        <p>
+            which corresponds to the first two values, <m>y_1, y_2</m> of the dual solution.  Note that <m>y_3</m> is a free variable, so doesn't have a related slack variable. 
+        </p>
+      </solution>
+    </exercise>
 </section>

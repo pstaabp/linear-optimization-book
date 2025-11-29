@@ -101,14 +101,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '7.9.19';
+eBookConfig.runestone_version = '7.10.0';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.5c6d23c3bf7decb7.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.296eb9cf978e3bdb.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<script src="_static/prefix-runtime.f91c1a4dc12163f2.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.fe35e59c546f8d19.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.557d81b04b3ec0e4.css">
 <script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
@@ -513,7 +513,7 @@ using .SimplexTableau
 </code></pre></div>
 <div class="para logical" id="subsec-st-julia-entering-tableaus-4">
 <div class="para">The result is the following:</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="subsec-st-julia-entering-tableaus-4-1">
 \begin{equation*}
 \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 4 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 120\\ 1 \amp 2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 40\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16 \\ \hline -1 \amp -3 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \end{array}\right] \\ ~ \amp \\ d \amp = 1 \qquad \pi = \{1, 2\} \qquad \beta = \{3, 4, 5\} \end{aligned}
 \end{equation*}
@@ -545,7 +545,7 @@ c= [1; 3]
 </code></pre></div>
 <div class="para logical" id="subsec-pivot-julia-5">
 <div class="para">results in</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="subsec-pivot-julia-5-1">
 \begin{equation*}
 \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 4 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 120\\ 0 \amp 5 \amp -1 \amp 4 \amp 0 \amp 0 \amp 40\\ 0 \amp 4 \amp 0 \amp 0 \amp 4 \amp 0 \amp 64 \\ \hline 0 \amp -9 \amp 1 \amp 0 \amp 0 \amp 4 \amp 120 \end{array}\right] \\ ~ \amp \\ d \amp = 4 \qquad \pi = \{2, 3\} \qquad \beta = \{1, 4, 5\} \end{aligned}
 \end{equation*}
@@ -558,7 +558,7 @@ c= [1; 3]
 </code></pre></div>
 <div class="para logical" id="subsec-pivot-julia-8">
 <div class="para">resulting in</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="subsec-pivot-julia-8-1">
 \begin{equation*}
 \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 5 \amp 0 \amp 2 \amp -3 \amp 0 \amp 0 \amp 120\\ 0 \amp 5 \amp -1 \amp 4 \amp 0 \amp 0 \amp 40\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40 \\ \hline 0 \amp 0 \amp -1 \amp 9 \amp 0 \amp 5 \amp 240 \end{array}\right] \\ ~ \amp \\ d \amp = 5 \qquad \pi = \{3, 4\} \qquad \beta = \{1, 2, 5\} \end{aligned}
 \end{equation*}
@@ -567,7 +567,7 @@ c= [1; 3]
 </div>
 <div class="para logical" id="subsec-pivot-julia-9">
 <div class="para">This is still not optimal, so one more step with <code class="code-inline tex2jax_ignore">t3 = pivot(t2, 3 =&gt; 5)</code> results in</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="subsec-pivot-julia-9-2">
 \begin{equation*}
 \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56 \end{array}\right] \\ ~ \amp \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \end{aligned}
 \end{equation*}
@@ -589,7 +589,7 @@ c= [1; 3]
 </code></pre></div>
 <div class="para logical" id="sect-simplex-tableau-julia-5-4">
 <div class="para">returns</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-simplex-tableau-julia-5-4-1">
 \begin{equation*}
 \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56 \end{array}\right] \\ ~ \amp \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \end{aligned}
 \end{equation*}
@@ -601,7 +601,7 @@ c= [1; 3]
 </code></pre></div>
 <div class="para logical" id="sect-simplex-tableau-julia-5-6">
 <div class="para">which results in</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-simplex-tableau-julia-5-6-1">
 \begin{equation*}
 \begin{aligned} \text{Initial Tableau} \qquad \amp \left[ \begin{array}{rr|rrrr|r} 4 \amp 3 \amp 1 \amp 0 \amp 0 \amp 0 \amp 120\\ 1 \amp 2 \amp 0 \amp 1 \amp 0 \amp 0 \amp 40\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16 \\ \hline -1 \amp -3 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \end{array}\right] \\ d \amp = 1 \qquad \pi = \{1, 2\} \qquad \beta = \{3, 4, 5\} \\ \text{pivots} \qquad \amp 1 \mapsto 3, 2 \mapsto 4, 3 \mapsto 5 \\ ~ \amp \\\text{Final Tableau} \qquad \amp \left[ \begin{array}{rr|rrrr|r} 1 \amp 0 \amp 0 \amp 1 \amp -2 \amp 0 \amp 8\\ 0 \amp 1 \amp 0 \amp 0 \amp 1 \amp 0 \amp 16\\ 0 \amp 0 \amp 1 \amp -4 \amp 5 \amp 0 \amp 40 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp 56 \end{array}\right] \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \\ \text{Completed} \qquad \amp true \\ \text{Message} \qquad \amp \end{aligned}
 \end{equation*}
@@ -614,7 +614,7 @@ c= [1; 3]
 </code></pre></div>
 <div class="para logical" id="sect-simplex-tableau-julia-5-9">
 <div class="para">and then can be solved with <code class="code-inline tex2jax_ignore">phaseI(t1)</code>, which results in</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-simplex-tableau-julia-5-9-2">
 \begin{equation*}
 \begin{aligned} A \amp =  \left[ \begin{array}{rr|rrrr|r} 0 \amp 0 \amp 1 \amp -3 \amp 4 \amp 0 \amp 10\\ 1 \amp 0 \amp 0 \amp -1 \amp 1 \amp 0 \amp 4\\ 0 \amp 1 \amp 0 \amp 1 \amp -2 \amp 0 \amp 4 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp -20 \end{array}\right] \\ ~ \amp \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \end{aligned}
 \end{equation*}
@@ -623,7 +623,7 @@ c= [1; 3]
 </div>
 <div class="para logical" id="sect-simplex-tableau-julia-5-10">
 <div class="para">If the optional argument <code class="code-inline tex2jax_ignore">show_steps = true</code> is added, then the steps of phase I are also shown.</div>
-<div class="displaymath process-math">
+<div class="displaymath process-math" id="sect-simplex-tableau-julia-5-10-2">
 \begin{equation*}
 \begin{aligned} \text{Initial Tableau} \qquad \amp \left[ \begin{array}{rr|rrrr|r} -2 \amp 1 \amp 1 \amp 0 \amp 0 \amp 0 \amp 6\\ -2 \amp -1 \amp 0 \amp 1 \amp 0 \amp 0 \amp -12\\ -1 \amp -1 \amp 0 \amp 0 \amp 1 \amp 0 \amp -8 \\ \hline 3 \amp 2 \amp 0 \amp 0 \amp 0 \amp 1 \amp 0 \end{array}\right] \\ d \amp = 1 \qquad \pi = \{1, 2\} \qquad \beta = \{3, 4, 5\} \\ \text{pivots} \qquad \amp 1 \mapsto 3, 2 \mapsto 3 \\ ~ \amp \\\text{Final Tableau} \qquad \amp \left[ \begin{array}{rr|rrrr|r} 0 \amp 0 \amp 1 \amp -3 \amp 4 \amp 0 \amp 10\\ 1 \amp 0 \amp 0 \amp -1 \amp 1 \amp 0 \amp 4\\ 0 \amp 1 \amp 0 \amp 1 \amp -2 \amp 0 \amp 4 \\ \hline 0 \amp 0 \amp 0 \amp 1 \amp 1 \amp 1 \amp -20 \end{array}\right] \\ d \amp = 1 \qquad \pi = \{4, 5\} \qquad \beta = \{1, 2, 3\} \\ \text{Completed} \qquad \amp true \\ \text{Message} \qquad \amp \end{aligned}
 \end{equation*}
