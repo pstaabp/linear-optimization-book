@@ -406,7 +406,7 @@
               Examine the <m>i</m>th row of <m>B'\Pi</m> and find the leftmost negative number.
               The index of this corresponds to the entering variable in <m>\pi</m>.
               Call this index <m>j</m>.
-              We will then perform the pivot <m>\pi_j \mapsto \beta_i</m>.
+              We will then perform the pivot <m>\pi_j \mapsto \beta_i</m>. Note: if there are no negatives in this row, then the LOP is infeasible.
             </p>
           </li>
 
@@ -440,7 +440,7 @@
           </li>
           <li>
             <p>
-              Find the smallest nonnegative ratio from the <m>\boldsymbol{b}</m>-ratios.  Call the index of this <m>i</m>.  The entering variable will be <m>\beta_i</m> and the pivot will be <m>\pi_j \mapsto \beta_i</m>.
+              Find the smallest nonnegative ratio from the <m>\boldsymbol{b}</m>-ratios.  Call the index of this <m>i</m>.  The entering variable will be <m>\beta_i</m> and the pivot will be <m>\pi_j \mapsto \beta_i</m>.  Note: if there is no nonnegative ratio, then the problem is unbounded.
             </p>
           </li>
           <li>
@@ -460,7 +460,7 @@
           x_{\beta} = \frac{1}{d_{\beta}} B' \boldsymbol{b}
         </me>
       
-        and if the objective vlaue is 
+        and if the objective value is 
         <me>
           z = \frac{1}{d_{\beta}} \boldsymbol{c}_{\beta}^{\intercal} B' \boldsymbol{b}
         </me>

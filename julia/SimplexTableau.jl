@@ -51,7 +51,7 @@ function ==(T1::Tableau, T2::Tableau)
 end
 
 function copy(t::Tableau)
-  Tableau(copy(t.A), t.d, copy(t.β), copy(t.π), t.num_slack, free = copy(t.free), equality = copy(t.eq))
+  Tableau(copy(t.A), t.d, copy(t.β), copy(t.π), t.num_slack, free=copy(t.free), equality=copy(t.eq))
 end
 
 function Base.show(io::IO, T::Tableau)
@@ -143,7 +143,7 @@ function pivot(T::Tableau, piv::Pair{Int,Int})
   piv.first ∈ T.π || error("The variable $(piv.first) must be a parameter")
   (piv.second ∈ T.β || piv.second == 0) || error("The variable $(piv.second) must be a basic variable")
 
-  length(T.eq) == 0 && piv.second == 0 && 
+  length(T.eq) == 0 && piv.second == 0 &&
     error("A pivot that doesn't remove a basis variable cannot be applied if there are not equality constraints.")
   # find the row corresponding to the exiting basic variable
   local k
@@ -152,7 +152,7 @@ function pivot(T::Tableau, piv::Pair{Int,Int})
       if T.A[i, T.β] == zeros(Int, length(T.β))
         k = i
         break
-      end 
+      end
     end
     k === nothing && error("All equality variables have basis variables.")
   else
@@ -165,7 +165,7 @@ function pivot(T::Tableau, piv::Pair{Int,Int})
     A[k, :] = -A[k, :]
   end
   local d = A[k, piv.first]
-  for kk = 1:size(A, 1)
+  for kk in axes(A, 1)
     kk == k && continue
     A[kk, :] = (-A[kk, piv.first] * A[k, :] + A[k, piv.first] * A[kk, :]) .÷ T.d
   end
@@ -250,16 +250,28 @@ function phaseII(T::Tableau; show_steps=false)
 end
 
 function basic_solution(T::Tableau)
-  B = T.A[1:end-1, T.β] .÷ T.d
+  inequalities = setdiff(collect(1:(size(T.A, 1)-1)), T.eq)
+  B = T.A[inequalities, T.β] .÷ T.d
+  @show "here"
+  @show B
+  @show size(B)
+  @show inv(B)
+  @show  T.A[setdiff(collect(1:(size(T.A, 1)-1)), T.eq), end]
   x = zeros(Int, length(T.β) + length(T.π))
-  x[T.β] = round.(Int, inv(B)) * T.A[1:end-1, end]
+  x[T.β] = round.(Int, inv(B)) * T.A[inequalities, end]
   x[T.π] = zeros(Int, length(T.π))
   x // T.d
 end
 
 function isFeasible(T::Tableau)
-  # need to update when free variables are available
-  all(T.A[1:end-1, end] .>= zeros(Int, size(T.A, 1) - 1))
+  # inequality constraints
+  inequalities = setdiff(collect(1:size(T.A, 1)-1), T.eq)
+  non_neg_constraints = setdiff(t3.β, t3.free)
+
+  all(basic_solution(t3)[non_neg_constraints] .>= zeros(Int, length(non_neg_constraints))) &&
+    all(T.A[inequalities, end] .>= zeros(Int, length(inequalities))) &&
+    length(T.eq) == 0 ? true : all(T.A[T.eq, 1:end-2] * basic_solution(T) .== T.A[T.eq, end])
+
 end
 
 function isOptimal(T::Tableau)
